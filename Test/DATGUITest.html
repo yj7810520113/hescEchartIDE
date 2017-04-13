@@ -1,0 +1,39 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/4/13
+ * Time:15:53
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/DAT.GUI.js"></script>
+</head>
+<body>
+<script>
+    var FizzyText = function() {
+        this.message = 'dat.gui';
+        this.speed = 0.8;
+        this.displayOutline = false;
+        this.explode = function() {
+            console.log(this.message);
+            console.log(this.speed);
+            console.log(this.displayOutline); };
+        // Define render logic ...
+
+    };
+
+    window.onload = function() {
+        var text = new FizzyText();
+        var gui = new dat.GUI();
+        gui.add(text, 'message');
+        gui.add(text, 'speed', -5, 5);
+        gui.add(text, 'displayOutline');
+        gui.add(text, 'explode');
+    };
+</script>
+</body>
+</html>
