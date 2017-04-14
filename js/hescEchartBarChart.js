@@ -31,101 +31,63 @@
         }
         return d;
     }
-
-    // Object.prototype.each = function (obj, callback, args) {
-    //     var value,
-    //         i = 0,
-    //         length = obj.length,
-    //         isArray = isArraylike(obj);
-    //     var class2type = {};
-    //     function typeObj(objType) {
-    //         if (objType == null) {
-    //             return objType + "";
-    //         }
-    //         return typeof objType === "object" || typeof objType === "function" ?
-    //             toString.call(objType) || "object" :
-    //             typeof objType;
-    //     }
-    //     function isArraylike(obj) {
-    //         //如果obj里面有length键，则length等于obj.lenght;否则等于false
-    //         var length = "length" in obj && obj.length,
-    //             //检测obj的类型
-    //             type = typeObj(obj);
-    //
-    //         //如果obj是function类型 或者是window对象 则返回false;
-    //         if (type === "function" ) {
-    //             return false;
-    //         }
-    //
-    //         //如果是dom元素，则为if(length)；若length为true；则返回true
-    //         if (obj.nodeType === 1 && length) {
-    //             return true;
-    //         }
-    //         //如果obj的类型是"array",    //length为0,    //length的属性是number为true //length大于0；//length-1在obj里面是否存在
-    //         return type === "array" || length === 0 || typeof length === "number" && length > 0 && ( length - 1 ) in obj;
-    //     }
-    //     if (args) {
-    //         if (isArray) {
-    //             for (; i < length; i++) {
-    //                 value = callback.apply(obj[i], args);
-    //
-    //                 if (value === false) {
-    //                     break;
-    //                 }
-    //             }
-    //         } else {
-    //             for (i in obj) {
-    //                 value = callback.apply(obj[i], args);
-    //
-    //                 if (value === false) {
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //     } else {
-    //         if (isArray) {
-    //             for (; i < length; i++) {
-    //                 value = callback.call(obj[i], i, obj[i]);
-    //
-    //                 if (value === false) {
-    //                     break;
-    //                 }
-    //             }
-    //         } else {
-    //             for (i in obj) {
-    //                 value = callback.call(obj[i], i, obj[i]);
-    //
-    //                 if (value === false) {
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //     }
-    //
-    //     return obj;
-    // }
     var selectID=null;
     //option相关属性
     var option=null,
         backgroundColor = '#ffffff',
+        //绘图区相对于画布偏移属性
+        gridLeft=50,
+        gridTop=50,
+        gridBottom=50,
+        gridRight=50,
+        /*
+        title相关属性
+         */
         title = '我是标题，请设置title属性',
         subtitle = false,
+        titleBackgroundColor='#fff',
+        titleTop=10,
+        titleLeft=10,
+        titleTextStyleFontSize=20,
+        titleTextStyleColor='#000',
+        /*
+        legend相关属性
+         */
         //legend数据的图示，默认为x轴坐标的数值
         legendAttr = '',
         //legend的对齐方式
-        legendAlignAttr = 'left',
+        legendAlign = 'left',
+        legendLeft=10,
+        legendRight=10,
+        legendTop=10,
+        legendBottom=10,
         //另存为图片等部分
         toolboxAttr = 'default',
+        /*
+        坐标轴相关属性
+         */
         //x轴显示的坐标文字
         xAxisData = '',
         //x轴是否显示网格
+        xAxisPosition='bottom',
         xAxisGridLineAttr = 'false',
+        xAxisInverse=false,
+        xAxisSplitAreaShow=false,
+        xAxisAxisLineShow=true,
+        xAxisAxisLabelInside=false,
+        xAxisAxisLabelTextStyleColor='#000',
+        xAxisAxisTickShow=true,
         //y轴显示的坐标文字
         yAxisDataAttr = '',
         //y轴是否显示网格
+        yAxisPosition='left',
         yAxisGridLineAttr = 'true',
-        //绘图区相对于画布的偏移
-        gridAttr = {top:'80px',left:'80px',right:'80px',bottom:'80px'},
+        yAxisInverse=false,
+        yAxisSplitAreaShow=false,
+        yAxisAxisLineShow=true,
+        yAxisAxisLabelInside=false,
+        yAxisAxisLabelTextStyleColor='#000',
+        yAxisAxisTickShow=true,
         //stack的设置,默认情况下为一维普通柱状图
         stackAttr='',
         //判断x，y轴是否转置，即为条形图横过来画
@@ -167,15 +129,36 @@
         /*
          生成的配置文件
          */
+        var itemStyle = {
+            normal: {
+            },
+            emphasis: {
+                barBorderWidth: 1,
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                shadowColor: 'rgba(0,0,0,0.5)'
+            }
+        };
         option={
             backgroundColor:backgroundColor,
             title:{
                 text:title,
-                subtext:subtitle
+                subtext:subtitle,
+                backgroundColor:titleBackgroundColor,
+                top:titleTop,
+                left:titleLeft,
+                textStyle:{
+                    fontSize:titleTextStyleFontSize,
+                    color:titleTextStyleColor
+                }
             },
-            //legend暂时还未确定
+            //legend
             legend:{
-                data:legendAttr
+                data:legendAttr,
+                align:legendAlign,
+                left:legendLeft,
+                top:legendTop
               //  align:left
             },
             toolbox:{
@@ -225,7 +208,21 @@
                 })(),
                 splitLine:{
                     show:xAxisGridLineAttr
-                 }
+                 },
+                 //------------4.14添加属性
+                position:xAxisPosition,
+                inverse:xAxisInverse,
+                splitArea:{show:xAxisSplitAreaShow},
+                axisLine:{show:xAxisAxisLineShow},
+                axisLabel:{
+                    inside:xAxisAxisLabelInside,
+                    textStyle:{
+                        color:xAxisAxisLabelTextStyleColor
+                    }
+                },
+                axisTick:{
+                    show:xAxisAxisTickShow
+                }
             },
             yAxis:{
                 data:(function () {
@@ -265,9 +262,28 @@
                 })(),
                 splitLine:{
                     show:yAxisGridLineAttr
+                },
+                //------------4.14添加属性
+                position:yAxisPosition,
+                inverse:yAxisInverse,
+                splitArea:{show:yAxisSplitAreaShow},
+                axisLine:{show:yAxisAxisLineShow},
+                axisLabel:{
+                    inside:yAxisAxisLabelInside,
+                    textStyle:{
+                        color:yAxisAxisLabelTextStyleColor
+                    }
+                },
+                axisTick:{
+                    show:yAxisAxisTickShow
                 }
             },
-            grid:gridAttr,
+            grid:{
+                left:gridLeft,
+                right:gridRight,
+                top:gridTop,
+                bottom:gridBottom
+            },
             //生成series
             series:(function () {
                 /*
@@ -309,7 +325,8 @@
                 }
                 return seriesAttr;
             })(),
-            animationEasing: 'elasticOut'
+            animationEasing: 'elasticOut',
+            itemStyle: itemStyle
         }
         return this;
 
@@ -338,14 +355,55 @@
         subtitle=x;
         return this;
     }
+    var titleBackgroundColorFun=function (x) {
+        titleBackgroundColor=x;
+        return this;
+    }
+    var titleTopFun=function (x) {
+        titleTop=x;
+        return this;
+    }
+    var titleLeftFun=function (x) {
+        titleLeft=x;
+        return this;
+    }
+    var titleTextStyleFontSizeFun=function (x) {
+        titleTextStyleFontSize=x;
+        return this;
+    }
+    var titleTextStyleColorFun=function (x) {
+        titleTextStyleColor=x;
+        return this;
+    }
     var legendAttrFun=function (x) {
         legendAttr=x;
+        return this;
+    }
+    var legendAlignFun=function (x) {
+        legendAlign=x;
+        return this;
+    }
+    var legendLeftFun=function (x) {
+        legendLeft=x;
+        return this;
+    }
+    var legendRightFun=function (x) {
+        legendRight=x;
+        return this;
+    }
+    var legendBottomFun=function (x) {
+        legendBottom=x;
+        return this;
+    }
+    var legendTopFun=function (x) {
+        legendTop=x;
         return this;
     }
     var xAxisDataFun=function(x){
         xAxisData=x;
         return this;
     }
+
     var xAxisGridLineAttrFun=function (x) {
         xAxisGridLineAttr=x;
         return this;
@@ -358,8 +416,21 @@
         yAxisDataAttr=x;
         return this;
     }
-    var gridAttrFun=function(x){
-        gridAttr=x;
+
+    var gridLeftFun=function (x) {
+        gridLeft=x;
+        return this;
+    }
+    var gridRightFun=function (x) {
+        gridRight=x;
+        return this;
+    }
+    var gridTopFun=function (x) {
+        gridTop=x;
+        return this;
+    }
+    var gridBottomFun=function (x) {
+        gridBottom=x;
         return this;
     }
     var reverseFun=function(x){
@@ -370,6 +441,62 @@
         selectID=selector;
         return this;
     }
+    var xAxisPositionFun=function (x) {
+        xAxisPosition=x;
+        return this;
+    }
+    var xAxisInverseFun=function(x){
+        xAxisInverse=x;
+        return this;
+    }
+    var xAxisSplitAreaShowFun=function (x) {
+        xAxisSplitAreaShow=x;
+        return this;
+    }
+    var xAxisAxisLineShowFun=function (x) {
+        xAxisAxisLineShow=x;
+        return this;
+    }
+    var xAxisAxisLabelInsideFun=function (x) {
+        xAxisAxisLabelInside=x;
+        return this;
+    }
+    var xAxisAxisLabelTextStyleColorFun=function (x) {
+        xAxisAxisLabelTextStyleColor=x;
+        return this;
+    }
+    var xAxisAxisTickShowFun=function (x) {
+        xAxisAxisTickShow=x;
+        return this;
+    }
+    var yAxisPositionFun=function (x) {
+        yAxisPosition=x;
+        return this;
+    }
+    var yAxisInverseFun=function(x){
+        yAxisInverse=x;
+        return this;
+    }
+    var yAxisSplitAreaShowFun=function (x) {
+        yAxisSplitAreaShow=x;
+        return this;
+    }
+    var yAxisAxisLineShowFun=function (x) {
+        yAxisAxisLineShow=x;
+        return this;
+    }
+    var yAxisAxisLabelInsideFun=function (x) {
+        yAxisAxisLabelInside=x;
+        return this;
+    }
+    var yAxisAxisLabelTextStyleColorFun=function (x) {
+        yAxisAxisLabelTextStyleColor=x;
+        return this;
+    }
+    var yAxisAxisTickShowFun=function (x) {
+        yAxisAxisTickShow=x;
+        return this;
+    }
 
 
     exports.select = selectFun;
@@ -378,13 +505,53 @@
     exports.stack=stackAttrFun;
     exports.render=render;
     exports.background=backgroundColorFun;
+    /*
+    title相关属性
+     */
     exports.title=titleFun;
     exports.subtitle=subtitleFun;
+    exports.titleBackgroundColor=titleBackgroundColorFun;
+    exports.titleTop=titleTopFun;
+    exports.titleLeft=titleLeftFun;
+    exports.titleTextStyleFontSize=titleTextStyleFontSizeFun;
+    exports.titleTextStyleColor=titleTextStyleColorFun;
+    /*
+    Grid相关属性
+     */
+    exports.gridLeft=gridLeftFun;
+    exports.gridRight=gridRightFun;
+    exports.gridTop=gridTopFun;
+    exports.gridBottom=gridBottomFun;
+    /*
+    legend相关属性
+     */
     exports.legendAttr=legendAttrFun;
+    exports.legendAlign=legendAlignFun;
+    exports.legendLeft=legendLeftFun;
+    exports.legendTop=legendTopFun;
+
+    /*
+    坐标轴相关属性
+     */
+    exports.xAxisPosition=xAxisPositionFun;
+    exports.xAxisInverse=xAxisInverseFun;
+    exports.xAxisSplitAreaShow=xAxisSplitAreaShowFun;
+    exports.xAxisAxisLineShow=xAxisAxisLineShowFun;
+    exports.xAxisAxisLabelInside=xAxisAxisLabelInsideFun;
+    exports.xAxisAxisLabelTextStyleColor=xAxisAxisLabelTextStyleColorFun;
+    exports.xAxisAxisTickShow=xAxisAxisTickShowFun;
     exports.xAxisData=xAxisDataFun;
     exports.xAxisGridLineAttr=xAxisGridLineAttrFun;
+    exports.yAxisPosition=yAxisPositionFun;
     exports.yAxisData=yAxisDataAttrFun;
     exports.yAxisGridLineAttr=yAxisGridLineAttrFun;
-    exports.gridAttr=gridAttrFun;
+    exports.yAxisInverse=yAxisInverseFun;
+    exports.yAxisSplitAreaShow=yAxisSplitAreaShowFun;
+    exports.yAxisAxisLineShow=yAxisAxisLineShowFun;
+    exports.yAxisAxisLabelInside=yAxisAxisLabelInsideFun;
+    exports.yAxisAxisLabelTextStyleColor=yAxisAxisLabelTextStyleColorFun;
+    exports.yAxisAxisTickShow=yAxisAxisTickShowFun;
+
+
     exports.reverse=reverseFun;
 })));
