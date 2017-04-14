@@ -11,6 +11,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="../js/DAT.GUI.js"></script>
+    <script src="../js/echarts.js"></script>
+    <script src="../js/hescEchartBarChart.js"></script>
+    <script src="../js/hescEchartCore.js"></script>
     <style>
         *{
             margin: 0px;
@@ -22,27 +25,22 @@
     </style>
 </head>
 <body>
+<div id="test" style="width: 600px;height:400px;">
 <script>
-    var FizzyText = function() {
-        this.backgroundColor='#000';
-        this.title = '我是标题，请修改';
-        this.subtitle='';
-        this.legend=[];
+    var barObj ={
+        backgroundColor:"#ffffff",
+        title:'我是标题，请修改',
+        subtitle:'',
+        legend:'',
         //两个属性未添加
         //留坑
         //------
-        this.xAxisData=[];
-        this.xAxisGridLine=false;
-        this.yAxisData=[];
-        this.yAxisGridLine=false;
-        this.reverse=false;
-        this.stack=[];
-        this.explode = function() {
-            console.log(this.message);
-            console.log(this.speed);
-            console.log(this.displayOutline); };
-        // Define render logic ...
-
+        xAxisData:'',
+        xAxisGridLine:false,
+        yAxisData:'',
+        yAxisGridLine:true,
+        reverse:false,
+        stack:''
     };
     /*
      exports.bar = bar;
@@ -61,23 +59,38 @@
      */
 
     window.onload = function() {
-        var text = new FizzyText();
-        this.gui = new dat.GUI();
-        gui.add(text,'backgroundColor').name('背景色');
-        gui.add(text, 'title').name('图表标题');
-        gui.add(text,'subtitle').name('图标副标题');
-        gui.add(text,'legend').name('图例');
-        gui.add(text,'xAxisData').name('x轴坐标点');
-        gui.add(text,'xAxisGridLine').name('x轴网格');
-        gui.add(text,'yAxisData').name('y轴坐标点');
-        gui.add(text,'yAxisGridLine').name('y轴网格');
-        gui.add(text,'reverse').name('坐标轴是否转置');
-        gui.add(text,'stack').name('多维堆叠柱状图数据模型')
+        var gui = new dat.GUI();
+        gui.addColor(barObj,'backgroundColor').name('背景色').onChange(renderBarChart);
+        gui.add(barObj, 'title').name('图表标题').onChange(renderBarChart);
+        gui.add(barObj,'subtitle').name('图标副标题').onChange(renderBarChart);
+        gui.add(barObj,'legend').name('图例').onChange(renderBarChart);
+        gui.add(barObj,'xAxisData').name('x轴坐标点').onChange(renderBarChart);
+        gui.add(barObj,'xAxisGridLine').name('x轴网格').onChange(renderBarChart);
+        gui.add(barObj,'yAxisData').name('y轴坐标点').onChange(renderBarChart);
+        gui.add(barObj,'yAxisGridLine').name('y轴网格').onChange(renderBarChart);
+        gui.add(barObj,'reverse').name('坐标轴是否转置').onChange(renderBarChart);
+        gui.add(barObj,'stack').name('多维堆叠柱状图数据模型').onChange(renderBarChart);
         //gui.add(text, 'speed', -5, 5);
-        gui.add(text, 'displayOutline').onChange(function (d) {
-            console.log(d);
-        });
+        renderBarChart();
     };
+    function renderBarChart() {
+        hescEchart.json('../Data/barChartTest.Data',function(error,data){
+            hescEchart.select('test')
+                .background(barObj.backgroundColor)
+                .title(barObj.title)
+                .subtitle(barObj.subtitle)
+                .legendAttr(barObj.legend)
+                .xAxisData(barObj.xAxisData)
+                .xAxisGridLineAttr(barObj.xAxisGridLine)
+                .yAxisData(barObj.yAxisData)
+                .yAxisGridLineAttr(barObj.yAxisGridLine)
+                .reverse(barObj.reverse)
+                .stack(barObj.stack)
+                .bar(data)
+                .render();
+        });
+    }
+
 
 </script>
 </body>
