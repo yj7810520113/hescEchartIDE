@@ -1,0 +1,32 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/4/13
+ * Time:15:53
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/DAT.GUI.js"></script>
+    <script src="./json-to-table.js"></script>
+</head>
+<body>
+<table id="jsonTable"></table>
+<script>
+    var objectArray = [{
+        "Total": "34",
+        "Version": "1.0.4",
+        "Office": "New York"
+    }, {
+        "Total": "67",
+        "Version": "1.1.0",
+        "Office": "Paris"
+    }];
+    ConvertJsonToTable(objectArray, 'jsonTable', null, 'Download');
+    console.log(' '?true:false);
+</script>
+</body>
+</html>

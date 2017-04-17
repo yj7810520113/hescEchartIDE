@@ -297,7 +297,7 @@
                     console.log(legendAttr[i]);
                     var series1={
                         name:legendAttr[i],
-                        type:'bar',
+                        type:'line',
                         areaStyle:{normal:{}},
                         stack:(function () {
                             if(stackAttr.length==0){
