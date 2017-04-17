@@ -14,6 +14,7 @@
     <script src="../js/echarts.js"></script>
     <script src="../js/hescEchartLineChart.js"></script>
     <script src="../js/hescEchartCore.js"></script>
+    <!--<link rel="stylesheet" href="../css/DAT.GUI.css">-->
     <style>
         *{
             margin: 0px;
@@ -27,7 +28,7 @@
 <body>
 <div id="test" style="width: 600px;height:400px;margin:50px 500px">
 <script>
-    var barObj ={
+    var lineObj ={
         backgroundColor:"#ffffff",
         title:'我是标题，请修改',
         subtitle:'',
@@ -45,6 +46,7 @@
         legendAlign:'left',
         legendLeft:200,
         legendTop:10,
+        seriesAreaStyle:false,
         xAxisData:'',
         xAxisGridLine:false,
         xAxisPosition:'bottom',
@@ -85,93 +87,93 @@
 
     window.onload = function() {
         var barGui = new dat.GUI();
-        barGui.addColor(barObj,'backgroundColor').name('背景色').onChange(renderBarChart);
+        barGui.addColor(lineObj,'backgroundColor').name('背景色').onChange(renderLineChart);
         var barTitle=barGui.addFolder('标题属性');
-        barTitle.add(barObj, 'title').name('图表标题').onChange(renderBarChart);
-        barTitle.add(barObj,'subtitle').name('图标副标题').onChange(renderBarChart);
-        barTitle.add(barObj,'titleTextStyleFontSize').name('标题大小').onChange(renderBarChart);
-        barTitle.addColor(barObj,'titleBackgroundColor').name('背景色').onChange(renderBarChart);
-        barTitle.addColor(barObj,'titleTextStyleColor').name('标题颜色').onChange(renderBarChart);
-        barTitle.add(barObj,'titleTop').name('上边距').onChange(renderBarChart);
-        barTitle.add(barObj,'titleLeft').name('左边距').onChange(renderBarChart);
+        barTitle.add(lineObj, 'title').name('图表标题').onChange(renderLineChart);
+        barTitle.add(lineObj,'subtitle').name('图标副标题').onChange(renderLineChart);
+        barTitle.add(lineObj,'titleTextStyleFontSize').name('标题大小').onChange(renderLineChart);
+        barTitle.addColor(lineObj,'titleBackgroundColor').name('背景色').onChange(renderLineChart);
+        barTitle.addColor(lineObj,'titleTextStyleColor').name('标题颜色').onChange(renderLineChart);
+        barTitle.add(lineObj,'titleTop').name('上边距').onChange(renderLineChart);
+        barTitle.add(lineObj,'titleLeft').name('左边距').onChange(renderLineChart);
         var barGrid=barGui.addFolder("绘图区属性");
-        barGrid.add(barObj,'gridTop').name('上边距').onChange(renderBarChart);
-        barGrid.add(barObj,'gridBottom').name('下边距').onChange(renderBarChart);
-        barGrid.add(barObj,"gridLeft").name('左边距').onChange(renderBarChart);
-        barGrid.add(barObj,"gridRight").name('右边距').onChange(renderBarChart);
-        barGui.add(barObj,'tooltipAxisPointerType',{阴影:'shadow',交叉线:'cross',垂直线:'line'}).name('ToolTip类型').onChange(renderBarChart);
+        barGrid.add(lineObj,'gridTop').name('上边距').onChange(renderLineChart);
+        barGrid.add(lineObj,'gridBottom').name('下边距').onChange(renderLineChart);
+        barGrid.add(lineObj,"gridLeft").name('左边距').onChange(renderLineChart);
+        barGrid.add(lineObj,"gridRight").name('右边距').onChange(renderLineChart);
         var barLegend=barGui.addFolder("图例属性");
-        barLegend.add(barObj,'legend').name('图例值').onChange(renderBarChart);
-        barLegend.add(barObj,'legendAlign',{左:'left',右:'right'}).name('图例朝向').onChange(renderBarChart);
-        barLegend.add(barObj,'legendTop').name('图例上边距').onChange(renderBarChart);
-        barLegend.add(barObj,'legendLeft').name('图例左边距').onChange(renderBarChart);
+        barLegend.add(lineObj,'legend').name('图例值').onChange(renderLineChart);
+        barLegend.add(lineObj,'legendAlign',{左:'left',右:'right'}).name('图例朝向').onChange(renderLineChart);
+        barLegend.add(lineObj,'legendTop').name('图例上边距').onChange(renderLineChart);
+        barLegend.add(lineObj,'legendLeft').name('图例左边距').onChange(renderLineChart);
         var barX=barGui.addFolder('x轴属性');
-        barX.add(barObj,'xAxisData').name('x轴坐标点').onChange(renderBarChart);
-        barX.add(barObj,'xAxisGridLine').name('x轴网格').onChange(renderBarChart);
-        barX.add(barObj,'xAxisPosition',{上:'top',下:'bottom'}).name('x轴位置').onChange(renderBarChart);
-        barX.add(barObj,'xAxisInverse').name('x轴反向').onChange(renderBarChart);
-        barX.add(barObj,'xAxisSplitAreaShow').name('x轴分割区域').onChange(renderBarChart);
-        barX.add(barObj,'xAxisAxisLineShow').name('x轴轴线').onChange(renderBarChart);
-        barX.add(barObj,'xAxisAxisTickShow').name('x轴刻度').onChange(renderBarChart);
-        barX.add(barObj,'xAxisAxisLabelInside').name('图内刻度').onChange(renderBarChart);
-        barX.addColor(barObj,'xAxisAxisLabelTextStyleColor').name('字体颜色').onChange(renderBarChart);
-        barX.add(barObj,'xAxisBoundaryGap').name('左右边界').onChange(renderBarChart);
+        barX.add(lineObj,'xAxisData').name('x轴坐标点').onChange(renderLineChart);
+        barX.add(lineObj,'xAxisPosition',{上:'top',下:'bottom'}).name('x轴位置').onChange(renderLineChart);
+        barX.addColor(lineObj,'xAxisAxisLabelTextStyleColor').name('字体颜色').onChange(renderLineChart);
+        barX.add(lineObj,'xAxisGridLine').name('x轴网格').onChange(renderLineChart);
+        barX.add(lineObj,'xAxisInverse').name('x轴反向').onChange(renderLineChart);
+        barX.add(lineObj,'xAxisSplitAreaShow').name('x轴分割区域').onChange(renderLineChart);
+        barX.add(lineObj,'xAxisAxisLineShow').name('x轴轴线').onChange(renderLineChart);
+        barX.add(lineObj,'xAxisAxisTickShow').name('x轴刻度').onChange(renderLineChart);
+        barX.add(lineObj,'xAxisAxisLabelInside').name('图内刻度').onChange(renderLineChart);
+        barX.add(lineObj,'xAxisBoundaryGap').name('左右边界').onChange(renderLineChart);
         var barY=barGui.addFolder('y轴属性');
-        barY.add(barObj,'yAxisData').name('y轴坐标点').onChange(renderBarChart);
-        barY.add(barObj,'yAxisGridLine').name('y轴网格').onChange(renderBarChart);
-        barY.add(barObj,'yAxisPosition',{左:'left',右:'right'}).name('y轴位置').onChange(renderBarChart);
-        barY.add(barObj,'yAxisInverse').name('y轴反向').onChange(renderBarChart);
-        barY.add(barObj,'yAxisSplitAreaShow').name('y轴分割区域').onChange(renderBarChart);
-        barY.add(barObj,'yAxisAxisLineShow').name('y轴轴线').onChange(renderBarChart);
-        barY.add(barObj,'yAxisAxisTickShow').name('y轴刻度').onChange(renderBarChart);
-        barY.add(barObj,'yAxisAxisLabelInside').name('图内刻度').onChange(renderBarChart);
-        barY.addColor(barObj,'yAxisAxisLabelTextStyleColor').name('字体颜色').onChange(renderBarChart);
-        barGui.add(barObj,'reverse').name('坐标轴是否转置').onChange(renderBarChart);
-        barGui.add(barObj,'stack').name('多维堆叠柱状图数据模型').onChange(renderBarChart);
+        barY.add(lineObj,'yAxisData').name('y轴坐标点').onChange(renderLineChart);
+        barY.add(lineObj,'yAxisPosition',{左:'left',右:'right'}).name('y轴位置').onChange(renderLineChart);
+        barY.addColor(lineObj,'yAxisAxisLabelTextStyleColor').name('字体颜色').onChange(renderLineChart);
+        barY.add(lineObj,'yAxisGridLine').name('y轴网格').onChange(renderLineChart);
+        barY.add(lineObj,'yAxisInverse').name('y轴反向').onChange(renderLineChart);
+        barY.add(lineObj,'yAxisSplitAreaShow').name('y轴分割区域').onChange(renderLineChart);
+        barY.add(lineObj,'yAxisAxisLineShow').name('y轴轴线').onChange(renderLineChart);
+        barY.add(lineObj,'yAxisAxisTickShow').name('y轴刻度').onChange(renderLineChart);
+        barY.add(lineObj,'yAxisAxisLabelInside').name('图内刻度').onChange(renderLineChart);
+        barGui.add(lineObj,'tooltipAxisPointerType',{阴影:'shadow',交叉线:'cross',垂直线:'line'}).name('ToolTip类型').onChange(renderLineChart);
+        barGui.add(lineObj,'reverse').name('坐标轴是否转置').onChange(renderLineChart);
+        barGui.add(lineObj,'seriesAreaStyle').name('流图').onChange(renderLineChart);
         //gui.add(text, 'speed', -5, 5);
-        renderBarChart();
+        renderLineChart();
     };
-    function renderBarChart() {
+    function renderLineChart() {
         hescEchart.json('../Data/barChartTest.Data',function(error,data){
             hescEchart.select('test')
-                .background(barObj.backgroundColor)
-                .title(barObj.title)
-                .subtitle(barObj.subtitle)
-                .titleBackgroundColor(barObj.titleBackgroundColor)
-                .titleTop(barObj.titleTop)
-                .titleLeft(barObj.titleLeft)
-                .titleTextStyleFontSize(barObj.titleTextStyleFontSize)
-                .titleTextStyleColor(barObj.titleTextStyleColor)
-                .gridLeft(barObj.gridLeft)
-                .gridRight(barObj.gridRight)
-                .gridTop(barObj.gridTop)
-                .gridBottom(barObj.gridBottom)
-                .tooltipAxisPointerType(barObj.tooltipAxisPointerType)
-                .legendAttr(barObj.legend)
-                .legendAlign(barObj.legendAlign)
-                .legendLeft(barObj.legendLeft)
-                .legendTop(barObj.legendTop)
-                .xAxisData(barObj.xAxisData)
-                .xAxisGridLineAttr(barObj.xAxisGridLine)
-                .xAxisPosition(barObj.xAxisPosition)
-                .xAxisInverse(barObj.xAxisInverse)
-                .xAxisSplitAreaShow(barObj.xAxisSplitAreaShow)
-                .xAxisAxisLineShow(barObj.xAxisAxisLineShow)
-                .xAxisAxisLabelInside(barObj.xAxisAxisLabelInside)
-                .xAxisAxisLabelTextStyleColor(barObj.xAxisAxisLabelTextStyleColor)
-                .xAxisAxisTickShow(barObj.xAxisAxisTickShow)
-                .xAxisBoundaryGap(barObj.xAxisBoundaryGap)
-                .yAxisInverse(barObj.yAxisInverse)
-                .yAxisSplitAreaShow(barObj.yAxisSplitAreaShow)
-                .yAxisAxisLineShow(barObj.yAxisAxisLineShow)
-                .yAxisAxisLabelInside(barObj.yAxisAxisLabelInside)
-                .yAxisAxisLabelTextStyleColor(barObj.yAxisAxisLabelTextStyleColor)
-                .yAxisAxisTickShow(barObj.yAxisAxisTickShow)
-                .yAxisData(barObj.yAxisData)
-                .yAxisGridLineAttr(barObj.yAxisGridLine)
-                .reverse(barObj.reverse)
-                .stack(barObj.stack)
-                .bar(data)
+                .background(lineObj.backgroundColor)
+                .title(lineObj.title)
+                .subtitle(lineObj.subtitle)
+                .titleBackgroundColor(lineObj.titleBackgroundColor)
+                .titleTop(lineObj.titleTop)
+                .titleLeft(lineObj.titleLeft)
+                .titleTextStyleFontSize(lineObj.titleTextStyleFontSize)
+                .titleTextStyleColor(lineObj.titleTextStyleColor)
+                .gridLeft(lineObj.gridLeft)
+                .gridRight(lineObj.gridRight)
+                .gridTop(lineObj.gridTop)
+                .gridBottom(lineObj.gridBottom)
+                .tooltipAxisPointerType(lineObj.tooltipAxisPointerType)
+                .legendAttr(lineObj.legend)
+                .legendAlign(lineObj.legendAlign)
+                .legendLeft(lineObj.legendLeft)
+                .legendTop(lineObj.legendTop)
+                .xAxisData(lineObj.xAxisData)
+                .xAxisGridLineAttr(lineObj.xAxisGridLine)
+                .xAxisPosition(lineObj.xAxisPosition)
+                .xAxisInverse(lineObj.xAxisInverse)
+                .xAxisSplitAreaShow(lineObj.xAxisSplitAreaShow)
+                .xAxisAxisLineShow(lineObj.xAxisAxisLineShow)
+                .xAxisAxisLabelInside(lineObj.xAxisAxisLabelInside)
+                .xAxisAxisLabelTextStyleColor(lineObj.xAxisAxisLabelTextStyleColor)
+                .xAxisAxisTickShow(lineObj.xAxisAxisTickShow)
+                .xAxisBoundaryGap(lineObj.xAxisBoundaryGap)
+                .yAxisInverse(lineObj.yAxisInverse)
+                .yAxisSplitAreaShow(lineObj.yAxisSplitAreaShow)
+                .yAxisAxisLineShow(lineObj.yAxisAxisLineShow)
+                .yAxisAxisLabelInside(lineObj.yAxisAxisLabelInside)
+                .yAxisAxisLabelTextStyleColor(lineObj.yAxisAxisLabelTextStyleColor)
+                .yAxisAxisTickShow(lineObj.yAxisAxisTickShow)
+                .yAxisData(lineObj.yAxisData)
+                .yAxisGridLineAttr(lineObj.yAxisGridLine)
+                .reverse(lineObj.reverse)
+                .seriesAreaStyle(lineObj.seriesAreaStyle)
+                .line(data)
                 .render();
         });
     }

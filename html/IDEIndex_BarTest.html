@@ -1,31 +1,65 @@
 <!--
  * Created by WebStorm
  * User:maomao,http://www.mmcode.top
- * Date:2017/4/13
- * Time:16:14
+ * Date:2017/4/17
+ * Time:14:28
  -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/index.css"/>
     <script src="../js/DAT.GUI.js"></script>
     <script src="../js/echarts.js"></script>
     <script src="../js/hescEchartBarChart.js"></script>
     <script src="../js/hescEchartCore.js"></script>
-    <style>
-        *{
-            margin: 0px;
-            padding:0px;
-        }
-        body{
-            background:gray;
-        }
-    </style>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
-<div id="test" style="width: 600px;height:400px;margin:50px 500px">
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="../" class="navbar-brand">HESCEchart</a>
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="./LineChartIDE.html/">条形</a>
+                </li>
+                <li>
+                    <a href="./BarChartIDE.html">柱状</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="tabs">
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#tabConfig" data-toggle="tab">
+                配置
+            </a>
+        </li>
+        <li><a href="#tabData" data-toggle="tab">数据</a></li>
+    </ul>
+    <div id="myTabContent" >
+        <div class="tab-pane fade in active" id="tabConfig">
+        </div>
+        <div class="tab-pane fade" id="tabData">
+            <p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple
+                TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
+        </div>
+    </div>
+</div>
 <script>
     var barObj ={
         backgroundColor:"#ffffff",
@@ -84,7 +118,11 @@
      */
 
     window.onload = function() {
-        var barGui = new dat.GUI();
+        var barGui = new dat.GUI({autoPlace:false});
+        //添加柱状图至控制面板
+        var customContainer = document.getElementById('tabConfig');
+        customContainer.appendChild(barGui.domElement);
+
         barGui.addColor(barObj,'backgroundColor').name('背景色').onChange(renderBarChart);
         var barTitle=barGui.addFolder('标题属性');
         barTitle.add(barObj, 'title').name('图表标题').onChange(renderBarChart);
@@ -178,5 +216,9 @@
 
 
 </script>
+
+
+
+
 </body>
 </html>

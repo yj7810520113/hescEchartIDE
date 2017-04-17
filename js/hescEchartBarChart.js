@@ -114,15 +114,14 @@
         dataNum = asyncData.length;
         //设置series个数，即为多维柱状图的维数
         seriesNum = asyncData[0].length;
-        //设置legend的图示如果没有设置lengattr属性，legend图示从第一个元素的x轴值获取
+        //设置legend的图示如果没有设置lengattr属性，legend图示取默认值
         if(legendAttr.length==0){
             legendAttr=[];
-            asyncData[0].forEach(function (data2) {
-            for (var key in data2) {
-                legendAttr.push(key);
-            }
+            asyncData[0].forEach(function (data2,i) {
+                legendAttr.push('默认值'+i);
+            });
             // console.log();
-        });}
+        }
         //否则将legendAttr转换为array
         else{
             legendAttr=stringToArray(legendAttr);
@@ -188,7 +187,10 @@
                             else {
                                 var defaultXAxisData = [];
                                 for (var i = 0; i < dataNum; i++) {
-                                    defaultXAxisData.push('默认值' + i);
+                                    var jsonO=(asyncData[i])[0];
+                                    for(var jsonKey in jsonO){
+                                        defaultXAxisData.push(jsonKey);
+                                    }
                                 }
                                 return defaultXAxisData;
                             }
@@ -236,14 +238,17 @@
                         }
                         else {
                             //返回默认xAxis坐标点的值
-                            if (seriesNum == 1 && legendAttr.length!=0) {
+                            if (seriesNum == 1 &&legendAttr.length!=0) {
                                 //若为一维普通普通柱状图返回legendAttr即为坐标点值
                                 return legendAttr;
                             }
                             else {
                                 var defaultXAxisData = [];
                                 for (var i = 0; i < dataNum; i++) {
-                                    defaultXAxisData.push('默认值' + i);
+                                    var jsonO=(asyncData[i])[0];
+                                    for(var jsonKey in jsonO){
+                                        defaultXAxisData.push(jsonKey);
+                                    }
                                 }
                                 return defaultXAxisData;
                             }
