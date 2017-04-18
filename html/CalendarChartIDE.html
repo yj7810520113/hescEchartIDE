@@ -1,0 +1,152 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/4/13
+ * Time:16:14
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/DAT.GUI.js"></script>
+    <script src="../js/echarts.js"></script>
+    <script src="../js/hescEchartPieChart.js"></script>
+    <script src="../js/hescEchartCore.js"></script>
+    <style>
+        *{
+            margin: 0px;
+            padding:0px;
+        }
+        body{
+            background:gray;
+        }
+    </style>
+</head>
+<body>
+<div id="test" style="width: 600px;height:400px;margin:50px 500px">
+<script>
+    var pieObj ={
+        backgroundColor:"#ffffff",
+        title:'我是标题，请修改',
+        subtitle:'',
+        titleBackgroundColor:'#fff',
+        titleTop:10,
+        titleLeft:10,
+        titleTextStyleFontSize:18,
+        titleTextStyleColor:'#000',
+        gridLeft:50,
+        gridRight:50,
+        gridTop:50,
+        gridBottom:50,
+        tooltipAxisPointerType:'shadow',
+        legend:'',
+        legendAlign:'left',
+        legendLeft:200,
+        legendTop:10,
+        legendOrient:'horizontal',
+        /*
+         series相关属性
+         */
+        seriesName: '默认1',
+        seriesRadiusOutter: 50,
+        seriesRadiusInner: 0,
+        seriesCenterTop: 50,
+        seriesCenterLeft: 50,
+        seriesRoseType:'false',
+        seriesLabelNormalShow: false
+    };
+    /*
+     exports.pie = pie;
+     exports.stack=stackAttrFun;
+     exports.render=render;
+     exports.backgroud=backgroundColorFun;
+     exports.title=titleFun;
+     exports.subtitle=subtitleFun;
+     exports.legendAttr=legendAttrFun;
+     exports.xAxisData=xAxisDataFun;
+     exports.xAxisGridLineAttr=xAxisGridLineAttrFun;
+     exports.yAxisData=yAxisDataAttrFun;
+     exports.yAxisGridLineAttr=yAxisGridLineAttrFun;
+     exports.gridAttr=gridAttrFun;
+     exports.reverse=reverseFun;
+     */
+
+    window.onload = function() {
+        var pieGui = new dat.GUI();
+        pieGui.addColor(pieObj,'backgroundColor').name('背景色').onChange(renderPieChart);
+        var pieTitle=pieGui.addFolder('标题属性');
+        pieTitle.add(pieObj, 'title').name('图表标题').onChange(renderPieChart);
+        pieTitle.add(pieObj,'subtitle').name('图标副标题').onChange(renderPieChart);
+        pieTitle.add(pieObj,'titleTextStyleFontSize').name('标题大小').onChange(renderPieChart);
+        pieTitle.addColor(pieObj,'titleBackgroundColor').name('背景色').onChange(renderPieChart);
+        pieTitle.addColor(pieObj,'titleTextStyleColor').name('标题颜色').onChange(renderPieChart);
+        pieTitle.add(pieObj,'titleTop').name('上边距').onChange(renderPieChart);
+        pieTitle.add(pieObj,'titleLeft').name('左边距').onChange(renderPieChart);
+        var pieGrid=pieGui.addFolder("绘图区属性");
+        pieGrid.add(pieObj,'seriesCenterTop',0,100).name("圆心上边距").onChange(renderPieChart);
+        pieGrid.add(pieObj,'seriesCenterLeft',0,100).name("圆心下边距").onChange(renderPieChart);
+        var pieLegend=pieGui.addFolder("图例属性");
+        pieLegend.add(pieObj,'legendOrient',{水平:'horizontal',垂直:'vertical'}).name('图例方向').onChange(renderPieChart);
+        pieLegend.add(pieObj,'legendAlign',{左:'left',右:'right'}).name('图例朝向').onChange(renderPieChart);
+        pieLegend.add(pieObj,'legendTop').name('图例上边距').onChange(renderPieChart);
+        pieLegend.add(pieObj,'legendLeft').name('图例左边距').onChange(renderPieChart);
+        var pieSeries=pieGui.addFolder("数据属性");
+        pieSeries.add(pieObj,'seriesName').name("数据名").onChange(renderPieChart);
+        pieSeries.add(pieObj,'seriesRadiusOutter',0,100).name("外半径").onChange(renderPieChart);
+        pieSeries.add(pieObj,'seriesRadiusInner',0,100).name("内半径").onChange(renderPieChart);
+
+        pieSeries.add(pieObj,'seriesRoseType',{否:'false',区域:'area',角度:'angle'}).name("玫瑰图").onChange(renderPieChart);
+        pieSeries.add(pieObj,'seriesLabelNormalShow').name("外标签").onChange(renderPieChart);
+
+        /*
+         series相关属性
+         */
+        // seriesName='默认1',
+        //     seriesRadius='50%',
+        //     seriesCenterTop='',
+        //     seriesCenterLeft='',
+        //     seriesRoseType=false,
+        //     seriesLabelNormalShow=false;
+        renderPieChart();
+        
+    };
+    function renderPieChart() {
+        hescEchart.json('../Data/pieChartTest.Data',function(error,data){
+            hescEchart.select('test')
+                .background(pieObj.backgroundColor)
+                .title(pieObj.title)
+                .subtitle(pieObj.subtitle)
+                .titleBackgroundColor(pieObj.titleBackgroundColor)
+                .titleTop(pieObj.titleTop)
+                .titleLeft(pieObj.titleLeft)
+                .titleTextStyleFontSize(pieObj.titleTextStyleFontSize)
+                .titleTextStyleColor(pieObj.titleTextStyleColor)
+                .gridLeft(pieObj.gridLeft)
+                .gridRight(pieObj.gridRight)
+                .gridTop(pieObj.gridTop)
+                .gridBottom(pieObj.gridBottom)
+                .tooltipAxisPointerType(pieObj.tooltipAxisPointerType)
+                .legendAttr(pieObj.legend)
+                .legendAlign(pieObj.legendAlign)
+                .legendLeft(pieObj.legendLeft)
+                .legendTop(pieObj.legendTop)
+                .legendOrient(pieObj.legendOrient)
+                .seriesName(pieObj.seriesName)
+                .seriesRadiusOutter(pieObj.seriesRadiusOutter+'%')
+                .seriesRadiusInner(pieObj.seriesRadiusInner+'%')
+                .seriesCenterLeft(pieObj.seriesCenterLeft+'%')
+                .seriesCenterTop(pieObj.seriesCenterTop+'%')
+                .seriesRoseType(pieObj.seriesRoseType=='false'?false:pieObj.seriesRoseType)
+                .seriesLabelNormalShow(pieObj.seriesLabelNormalShow)
+                .pie(data)
+                .render();
+            
+        });
+    }
+
+
+</script>
+</body>
+</html>

@@ -39,9 +39,12 @@
 <script>
     window.onload = function() {
 
+        var delete1="";
         var gui = new dat.GUI();
         gui.Horizontale = 300;
         gui.Vertikale = 300;
+        gui.addbottom=true;
+        gui.removebottom=true;
         gui.A = new Array();
 
         for (var i=1; i<7; i++) {
@@ -50,11 +53,21 @@
 
         gui.add(gui, 'Horizontale', 0, 600);
         gui.add(gui, 'Vertikale', 0, 600);
+        gui.add(gui,'removebottom').onChange(function () {
+            gui.remove(delete1);
+        })
+        gui.add(gui,'addbottom').onChange(function () {
+            gui.removeele=gui.clickvalue=50;
+            var guifolder=gui.addFolder("test");
+            delete1=guifolder.add(gui,'clickvalue');
+            console.log(gui.A)
+        });
 
         for (var i=1; i<7; i++) {
-            gui.add(gui.A, i, gui.A[i]);
+            gui.add(gui.A, i);
         }
         gui.remember(gui);
+
     };
 </script>
 </body>
