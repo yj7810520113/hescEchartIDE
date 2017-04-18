@@ -553,6 +553,7 @@
     exports.legendAlign=legendAlignFun;
     exports.legendLeft=legendLeftFun;
     exports.legendTop=legendTopFun;
+    exports.legendOrient=legendOrientFun;
 
 
     /*
