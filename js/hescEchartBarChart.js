@@ -62,6 +62,7 @@
         legendRight=10,
         legendTop=10,
         legendBottom=10,
+        legendOrient='horizontal',
         //另存为图片等部分
         toolboxAttr = 'default',
         /*
@@ -159,7 +160,8 @@
                 data:legendAttr,
                 align:legendAlign,
                 left:legendLeft,
-                top:legendTop
+                top:legendTop,
+                orient:legendOrient
               //  align:left
             },
             toolbox:{
@@ -412,6 +414,10 @@
         legendTop=x;
         return this;
     }
+    var legendOrientFun=function (x) {
+        legendOrient=x;
+        return this;
+    }
     var xAxisDataFun=function(x){
         xAxisData=x;
         return this;
@@ -547,6 +553,7 @@
     exports.legendAlign=legendAlignFun;
     exports.legendLeft=legendLeftFun;
     exports.legendTop=legendTopFun;
+
 
     /*
     坐标轴相关属性

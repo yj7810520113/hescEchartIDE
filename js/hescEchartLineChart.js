@@ -62,6 +62,7 @@
         legendRight=10,
         legendTop=10,
         legendBottom=10,
+        legendOrient='horizontal',
         /*
         是否为流图或者面积图
          */
@@ -163,7 +164,8 @@
                 data:legendAttr,
                 align:legendAlign,
                 left:legendLeft,
-                top:legendTop
+                top:legendTop,
+                orient:legendOrient
               //  align:left
             },
             toolbox:{
@@ -422,6 +424,10 @@
         legendTop=x;
         return this;
     }
+    var legendOrientFun=function (x) {
+        legendOrient=x;
+        return this;
+    }
     var seriesAreaStyleFun=function (x) {
         seriesAreaStyle=x;
         return this;
@@ -561,6 +567,7 @@
     exports.legendAlign=legendAlignFun;
     exports.legendLeft=legendLeftFun;
     exports.legendTop=legendTopFun;
+    exports.legendOrient=legendOrientFun;
 
 
     exports.seriesAreaStyle=seriesAreaStyleFun;

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/bootstrap.css"/>
     <link rel="stylesheet" href="../css/index.css"/>
     <script src="../js/DAT.GUI.js"></script>
+    <link rel="stylesheet" href="../css/DAT.GUI.css"/>
     <script src="../js/echarts.js"></script>
     <script src="../js/hescEchartBarChart.js"></script>
     <script src="../js/hescEchartCore.js"></script>
@@ -20,6 +21,8 @@
     <script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
+<div id="test" style="width: 600px;height:400px;margin:50px 500px">
+</div>
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -51,7 +54,7 @@
         </li>
         <li><a href="#tabData" data-toggle="tab">数据</a></li>
     </ul>
-    <div id="myTabContent" >
+    <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="tabConfig">
         </div>
         <div class="tab-pane fade" id="tabData">
@@ -60,6 +63,7 @@
         </div>
     </div>
 </div>
+
 <script>
     var barObj ={
         backgroundColor:"#ffffff",

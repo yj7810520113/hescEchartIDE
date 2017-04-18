@@ -28,6 +28,10 @@
 <div id="test" style="width: 600px;height:400px;margin:50px 500px">
 <script>
     var barObj ={
+        test:{
+            test1:'',
+            test2:''
+        },
         backgroundColor:"#ffffff",
         title:'我是标题，请修改',
         subtitle:'',
@@ -45,6 +49,7 @@
         legendAlign:'left',
         legendLeft:200,
         legendTop:10,
+        legendOrient:'horizontal',
         xAxisData:'',
         xAxisGridLine:false,
         xAxisPosition:'bottom',
@@ -102,6 +107,7 @@
         barGui.add(barObj,'tooltipAxisPointerType',{阴影:'shadow',交叉线:'cross',垂直线:'line'}).name('ToolTip类型').onChange(renderBarChart);
         var barLegend=barGui.addFolder("图例属性");
         barLegend.add(barObj,'legend').name('图例值').onChange(renderBarChart);
+        barLegend.add(barObj,'legendOrient',{水平:'horizontal',垂直:'vertical'}).name('图例方向').onChange(renderBarChart);
         barLegend.add(barObj,'legendAlign',{左:'left',右:'right'}).name('图例朝向').onChange(renderBarChart);
         barLegend.add(barObj,'legendTop').name('图例上边距').onChange(renderBarChart);
         barLegend.add(barObj,'legendLeft').name('图例左边距').onChange(renderBarChart);
@@ -151,6 +157,7 @@
                 .legendAlign(barObj.legendAlign)
                 .legendLeft(barObj.legendLeft)
                 .legendTop(barObj.legendTop)
+                .legendOrient(lineObj.legendOrient)
                 .xAxisData(barObj.xAxisData)
                 .xAxisGridLineAttr(barObj.xAxisGridLine)
                 .xAxisPosition(barObj.xAxisPosition)

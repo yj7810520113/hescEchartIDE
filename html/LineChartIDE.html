@@ -14,7 +14,7 @@
     <script src="../js/echarts.js"></script>
     <script src="../js/hescEchartLineChart.js"></script>
     <script src="../js/hescEchartCore.js"></script>
-    <!--<link rel="stylesheet" href="../css/DAT.GUI.css">-->
+    <link rel="stylesheet" href="../css/DAT.GUI.css">
     <style>
         *{
             margin: 0px;
@@ -46,6 +46,7 @@
         legendAlign:'left',
         legendLeft:200,
         legendTop:10,
+        legendOrient:'horizontal',
         seriesAreaStyle:false,
         xAxisData:'',
         xAxisGridLine:false,
@@ -103,6 +104,7 @@
         barGrid.add(lineObj,"gridRight").name('右边距').onChange(renderLineChart);
         var barLegend=barGui.addFolder("图例属性");
         barLegend.add(lineObj,'legend').name('图例值').onChange(renderLineChart);
+        barLegend.add(barObj,'legendOrient',{水平:'horizontal',垂直:'vertical'}).name('图例方向').onChange(renderBarChart);
         barLegend.add(lineObj,'legendAlign',{左:'left',右:'right'}).name('图例朝向').onChange(renderLineChart);
         barLegend.add(lineObj,'legendTop').name('图例上边距').onChange(renderLineChart);
         barLegend.add(lineObj,'legendLeft').name('图例左边距').onChange(renderLineChart);
@@ -153,6 +155,7 @@
                 .legendAlign(lineObj.legendAlign)
                 .legendLeft(lineObj.legendLeft)
                 .legendTop(lineObj.legendTop)
+                .legendOrient(lineObj.legendOrient)
                 .xAxisData(lineObj.xAxisData)
                 .xAxisGridLineAttr(lineObj.xAxisGridLine)
                 .xAxisPosition(lineObj.xAxisPosition)
