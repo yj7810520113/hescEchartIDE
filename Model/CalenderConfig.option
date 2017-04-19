@@ -1,0 +1,53 @@
+/**
+ * Created by maomao on 2017/4/11.
+ */
+{
+ /*
+  *title,grid,legend相同省略
+  */
+  visualMap:{
+    show:true,
+    min:0,
+    max:1000,
+    calculable:true,
+    orient:'horizontal',
+    left:'20',
+    top:'20',
+    color:['red','yellow']
+  }
+  calendar:[{
+    top:100,
+    left:20,
+    orient:'vertical',
+    range:['2017-1-1','2017-1-31'],
+    yearLabel:{
+        margin:40
+    },
+    monthLabel:{
+        nameMap:'cn',
+        margin:20
+    },
+    dayLabel:{
+        //一周初始日
+        firstDay:1,
+        nameMap:'cn'
+    },
+    cellsize:['auto','20']
+    }
+  ]
+  series:[{
+    type:'heatmap'或者'scatter',
+    coordinateSystem:'calendar',
+    data:data,
+    label:{
+        normal:{
+            show:true,
+            textStyle:{
+                color:'',
+                fontSize:12
+            }
+        }
+    }
+  }]
+
+}
