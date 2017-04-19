@@ -49,16 +49,18 @@
         function sortData(a,b){
             return b[1]-a[1];
         }
-        function calendarProperties(d){
-            var visualMapMaxV=(d[0])[1];
-            var visualMapMinV=(d[d.length-1])[1];
-            var calendarRangeStartV=(d[0])[0];
-            var calendarRangeEndV=(d[d.length-1])[0];
-            var seriesSymbolSizeV=(d[0])[1]/20;
-            return calPro:{
-
-            }
-        }
+        // function calendarProperties(d){
+        //     var visualMapMaxV=(d[0])[1];
+        //     var visualMapMinV=(d[d.length-1])[1];
+        //     var calendarRangeStartV=(d[0])[0];
+        //     var calendarRangeEndV=(d[d.length-1])[0];
+        //     var seriesSymbolSizeV=(d[0])[1]/20;
+        //     return calPro:{
+        //
+        //     }
+        //
+        //
+        // }
 
         var selectID = null;
         //option相关属性

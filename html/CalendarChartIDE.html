@@ -71,9 +71,10 @@
          */
         seriesType : 'heatmap',
         seriesCoordinateSystem : 'calendar',
-        seriesLabelNormalShow : true,
+        seriesLabelNormalShow : false,
         seriesLabelNormalTextStyleColor : '#fff',
-        seriesLabelNormalTextStyleFontsize : 12
+        seriesLabelNormalTextStyleFontsize : 12,
+        seriesSymbolSize:50
 
     };
     /*
@@ -104,7 +105,7 @@
         calendarTitle.add(calendarObj,'titleTop').name('上边距').onChange(renderCalendarChart);
         calendarTitle.add(calendarObj,'titleLeft').name('左边距').onChange(renderCalendarChart);
         var calendarVisualMap=calendarGui.addFolder("图示区属性");
-        calendarVisualMap.add(calendarObj,'visualShow',{是:true,否:false}).name('是否显示').onChange(renderCalendarChart);
+        calendarVisualMap.add(calendarObj,'visualShow').name('是否显示').onChange(renderCalendarChart);
         calendarVisualMap.add(calendarObj,'visualMapOrient',{水平:'horizontal',垂直:'vertical'}).name('图示朝向').onChange(renderCalendarChart);
         calendarVisualMap.add(calendarObj,'visualMapMin').name('映射最小值').onChange(renderCalendarChart);
         calendarVisualMap.add(calendarObj,'visualMapMax').name('映射最大值').onChange(renderCalendarChart);
@@ -114,7 +115,7 @@
         calendarVisualMap.addColor(calendarObj,'visualMapColorEnd').name('映射颜色终止').onChange(renderCalendarChart);
         var calendarCalendar=calendarGui.addFolder("日历图属性");
         calendarCalendar.add(calendarObj,'calendarTop').name('上边距').onChange(renderCalendarChart);
-        calendarCalendar.add(calendarObj,'calendarLeft').name('坐边距').onChange(renderCalendarChart);
+        calendarCalendar.add(calendarObj,'calendarLeft').name('左边距').onChange(renderCalendarChart);
         calendarCalendar.add(calendarObj,'calendarOrient',{水平:'horizontal',垂直:'vertical'}).name('朝向').onChange(renderCalendarChart);
         calendarCalendar.add(calendarObj,'calendarRangeStart').name('起始日期(yyyy-mm-dd)').onChange(renderCalendarChart);
         calendarCalendar.add(calendarObj,'calendarRangeEnd').name('终止日期((yyyy-mm-dd))').onChange(renderCalendarChart);
@@ -128,6 +129,7 @@
         calendarSeries.add(calendarObj,'seriesLabelNormalShow').name('标签').onChange(renderCalendarChart);
         calendarSeries.addColor(calendarObj,'seriesLabelNormalTextStyleColor').name('字体颜色').onChange(renderCalendarChart);
         calendarSeries.add(calendarObj,'seriesLabelNormalTextStyleFontsize',2,20).name('字体大小').onChange(renderCalendarChart);
+        calendarSeries.add(calendarObj,'seriesSymbolSize').name('填充系数').onChange(renderCalendarChart);
 
         renderCalendarChart();
         
@@ -168,6 +170,7 @@
                 .seriesLabelNormalShow(calendarObj.seriesLabelNormalShow)
                 .seriesLabelNormalTextStyleColor(calendarObj.seriesLabelNormalTextStyleColor)
                 .seriesLabelNormalTextStyleFontsize(calendarObj.seriesLabelNormalTextStyleFontsize)
+                .seriesSymbolSize(calendarObj.seriesSymbolSize)
                 .calendar(data)
                 .render();
             
