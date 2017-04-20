@@ -36,11 +36,6 @@
     //option相关属性
     var option = null,
         backgroundColor = '#ffffff',
-        //绘图区相对于画布偏移属性
-        gridLeft = 50,
-        gridTop = 50,
-        gridBottom = 50,
-        gridRight = 50,
         /*
          title相关属性
          */
@@ -51,7 +46,6 @@
         titleLeft = 10,
         titleTextStyleFontSize = 20,
         titleTextStyleColor = '#000',
-        tooltipAxisPointerType = 'shadow',
         /*
          legend相关属性
          */
@@ -68,7 +62,7 @@
          radar图特有属性
          */
         tooltipShow = true,
-        radarIndicator = '',
+        radarIndicators = '',
         radarCenterLeft = 50,
         radarCenterTop = 50,
         radarRadius = 100,
@@ -98,17 +92,26 @@
         //----------------asyncJson数据相关属性----
         //n为默认坐标下，元素的个数，即为x轴个数
         var dataNum = 0;
-
-        /*
-         处理asyncData数据,并生成series
-         */
-        // asyncData.forEach(function (data1) {
-        //n为默认坐标下，元素的个数，即为x轴个数
         dataNum = asyncData.length;
-        console.log(radarIndicator);
-        //设置radarIndicator默认属性的图示如果没有设置lengattr属性，legend图示取默认值
-        if (radarIndicator.length == 0) {
-            radarIndicator = [];
+
+        //获得series的data
+        var seriesDatas = [];
+        for(var i=0;i<dataNum;i++){
+           // console.log(asyncData[i])
+            var seriesDataSingle=[];
+            for (var seriesData in asyncData[i]) {
+                // console.log();
+                for (var seriesDataKey in (asyncData[i])[seriesData]) {
+                    seriesDataSingle.push(((asyncData[i])[seriesData])[seriesDataKey]);
+                }
+            }
+            seriesDatas.push(seriesDataSingle);
+        }
+
+
+
+        if (radarIndicators.length==0) {
+            var radarIndicator = [];
             asyncData[0].forEach(function (data2, i) {
                 for (var radarIndicatorO in data2) {
                     radarIndicator.push({text: radarIndicatorO});
@@ -117,12 +120,11 @@
         }
         else {
             var radarIndicator = [];
-            var radarIndicatorArray = stringToArray(radarIndicator);
+            var radarIndicatorArray = stringToArray(radarIndicators);
             for (var radarIndicatorArrayO in radarIndicatorArray) {
                 radarIndicator.push({text: radarIndicatorArrayO});
             }
         }
-        //设置legendAttr默认属性
         if (legendAttr.length == 0) {
             legendAttr = [];
             for (var i = 0; i < dataNum; i++) {
@@ -130,7 +132,7 @@
             }
         }
         else {
-            return stringToArray(legendAttr);
+             legendAttr=stringToArray(legendAttr);
         }
 
         /*
@@ -209,15 +211,7 @@
                     for (var radarSeriesDatasInt = 0; radarSeriesDatasInt < dataNum; radarSeriesDatasInt++) {
                         var radarSeriesData = {
                             name: legendAttr[radarSeriesDatasInt],
-                            value: (function () {
-                                var seriesDatas = [];
-                                for (var seriesData in asyncData[radarSeriesDatasInt]) {
-                                    for (var seriesDataKey in seriesData) {
-                                        seriesDatas.push(seriesData[seriesDataKey]);
-                                    }
-                                }
-                                return seriesDatas;
-                            })(),
+                            value: seriesDatas[radarSeriesDatasInt],
                             symbol: seriesSymbol,
                             symbolSize: seriesSymbolSize,
                             lineStyle: {
@@ -306,7 +300,7 @@
         return this;
     }
     var radarIndicatorFun = function (x) {
-        radarIndicator = x;
+        radarIndicators = x;
         return this;
     }
     var radarCenterLeftFun = function (x) {
