@@ -1,0 +1,77 @@
+/**
+ * Created by maomao on 2017/4/11.
+ */
+{
+ /*
+  *title,grid,legend相同省略
+  */
+  tooltip: {
+          trigger: 'item'
+  },
+  /*
+   *radar
+   */
+   radar:[{
+    //雷达图每个坐标轴的文字
+    indicator:[{
+        {text:'label1'}
+    }],
+    center:['50%','50%'],
+    radius:100,//半径
+    startAngle:90,
+    splitNumber:4,//分割线数量
+    shape:'circle',//或者是rect
+    name:{
+        textStyle:{
+            color:'#000000',
+            fontSize:12
+        }
+    }
+    //暂时未添加
+    splitArea:{
+    },
+    //坐标线
+    axisLine:{
+        show:true,
+        lineStyle:{
+            color:'rbga(255, 255, 255, 0.5)'
+        }
+    },
+    //分割线
+    splitLine:{
+        show:true,
+        lineStyle:{
+            color:'rgba(255, 255, 255, 0.5)'
+        }
+    }],
+    series:{
+        name:'雷达图',
+        type:'radar',
+        //暂未添加
+        itemStyle:{
+        },
+         tooltip: {
+             trigger: 'item'//'false'或者是'item'
+         },
+        data:[{
+            value:[],
+            name:'legend1',
+            //标记点图形，circle，rect，triangle，arrow
+            symbol:'circle',
+            symbolSize:5,
+            lineStyle:{
+                normal:{
+                    show:true,//展示标签值
+                    width:0.5,
+                    type:'solid',
+                    opacity:1
+                }
+            }
+        }]
+    }
+   }
+
+   ]
+
+
+}

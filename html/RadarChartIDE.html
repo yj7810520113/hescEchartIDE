@@ -1,0 +1,165 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/4/13
+ * Time:16:14
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/DAT.GUI.js"></script>
+    <script src="../js/echarts.js"></script>
+    <script src="../js/hescEchartRadarChart.js"></script>
+    <script src="../js/hescEchartCore.js"></script>
+    <style>
+        *{
+            margin: 0px;
+            padding:0px;
+        }
+        body{
+            background:gray;
+        }
+    </style>
+</head>
+<body>
+<div id="test" style="width: 600px;height:400px;margin:50px 500px">
+<script>
+    var radarObj ={
+        backgroundColor:"#ffffff",
+        title:'我是标题，请修改',
+        subtitle:'',
+        titleBackgroundColor:'#fff',
+        titleTop:10,
+        titleLeft:10,
+        titleTextStyleFontSize:18,
+        titleTextStyleColor:'#000',
+        tooltipAxisPointerType:'shadow',
+        legend:'',
+        legendAlign:'left',
+        legendLeft:200,
+        legendTop:10,
+        legendOrient:'horizontal',
+
+        /*
+         radar图特有属性
+         */
+        tooltipShow:true,
+        radarIndicator:'',
+        radarCenterLeft:50,
+        radarCenterTop:50,
+        radarRadius:100,
+        radarStartAngle:90,
+        radarSplitNumber:4,
+        radarShape:'rect',
+        radarNameTextStyleColor:'#000',
+        radarNameTextStyleFontSize:12,
+        radarAxisLineShow:true,
+        radarAxisLineLineStyle:'#b0bec5',
+        radarSplitLineShow:true,
+        radarSplitLineLineStyle:'#b0bec5',
+        seriesName:'雷达图',
+        seriesType:'radar',
+        seriesSymbol:'circle',
+        seriesSymbolSize:5,
+        seriesLineStyleNormalShow:false,
+        seriesLineStyleNormalWidth:0.5,
+        seriesLineStyleNormalType:'solid',//dashed、'dotted'
+        seriesLineStyleNormalOpacity:1
+
+        
+    };
+
+
+    window.onload = function() {
+        var radarGui = new dat.GUI();
+        radarGui.addColor(radarObj,'backgroundColor').name('背景色').onChange(renderRadarChart);
+        var radarTitle=radarGui.addFolder('标题属性');
+        radarTitle.add(radarObj, 'title').name('图表标题').onChange(renderRadarChart);
+        radarTitle.add(radarObj,'subtitle').name('图标副标题').onChange(renderRadarChart);
+        radarTitle.add(radarObj,'titleTextStyleFontSize').name('标题大小').onChange(renderRadarChart);
+        radarTitle.addColor(radarObj,'titleBackgroundColor').name('背景色').onChange(renderRadarChart);
+        radarTitle.addColor(radarObj,'titleTextStyleColor').name('标题颜色').onChange(renderRadarChart);
+        radarTitle.add(radarObj,'titleTop').name('上边距').onChange(renderRadarChart);
+        radarTitle.add(radarObj,'titleLeft').name('左边距').onChange(renderRadarChart);
+        var radarLegend=radarGui.addFolder("图例属性");
+        radarLegend.add(radarObj,'legend').name('图例值').onChange(renderRadarChart);
+        radarLegend.add(radarObj,'legendOrient',{水平:'horizontal',垂直:'vertical'}).name('图例方向').onChange(renderRadarChart);
+        radarLegend.add(radarObj,'legendAlign',{左:'left',右:'right'}).name('图例朝向').onChange(renderRadarChart);
+        radarLegend.add(radarObj,'legendTop').name('图例上边距').onChange(renderRadarChart);
+        radarLegend.add(radarObj,'legendLeft').name('图例左边距').onChange(renderRadarChart);
+        var radarRadar=radarGui.addFolder("绘图区属性");
+        radarRadar.add(radarObj,'tooltipShow').name('Tooltip').onChange(renderRadarChart);
+        radarRadar.add(radarObj,'radarIndicator').name('坐标轴Label').onChange(renderRadarChart);
+        radarRadar.add(radarObj,'radarCenterTop').name('上边距').onChange(renderRadarChart);
+        radarRadar.add(radarObj,'radarCenterLeft').name('左边距').onChange(renderRadarChart);
+        radarRadar.add(radarObj,'radarRadius').name('半径').onChange(renderRadarChart);
+        radarRadar.add(radarObj,'radarStartAngle',0,360).name('旋转角度').onChange(renderRadarChart);
+        radarRadar.add(radarObj,'radarSplitNumber',0,20).name('网格横向数量').onChange(renderRadarChart);
+        radarRadar.add(radarObj,'radarShape',{矩形:'rect',圆形:'circle'}).name('雷达图外观').onChange(renderRadarChart);
+        radarRadar.addColor(radarObj,'radarNameTextStyleColor').name('标签字体颜色').onChange(renderRadarChart);
+        radarRadar.add(radarObj,'radarNameTextStyleFontSize',1,30).name('标签字体大小').onChange(renderRadarChart);
+        radarRadar.add(radarObj,'radarAxisLineShow').name('坐标线').onChange(renderRadarChart);
+        radarRadar.add(radarObj,'radarSplitLineShow').name('分隔线').onChange(renderRadarChart);
+        radarRadar.addColor(radarObj,'radarAxisLineLineStyle').name('坐标线颜色').onChange(renderRadarChart);
+        radarRadar.addColor(radarObj,'radarSplitLineLineStyle').name('分割线颜色').onChange(renderRadarChart);
+        radarRadar.add(radarObj,'radarAxisLineShow').name('坐标线').onChange(renderRadarChart);
+        var radarSeries=radarGui.addFolder('雷达图属性')
+        radarSeries.add(radarObj,'seriesName').name('图名').onChange(renderRadarChart);
+        radarSeries.add(radarObj,'seriesSymbol',{圆形:'circle',矩形:'rect',三角形:'triangle',箭头:'arrow'}).name('标记点').onChange(renderRadarChart);
+        radarSeries.add(radarObj,'seriesSymbolSize',0,20).name('标记点大小').onChange(renderRadarChart);
+        radarSeries.add(radarObj,'seriesLineStyleNormalShow').name('show?').onChange(renderRadarChart);
+        radarSeries.add(radarObj,'seriesLineStyleNormalWidth',0,5).name('线宽度').onChange(renderRadarChart);
+        radarSeries.add(radarObj,'seriesLineStyleNormalType',{实线:'solid',虚线:'dashed',点阵:'dotted'}).name('线段类型').onChange(renderRadarChart);
+        radarSeries.add(radarObj,'seriesLineStyleNormalOpacity',0,1).name('线段透明度').onChange(renderRadarChart);
+        renderRadarChart();
+    };
+    function renderRadarChart() {
+        hescEchart.json('../Data/radarChartTest.Data',function(error,data){
+            hescEchart.select('test')
+                .background(radarObj.backgroundColor)
+                .title(radarObj.title)
+                .subtitle(radarObj.subtitle)
+                .titleBackgroundColor(radarObj.titleBackgroundColor)
+                .titleTop(radarObj.titleTop)
+                .titleLeft(radarObj.titleLeft)
+                .titleTextStyleFontSize(radarObj.titleTextStyleFontSize)
+                .titleTextStyleColor(radarObj.titleTextStyleColor)
+                .legendAttr(radarObj.legend)
+                .legendAlign(radarObj.legendAlign)
+                .legendLeft(radarObj.legendLeft)
+                .legendTop(radarObj.legendTop)
+                .legendOrient(radarObj.legendOrient)
+                .tooltipShow(radarObj.tooltipShow)
+                .radarIndicator(radarObj.radarIndicator)
+                .radarCenterLeft(radarObj.radarCenterLeft+'%')
+                .radarCenterTop(radarObj.radarCenterTop+'%')
+                .radarRadius(radarObj.radarRadius)
+                .radarStartAngle(radarObj.radarStartAngle)
+                .radarSplitNumber(radarObj.radarSplitNumber)
+                .radarShape(radarObj.radarShape)
+                .radarNameTextStyleColor(radarObj.radarNameTextStyleColor)
+                .radarNameTextStyleFontSize(radarObj.radarNameTextStyleFontSize)
+                .radarAxisLineShow(radarObj.radarAxisLineShow)
+                .radarAxisLineLineStyle(radarObj.radarAxisLineLineStyle)
+                .radarSplitLineShow(radarObj.radarSplitLineShow)
+                .radarSplitLineLineStyle(radarObj.radarSplitLineLineStyle)
+                .seriesName(radarObj.seriesName)
+                .seriesType(radarObj.seriesType)
+                .seriesSymbol(radarObj.seriesSymbol)
+                .seriesSymbolSize(radarObj.seriesSymbolSize)
+                .seriesLineStyleNormalShow(radarObj.seriesLineStyleNormalShow)
+                .seriesLineStyleNormalWidth(radarObj.seriesLineStyleNormalWidth)
+                .seriesLineStyleNormalType(radarObj.seriesLineStyleNormalType)
+                .seriesLineStyleNormalOpacity(radarObj.seriesLineStyleNormalOpacity)
+                .radar(data)
+                .render();
+        });
+    }
+
+
+</script>
+</body>
+</html>

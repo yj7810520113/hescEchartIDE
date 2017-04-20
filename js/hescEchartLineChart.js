@@ -62,7 +62,7 @@
         legendRight=10,
         legendTop=10,
         legendBottom=10,
-        legendOrient='horizontal',
+        legendOrient='',
         /*
         是否为流图或者面积图
          */
@@ -165,7 +165,6 @@
                 align:legendAlign,
                 left:legendLeft,
                 top:legendTop,
-                orient:legendOrient
               //  align:left
             },
             toolbox:{
