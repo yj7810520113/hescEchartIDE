@@ -8,6 +8,9 @@
     position: absolute;
     margin:60px 2px;
     width: 300px;
+    height:100vh;
+    border:1px;
+    solid:#fff
 }
 .dg .main{
     width: 300px;

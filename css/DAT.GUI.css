@@ -1,66 +1,72 @@
-.dg.main.taller-than-window .close-button {
-    border-top: 1px solid #ddd;
-}
 
-.dg.main .close-button {
-    background-color: #e8e8e8;
-}
+/*.dg.main.taller-than-window .close-button {*/
+    /*border-top: 1px solid #ddd;*/
+/*}*/
 
-.dg.main .close-button:hover {
-    background-color: #ddd;
-}
+/*.dg.main .close-button {*/
+    /*background-color: #e8e8e8;*/
+/*}*/
 
-.dg {
-    color: #555;
-    text-shadow: none !important;
-}
+/*.dg.main .close-button:hover {*/
+    /*background-color: #ddd;*/
+/*}*/
 
-.dg.main::-webkit-scrollbar {
-    background: #fafafa;
-}
+/*.dg {*/
+    /*color: #555;*/
+    /*text-shadow: none !important;*/
+/*}*/
 
-.dg.main::-webkit-scrollbar-thumb {
-    background: #bbb;
-}
+/*.dg.main::-webkit-scrollbar {*/
+    /*background: #fafafa;*/
+/*}*/
 
-.dg li:not(.folder) {
-    background: #fafafa;
-    border-bottom: 1px solid #ddd;
-}
+/*.dg.main::-webkit-scrollbar-thumb {*/
+    /*background: #bbb;*/
+/*}*/
 
-.dg li.save-row .button {
-    text-shadow: none !important;
-}
+/*.dg li:not(.folder) {*/
+    /*background: #fafafa;*/
+    /*border-bottom: 1px solid #ddd;*/
+/*}*/
 
-.dg li.title {
-    background: #e8e8e8 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat;
-}
+/*.dg li.save-row .button {*/
+    /*text-shadow: none !important;*/
+/*}*/
 
-.dg .cr.function:hover,.dg .cr.boolean:hover {
+/*.dg li.title {*/
+    /*background: #e8e8e8 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat;*/
+/*}*/
+
+/*.dg .cr.function:hover,.dg .cr.boolean:hover {*/
+    /*background: #fff;*/
+/*}*/
+
+/*.dg .c input[type=text] {*/
+    /*color: #555;*/
+    /*background: #e9e9e9;*/
+/*}*/
+
+/*.dg .c input[type=text]:hover {*/
+    /*color: #555;*/
+    /*background: #eee;*/
+/*}*/
+
+/*.dg .c input[type=text]:focus {*/
+    /*color: #555;*/
+    /*background: #eee;*/
+/*}*/
+
+/*.dg .c .slider {*/
+    /*background: #e9e9e9;*/
+/*}*/
+
+/*.dg .c .slider:hover {*/
+    /*background: #eee;*/
+/*}*/
+.dg .c select{
     background: #fff;
+    color:black;
 }
-
-.dg .c input[type=text] {
-    background: #e9e9e9;
-}
-
-.dg .c input[type=text]:hover {
-    background: #eee;
-}
-
-.dg .c input[type=text]:focus {
-    background: #eee;
-    color: #555;
-}
-
-.dg .c input[type=color] {
-    background: red;
-}
-
-.dg .c .slider {
-    background: #e9e9e9;
-}
-
-.dg .c .slider:hover {
-    background: red;
+.dg .c input[type=text]{
+    height:20px;
 }

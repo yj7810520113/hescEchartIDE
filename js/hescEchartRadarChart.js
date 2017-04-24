@@ -109,7 +109,7 @@
         }
 
 
-
+        //radarIndicator 格式为{text:'KDA',text:'输出'}
         if (radarIndicators.length==0) {
             var radarIndicator = [];
             asyncData[0].forEach(function (data2, i) {

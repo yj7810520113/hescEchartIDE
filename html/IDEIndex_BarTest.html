@@ -10,18 +10,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="../css/jsoneditor.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="../css/bootstrap.css"/>
     <link rel="stylesheet" href="../css/index.css"/>
-    <script src="../js/DAT.GUI.js"></script>
     <link rel="stylesheet" href="../css/DAT.GUI.css"/>
+    <script src="../js/DAT.GUI.js"></script>
     <script src="../js/echarts.js"></script>
     <script src="../js/hescEchartBarChart.js"></script>
     <script src="../js/hescEchartCore.js"></script>
     <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jsoneditor.js"></script>
+    <script src="../js/fileReader.js"></script>
 </head>
 <body>
-<div id="test" style="width: 600px;height:400px;margin:50px 500px">
+<div id="test" style="width: 600px;height:400px;margin:150px 500px;position: absolute;">
 </div>
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -45,7 +48,7 @@
         </div>
     </div>
 </div>
-<div class="tabs">
+<div class="tabs" >
     <ul id="myTab" class="nav nav-tabs">
         <li class="active">
             <a href="#tabConfig" data-toggle="tab">
@@ -58,13 +61,51 @@
         <div class="tab-pane fade in active" id="tabConfig">
         </div>
         <div class="tab-pane fade" id="tabData">
-            <p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple
-                TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
+            <input type="file" id="loadDocument" value="Load"/>
         </div>
     </div>
 </div>
+<script>
+    /*
+    生成数据
+     */
+    // create the editor
+    var json = {
+        'array': [1, 2, 3],
+        'boolean': true,
+        'null': null,
+        'number': 123,
+        'object': {'a': 'b', 'c': 'd'},
+        'string': 'Hello World'
+    };
+    var options = {
+        mode: 'view',
+        modes: [ 'text', 'tree', 'view'], // allowed modes
+        onError: function (err) {
+            alert(err.toString());
+        },
+        onModeChange: function (newMode, oldMode) {
+            console.log('Mode switched from', oldMode, 'to', newMode);
+        }
+    };
+    var editor = new JSONEditor(document.getElementById('tabData'),options);
+    editor.set(json);
+
+    // Load a JSON document
+    FileReaderJS.setupInput(document.getElementById('loadDocument'), {
+        readAsDefault: 'Text',
+        on: {
+            load: function (event, file) {
+                editor.setText(event.target.result);
+            }
+        }
+    });
+</script>
 
 <script>
+    /*
+    生成Dat.gui
+     */
     var barObj ={
         backgroundColor:"#ffffff",
         title:'我是标题，请修改',
@@ -105,21 +146,6 @@
         reverse:false,
         stack:''
     };
-    /*
-     exports.bar = bar;
-     exports.stack=stackAttrFun;
-     exports.render=render;
-     exports.backgroud=backgroundColorFun;
-     exports.title=titleFun;
-     exports.subtitle=subtitleFun;
-     exports.legendAttr=legendAttrFun;
-     exports.xAxisData=xAxisDataFun;
-     exports.xAxisGridLineAttr=xAxisGridLineAttrFun;
-     exports.yAxisData=yAxisDataAttrFun;
-     exports.yAxisGridLineAttr=yAxisGridLineAttrFun;
-     exports.gridAttr=gridAttrFun;
-     exports.reverse=reverseFun;
-     */
 
     window.onload = function() {
         var barGui = new dat.GUI({autoPlace:false});
