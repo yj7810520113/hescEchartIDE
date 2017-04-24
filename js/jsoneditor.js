@@ -19397,6 +19397,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        if (y + height > windowHeight) {
 	            y -= 20 + height;
+                // console.log('y'+y);
+                // y=500;
 	        }
 	        Tooltip.prototype.setPosition.call(this, x, y);
 	    };
