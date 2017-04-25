@@ -31,8 +31,8 @@
 <body>
 <div id="screen" class="screen">
     <!--resize and drag div test-->
-    <div id='bar' class="monitor">
-        <div id="barChild" style="height:calc(100% - 3px);width:calc(100% - 3px);margin: 5px 5px;"></div>
+    <div id='bar' class="barMonitor">
+        <div id="barChild" style="height:calc(100% - 3px);width:calc(100% - 3px);"></div>
     </div>
 
 </div>
@@ -130,17 +130,34 @@
 </div>
 <!--drag and resize-->
 <script>
-    $( function() {
-        $( "#dialog" ).dialog();
-    } );
+    /*
+    添加鼠标移动过和click事件
+     */
+    $('#barChild').parent().mouseover(function () {
+        console.log("出发了barchild 的parent");
+//        console.log($('#barChild').parent().css('border'))
+        $('#barChild').parent().css('outline','2px dotted blue');
+    });
+    $('#barChild').parent().mouseout(function () {
+        console.log('我俩开了')
+        $('#barChild').parent().css('outline','0px');
+    });
+    $('#barChild').parent().click(function () {
+        console.log('我点击了');
+        $('#barChild').parent().css('outline','2px solid blue');
+    });
     $(function() {
         //how to use it
-        $('div.monitor').mutate('height width', function(el,info) {
-            expanded = true;
+        $('#barChild').parent().mutate('height width', function(el,info) {
+            console.log($(el).height());
+            barObj.canvasHeight=$(el).height();
+            barObj.canvasWidth=$(el).width();
+            renderBarChart();
+//            expanded = true;
 //            $('#heighter').text('height changed:' + $(el).height());
 //            $('#widther').text('Width changed:' + $(el).width());
         });
-        $('div.monitor').mutate('top left right bottom', function(el,info) {
+        $('#barChild').parent().mutate('top left right bottom', function(el,info) {
 //            $('#topper').text('box has moved either (top,left,right or bottom):' + parseInt($(el).css('top')));
 //            if(parseInt($(el).css('top'))>=250) $('#topper2').html('Element Moved top to more than 250:<strong class="red">' + parseInt($(el).css('top'))+'px</strong> this is especially usefull when you need to make a game. Exact 250px maybe be a little more tricky, as some pixels may skip due to animation time so it\'s better to use more than or less than ');
         });
@@ -160,8 +177,7 @@
 //        $('#subm').click(function() {
 //            $('#my1').stop(true,true).css('top',0).animate({'top':300},2000);
 //        });
-        $('.monitor').resizable().draggable();
-//        $('.monitor').resizable();
+        $('.barMonitor').resizable().draggable();
     })
 </script>
 
@@ -231,12 +247,14 @@
     生成Dat.gui
      */
     var barObj ={
+        canvasWidth:400,
+        canvasHeight:300,
         backgroundColor:"#ffffff",
         title:'我是标题，请修改',
         subtitle:'',
         titleBackgroundColor:'#fff',
-        titleTop:10,
-        titleLeft:10,
+        titleTop:5,
+        titleLeft:50,
         titleTextStyleFontSize:18,
         titleTextStyleColor:'#000',
         gridLeft:50,
@@ -276,6 +294,10 @@
         //添加柱状图至控制面板
         var customContainer = document.getElementById('tabConfig');
         customContainer.appendChild(barGui.domElement);
+        //添加画布大小
+        var barCanvas=barGui.addFolder('画布大小');
+        barCanvas.add(barObj,'canvasWidth',200,1000).name('画布宽').listen().onChange(renderBarChart);
+        barCanvas.add(barObj,'canvasHeight',150,800).name("画布高").listen().onChange(renderBarChart);
 
         barGui.addColor(barObj,'backgroundColor').name('背景色').onChange(renderBarChart);
         var barTitle=barGui.addFolder('标题属性');
@@ -284,8 +306,8 @@
         barTitle.add(barObj,'titleTextStyleFontSize').name('标题大小').onChange(renderBarChart);
         barTitle.addColor(barObj,'titleBackgroundColor').name('背景色').onChange(renderBarChart);
         barTitle.addColor(barObj,'titleTextStyleColor').name('标题颜色').onChange(renderBarChart);
-        barTitle.add(barObj,'titleTop').name('上边距').onChange(renderBarChart);
-        barTitle.add(barObj,'titleLeft').name('左边距').onChange(renderBarChart);
+        barTitle.add(barObj,'titleTop',0,100).name('上边距').onChange(renderBarChart);
+        barTitle.add(barObj,'titleLeft',0,100).name('左边距').onChange(renderBarChart);
         var barGrid=barGui.addFolder("绘图区属性");
         barGrid.add(barObj,'gridTop').name('上边距').onChange(renderBarChart);
         barGrid.add(barObj,'gridBottom').name('下边距').onChange(renderBarChart);
@@ -324,14 +346,16 @@
         renderBarChart();
     };
     function renderBarChart() {
+        $('#barChild').parent().width(barObj.canvasWidth);
+        $('#barChild').parent().height(barObj.canvasHeight);
         hescEchart.json('../Data/barChartTest.Data',function(error,data){
             hescEchart.select('barChild')
                 .background(barObj.backgroundColor)
                 .title(barObj.title)
                 .subtitle(barObj.subtitle)
                 .titleBackgroundColor(barObj.titleBackgroundColor)
-                .titleTop(barObj.titleTop)
-                .titleLeft(barObj.titleLeft)
+                .titleTop(barObj.titleTop+'%')
+                .titleLeft(barObj.titleLeft+'%')
                 .titleTextStyleFontSize(barObj.titleTextStyleFontSize)
                 .titleTextStyleColor(barObj.titleTextStyleColor)
                 .gridLeft(barObj.gridLeft)

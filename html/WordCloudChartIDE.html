@@ -1,0 +1,127 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/4/13
+ * Time:16:14
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/DAT.GUI.js"></script>
+    <script src="../js/echarts.js"></script>
+    <script src="../js/hescEchartWordCloudChart.js"></script>
+    <script src="../js/hescEchartCore.js"></script>
+    <script src="../js/worldcloud.js"></script>
+
+    <style>
+        *{
+            margin: 0px;
+            padding:0px;
+        }
+        body{
+            background:gray;
+        }
+    </style>
+</head>
+<body>
+<div id="test" style="width: 600px;height:400px;margin:50px 500px">
+<script>
+    var wordCloudObj ={
+        backgroundColor:"#ffffff",
+        title:'我是标题，请修改',
+        subtitle:'',
+        titleBackgroundColor:'#fff',
+        titleTop:10,
+        titleLeft:10,
+        titleTextStyleFontSize:18,
+        titleTextStyleColor:'#000',
+//            series相关属性
+//        */
+        seriesName:'默认1',
+        seriesType:'wordcount',
+        seriesSizeMin:10,
+        seriesSizeMax:90,
+        seriesSizeRangeMin:6,
+        seriesSizeRangeMax:50,
+        seriesTextRotation:'',
+        seriesRotationRangeMin:-90,
+        seriesRotationRangeMax:90,
+        seriesShape:'circle',
+        maskImage:''
+        
+    };
+
+    window.onload = function() {
+        var wordCloudGui = new dat.GUI();
+        wordCloudGui.addColor(wordCloudObj,'backgroundColor').name('背景色').onChange(renderWordCloudChart);
+        var wordCloudTitle=wordCloudGui.addFolder('标题属性');
+        wordCloudTitle.add(wordCloudObj, 'title').name('图表标题').onChange(renderWordCloudChart);
+        wordCloudTitle.add(wordCloudObj,'subtitle').name('图标副标题').onChange(renderWordCloudChart);
+        wordCloudTitle.add(wordCloudObj,'titleTextStyleFontSize').name('标题大小').onChange(renderWordCloudChart);
+        wordCloudTitle.addColor(wordCloudObj,'titleBackgroundColor').name('背景色').onChange(renderWordCloudChart);
+        wordCloudTitle.addColor(wordCloudObj,'titleTextStyleColor').name('标题颜色').onChange(renderWordCloudChart);
+        wordCloudTitle.add(wordCloudObj,'titleTop').name('上边距').onChange(renderWordCloudChart);
+        wordCloudTitle.add(wordCloudObj,'titleLeft').name('左边距').onChange(renderWordCloudChart);
+        var wordCloudGrid=wordCloudGui.addFolder("绘图区属性");
+        wordCloudGrid.add(wordCloudObj,'seriesSizeMin',0,100).name('最小大小(%)').onChange(renderWordCloudChart);
+        wordCloudGrid.add(wordCloudObj,'seriesSizeMax',0,100).name('最大大小(%)').onChange(renderWordCloudChart);
+        wordCloudGrid.add(wordCloudObj,'seriesSizeRangeMin',1,50).name('最小字体').onChange(renderWordCloudChart);
+        wordCloudGrid.add(wordCloudObj,'seriesSizeRangeMax',10,150).name('最大字体').onChange(renderWordCloudChart);
+        wordCloudGrid.add(wordCloudObj,'seriesTextRotation').name('字体朝向(0,45,90)').onChange(renderWordCloudChart);
+        wordCloudGrid.add(wordCloudObj,'seriesRotationRangeMin',-180,180).name('最小旋转角度').onChange(renderWordCloudChart);
+        wordCloudGrid.add(wordCloudObj,'seriesRotationRangeMax',-180,180).name('最大旋转角度').onChange(renderWordCloudChart);
+        wordCloudGrid.add(wordCloudObj,'seriesShape').name('形状').onChange(renderWordCloudChart);
+        wordCloudGrid.add(wordCloudObj,'maskImage').name('词云图').onChange(renderWordCloudChart);
+
+
+//        //            series相关属性
+////        */
+//        seriesName:'默认1',
+//            seriesType:'wordcount',
+//            seriesSizeMin:'10%',
+//            seriesSizeMax:'90%',
+//            seriesSizeRangeMin:6,
+//            seriesSizeRangeMax:50,
+//            seriesTextRotation:'',
+//            seriesRotationRangeMin:-90,
+//            seriesRotationRangeMax:90,
+//            seriesShape:'circle',
+//            maskImage:''
+
+        renderWordCloudChart();
+        
+    };
+    function renderWordCloudChart() {
+        hescEchart.json('../Data/wordCloudChartTest.Data',function(error,data){
+            hescEchart.select('test')
+                .background(wordCloudObj.backgroundColor)
+                .title(wordCloudObj.title)
+                .subtitle(wordCloudObj.subtitle)
+                .titleBackgroundColor(wordCloudObj.titleBackgroundColor)
+                .titleTop(wordCloudObj.titleTop)
+                .titleLeft(wordCloudObj.titleLeft)
+                .titleTextStyleFontSize(wordCloudObj.titleTextStyleFontSize)
+                .titleTextStyleColor(wordCloudObj.titleTextStyleColor)
+                .seriesName(wordCloudObj.seriesName)
+                .seriesSizeMin(wordCloudObj.seriesSizeMin+'%')
+                .seriesSizeMax(wordCloudObj.seriesSizeMax+'%')
+                .seriesSizeRangeMin(wordCloudObj.seriesSizeRangeMin)
+                .seriesSizeRangeMax(wordCloudObj.seriesSizeRangeMax)
+                .seriesTextRotation(wordCloudObj.seriesTextRotation)
+                .seriesRotationRangeMin(wordCloudObj.seriesRotationRangeMin)
+                .seriesRotationRangeMax(wordCloudObj.seriesRotationRangeMax)
+                .seriesShape(wordCloudObj.seriesShape)
+                .maskImage(wordCloudObj.maskImage)
+                .wordCloud(data)
+                .render();
+            
+        });
+    }
+
+
+</script>
+</body>
+</html>

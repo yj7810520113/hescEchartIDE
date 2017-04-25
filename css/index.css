@@ -27,6 +27,6 @@
 div.screen{
     width: 900px;height:600px;margin:60px 320px;position: absolute;background: grey;overflow: hidden;
 }
-div.monitor{width: 500px; margin: auto;height: 400px; overflow: hidden; border:2px dotted red;background: whitesmoke;padding: 20px;cursor: move;}
-.new_class{height: 101px;}
-.red{color: red;}
+div.barMonitor{width: 500px;height: 400px;outline:2px dotted blue;overflow: hidden;background: whitesmoke;cursor: move;}
+
+div.barMonitor:focus{width: 500px;height: 400px; border:2px dotted red; overflow: hidden;background: whitesmoke;cursor: move;}
