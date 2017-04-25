@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="../css/bootstrap.css"/>
     <link rel="stylesheet" href="../css/index.css"/>
     <link rel="stylesheet" href="../css/DAT.GUI.css"/>
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+
     <script src="../js/DAT.GUI.js"></script>
     <script src="../js/echarts.js"></script>
     <script src="../js/hescEchartBarChart.js"></script>
@@ -22,9 +24,17 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jsoneditor.js"></script>
     <script src="../js/fileReader.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script src="../js/jQuery-mutate-event.js"></script>
+    <script src="../js/jQuery-mutate-mutate.js"></script>
 </head>
 <body>
-<div id="test" style="width: 600px;height:400px;margin:150px 500px;position: absolute;">
+<div id="screen" class="screen">
+    <!--resize and drag div test-->
+    <div id='bar' class="monitor">
+        <div id="barChild" style="height:calc(100% - 3px);width:calc(100% - 3px);margin: 5px 5px;"></div>
+    </div>
+
 </div>
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -61,6 +71,12 @@
         <div class="tab-pane fade in active" id="tabConfig">
         </div>
         <div class="tab-pane fade" id="tabData">
+            <div id="dataDescription">
+                <label>数据说明：</label>
+                <!--数据说明待添加-->
+            </div>
+
+
             <!--<input type="file" id="loadDocument" value="Load"/>-->
             <!--选择文件，静态文件，webAPI或者本地文件-->
                 <ul id="myTab1" class="nav nav-tabs">
@@ -78,18 +94,21 @@
                     </li>
                 </ul>
                 <div id="DataSourceSelector" class="tab-content">
+                    <!--静态文件-->
                     <div class="tab-pane fade in active" id="dropdownstaticData">
                     </div>
+                    <!--WebAPI-->
                     <div class="tab-pane fade" id="dropdownWebAPI">
                         <form role="form">
                             <div class="form-group">
                                 <label >WebAPI地址：</label>
                                 <input type="text" class="form-control" id="webAPIUrl"
-                                       placeholder="请输入URL，如http://example.com/API">
+                                       placeholder="请输入URL，如http://example.com/API" style="width: 280px">
                             </div>
-                            <button type="submit" class="btn btn-default">确定</button>
+                            <button type="submit" class="btn btn-default" style="width: 280px">确定</button>
                         </form>
                     </div>
+                    <!--本地文件-->
                     <div class="tab-pane fade" id="dropdownLocalData">
                         <form role="form">
                             <div class="form-group">
@@ -102,13 +121,49 @@
                     </div>
                 </div>
                 <!--添加jsoneditor模块-->
-                <div id="jsonEditorData">
+                <div id="jsonEditorData" style="width: 280px; height: 400px;">
                     <!--<input type="file" id="loadDocument" value="Load"/>-->
                 </div>
-                <button type="submit" class="btn btn-default" id="submitData">确定</button>
+                <button type="submit" class="btn btn-default" id="submitData" style="width: 280px">确定</button>
         </div>
     </div>
 </div>
+<!--drag and resize-->
+<script>
+    $( function() {
+        $( "#dialog" ).dialog();
+    } );
+    $(function() {
+        //how to use it
+        $('div.monitor').mutate('height width', function(el,info) {
+            expanded = true;
+//            $('#heighter').text('height changed:' + $(el).height());
+//            $('#widther').text('Width changed:' + $(el).width());
+        });
+        $('div.monitor').mutate('top left right bottom', function(el,info) {
+//            $('#topper').text('box has moved either (top,left,right or bottom):' + parseInt($(el).css('top')));
+//            if(parseInt($(el).css('top'))>=250) $('#topper2').html('Element Moved top to more than 250:<strong class="red">' + parseInt($(el).css('top'))+'px</strong> this is especially usefull when you need to make a game. Exact 250px maybe be a little more tricky, as some pixels may skip due to animation time so it\'s better to use more than or less than ');
+        });
+//        $('div.monitor').mutate('hide', function(el,info) {
+//            $('#hidder').text('Element was hidden:'+iii++);
+//        });
+//        $('div.monitor').mutate('show', function(el,info) {
+//            $('#shower').text('Element is now visible:'+ iii++);
+//        });
+//        //illustration purpuso only
+//        $('#subm3').click(function() {
+//            $('#my1').stop(true,true).css({width:300,height:100}).animate({width: 500,height:500},1000);
+//        });
+//        $('#subm2').click(function() {
+//            $('#my1').toggle();
+//        });
+//        $('#subm').click(function() {
+//            $('#my1').stop(true,true).css('top',0).animate({'top':300},2000);
+//        });
+        $('.monitor').resizable().draggable();
+//        $('.monitor').resizable();
+    })
+</script>
 
 <!--jsonEditor对应的数据-->
 <script>
@@ -270,7 +325,7 @@
     };
     function renderBarChart() {
         hescEchart.json('../Data/barChartTest.Data',function(error,data){
-            hescEchart.select('test')
+            hescEchart.select('barChild')
                 .background(barObj.backgroundColor)
                 .title(barObj.title)
                 .subtitle(barObj.subtitle)
@@ -310,6 +365,7 @@
                 .stack(barObj.stack)
                 .bar(barData)
                 .render();
+            console.log(hescEchart.option);
         });
     }
 

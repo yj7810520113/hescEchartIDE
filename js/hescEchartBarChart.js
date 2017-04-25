@@ -520,6 +520,9 @@
         yAxisAxisTickShow=x;
         return this;
     }
+    var getOptionFun=function () {
+        return option;
+    }
 
 
     exports.select = selectFun;
@@ -578,6 +581,7 @@
     exports.yAxisAxisLabelInside=yAxisAxisLabelInsideFun;
     exports.yAxisAxisLabelTextStyleColor=yAxisAxisLabelTextStyleColorFun;
     exports.yAxisAxisTickShow=yAxisAxisTickShowFun;
+    exports.option=getOptionFun;
 
 
     exports.reverse=reverseFun;

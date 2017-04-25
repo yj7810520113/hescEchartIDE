@@ -8,7 +8,7 @@
       position: absolute;
       margin:60px 2px;
       width: 300px;
-      height:100vh;
+      height:500vh;
       border:1px;
       solid:#fff
   }
@@ -24,3 +24,9 @@
 .dg .main{
     width: 300px;
 }
+div.screen{
+    width: 900px;height:600px;margin:60px 320px;position: absolute;background: grey;overflow: hidden;
+}
+div.monitor{width: 500px; margin: auto;height: 400px; overflow: hidden; border:2px dotted red;background: whitesmoke;padding: 20px;cursor: move;}
+.new_class{height: 101px;}
+.red{color: red;}
