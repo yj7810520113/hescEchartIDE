@@ -8,10 +8,11 @@
       position: absolute;
       margin:60px 2px;
       width: 300px;
-      height:500vh;
+      height:700px;
       border:1px;
-      solid:#fff
-  }
+      solid:#fff;
+    overflow-y:auto;
+}
 
 .tabs1{
     position: absolute;

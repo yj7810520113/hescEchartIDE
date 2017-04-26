@@ -15,6 +15,8 @@
     <script src="../js/hescEchartWordCloudChart.js"></script>
     <script src="../js/hescEchartCore.js"></script>
     <script src="../js/worldcloud.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/fileReader.js"></script>
 
     <style>
         *{
@@ -27,8 +29,12 @@
     </style>
 </head>
 <body>
+<!--隐藏的按钮用于输入input 的file-->
+<input id="imgFileInput" type="file" style="visibility:hidden" />
 <div id="test" style="width: 600px;height:400px;margin:50px 500px">
 <script>
+
+
     var wordCloudObj ={
         backgroundColor:"#ffffff",
         title:'我是标题，请修改',
@@ -50,7 +56,10 @@
         seriesRotationRangeMin:-90,
         seriesRotationRangeMax:90,
         seriesShape:'circle',
-        maskImage:''
+        maskImage:'',
+        imgButton:function () {
+            $('#imgFileInput').click();
+        }
         
     };
 
@@ -66,6 +75,7 @@
         wordCloudTitle.add(wordCloudObj,'titleTop').name('上边距').onChange(renderWordCloudChart);
         wordCloudTitle.add(wordCloudObj,'titleLeft').name('左边距').onChange(renderWordCloudChart);
         var wordCloudGrid=wordCloudGui.addFolder("绘图区属性");
+        wordCloudGrid.add(wordCloudObj,'seriesName').name('名称').onChange(renderWordCloudChart);
         wordCloudGrid.add(wordCloudObj,'seriesSizeMin',0,100).name('最小大小(%)').onChange(renderWordCloudChart);
         wordCloudGrid.add(wordCloudObj,'seriesSizeMax',0,100).name('最大大小(%)').onChange(renderWordCloudChart);
         wordCloudGrid.add(wordCloudObj,'seriesSizeRangeMin',1,50).name('最小字体').onChange(renderWordCloudChart);
@@ -74,22 +84,8 @@
         wordCloudGrid.add(wordCloudObj,'seriesRotationRangeMin',-180,180).name('最小旋转角度').onChange(renderWordCloudChart);
         wordCloudGrid.add(wordCloudObj,'seriesRotationRangeMax',-180,180).name('最大旋转角度').onChange(renderWordCloudChart);
         wordCloudGrid.add(wordCloudObj,'seriesShape').name('形状').onChange(renderWordCloudChart);
-        wordCloudGrid.add(wordCloudObj,'maskImage').name('词云图').onChange(renderWordCloudChart);
+        wordCloudGrid.add(wordCloudObj,'imgButton').name('词云图');
 
-
-//        //            series相关属性
-////        */
-//        seriesName:'默认1',
-//            seriesType:'wordcount',
-//            seriesSizeMin:'10%',
-//            seriesSizeMax:'90%',
-//            seriesSizeRangeMin:6,
-//            seriesSizeRangeMax:50,
-//            seriesTextRotation:'',
-//            seriesRotationRangeMin:-90,
-//            seriesRotationRangeMax:90,
-//            seriesShape:'circle',
-//            maskImage:''
 
         renderWordCloudChart();
         
@@ -121,7 +117,20 @@
         });
     }
 
-
+    /*
+     添加词云的本地文件
+     */
+    FileReaderJS.setupInput(document.getElementById('imgFileInput'), {
+        on: {
+            load: function (event, file) {
+//                editor.setText(event.target.result);
+                wordCloudObj.maskImage=event.target.result;
+            },
+            loadend:function () {
+                renderWordCloudChart();
+            }
+        }
+    });
 </script>
 </body>
 </html>
