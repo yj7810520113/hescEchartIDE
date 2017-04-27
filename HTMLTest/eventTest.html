@@ -1,0 +1,41 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/4/27
+ * Time:16:04
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.js"></script>
+</head>
+<body>
+<input type="button" id="test">
+<input type="text" id="test2">
+<script>
+    $(function () {
+
+    })
+    fun1();
+    function fun1(){
+        console.log('fun1');
+        fun2();
+        function fun2() {
+            console.log('fun2');
+            $('#test').click(function () {
+                console.log('test')
+            });
+            $('#test2').change(function () {
+                console.log('change')
+            })
+        }
+    }
+//    $('#test').click(function () {
+//        console.log('test')
+//    });
+</script>
+</body>
+</html>

@@ -7,7 +7,7 @@
 .tabs{
       position: absolute;
       margin:60px 2px;
-      width: 300px;
+      width: 315px;
       height:700px;
       border:1px;
       solid:#fff;
@@ -28,6 +28,6 @@
 div.screen{
     width: 900px;height:600px;margin:60px 320px;position: absolute;background: grey;overflow: hidden;
 }
-div.barMonitor{width: 500px;height: 400px;outline:2px dotted blue;overflow: hidden;background: whitesmoke;cursor: move;}
+div.Monitor{width: 500px;height: 400px;outline:2px dotted blue;overflow: hidden;background: whitesmoke;cursor: move;position: absolute;}
 
-div.barMonitor:focus{width: 500px;height: 400px; border:2px dotted red; overflow: hidden;background: whitesmoke;cursor: move;}
+div.Monitor:focus{width: 500px;height: 400px; border:2px dotted red; overflow: hidden;background: whitesmoke;cursor: move;}

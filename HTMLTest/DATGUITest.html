@@ -39,65 +39,178 @@
 //    };
 </script>
 <script>
-    function getVirtulData(year) {
-        year = year || '2017';
-        var date = +echarts.number.parseDate(year + '-01-01');
-        var end = +echarts.number.parseDate((+year + 1) + '-01-01');
-        var dayTime = 3600 * 24 * 1000;
-        var data = [];
-        for (var time = date; time < end; time += dayTime) {
-            data.push([
-                echarts.format.formatTime('yyyy-MM-dd', time),
-                Math.floor(Math.random() * 1000)
-            ]);
-        }
-        return data;
-    }
 
-
-    var d=getVirtulData(2017);
-    var str='';
-    for(var i=0;i<d.length;i++){
-        str+='[';
-        str+='\''+(d[i])[0]+'\','+(d[i])[1];
-        str+='],';
-
-    }
-    console.log(str);
-
-
-    window.onload = function() {
-
-        var delete1="";
-        var gui = new dat.GUI();
-        gui.Horizontale = 300;
-        gui.Vertikale = 300;
-        gui.addbottom=true;
-        gui.removebottom=true;
-        gui.A = new Array();
-
-        for (var i=1; i<7; i++) {
-            gui.A[i] = false;
-        }
-
-        gui.add(gui, 'Horizontale', 0, 600);
-        gui.add(gui, 'Vertikale', 0, 600);
-        gui.add(gui,'removebottom').onChange(function () {
-            gui.remove(delete1);
-        })
-        gui.add(gui,'addbottom').onChange(function () {
-            gui.removeele=gui.clickvalue=50;
-            var guifolder=gui.addFolder("test");
-            delete1=guifolder.add(gui,'clickvalue');
-            console.log(gui.A)
-        });
-
-        for (var i=1; i<7; i++) {
-            gui.add(gui.A, i);
-        }
-        gui.remember(gui);
-
+    var barObj ={
+        test:{
+            test1:'',
+            test2:''
+        },
+        backgroundColor:"#ffffff",
+        title:'我是标题，请修改',
+        subtitle:'',
+        titleBackgroundColor:'#fff',
+        titleTop:10,
+        titleLeft:10,
+        titleTextStyleFontSize:18,
+        titleTextStyleColor:'#000',
+        gridLeft:50,
+        gridRight:50,
+        gridTop:50,
+        gridBottom:50,
+        tooltipAxisPointerType:'shadow',
+        legend:'',
+        legendAlign:'left',
+        legendLeft:200,
+        legendTop:10,
+        legendOrient:'horizontal',
+        xAxisData:'',
+        xAxisGridLine:false,
+        xAxisPosition:'bottom',
+        xAxisInverse:false,
+        xAxisSplitAreaShow:false,
+        xAxisAxisLineShow:true,
+        xAxisAxisLabelInside:false,
+        xAxisAxisLabelTextStyleColor:'#000',
+        xAxisAxisTickShow:true,
+        xAxisBoundaryGap:true,
+        yAxisData:'',
+        yAxisGridLine:true,
+        yAxisPosition:'left',
+        yAxisInverse:false,
+        yAxisSplitAreaShow:false,
+        yAxisAxisLineShow:true,
+        yAxisAxisLabelInside:false,
+        yAxisAxisLabelTextStyleColor:'#000',
+        yAxisAxisTickShow:true,
+        reverse:false,
+        stack:''
     };
+
+    var json={
+        "preset": "default",
+        "remembered": {
+            "default": {
+                "0": {
+                    "backgroundColor": "#fff",
+                    "tooltipAxisPointerType": "shadow",
+                    "reverse": false,
+                    "stack": "",
+                    "title": "我是标题，请修改",
+                    "subtitle": "",
+                    "titleTextStyleFontSize": 18,
+                    "titleBackgroundColor": "#fff",
+                    "titleTextStyleColor": "#000",
+                    "titleTop": 10,
+                    "titleLeft": 10,
+                    "gridTop": 50,
+                    "gridBottom": 50,
+                    "gridLeft": 50,
+                    "gridRight": 50,
+                    "legend": "",
+                    "legendOrient": "horizontal",
+                    "legendAlign": "left",
+                    "legendTop": 10,
+                    "legendLeft": 200,
+                    "xAxisData": "",
+                    "xAxisPosition": "bottom",
+                    "xAxisAxisLabelTextStyleColor": "#000",
+                    "xAxisGridLine": false,
+                    "xAxisInverse": false,
+                    "xAxisSplitAreaShow": false,
+                    "xAxisAxisLineShow": true,
+                    "xAxisAxisTickShow": true,
+                    "xAxisAxisLabelInside": false,
+                    "xAxisBoundaryGap": true,
+                    "yAxisData": "",
+                    "yAxisPosition": "left",
+                    "yAxisAxisLabelTextStyleColor": "#000",
+                    "yAxisGridLine": true,
+                    "yAxisInverse": false,
+                    "yAxisSplitAreaShow": false,
+                    "yAxisAxisLineShow": true,
+                    "yAxisAxisTickShow": true,
+                    "yAxisAxisLabelInside": false
+                }
+            }
+        },
+        "closed": false,
+        "folders": {
+            "标题属性": {
+                "preset": "Default",
+                "closed": true,
+                "folders": {}
+            },
+            "绘图区属性": {
+                "preset": "Default",
+                "closed": true,
+                "folders": {}
+            },
+            "图例属性": {
+                "preset": "Default",
+                "closed": true,
+                "folders": {}
+            },
+            "x轴属性": {
+                "preset": "Default",
+                "closed": false,
+                "folders": {}
+            },
+            "y轴属性": {
+                "preset": "Default",
+                "closed": true,
+                "folders": {}
+            }
+        }
+    };
+    var barGui = new dat.GUI({load:json});
+        barGui.remember(barObj)
+    barGui.addColor(barObj,'backgroundColor').name('背景色');
+    var barTitle=barGui.addFolder('标题属性');
+    barTitle.add(barObj, 'title').name('图表标题');
+    barTitle.add(barObj,'subtitle').name('图标副标题');
+    barTitle.add(barObj,'titleTextStyleFontSize').name('标题大小');
+    barTitle.addColor(barObj,'titleBackgroundColor').name('背景色');
+    barTitle.addColor(barObj,'titleTextStyleColor').name('标题颜色');
+    barTitle.add(barObj,'titleTop').name('上边距');
+    barTitle.add(barObj,'titleLeft').name('左边距');
+    var barGrid=barGui.addFolder("绘图区属性");
+    barGrid.add(barObj,'gridTop').name('上边距');
+    barGrid.add(barObj,'gridBottom').name('下边距');
+    barGrid.add(barObj,"gridLeft").name('左边距');
+    barGrid.add(barObj,"gridRight").name('右边距');
+    barGui.add(barObj,'tooltipAxisPointerType',{阴影:'shadow',交叉线:'cross',垂直线:'line'}).name('ToolTip类型');
+    var barLegend=barGui.addFolder("图例属性");
+    barLegend.add(barObj,'legend').name('图例值');
+    barLegend.add(barObj,'legendOrient',{水平:'horizontal',垂直:'vertical'}).name('图例方向');
+    barLegend.add(barObj,'legendAlign',{左:'left',右:'right'}).name('图例朝向');
+    barLegend.add(barObj,'legendTop').name('图例上边距');
+    barLegend.add(barObj,'legendLeft').name('图例左边距');
+    var barX=barGui.addFolder('x轴属性');
+    barX.add(barObj,'xAxisData').name('x轴坐标点');
+    barX.add(barObj,'xAxisPosition',{上:'top',下:'bottom'}).name('x轴位置');
+    barX.addColor(barObj,'xAxisAxisLabelTextStyleColor').name('字体颜色');
+    barX.add(barObj,'xAxisGridLine').name('x轴网格');
+    barX.add(barObj,'xAxisInverse').name('x轴反向');
+    barX.add(barObj,'xAxisSplitAreaShow').name('x轴分割区域');
+    barX.add(barObj,'xAxisAxisLineShow').name('x轴轴线');
+    barX.add(barObj,'xAxisAxisTickShow').name('x轴刻度');
+    barX.add(barObj,'xAxisAxisLabelInside').name('图内刻度');
+    barX.add(barObj,'xAxisBoundaryGap').name('左右边界');
+    var barY=barGui.addFolder('y轴属性');
+    barY.add(barObj,'yAxisData').name('y轴坐标点');
+    barY.add(barObj,'yAxisPosition',{左:'left',右:'right'}).name('y轴位置');
+    barY.addColor(barObj,'yAxisAxisLabelTextStyleColor').name('字体颜色');
+    barY.add(barObj,'yAxisGridLine').name('y轴网格');
+    barY.add(barObj,'yAxisInverse').name('y轴反向');
+    barY.add(barObj,'yAxisSplitAreaShow').name('y轴分割区域');
+    barY.add(barObj,'yAxisAxisLineShow').name('y轴轴线');
+    barY.add(barObj,'yAxisAxisTickShow').name('y轴刻度');
+    barY.add(barObj,'yAxisAxisLabelInside').name('图内刻度');
+    barGui.add(barObj,'reverse').name('坐标轴是否转置');
+    barGui.add(barObj,'stack').name('多维堆叠柱状图数据模型');
+    //gui.add(text, 'speed', -5, 5);
+//    barGui.remember(barObj);
+    console.log(barGui.getSaveObject())
 </script>
 </body>
 </html>

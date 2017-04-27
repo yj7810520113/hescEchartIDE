@@ -78,7 +78,9 @@
         var barGui = new dat.GUI();
         barGui.addColor(barObj,'backgroundColor').name('背景色').onChange(renderBarChart);
         var barTitle=barGui.addFolder('标题属性');
-        barTitle.add(barObj, 'title').name('图表标题').onChange(renderBarChart);
+        barTitle.add(barObj, 'title').name('图表标题').onChange=(function () {
+            renderBarChart()
+        })();
         barTitle.add(barObj,'subtitle').name('图标副标题').onChange(renderBarChart);
         barTitle.add(barObj,'titleTextStyleFontSize').name('标题大小').onChange(renderBarChart);
         barTitle.addColor(barObj,'titleBackgroundColor').name('背景色').onChange(renderBarChart);
