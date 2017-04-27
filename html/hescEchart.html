@@ -172,7 +172,12 @@
     测试在screen上面点击是否能触发div
      */
     $('#screen').click(function (e) {
-        console.log(e.target);
+        //获取到唯一的图形id
+//        console.log()
+        var divChartId=$(e.target).parent().parent().parent().attr('id');
+        console.log(divChartId)
+        addBarDatGui(divChartId);
+
     })
 //    function addChart() {
 //        console.log()

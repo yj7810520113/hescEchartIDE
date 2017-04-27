@@ -12,82 +12,125 @@ var hashids=new Hashids('hescEchart',5);
 var datGuiPannel='';
 //bar相关的配置数据和数据
 var barInitialCanvasData=[[{"2011":2},{"2011":4},{"2011":4},{"2011":4}],[{"2012":6},{"2012":8},{"2013":4},{"2013":4}],[{"2014":5},{"2014":2},{"2014":9},{"2014":1}],[{"2015":8},{"2015":6},{"2015":1},{"2015":7}]];
-var barInitialDatGuiData={
-    "preset": "default",
-    "remembered": {
-        "default": {
-            "0": {
-                "backgroundColor": "#fff",
-                "tooltipAxisPointerType": "cross",
-                "reverse": false,
-                "stack": "",
-                "title": "我是标题，请修改",
-                "subtitle": "",
-                "titleTextStyleFontSize": 18,
-                "titleBackgroundColor": "#fff",
-                "titleTextStyleColor": "#000",
-                "titleTop": 10,
-                "titleLeft": 10,
-                "gridTop": 50,
-                "gridBottom": 50,
-                "gridLeft": 50,
-                "gridRight": 50,
-                "legend": "",
-                "legendOrient": "horizontal",
-                "legendAlign": "left",
-                "legendTop": 10,
-                "legendLeft": 200,
-                "xAxisData": "",
-                "xAxisPosition": "bottom",
-                "xAxisAxisLabelTextStyleColor": "#000",
-                "xAxisGridLine": false,
-                "xAxisInverse": false,
-                "xAxisSplitAreaShow": false,
-                "xAxisAxisLineShow": true,
-                "xAxisAxisTickShow": true,
-                "xAxisAxisLabelInside": false,
-                "xAxisBoundaryGap": true,
-                "yAxisData": "",
-                "yAxisPosition": "left",
-                "yAxisAxisLabelTextStyleColor": "#000",
-                "yAxisGridLine": true,
-                "yAxisInverse": false,
-                "yAxisSplitAreaShow": false,
-                "yAxisAxisLineShow": true,
-                "yAxisAxisTickShow": true,
-                "yAxisAxisLabelInside": false
-            }
-        }
-    },
-    "closed": false,
-    "folders": {
-        "标题属性": {
-            "preset": "Default",
-            "closed": true,
-            "folders": {}
-        },
-        "绘图区属性": {
-            "preset": "Default",
-            "closed": true,
-            "folders": {}
-        },
-        "图例属性": {
-            "preset": "Default",
-            "closed": true,
-            "folders": {}
-        },
-        "x轴属性": {
-            "preset": "Default",
-            "closed": false,
-            "folders": {}
-        },
-        "y轴属性": {
-            "preset": "Default",
-            "closed": true,
-            "folders": {}
-        }
-    }
+var barInitialDatGuiData ={
+    canvasWidth:400,
+    canvasHeight:300,
+    backgroundColor:"#feefff",
+    title:'我是标题，请修改',
+    subtitle:'',
+    titleBackgroundColor:'#fff',
+    titleTop:10,
+    titleLeft:10,
+    titleTextStyleFontSize:18,
+    titleTextStyleColor:'#000',
+    gridLeft:50,
+    gridRight:50,
+    gridTop:50,
+    gridBottom:50,
+    tooltipAxisPointerType:'shadow',
+    legend:'',
+    legendAlign:'left',
+    legendLeft:200,
+    legendTop:10,
+    legendOrient:'horizontal',
+    xAxisData:'',
+    xAxisGridLine:false,
+    xAxisPosition:'bottom',
+    xAxisInverse:false,
+    xAxisSplitAreaShow:false,
+    xAxisAxisLineShow:true,
+    xAxisAxisLabelInside:false,
+    xAxisAxisLabelTextStyleColor:'#000',
+    xAxisAxisTickShow:true,
+    xAxisBoundaryGap:true,
+    yAxisData:'',
+    yAxisGridLine:true,
+    yAxisPosition:'left',
+    yAxisInverse:false,
+    yAxisSplitAreaShow:false,
+    yAxisAxisLineShow:true,
+    yAxisAxisLabelInside:false,
+    yAxisAxisLabelTextStyleColor:'#000',
+    yAxisAxisTickShow:true,
+    reverse:false,
+    stack:''
 };
+// var barInitialDatGuiData={
+//     "preset": "default",
+//     "remembered": {
+//         "default": {
+//             "0": {
+//                 "backgroundColor": "#fff",
+//                 "tooltipAxisPointerType": "cross",
+//                 "reverse": false,
+//                 "stack": "",
+//                 "title": "我是标题，请修改",
+//                 "subtitle": "",
+//                 "titleTextStyleFontSize": 18,
+//                 "titleBackgroundColor": "#fff",
+//                 "titleTextStyleColor": "#000",
+//                 "titleTop": 10,
+//                 "titleLeft": 10,
+//                 "gridTop": 50,
+//                 "gridBottom": 50,
+//                 "gridLeft": 50,
+//                 "gridRight": 50,
+//                 "legend": "",
+//                 "legendOrient": "horizontal",
+//                 "legendAlign": "left",
+//                 "legendTop": 10,
+//                 "legendLeft": 200,
+//                 "xAxisData": "",
+//                 "xAxisPosition": "bottom",
+//                 "xAxisAxisLabelTextStyleColor": "#000",
+//                 "xAxisGridLine": false,
+//                 "xAxisInverse": false,
+//                 "xAxisSplitAreaShow": false,
+//                 "xAxisAxisLineShow": true,
+//                 "xAxisAxisTickShow": true,
+//                 "xAxisAxisLabelInside": false,
+//                 "xAxisBoundaryGap": true,
+//                 "yAxisData": "",
+//                 "yAxisPosition": "left",
+//                 "yAxisAxisLabelTextStyleColor": "#000",
+//                 "yAxisGridLine": true,
+//                 "yAxisInverse": false,
+//                 "yAxisSplitAreaShow": false,
+//                 "yAxisAxisLineShow": true,
+//                 "yAxisAxisTickShow": true,
+//                 "yAxisAxisLabelInside": false
+//             }
+//         }
+//     },
+//     "closed": false,
+//     "folders": {
+//         "标题属性": {
+//             "preset": "Default",
+//             "closed": true,
+//             "folders": {}
+//         },
+//         "绘图区属性": {
+//             "preset": "Default",
+//             "closed": true,
+//             "folders": {}
+//         },
+//         "图例属性": {
+//             "preset": "Default",
+//             "closed": true,
+//             "folders": {}
+//         },
+//         "x轴属性": {
+//             "preset": "Default",
+//             "closed": false,
+//             "folders": {}
+//         },
+//         "y轴属性": {
+//             "preset": "Default",
+//             "closed": true,
+//             "folders": {}
+//         }
+//     }
+// };
 var selectDivId='';
 
 /*
@@ -98,14 +141,12 @@ function addChartDiv(parent,chartType){
 //         <div id="barChild" style="height:calc(100% - 3px);wid    th:calc(100% - 3px);"></div>
 //         </div>
     var ids=chartType+'-'+uniqueDivId(hescList.length);
-    console.log($(parent))
-    console.log($(parent)-3)
     //这里的长宽为monitor的长宽-3
     var divContent='<div id="'+ids+'" class="Monitor"><div id='+ids+'canvas class="canvasclass" style="height:'+(400)+'px;width:'+(500)+'px;"></div>';
-    console.log(divContent)
     $(parent).append(divContent);
     $('.Monitor').resizable().draggable();
-    addHescEle(ids,'static',barInitialCanvasData,barInitialDatGuiData);
+    addHescEle(ids,'static',cloneObj(barInitialCanvasData),cloneObj(barInitialDatGuiData));
+    console.log(cloneObj(barInitialCanvasData))
     return ids;
 
 }
@@ -123,59 +164,12 @@ function addHescEle(divId,dataType,data,datGuiConfig){
     });
 }
 /*
-柱状图dat.gui初始化配置方法
+柱状图dat.gui初始化配置方法,即为dat.gui添加方法
  */
 function addBarDatGui(chartId){
-    selectDivId=chartId;
-    console.log(hescList)
-    console.log(chartId)
-    var barDefaultDatGuiJson=findDatGuiDataById(chartId);
-    var barDefaultCanvasData=findCanvasDataById(chartId);
-    var barDefaultDatGUiObj ={
-        canvasWidth:400,
-        canvasHeight:300,
-        backgroundColor:"#feefff",
-        title:'我是标题，请修改',
-        subtitle:'',
-        titleBackgroundColor:'#fff',
-        titleTop:10,
-        titleLeft:10,
-        titleTextStyleFontSize:18,
-        titleTextStyleColor:'#000',
-        gridLeft:50,
-        gridRight:50,
-        gridTop:50,
-        gridBottom:50,
-        tooltipAxisPointerType:'shadow',
-        legend:'',
-        legendAlign:'left',
-        legendLeft:200,
-        legendTop:10,
-        legendOrient:'horizontal',
-        xAxisData:'',
-        xAxisGridLine:false,
-        xAxisPosition:'bottom',
-        xAxisInverse:false,
-        xAxisSplitAreaShow:false,
-        xAxisAxisLineShow:true,
-        xAxisAxisLabelInside:false,
-        xAxisAxisLabelTextStyleColor:'#000',
-        xAxisAxisTickShow:true,
-        xAxisBoundaryGap:true,
-        yAxisData:'',
-        yAxisGridLine:true,
-        yAxisPosition:'left',
-        yAxisInverse:false,
-        yAxisSplitAreaShow:false,
-        yAxisAxisLineShow:true,
-        yAxisAxisLabelInside:false,
-        yAxisAxisLabelTextStyleColor:'#000',
-        yAxisAxisTickShow:true,
-        reverse:false,
-        stack:''
-    };
-    addBarDatGuiPannel();
-    function addBarDatGuiPannel(){
+    //selectDivId=chartId;
+    addBarDatGuiPannel(findDatGuiDataById(chartId),findCanvasDataById(chartId));
+    function addBarDatGuiPannel(barDefaultDatGUiObj,barDefaultCanvasData){
         /*
         移除之前的dat.gui
          */
@@ -413,11 +407,14 @@ function addBarDatGui(chartId){
 更新bardefaultDatGuiObj
  */
 function updateHescEleByIdToDatGuiConfig(chartId,datGuiConfig){
+    // console.log(hescList);
+    // console.log('----------------')
     for(var object1 in hescList){
         if(hescList[object1].divId==chartId){
             hescList[object1].datGuiConfig=datGuiConfig;
         }
     }
+    // console.log(hescList)
 }
 /*
 根据id查找数据结构的方法
@@ -464,3 +461,23 @@ function findCanvasDataById(chartId) {
 function uniqueDivId(id){
     return hashids.encode(id);
 }
+
+/*
+初始barInitialDatGuiData 、barInitialCanvasData对象拷贝
+ https://www.zhihu.com/question/23031215
+ */
+var cloneObj = function(obj){
+    var str, newobj = obj.constructor === Array ? [] : {};
+    if(typeof obj !== 'object'){
+        return;
+    } else if(window.JSON){
+        str = JSON.stringify(obj), //系列化对象
+            newobj = JSON.parse(str); //还原
+    } else {
+        for(var i in obj){
+            newobj[i] = typeof obj[i] === 'object' ?
+                cloneObj(obj[i]) : obj[i];
+        }
+    }
+    return newobj;
+};

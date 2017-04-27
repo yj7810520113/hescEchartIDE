@@ -14,7 +14,7 @@
 function renderBarChart(canvasId,canvasData,barObj){
     // console.log('renderbarchart')
     // console.log(canvasId+' .render')
-    console.log(barObj)
+    // console.log(barObj)
     hescEchart.select(canvasId+'canvas')
         .background(barObj.backgroundColor)
         .title(barObj.title)

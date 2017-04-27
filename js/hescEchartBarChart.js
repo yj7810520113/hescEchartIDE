@@ -301,7 +301,6 @@
                  */
                 var seriesAttr=[];
                 for(var i=0;i<seriesNum;i++){
-                    console.log(legendAttr[i]);
                     var series1={
                         name:legendAttr[i],
                         type:'bar',
@@ -349,7 +348,7 @@
     }
 
     var render=function(){
-        console.log(option);
+        // console.log(option);
         var chart = echarts.init(document.getElementById(selectID));
         chart.setOption(option);
         return this;
