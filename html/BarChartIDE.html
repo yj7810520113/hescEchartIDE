@@ -14,6 +14,7 @@
     <script src="../js/echarts.js"></script>
     <script src="../js/hescEchartBarChart.js"></script>
     <script src="../js/hescEchartCore.js"></script>
+    <script src="../js/ETheme/chalk.js"></script>
     <style>
         *{
             margin: 0px;
@@ -120,6 +121,7 @@
         barGui.add(barObj,'reverse').name('坐标轴是否转置').onChange(renderBarChart);
         barGui.add(barObj,'stack').name('多维堆叠柱状图数据模型').onChange(renderBarChart);
         //gui.add(text, 'speed', -5, 5);
+        barGui.remember(barObj);
         renderBarChart();
     };
     function renderBarChart() {
@@ -142,7 +144,7 @@
                 .legendAlign(barObj.legendAlign)
                 .legendLeft(barObj.legendLeft)
                 .legendTop(barObj.legendTop)
-                .legendOrient(lineObj.legendOrient)
+                .legendOrient(barObj.legendOrient)
                 .xAxisData(barObj.xAxisData)
                 .xAxisGridLineAttr(barObj.xAxisGridLine)
                 .xAxisPosition(barObj.xAxisPosition)

@@ -1,0 +1,58 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/4/26
+ * Time:16:34
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var hescList=[];
+    console.log(hescList )
+    addHescEle(1,1,1,1);
+    addHescEle(2,2,2,2);
+    console.log(hescList[0].datGuiConfig+hescList[0].canvasData.dataType
+    )
+    console.log(findHescEle(1));
+    replaceHescEle(1,2,2,2);
+    console.log(hescList);
+
+
+    function addHescEle(divId,dataType,data,datGuiConfig){
+        hescList.push({
+            divId:divId,
+            canvasData:{
+                dataType:dataType,
+                data:data
+            },
+            datGuiConfig:datGuiConfig
+        });
+    }
+    function findHescEle(divId){
+        for(var hescListEle in hescList){
+            if(divId==hescList[hescListEle].divId){
+                return hescList[hescListEle];
+                break;
+            }
+        }
+    }
+    function replaceHescEle(divId,dataType,data,datGuiConfig){
+        for(var hescListEle in hescList){
+            if(divId==hescList[hescListEle].divId){
+                hescList[hescListEle].canvasData={dataType:dataType,data:data};
+                hescList[hescListEle].datGuiConfig=datGuiConfig;
+                break;
+            }
+        }
+    }
+
+</script>
+
+</body>
+</html>
