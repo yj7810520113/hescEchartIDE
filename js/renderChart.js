@@ -153,3 +153,61 @@ function renderPieChart(canvasId,canvasData,pieObj) {
         .pie(canvasData)
         .render();
 }
+/*
+雷达图配置
+ */
+function renderRadarChart(canvasId,canvasData,radarObj) {
+    $('#'+canvasId).width(radarObj.canvasWidth);
+    $('#'+canvasId).height(radarObj.canvasHeight);
+    //更新canvas容器的大小
+    $('#'+canvasId+'canvas').width(radarObj.canvasWidth);
+    $('#'+canvasId+'canvas').height(radarObj.canvasHeight);
+    hescEchartRadar.select(canvasId+'canvas')
+        .background(radarObj.backgroundColor)
+        .title(radarObj.title)
+        .subtitle(radarObj.subtitle)
+        .titleBackgroundColor(radarObj.titleBackgroundColor)
+        .titleTop(radarObj.titleTop)
+        .titleLeft(radarObj.titleLeft)
+        .titleTextStyleFontSize(radarObj.titleTextStyleFontSize)
+        .titleTextStyleColor(radarObj.titleTextStyleColor)
+        .legendAttr(radarObj.legend)
+        .legendAlign(radarObj.legendAlign)
+        .legendLeft(radarObj.legendLeft)
+        .legendTop(radarObj.legendTop)
+        .legendOrient(radarObj.legendOrient)
+        .tooltipShow(radarObj.tooltipShow)
+        .radarIndicator(radarObj.radarIndicator)
+        .radarCenterLeft(radarObj.radarCenterLeft+'%')
+        .radarCenterTop(radarObj.radarCenterTop+'%')
+        .radarRadius(radarObj.radarRadius)
+        .radarStartAngle(radarObj.radarStartAngle)
+        .radarSplitNumber(radarObj.radarSplitNumber)
+        .radarShape(radarObj.radarShape)
+        .radarNameTextStyleColor(radarObj.radarNameTextStyleColor)
+        .radarNameTextStyleFontSize(radarObj.radarNameTextStyleFontSize)
+        .radarAxisLineShow(radarObj.radarAxisLineShow)
+        .radarAxisLineLineStyle(radarObj.radarAxisLineLineStyle)
+        .radarSplitLineShow(radarObj.radarSplitLineShow)
+        .radarSplitLineLineStyle(radarObj.radarSplitLineLineStyle)
+        .seriesName(radarObj.seriesName)
+        .seriesType(radarObj.seriesType)
+        .seriesSymbol(radarObj.seriesSymbol)
+        .seriesSymbolSize(radarObj.seriesSymbolSize)
+        .seriesLineStyleNormalShow(radarObj.seriesLineStyleNormalShow)
+        .seriesLineStyleNormalWidth(radarObj.seriesLineStyleNormalWidth)
+        .seriesLineStyleNormalType(radarObj.seriesLineStyleNormalType)
+        .seriesLineStyleNormalOpacity(radarObj.seriesLineStyleNormalOpacity)
+        .radar(canvasData)
+        .render();
+
+
+}
+/*
+日历热图配置
+ */
+function renderCalendarChart(canvasId,canvasData,radarObj){}
+/*
+词云配置
+ */
+function renderWordCloudChart(canvasId,canvasData,radarObj){}

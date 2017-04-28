@@ -134,6 +134,53 @@ var pieInitailDatGuiData={
     seriesRoseType:'false',
     seriesLabelNormalShow: false
 };
+var radarInitialCanvasData=[[{"推塔":2},{"输出":4},{"承受伤害":4},{"KDA":4},{"胜率":78}],[{"推塔":3},{"输出":5},{"承受伤害":5},{"KDA":10},{"胜率":60}],[{"推塔":4},{"输出":1},{"承受伤害":1},{"KDA":5},{"胜率":65}],[{"推塔":5},{"输出":4},{"承受伤害":2},{"KDA":8},{"胜率":70}]];
+var radarInitialDatGuiData={
+    canvasWidth:500,
+    canvasHeight:400,
+    backgroundColor:"#ffffff",
+    title:'我是标题，请修改',
+    subtitle:'',
+    titleBackgroundColor:'#fff',
+    titleTop:10,
+    titleLeft:10,
+    titleTextStyleFontSize:18,
+    titleTextStyleColor:'#000',
+    tooltipAxisPointerType:'shadow',
+    legend:'',
+    legendAlign:'left',
+    legendLeft:200,
+    legendTop:10,
+    legendOrient:'horizontal',
+
+    /*
+     radar图特有属性
+     */
+    tooltipShow:true,
+    radarIndicator:'',
+    radarCenterLeft:50,
+    radarCenterTop:50,
+    radarRadius:100,
+    radarStartAngle:90,
+    radarSplitNumber:4,
+    radarShape:'rect',
+    radarNameTextStyleColor:'#000',
+    radarNameTextStyleFontSize:12,
+    radarAxisLineShow:true,
+    radarAxisLineLineStyle:'#b0bec5',
+    radarSplitLineShow:true,
+    radarSplitLineLineStyle:'#b0bec5',
+    seriesName:'雷达图',
+    seriesType:'radar',
+    seriesSymbol:'circle',
+    seriesSymbolSize:5,
+    seriesLineStyleNormalShow:false,
+    seriesLineStyleNormalWidth:0.5,
+    seriesLineStyleNormalType:'solid',//dashed、'dotted'
+    seriesLineStyleNormalOpacity:1
+
+
+};
 // var barInitialDatGuiData={
 //     "preset": "default",
 //     "remembered": {
@@ -235,6 +282,9 @@ function addChartDiv(parent,chartType){
     else if(chartType=='pie'){
         addHescEle(ids,'static',cloneObj(pieInitialCanvasData),cloneObj(pieInitailDatGuiData));
     }
+    else if(chartType=='radar'){
+        addHescEle(ids,'static',cloneObj(radarInitialCanvasData),cloneObj(radarInitialDatGuiData));
+    }
 
     /*
     因为monitor需要对hesclist进行操作，所以放在后面
@@ -242,7 +292,26 @@ function addChartDiv(parent,chartType){
      */
     $('.Monitor').each(function () {
         $(this).mutate('height width',function (e1,info) {
-            console.log($(e1).width())
+            var ids1=$(e1).attr('id').split('-');
+            //查找到hescList中指定的元素并替换height和width的值
+            for(var hescListHeightWidth in hescList){
+                if(hescList[hescListHeightWidth].divId==$(e1).attr('id')){
+                    hescList[hescListHeightWidth].datGuiConfig.canvasHeight=$(e1).height();
+                    hescList[hescListHeightWidth].datGuiConfig.canvasWidth=$(e1).width();
+                    if(ids1[0]=='bar') {
+                        renderBarChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
+                    }
+                    else if(ids1[0]=='line'){
+                        renderLineChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
+                    }
+                    else if(ids1[0]=='pie'){
+                        renderPieChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
+                    }
+                    else if(ids1[0]=='radar'){
+                        renderRadarChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
+                    }
+                }
+            }
         })
     })
     return ids;
@@ -667,12 +736,165 @@ function addPieDatGui(chartId) {
         });
     }
 }
+function addRadarDatGui(chartId) {
+    addRadarDatGuiPannel(findDatGuiDataById(chartId), findCanvasDataById(chartId));
+    function addRadarDatGuiPannel(radarDefaultDatGUiObj, radarDefaultCanvasData) {
+        /*
+         移除之前的dat.gui
+         */
+        // datGuiPannel.destroy();
+        $('#tabConfig').children().remove();
+
+        datGuiPannel = new dat.GUI({autoPlace: false});
+        //添加柱状图至控制面板
+        var customContainer = document.getElementById('tabConfig');
+        customContainer.appendChild(datGuiPannel.domElement);
+
+        renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        //添加事件监听
+        var radarCanvas = datGuiPannel.addFolder('画布大小');
+        radarCanvas.add(radarDefaultDatGUiObj, 'canvasWidth', 200, 1000).name('画布宽').listen().onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarCanvas.add(radarDefaultDatGUiObj, 'canvasHeight', 150, 800).name("画布高").listen().onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+
+        datGuiPannel.addColor(radarDefaultDatGUiObj, 'backgroundColor').name('背景色').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        var radarTitle = datGuiPannel.addFolder('标题属性');
+        radarTitle.add(radarDefaultDatGUiObj, 'title').name('图表标题').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarTitle.add(radarDefaultDatGUiObj, 'subtitle').name('图标副标题').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarTitle.add(radarDefaultDatGUiObj, 'titleTextStyleFontSize').name('标题大小').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarTitle.addColor(radarDefaultDatGUiObj, 'titleBackgroundColor').name('背景色').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarTitle.addColor(radarDefaultDatGUiObj, 'titleTextStyleColor').name('标题颜色').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarTitle.add(radarDefaultDatGUiObj, 'titleTop').name('上边距').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarTitle.add(radarDefaultDatGUiObj, 'titleLeft').name('左边距').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        var radarLegend = datGuiPannel.addFolder("图例属性");
+        radarLegend.add(radarDefaultDatGUiObj, 'legend').name('图例值').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarLegend.add(radarDefaultDatGUiObj, 'legendOrient', {
+            水平: 'horizontal',
+            垂直: 'vertical'
+        }).name('图例方向').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarLegend.add(radarDefaultDatGUiObj, 'legendAlign', {
+            左: 'left',
+            右: 'right'
+        }).name('图例朝向').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarLegend.add(radarDefaultDatGUiObj, 'legendTop').name('图例上边距').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarLegend.add(radarDefaultDatGUiObj, 'legendLeft').name('图例左边距').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        var radarRadar = datGuiPannel.addFolder("绘图区属性");
+        radarRadar.add(radarDefaultDatGUiObj, 'tooltipShow').name('Tooltip').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.add(radarDefaultDatGUiObj, 'radarIndicator').name('坐标轴Label').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.add(radarDefaultDatGUiObj, 'radarCenterTop').name('上边距').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.add(radarDefaultDatGUiObj, 'radarCenterLeft').name('左边距').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.add(radarDefaultDatGUiObj, 'radarRadius').name('半径').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.add(radarDefaultDatGUiObj, 'radarStartAngle', 0, 360).name('旋转角度').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.add(radarDefaultDatGUiObj, 'radarSplitNumber', 0, 20).name('网格横向数量').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.add(radarDefaultDatGUiObj, 'radarShape', {
+            矩形: 'rect',
+            圆形: 'circle'
+        }).name('雷达图外观').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.addColor(radarDefaultDatGUiObj, 'radarNameTextStyleColor').name('标签字体颜色').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.add(radarDefaultDatGUiObj, 'radarNameTextStyleFontSize', 1, 30).name('标签字体大小').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.add(radarDefaultDatGUiObj, 'radarAxisLineShow').name('坐标线').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.add(radarDefaultDatGUiObj, 'radarSplitLineShow').name('分隔线').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.addColor(radarDefaultDatGUiObj, 'radarAxisLineLineStyle').name('坐标线颜色').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.addColor(radarDefaultDatGUiObj, 'radarSplitLineLineStyle').name('分割线颜色').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarRadar.add(radarDefaultDatGUiObj, 'radarAxisLineShow').name('坐标线').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        var radarSeries = datGuiPannel.addFolder('雷达图属性')
+        radarSeries.add(radarDefaultDatGUiObj, 'seriesName').name('图名').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarSeries.add(radarDefaultDatGUiObj, 'seriesSymbol', {
+            圆形: 'circle',
+            矩形: 'rect',
+            三角形: 'triangle',
+            箭头: 'arrow'
+        }).name('标记点').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarSeries.add(radarDefaultDatGUiObj, 'seriesSymbolSize', 0, 20).name('标记点大小').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarSeries.add(radarDefaultDatGUiObj, 'seriesLineStyleNormalShow').name('show?').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarSeries.add(radarDefaultDatGUiObj, 'seriesLineStyleNormalWidth', 0, 5).name('线宽度').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarSeries.add(radarDefaultDatGUiObj, 'seriesLineStyleNormalType', {
+            实线: 'solid',
+            虚线: 'dashed',
+            点阵: 'dotted'
+        }).name('线段类型').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+        radarSeries.add(radarDefaultDatGUiObj, 'seriesLineStyleNormalOpacity', 0, 1).name('线段透明度').onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
+    }
+}
+
 function addCanvasData(divChartId){
     //更新jsoneditor中的text
     return  findCanvasDataById(divChartId);
 
 }
-
 
 /*
  更新bardefaultDatGuiObj（这里因为js是浅拷贝所以不需要手动替换元素，js会自动修改hescList元素的值）

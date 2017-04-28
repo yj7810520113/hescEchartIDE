@@ -38,9 +38,9 @@
 <body>
 <div id="screen" class="screen">
     <!--resize and drag div test-->
-    <div id='bar随即id' class="Monitor">
-        <div id="barChild" style="height:calc(100% - 3px);width:calc(100% - 3px);"></div>
-    </div>
+    <!--<div id='bar随即id' class="Monitor">-->
+        <!--<div id="barChild" style="height:calc(100% - 3px);width:calc(100% - 3px);"></div>-->
+    <!--</div>-->
 
 </div>
 <div class="navbar navbar-default navbar-fixed-top">
@@ -146,6 +146,12 @@
     </div>
 </div>
 
+<!--初始化screen高度-->
+<script>
+    $('#screen').css('height',$(window).height()-80);
+    $('#screen').css('width',$(window).width()-350);
+</script>
+
 <!----------------------------------------------------JS-------------------------------------------------------->
 <!--添加图形-->
 <script>
@@ -165,7 +171,10 @@
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
         }
         else if(addChartEle=='radar'){
-
+            var chartId=addChartDiv($('#screen'),'radar');
+            addRadarDatGui(chartId);
+            divChartId=chartId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
         }
         else if(addChartEle=='calendar'){
 
@@ -208,6 +217,9 @@
         }
         else if(divChartIdSplit[0]=='pie'){
             addPieDatGui(divChartId1);
+        }
+        else if(divChartIdSplit[0]=='radar'){
+            addRadarDatGui(divChartId1);
         }
     }
     $('#submitData').click(function () {
