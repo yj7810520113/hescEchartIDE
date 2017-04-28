@@ -385,6 +385,11 @@
         return this;
     }
 
+    var getOptionFun=function () {
+        return option;
+    }
+
+    exports.option=getOptionFun;
     exports.select = selectFun;
 
     exports.radar = radar;

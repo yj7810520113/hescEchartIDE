@@ -18,7 +18,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
         typeof define === 'function' && define.amd ? define(['exports'], factory) :
-            (factory((global.hescEchart = global.hescEchart || {})));
+            (factory((global.hescEchartWordCloud = global.hescEchartWordCloud || {})));
 }(this, (function (exports) {
     'use strict';
     var version = "0.0.1";
@@ -261,7 +261,11 @@
         return this;
     }
 
+    var getOptionFun=function () {
+        return option;
+    }
 
+    exports.option=getOptionFun;
 
 
 

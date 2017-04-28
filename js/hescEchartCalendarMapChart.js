@@ -18,7 +18,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
         typeof define === 'function' && define.amd ? define(['exports'], factory) :
-            (factory((global.hescEchart = global.hescEchart || {})));
+            (factory((global.hescEchartCalendar = global.hescEchartCalendar || {})));
 }(this, (function (exports) {
         'use strict';
         var version = "0.0.1";
@@ -378,6 +378,11 @@
             seriesSymbolSize=x;
             return this
         }
+        var getOptionFun=function () {
+            return option;
+        }
+
+        exports.option=getOptionFun;
 
 
         exports.select = selectFun;

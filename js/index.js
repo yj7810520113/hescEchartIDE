@@ -181,6 +181,428 @@ var radarInitialDatGuiData={
 
 
 };
+var calendarInitialCanvasData=[{"2017-01-01":713},{"2017-01-02":871},{"2017-01-03":65},{"2017-01-04":629},{"2017-01-05":468},{"2017-01-06":532},{"2017-01-07":823},{"2017-01-08":458},{"2017-01-09":525},{"2017-01-10":200},{"2017-01-11":884},{"2017-01-12":760},{"2017-01-13":845},{"2017-01-14":11},{"2017-01-15":46},{"2017-01-16":458},{"2017-01-17":302},{"2017-01-18":850},{"2017-01-19":485},{"2017-01-20":710},{"2017-01-21":511},{"2017-01-22":931},{"2017-01-23":631},{"2017-01-24":332},{"2017-01-25":675},{"2017-01-26":424},{"2017-01-27":536},{"2017-01-28":540},{"2017-01-29":917},{"2017-01-30":9},{"2017-01-31":26},{"2017-02-01":278},{"2017-02-02":135},{"2017-02-03":629},{"2017-02-04":86},{"2017-02-05":981},{"2017-02-06":91},{"2017-02-07":326},{"2017-02-08":134},{"2017-02-09":932},{"2017-02-10":813},{"2017-02-11":237},{"2017-02-12":664},{"2017-02-13":273},{"2017-02-14":622},{"2017-02-15":360},{"2017-02-16":17},{"2017-02-17":980},{"2017-02-18":870},{"2017-02-19":908},{"2017-02-20":544},{"2017-02-21":734},{"2017-02-22":255},{"2017-02-23":186},{"2017-02-24":4},{"2017-02-25":68},{"2017-02-26":811},{"2017-02-27":751},{"2017-02-28":115},{"2017-03-01":272},{"2017-03-02":819},{"2017-03-03":739},{"2017-03-04":969},{"2017-03-05":488},{"2017-03-06":332},{"2017-03-07":829},{"2017-03-08":867},{"2017-03-09":802},{"2017-03-10":215},{"2017-03-11":858},{"2017-03-12":888},{"2017-03-13":188},{"2017-03-14":866},{"2017-03-15":246},{"2017-03-16":143},{"2017-03-17":1},{"2017-03-18":347},{"2017-03-19":943},{"2017-03-20":796},{"2017-03-21":254},{"2017-03-22":23},{"2017-03-23":373},{"2017-03-24":424},{"2017-03-25":502},{"2017-03-26":899},{"2017-03-27":876},{"2017-03-28":662},{"2017-03-29":56},{"2017-03-30":155},{"2017-03-31":977},{"2017-04-01":578},{"2017-04-02":557},{"2017-04-03":3},{"2017-04-04":730},{"2017-04-05":388},{"2017-04-06":736},{"2017-04-07":915},{"2017-04-08":653},{"2017-04-09":654},{"2017-04-10":353},{"2017-04-11":628},{"2017-04-12":563},{"2017-04-13":799},{"2017-04-14":972},{"2017-04-15":841},{"2017-04-16":702},{"2017-04-17":331},{"2017-04-18":728},{"2017-04-19":723},{"2017-04-20":13},{"2017-04-21":922},{"2017-04-22":20},{"2017-04-23":849},{"2017-04-24":903},{"2017-04-25":736},{"2017-04-26":945},{"2017-04-27":521},{"2017-04-28":349},{"2017-04-29":279},{"2017-04-30":279},{"2017-05-01":924},{"2017-05-02":802},{"2017-05-03":86},{"2017-05-04":344},{"2017-05-05":332},{"2017-05-06":270},{"2017-05-07":613},{"2017-05-08":485},{"2017-05-09":752},{"2017-05-10":733},{"2017-05-11":49},{"2017-05-12":110},{"2017-05-13":456},{"2017-05-14":507},{"2017-05-15":833},{"2017-05-16":259},{"2017-05-17":266},{"2017-05-18":872},{"2017-05-19":700},{"2017-05-20":588},{"2017-05-21":592},{"2017-05-22":68},{"2017-05-23":491},{"2017-05-24":898},{"2017-05-25":313},{"2017-05-26":877},{"2017-05-27":666},{"2017-05-28":326},{"2017-05-29":186},{"2017-05-30":920},{"2017-05-31":496},{"2017-06-01":818},{"2017-06-02":12},{"2017-06-03":34},{"2017-06-04":914},{"2017-06-05":720},{"2017-06-06":535},{"2017-06-07":788},{"2017-06-08":891},{"2017-06-09":565},{"2017-06-10":832},{"2017-06-11":575},{"2017-06-12":225},{"2017-06-13":68},{"2017-06-14":650},{"2017-06-15":131},{"2017-06-16":478},{"2017-06-17":963},{"2017-06-18":906},{"2017-06-19":102},{"2017-06-20":72},{"2017-06-21":834},{"2017-06-22":638},{"2017-06-23":933},{"2017-06-24":631},{"2017-06-25":595},{"2017-06-26":411},{"2017-06-27":960},{"2017-06-28":871},{"2017-06-29":681},{"2017-06-30":930},{"2017-07-01":346},{"2017-07-02":265},{"2017-07-03":770},{"2017-07-04":618},{"2017-07-05":260},{"2017-07-06":550},{"2017-07-07":385},{"2017-07-08":460},{"2017-07-09":137},{"2017-07-10":783},{"2017-07-11":55},{"2017-07-12":522},{"2017-07-13":501},{"2017-07-14":121},{"2017-07-15":975},{"2017-07-16":532},{"2017-07-17":474},{"2017-07-18":78},{"2017-07-19":233},{"2017-07-20":489},{"2017-07-21":629},{"2017-07-22":76},{"2017-07-23":156},{"2017-07-24":131},{"2017-07-25":473},{"2017-07-26":155},{"2017-07-27":925},{"2017-07-28":664},{"2017-07-29":440},{"2017-07-30":381},{"2017-07-31":939},{"2017-08-01":690},{"2017-08-02":407},{"2017-08-03":933},{"2017-08-04":667},{"2017-08-05":272},{"2017-08-06":880},{"2017-08-07":265},{"2017-08-08":261},{"2017-08-09":897},{"2017-08-10":609},{"2017-08-11":735},{"2017-08-12":428},{"2017-08-13":547},{"2017-08-14":735},{"2017-08-15":330},{"2017-08-16":95},{"2017-08-17":80},{"2017-08-18":449},{"2017-08-19":425},{"2017-08-20":51},{"2017-08-21":334},{"2017-08-22":13},{"2017-08-23":981},{"2017-08-24":413},{"2017-08-25":507},{"2017-08-26":753},{"2017-08-27":657},{"2017-08-28":462},{"2017-08-29":574},{"2017-08-30":363},{"2017-08-31":287},{"2017-09-01":203},{"2017-09-02":213},{"2017-09-03":216},{"2017-09-04":166},{"2017-09-05":9},{"2017-09-06":0},{"2017-09-07":15},{"2017-09-08":558},{"2017-09-09":784},{"2017-09-10":833},{"2017-09-11":797},{"2017-09-12":64},{"2017-09-13":847},{"2017-09-14":673},{"2017-09-15":78},{"2017-09-16":901},{"2017-09-17":339},{"2017-09-18":239},{"2017-09-19":543},{"2017-09-20":476},{"2017-09-21":225},{"2017-09-22":43},{"2017-09-23":151},{"2017-09-24":894},{"2017-09-25":728},{"2017-09-26":310},{"2017-09-27":608},{"2017-09-28":545},{"2017-09-29":272},{"2017-09-30":331},{"2017-10-01":207},{"2017-10-02":100},{"2017-10-03":662},{"2017-10-04":326},{"2017-10-05":384},{"2017-10-06":382},{"2017-10-07":20},{"2017-10-08":628},{"2017-10-09":240},{"2017-10-10":399},{"2017-10-11":315},{"2017-10-12":204},{"2017-10-13":117},{"2017-10-14":317},{"2017-10-15":52},{"2017-10-16":420},{"2017-10-17":339},{"2017-10-18":66},{"2017-10-19":785},{"2017-10-20":326},{"2017-10-21":611},{"2017-10-22":423},{"2017-10-23":231},{"2017-10-24":796},{"2017-10-25":109},{"2017-10-26":198},{"2017-10-27":440},{"2017-10-28":322},{"2017-10-29":760},{"2017-10-30":238},{"2017-10-31":982},{"2017-11-01":119},{"2017-11-02":776},{"2017-11-03":808},{"2017-11-04":847},{"2017-11-05":870},{"2017-11-06":617},{"2017-11-07":838},{"2017-11-08":868},{"2017-11-09":547},{"2017-11-10":970},{"2017-11-11":405},{"2017-11-12":681},{"2017-11-13":628},{"2017-11-14":835},{"2017-11-15":164},{"2017-11-16":790},{"2017-11-17":823},{"2017-11-18":765},{"2017-11-19":926},{"2017-11-20":469},{"2017-11-21":117},{"2017-11-22":656},{"2017-11-23":505},{"2017-11-24":23},{"2017-11-25":886},{"2017-11-26":651},{"2017-11-27":987},{"2017-11-28":269},{"2017-11-29":687},{"2017-11-30":204},{"2017-12-01":649},{"2017-12-02":482},{"2017-12-03":989},{"2017-12-04":321},{"2017-12-05":63},{"2017-12-06":917},{"2017-12-07":97},{"2017-12-08":445},{"2017-12-09":56},{"2017-12-10":650},{"2017-12-11":688},{"2017-12-12":973},{"2017-12-13":859},{"2017-12-14":264},{"2017-12-15":364},{"2017-12-16":918},{"2017-12-17":887},{"2017-12-18":461},{"2017-12-19":925},{"2017-12-20":635},{"2017-12-21":679},{"2017-12-22":514},{"2017-12-23":2},{"2017-12-24":86},{"2017-12-25":193},{"2017-12-26":450},{"2017-12-27":284},{"2017-12-28":133},{"2017-12-29":646},{"2017-12-30":813},{"2017-12-31":1}];
+var calendarInitialDatGuiData={
+    canvasWidth:500,
+    canvasHeight:400,
+    backgroundColor:"#ffffff",
+    title:'我是标题，请修改',
+    subtitle:'',
+    titleBackgroundColor:'#fff',
+    titleTop:10,
+    titleLeft:10,
+    titleTextStyleFontSize:18,
+    titleTextStyleColor:'#000',
+    gridLeft:50,
+    gridRight:50,
+    gridTop:50,
+    gridBottom:50,
+    /*
+     visualMap，颜色映射
+     */
+    visualShow : true,
+    visualMapMin : 0,
+    visualMapMax : 200,
+    visualMapCalculable : true,
+    visualMapOrient : 'horizontal',
+    visualMapLeft : 200,
+    visualMapTop : 20,
+    visualMapColorStart : '#ffeb3b',
+    visualMapColorEnd : '#e51c23',
+    /*
+     calendar
+     */
+    calendarTop : 100,
+    calendarLeft : 150,
+    calendarOrient : 'horizontal',
+    calendarRangeStart : '2017-1-1',
+    calendarRangeEnd : '2017-3-31',
+    calendarYearLabelMargin : 20,
+    calendarMonthLabelNameMap : 'cn',
+    calendarMonthLabelMargin : 40,
+    calendarDayLabelFirstDay : 1,
+    calendarCellSizeWidth : 20,
+    calendarCellSizeHeight : 20,
+    /*
+     series
+     */
+    seriesType : 'heatmap',
+    seriesCoordinateSystem : 'calendar',
+    seriesLabelNormalShow : false,
+    seriesLabelNormalTextStyleColor : '#fff',
+    seriesLabelNormalTextStyleFontsize : 12,
+    seriesSymbolSize:50
+
+};
+var wordCloudInitialCanvasData={
+    "visualMap": 22199,
+    "continuous": 10288,
+    "contoller": 620,
+    "series": 274470,
+    "gauge": 12311,
+    "detail": 1206,
+    "piecewise": 4885,
+    "textStyle": 32294,
+    "markPoint": 18574,
+    "pie": 38929,
+    "roseType": 969,
+    "label": 37517,
+    "emphasis": 12053,
+    "yAxis": 57299,
+    "name": 15418,
+    "type": 22905,
+    "gridIndex": 5146,
+    "normal": 49487,
+    "itemStyle": 33837,
+    "min": 4500,
+    "silent": 5744,
+    "animation": 4840,
+    "offsetCenter": 232,
+    "inverse": 3706,
+    "borderColor": 4812,
+    "markLine": 16578,
+    "line": 76970,
+    "radiusAxis": 6704,
+    "radar": 15964,
+    "data": 60679,
+    "dataZoom": 24347,
+    "tooltip": 43420,
+    "toolbox": 25222,
+    "geo": 16904,
+    "parallelAxis": 4029,
+    "parallel": 5319,
+    "max": 3393,
+    "bar": 43066,
+    "heatmap": 3110,
+    "map": 20285,
+    "animationDuration": 3425,
+    "animationDelay": 2431,
+    "splitNumber": 5175,
+    "axisLine": 12738,
+    "lineStyle": 19601,
+    "splitLine": 7133,
+    "axisTick": 8831,
+    "axisLabel": 17516,
+    "pointer": 590,
+    "color": 23426,
+    "title": 38497,
+    "formatter": 15214,
+    "slider": 7236,
+    "legend": 66514,
+    "grid": 28516,
+    "smooth": 1295,
+    "smoothMonotone": 696,
+    "sampling": 757,
+    "feature": 12815,
+    "saveAsImage": 2616,
+    "polar": 6279,
+    "calculable": 879,
+    "backgroundColor": 9419,
+    "excludeComponents": 130,
+    "show": 20620,
+    "text": 2592,
+    "icon": 2782,
+    "dimension": 478,
+    "inRange": 1060,
+    "animationEasing": 2983,
+    "animationDurationUpdate": 2259,
+    "animationDelayUpdate": 2236,
+    "animationEasingUpdate": 2213,
+    "xAxis": 89459,
+    "angleAxis": 5469,
+    "showTitle": 484,
+    "dataView": 2754,
+    "restore": 932,
+    "timeline": 10104,
+    "range": 477,
+    "value": 5732,
+    "precision": 878,
+    "target": 1433,
+    "zlevel": 5361,
+    "symbol": 8718,
+    "interval": 7964,
+    "symbolSize": 5300,
+    "showSymbol": 1247,
+    "inside": 8913,
+    "xAxisIndex": 3843,
+    "orient": 4205,
+    "boundaryGap": 5073,
+    "nameGap": 4896,
+    "zoomLock": 571,
+    "hoverAnimation": 2307,
+    "legendHoverLink": 3553,
+    "stack": 2907,
+    "throttle": 466,
+    "connectNulls": 897,
+    "clipOverflow": 826,
+    "startValue": 551,
+    "minInterval": 3292,
+    "opacity": 3097,
+    "splitArea": 4775,
+    "filterMode": 635,
+    "end": 409,
+    "left": 6475,
+    "funnel": 2238,
+    "lines": 6403,
+    "baseline": 431,
+    "align": 2608,
+    "coord": 897,
+    "nameTextStyle": 7477,
+    "width": 4338,
+    "shadowBlur": 4493,
+    "effect": 929,
+    "period": 225,
+    "areaColor": 631,
+    "borderWidth": 3654,
+    "nameLocation": 4418,
+    "position": 11723,
+    "containLabel": 1701,
+    "scatter": 10718,
+    "areaStyle": 5310,
+    "scale": 3859,
+    "pieces": 414,
+    "categories": 1000,
+    "selectedMode": 3825,
+    "itemSymbol": 273,
+    "effectScatter": 7147,
+    "fontStyle": 3376,
+    "fontSize": 3386,
+    "margin": 1034,
+    "iconStyle": 2257,
+    "link": 1366,
+    "axisPointer": 5245,
+    "showDelay": 896,
+    "graph": 22194,
+    "subtext": 1442,
+    "selected": 2881,
+    "barCategoryGap": 827,
+    "barGap": 1094,
+    "barWidth": 1521,
+    "coordinateSystem": 3622,
+    "barBorderRadius": 284,
+    "z": 4014,
+    "polarIndex": 1456,
+    "shadowOffsetX": 3046,
+    "shadowColor": 3771,
+    "shadowOffsetY": 2475,
+    "height": 1988,
+    "barMinHeight": 575,
+    "lang": 131,
+    "symbolRotate": 2752,
+    "symbolOffset": 2549,
+    "showAllSymbol": 942,
+    "transitionDuration": 993,
+    "bottom": 3724,
+    "fillerColor": 229,
+    "nameMap": 1249,
+    "barMaxWidth": 747,
+    "radius": 2103,
+    "center": 2425,
+    "magicType": 3276,
+    "labelPrecision": 248,
+    "option": 654,
+    "seriesIndex": 935,
+    "controlPosition": 121,
+    "itemGap": 3188,
+    "padding": 3481,
+    "shadowStyle": 347,
+    "boxplot": 1394,
+    "labelFormatter": 264,
+    "realtime": 631,
+    "dataBackgroundColor": 239,
+    "showDetail": 247,
+    "showDataShadow": 217,
+    "x": 684,
+    "valueDim": 499,
+    "onZero": 931,
+    "right": 3255,
+    "clockwise": 1035,
+    "itemWidth": 1732,
+    "trigger": 3840,
+    "axis": 379,
+    "selectedOffset": 670,
+    "startAngle": 1293,
+    "minAngle": 590,
+    "top": 4637,
+    "avoidLabelOverlap": 870,
+    "labelLine": 3785,
+    "sankey": 2933,
+    "endAngle": 213,
+    "start": 779,
+    "roam": 1738,
+    "fontWeight": 2828,
+    "fontFamily": 2490,
+    "subtextStyle": 2066,
+    "indicator": 853,
+    "sublink": 708,
+    "zoom": 1038,
+    "subtarget": 659,
+    "length": 1060,
+    "itemSize": 505,
+    "controlStyle": 452,
+    "yAxisIndex": 2529,
+    "edgeLabel": 1188,
+    "radiusAxisIndex": 354,
+    "scaleLimit": 1313,
+    "geoIndex": 535,
+    "regions": 1892,
+    "itemHeight": 1290,
+    "nodes": 644,
+    "candlestick": 3166,
+    "crossStyle": 466,
+    "edges": 369,
+    "links": 3277,
+    "layout": 846,
+    "barBorderColor": 721,
+    "barBorderWidth": 498,
+    "treemap": 3865,
+    "y": 367,
+    "valueIndex": 704,
+    "showLegendSymbol": 482,
+    "mapValueCalculation": 492,
+    "optionToContent": 264,
+    "handleColor": 187,
+    "handleSize": 271,
+    "showContent": 1853,
+    "angleAxisIndex": 406,
+    "endValue": 327,
+    "triggerOn": 1720,
+    "contentToOption": 169,
+    "buttonColor": 71,
+    "rotate": 1144,
+    "hoverLink": 335,
+    "outOfRange": 491,
+    "textareaColor": 58,
+    "textareaBorderColor": 58,
+    "textColor": 60,
+    "buttonTextColor": 66,
+    "category": 336,
+    "hideDelay": 786,
+    "alwaysShowContent": 1267,
+    "extraCssText": 901,
+    "effectType": 277,
+    "force": 1820,
+    "rippleEffect": 723,
+    "edgeSymbolSize": 329,
+    "showEffectOn": 271,
+    "gravity": 199,
+    "edgeLength": 193,
+    "layoutAnimation": 152,
+    "length2": 169,
+    "enterable": 957,
+    "dim": 83,
+    "readOnly": 143,
+    "levels": 444,
+    "textGap": 256,
+    "pixelRatio": 84,
+    "nodeScaleRatio": 232,
+    "draggable": 249,
+    "brushType": 158,
+    "radarIndex": 152,
+    "large": 182,
+    "edgeSymbol": 675,
+    "largeThreshold": 132,
+    "leafDepth": 73,
+    "childrenVisibleMin": 73,
+    "minSize": 35,
+    "maxSize": 35,
+    "sort": 90,
+    "funnelAlign": 61,
+    "source": 336,
+    "nodeClick": 200,
+    "curveness": 350,
+    "areaSelectStyle": 104,
+    "parallelIndex": 52,
+    "initLayout": 359,
+    "trailLength": 116,
+    "boxWidth": 20,
+    "back": 53,
+    "rewind": 110,
+    "zoomToNodeRatio": 80,
+    "squareRatio": 60,
+    "parallelAxisDefault": 358,
+    "checkpointStyle": 440,
+    "nodeWidth": 49,
+    "color0": 62,
+    "layoutIterations": 56,
+    "nodeGap": 54,
+    "color(Array": 76,
+    "<string>)": 76,
+    "repulsion": 276,
+    "tiled": 105,
+    "currentIndex": 145,
+    "axisType": 227,
+    "loop": 97,
+    "playInterval": 112,
+    "borderColor0": 23,
+    "gap": 43,
+    "autoPlay": 123,
+    "showPlayBtn": 25,
+    "breadcrumb": 119,
+    "colorMappingBy": 85,
+    "id": 18,
+    "blurSize": 85,
+    "minOpacity": 50,
+    "maxOpacity": 54,
+    "prevIcon": 12,
+    "children": 21,
+    "shape": 98,
+    "nextIcon": 12,
+    "showNextBtn": 17,
+    "stopIcon": 21,
+    "visibleMin": 83,
+    "visualDimension": 97,
+    "colorSaturation": 56,
+    "colorAlpha": 66,
+    "emptyItemWidth": 10,
+    "inactiveOpacity": 4,
+    "activeOpacity": 4,
+    "showPrevBtn": 19,
+    "playIcon": 26,
+    "ellipsis": 19,
+    "gapWidth": 19,
+    "borderColorSaturation": 10,
+    "handleIcon": 2,
+    "handleStyle": 6,
+    "borderType": 1,
+    "constantSpeed": 1,
+    "polyline": 2,
+    "blendMode": 1,
+    "dataBackground": 1,
+    "textAlign": 1,
+    "textBaseline": 1,
+    "brush": 3
+};
+var wordCloudInitialDatGuiData= {
+    canvasWidth:500,
+    canvasHeight:400,
+    backgroundColor:"#ffffff",
+    title:'我是标题，请修改',
+    subtitle:'',
+    titleBackgroundColor:'#fff',
+    titleTop:10,
+    titleLeft:10,
+    titleTextStyleFontSize:18,
+    titleTextStyleColor:'#000',
+//            series相关属性
+//        */
+    seriesName:'默认1',
+    seriesType:'wordcount',
+    seriesSizeMin:10,
+    seriesSizeMax:90,
+    seriesSizeRangeMin:6,
+    seriesSizeRangeMax:50,
+    seriesTextRotation:'',
+    seriesRotationRangeMin:-90,
+    seriesRotationRangeMax:90,
+    seriesShape:'circle',
+    maskImage:'',
+    imgButton:function () {
+        $('#imgFileInput').click();
+    }
+
+};
+
 // var barInitialDatGuiData={
 //     "preset": "default",
 //     "remembered": {
@@ -260,7 +682,7 @@ var radarInitialDatGuiData={
 var selectDivId='';
 
 /*
-添加div的方法,返回值为随机id
+添加div的方法,返回值为随机id,这里需要对图的类型进行判断
  */
 function addChartDiv(parent,chartType){
 // <div id='bar随即id' class="Monitor">
@@ -268,7 +690,7 @@ function addChartDiv(parent,chartType){
 //         </div>
     var ids=chartType+'-'+uniqueDivId(hescList.length);
     //这里的长宽为monitor的长宽-3
-    var divContent='<div id="'+ids+'" class="Monitor"><div id='+ids+'canvas class="canvasclass" style="height:'+(400)+'px;width:'+(500)+'px;"></div>';
+    var divContent='<div id="'+ids+'" class="Monitor">    <div  class="divControlPannel"><span class="glyphicon glyphicon-remove divControlPannelIcon removediv" id="removediv" onclick="removeDivFun()"></span> <span class="glyphicon glyphicon-download-alt divControlPannelIcon downloadOption" id="downloadOption" onclick="downloadOptionFun()"></span> </div><div id='+ids+'canvas class="canvasclass" style="height:'+(400)+'px;width:'+(500)+'px;"></div>';
     $(parent).append(divContent);
     $('.Monitor').resizable().draggable();
 
@@ -284,6 +706,12 @@ function addChartDiv(parent,chartType){
     }
     else if(chartType=='radar'){
         addHescEle(ids,'static',cloneObj(radarInitialCanvasData),cloneObj(radarInitialDatGuiData));
+    }
+    else if(chartType=='calendar'){
+        addHescEle(ids,'static',cloneObj(calendarInitialCanvasData),cloneObj(calendarInitialDatGuiData));
+    }
+    else if(chartType=='wordCloud'){
+        addHescEle(ids,'static',cloneObj(wordCloudInitialCanvasData),cloneObj(wordCloudInitialDatGuiData));
     }
 
     /*
@@ -309,6 +737,12 @@ function addChartDiv(parent,chartType){
                     }
                     else if(ids1[0]=='radar'){
                         renderRadarChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
+                    }
+                    else if(ids1[0]=='calendar'){
+                        renderCalendarChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
+                    }
+                    else if(ids1[0]=='wordCloud'){
+                        renderWordCloudChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
                     }
                 }
             }
@@ -889,7 +1323,209 @@ function addRadarDatGui(chartId) {
         });
     }
 }
+function addCalendarDatGui(chartId) {
+    addCalendarDatGuiPannel(findDatGuiDataById(chartId), findCanvasDataById(chartId));
+    function addCalendarDatGuiPannel(CalendarDefaultDatGUiObj, CalendarDefaultCanvasData) {
+        /*
+         移除之前的dat.gui
+         */
+        // datGuiPannel.destroy();
+        $('#tabConfig').children().remove();
 
+        datGuiPannel = new dat.GUI({autoPlace: false});
+        //添加柱状图至控制面板
+        var customContainer = document.getElementById('tabConfig');
+        customContainer.appendChild(datGuiPannel.domElement);
+
+        renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        //添加事件监听
+        var calendarCanvas = datGuiPannel.addFolder('画布大小');
+        calendarCanvas.add(CalendarDefaultDatGUiObj, 'canvasWidth', 200, 1000).name('画布宽').listen().onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarCanvas.add(CalendarDefaultDatGUiObj, 'canvasHeight', 150, 800).name("画布高").listen().onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+
+        datGuiPannel.addColor(CalendarDefaultDatGUiObj,'backgroundColor').name('背景色').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        var calendarTitle=datGuiPannel.addFolder('标题属性');
+        calendarTitle.add(CalendarDefaultDatGUiObj, 'title').name('图表标题').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarTitle.add(CalendarDefaultDatGUiObj,'subtitle').name('图标副标题').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarTitle.add(CalendarDefaultDatGUiObj,'titleTextStyleFontSize').name('标题大小').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarTitle.addColor(CalendarDefaultDatGUiObj,'titleBackgroundColor').name('背景色').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarTitle.addColor(CalendarDefaultDatGUiObj,'titleTextStyleColor').name('标题颜色').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarTitle.add(CalendarDefaultDatGUiObj,'titleTop').name('上边距').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarTitle.add(CalendarDefaultDatGUiObj,'titleLeft').name('左边距').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        var calendarVisualMap=datGuiPannel.addFolder("图示区属性");
+        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualShow').name('是否显示').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapOrient',{水平:'horizontal',垂直:'vertical'}).name('图示朝向').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapMin').name('映射最小值').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapMax').name('映射最大值').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapTop').name('上边距').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapLeft').name('左边距').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarVisualMap.addColor(CalendarDefaultDatGUiObj,'visualMapColorStart').name('映射颜色起始').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarVisualMap.addColor(CalendarDefaultDatGUiObj,'visualMapColorEnd').name('映射颜色终止').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        var calendarCalendar=datGuiPannel.addFolder("日历图属性");
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarTop').name('上边距').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarLeft').name('左边距').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarOrient',{水平:'horizontal',垂直:'vertical'}).name('朝向').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarRangeStart').name('起始日期(yyyy-mm-dd)').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarRangeEnd').name('终止日期((yyyy-mm-dd))').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarYearLabelMargin').name('年份边距').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarMonthLabelMargin').name('月份边距').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarDayLabelFirstDay',{星期天:0,星期一:1,星期二:2,星期三:3,星期四:4,星期五:5,星期六:6}).name('一周起始日期').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarCellSizeWidth',5,40).name('Cell宽度').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarCellSizeHeight',5,40).name('Cell高度').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        var calendarSeries=datGuiPannel.addFolder("日历图填充属性");
+        calendarSeries.add(CalendarDefaultDatGUiObj,'seriesType',{填充:'heatmap',散点:'scatter'}).name('热图展现').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarSeries.add(CalendarDefaultDatGUiObj,'seriesLabelNormalShow').name('标签').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarSeries.addColor(CalendarDefaultDatGUiObj,'seriesLabelNormalTextStyleColor').name('字体颜色').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarSeries.add(CalendarDefaultDatGUiObj,'seriesLabelNormalTextStyleFontsize',2,20).name('字体大小').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarSeries.add(CalendarDefaultDatGUiObj,'seriesSymbolSize').name('填充系数').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+    }
+}
+function addWordCloudDatGui(chartId) {
+    addWordCloudDatGuiPannel(findDatGuiDataById(chartId), findCanvasDataById(chartId));
+    function addWordCloudDatGuiPannel(WordCloudDefaultDatGUiObj, WordCloudDefaultCanvasData) {
+        /*
+         移除之前的dat.gui
+         */
+        // datGuiPannel.destroy();
+        $('#tabConfig').children().remove();
+
+        datGuiPannel = new dat.GUI({autoPlace: false});
+        //添加柱状图至控制面板
+        var customContainer = document.getElementById('tabConfig');
+        customContainer.appendChild(datGuiPannel.domElement);
+
+        renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data,WordCloudDefaultDatGUiObj);
+        //添加事件监听
+        var wordCloudCanvas = datGuiPannel.addFolder('画布大小');
+        wordCloudCanvas.add(WordCloudDefaultDatGUiObj, 'canvasWidth', 200, 1000).name('画布宽').listen().onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudCanvas.add(WordCloudDefaultDatGUiObj, 'canvasHeight', 150, 800).name("画布高").listen().onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        datGuiPannel.addColor(WordCloudDefaultDatGUiObj,'backgroundColor').name('背景色').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        var wordCloudTitle=datGuiPannel.addFolder('标题属性');
+        wordCloudTitle.add(WordCloudDefaultDatGUiObj, 'title').name('图表标题').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudTitle.add(WordCloudDefaultDatGUiObj,'subtitle').name('图标副标题').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudTitle.add(WordCloudDefaultDatGUiObj,'titleTextStyleFontSize').name('标题大小').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudTitle.addColor(WordCloudDefaultDatGUiObj,'titleBackgroundColor').name('背景色').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudTitle.addColor(WordCloudDefaultDatGUiObj,'titleTextStyleColor').name('标题颜色').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudTitle.add(WordCloudDefaultDatGUiObj,'titleTop').name('上边距').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudTitle.add(WordCloudDefaultDatGUiObj,'titleLeft').name('左边距').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        var wordCloudGrid=datGuiPannel.addFolder("绘图区属性");
+        wordCloudGrid.add(WordCloudDefaultDatGUiObj,'seriesName').name('名称').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudGrid.add(WordCloudDefaultDatGUiObj,'seriesSizeMin',0,100).name('最小大小(%)').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudGrid.add(WordCloudDefaultDatGUiObj,'seriesSizeMax',0,100).name('最大大小(%)').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudGrid.add(WordCloudDefaultDatGUiObj,'seriesSizeRangeMin',1,50).name('最小字体').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudGrid.add(WordCloudDefaultDatGUiObj,'seriesSizeRangeMax',10,150).name('最大字体').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudGrid.add(WordCloudDefaultDatGUiObj,'seriesTextRotation').name('字体朝向(0,45,90)').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudGrid.add(WordCloudDefaultDatGUiObj,'seriesRotationRangeMin',-180,180).name('最小旋转角度').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudGrid.add(WordCloudDefaultDatGUiObj,'seriesRotationRangeMax',-180,180).name('最大旋转角度').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        wordCloudGrid.add(WordCloudDefaultDatGUiObj,'seriesShape').name('形状').onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
+        // wordCloudGrid.add(WordCloudDefaultDatGUiObj,'imgButton').name('词云图');
+
+    }
+}
 function addCanvasData(divChartId){
     //更新jsoneditor中的text
     return  findCanvasDataById(divChartId);
@@ -960,6 +1596,14 @@ function findCanvasDataById(chartId) {
         }
     }
 }
+//根据id查找option
+function findOptionById(chartId) {
+    for(var object1 in hescList){
+        if(hescList[object1].divId==chartId){
+            return hescList[object1].option;
+        }
+    }
+}
 /*
 获取唯一的id
  */
@@ -985,4 +1629,105 @@ var cloneObj = function(obj){
         }
     }
     return newobj;
+};
+
+
+//-----------------------------------------------------------------------------------------------
+/*
+样式更新
+ */
+function removeDivFun() {
+    console.log(divChartId)
+    console.log("准备移除元素了")
+    $('#'+divChartId).remove();
+}
+function downloadOptionFun() {
+    console.log(findOptionById(divChartId));
+    $('#downloadOptionModal textarea').val(formatJson(JSON.stringify(findOptionById(divChartId))));
+    $("#downloadOptionModal").modal({
+//            remote:"test/test.jsp";//可以填写一个url，会调用jquery load方法加载数据
+//        backdrop:"static",//指定一个静态背景，当用户点击背景处，modal界面不会消失
+        keyboard:true//当按下esc键时，modal框消失
+    });
+}
+//格式化json
+var formatJson = function(json, options) {
+    var reg = null,
+        formatted = '',
+        pad = 0,
+        PADDING = '    '; // one can also use '\t' or a different number of spaces
+
+    // optional settings
+    options = options || {};
+    // remove newline where '{' or '[' follows ':'
+    options.newlineAfterColonIfBeforeBraceOrBracket = (options.newlineAfterColonIfBeforeBraceOrBracket === true) ? true : false;
+    // use a space after a colon
+    options.spaceAfterColon = (options.spaceAfterColon === false) ? false : true;
+
+    // begin formatting...
+    if (typeof json !== 'string') {
+        // make sure we start with the JSON as a string
+        json = JSON.stringify(json);
+    } else {
+        // is already a string, so parse and re-stringify in order to remove extra whitespace
+        json = JSON.parse(json);
+        json = JSON.stringify(json);
+    }
+
+    // add newline before and after curly braces
+    reg = /([\{\}])/g;
+    json = json.replace(reg, '\r\n$1\r\n');
+
+    // add newline before and after square brackets
+    reg = /([\[\]])/g;
+    json = json.replace(reg, '\r\n$1\r\n');
+
+    // add newline after comma
+    reg = /(\,)/g;
+    json = json.replace(reg, '$1\r\n');
+
+    // remove multiple newlines
+    reg = /(\r\n\r\n)/g;
+    json = json.replace(reg, '\r\n');
+
+    // remove newlines before commas
+    reg = /\r\n\,/g;
+    json = json.replace(reg, ',');
+
+    // optional formatting...
+    if (!options.newlineAfterColonIfBeforeBraceOrBracket) {
+        reg = /\:\r\n\{/g;
+        json = json.replace(reg, ':{');
+        reg = /\:\r\n\[/g;
+        json = json.replace(reg, ':[');
+    }
+    if (options.spaceAfterColon) {
+        reg = /\:/g;
+        json = json.replace(reg, ': ');
+    }
+
+    $.each(json.split('\r\n'), function(index, node) {
+        var i = 0,
+            indent = 0,
+            padding = '';
+
+        if (node.match(/\{$/) || node.match(/\[$/)) {
+            indent = 1;
+        } else if (node.match(/\}/) || node.match(/\]/)) {
+            if (pad !== 0) {
+                pad -= 1;
+            }
+        } else {
+            indent = 0;
+        }
+
+        for (i = 0; i < pad; i++) {
+            padding += PADDING;
+        }
+
+        formatted += padding + node + '\r\n';
+        pad += indent;
+    });
+
+    return formatted;
 };

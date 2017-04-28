@@ -1,0 +1,79 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/4/28
+ * Time:15:11
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <script src="../js/bootstrap.min.js"></script>
+
+    <style>
+        *{margin:0;padding:0;}
+    .test{
+    width: 500px;height: 400px;outline:2px dotted blue;overflow: hidden;background: #000;cursor: move;position: absolute;
+
+    }
+        .divControlPannel{
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            width: 45px;
+            height:18px;
+            text-align: center;
+        }
+        .divControlPannelIcon{
+            margin-left: 5px;
+            color: #738ffe;
+            outline:1px dotted #738ffe;
+            cursor:pointer;
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<div class="test">
+    <div  class="divControlPannel" >
+        <span class="glyphicon glyphicon-remove divControlPannelIcon removediv" onclick="clickfun()"></span>
+        <span class="glyphicon glyphicon-download-alt divControlPannelIcon downloadOption" ></span>
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script>
+    $('.divControlPannel .removediv').click(function () {
+            console.log(this)
+    }
+
+    )
+    function clickfun() {
+        console.log($(this.target));
+        $("#myModal").modal({
+//            remote:"test/test.jsp";//可以填写一个url，会调用jquery load方法加载数据
+//        backdrop:"static",//指定一个静态背景，当用户点击背景处，modal界面不会消失
+        keyboard:true//当按下esc键时，modal框消失
+     })
+    }
+
+</script>
+</body>
+</html>

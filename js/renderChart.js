@@ -19,7 +19,7 @@ function renderBarChart(canvasId,canvasData,barObj){
     $('#'+canvasId+'canvas').width(barObj.canvasWidth);
     $('#'+canvasId+'canvas').height(barObj.canvasHeight);
 
-    hescEchartBar.select(canvasId+'canvas')
+    var option1=hescEchartBar.select(canvasId+'canvas')
         .background(barObj.backgroundColor)
         .title(barObj.title)
         .subtitle(barObj.subtitle)
@@ -59,7 +59,9 @@ function renderBarChart(canvasId,canvasData,barObj){
         .reverse(barObj.reverse)
         .stack(barObj.stack)
         .bar(canvasData)
-        .render();
+        .render()
+        .option();
+    saveOption(canvasId,option1);
 }
 /*
 折线图配置
@@ -73,7 +75,7 @@ function renderLineChart(canvasId,canvasData,lineObj){
     $('#'+canvasId+'canvas').width(lineObj.canvasWidth);
     $('#'+canvasId+'canvas').height(lineObj.canvasHeight);
 
-    hescEchartLine.select(canvasId+'canvas')
+    var option1=hescEchartLine.select(canvasId+'canvas')
         .background(lineObj.backgroundColor)
         .title(lineObj.title)
         .subtitle(lineObj.subtitle)
@@ -114,6 +116,8 @@ function renderLineChart(canvasId,canvasData,lineObj){
         .seriesAreaStyle(lineObj.seriesAreaStyle)
         .line(canvasData)
         .render();
+    saveOption(canvasId,option1);
+
 }
 /*
 饼图配置
@@ -124,7 +128,7 @@ function renderPieChart(canvasId,canvasData,pieObj) {
     //更新canvas容器的大小
     $('#'+canvasId+'canvas').width(pieObj.canvasWidth);
     $('#'+canvasId+'canvas').height(pieObj.canvasHeight);
-    hescEchartPie.select(canvasId+'canvas')
+    var option1=hescEchartPie.select(canvasId+'canvas')
         .background(pieObj.backgroundColor)
         .title(pieObj.title)
         .subtitle(pieObj.subtitle)
@@ -152,6 +156,8 @@ function renderPieChart(canvasId,canvasData,pieObj) {
         .seriesLabelNormalShow(pieObj.seriesLabelNormalShow)
         .pie(canvasData)
         .render();
+    saveOption(canvasId,option1);
+
 }
 /*
 雷达图配置
@@ -162,7 +168,7 @@ function renderRadarChart(canvasId,canvasData,radarObj) {
     //更新canvas容器的大小
     $('#'+canvasId+'canvas').width(radarObj.canvasWidth);
     $('#'+canvasId+'canvas').height(radarObj.canvasHeight);
-    hescEchartRadar.select(canvasId+'canvas')
+    var option1=hescEchartRadar.select(canvasId+'canvas')
         .background(radarObj.backgroundColor)
         .title(radarObj.title)
         .subtitle(radarObj.subtitle)
@@ -200,14 +206,100 @@ function renderRadarChart(canvasId,canvasData,radarObj) {
         .seriesLineStyleNormalOpacity(radarObj.seriesLineStyleNormalOpacity)
         .radar(canvasData)
         .render();
+    saveOption(canvasId,option1);
+
 
 
 }
 /*
 日历热图配置
  */
-function renderCalendarChart(canvasId,canvasData,radarObj){}
+function renderCalendarChart(canvasId,canvasData,calendarObj){
+    $('#'+canvasId).width(calendarObj.canvasWidth);
+    $('#'+canvasId).height(calendarObj.canvasHeight);
+    //更新canvas容器的大小
+    $('#'+canvasId+'canvas').width(calendarObj.canvasWidth);
+    $('#'+canvasId+'canvas').height(calendarObj.canvasHeight);
+    var option1=hescEchartCalendar.select(canvasId+'canvas')
+        .background(calendarObj.backgroundColor)
+        .title(calendarObj.title)
+        .subtitle(calendarObj.subtitle)
+        .titleBackgroundColor(calendarObj.titleBackgroundColor)
+        .titleTop(calendarObj.titleTop)
+        .titleLeft(calendarObj.titleLeft)
+        .titleTextStyleFontSize(calendarObj.titleTextStyleFontSize)
+        .titleTextStyleColor(calendarObj.titleTextStyleColor)
+        .visualShow(calendarObj.visualShow)
+        .visualMapMin(calendarObj.visualMapMin)
+        .visualMapMax(calendarObj.visualMapMax)
+        .visualMapOrient(calendarObj.visualMapOrient)
+        .visualMapLeft(calendarObj.visualMapLeft)
+        .visualMapTop(calendarObj.visualMapTop)
+        .visualMapColorStart(calendarObj.visualMapColorEnd)
+        .visualMapColorEnd(calendarObj.visualMapColorStart)
+        .calendarTop(calendarObj.calendarTop)
+        .calendarLeft(calendarObj.calendarLeft)
+        .calendarOrient(calendarObj.calendarOrient)
+        .calendarRangeStart(calendarObj.calendarRangeStart)
+        .calendarRangeEnd(calendarObj.calendarRangeEnd)
+        .calendarYearLabelMargin(calendarObj.calendarYearLabelMargin)
+        .calendarMonthLabelMargin(calendarObj.calendarMonthLabelMargin)
+        .calendarDayLabelFirstDay(calendarObj.calendarDayLabelFirstDay)
+        .calendarCellSizeWidth(calendarObj.calendarCellSizeWidth)
+        .calendarCellSizeHeight(calendarObj.calendarCellSizeHeight)
+        .seriesType(calendarObj.seriesType)
+        .seriesLabelNormalShow(calendarObj.seriesLabelNormalShow)
+        .seriesLabelNormalTextStyleColor(calendarObj.seriesLabelNormalTextStyleColor)
+        .seriesLabelNormalTextStyleFontsize(calendarObj.seriesLabelNormalTextStyleFontsize)
+        .seriesSymbolSize(calendarObj.seriesSymbolSize)
+        .calendar(canvasData)
+        .render();
+    saveOption(canvasId,option1);
+
+}
 /*
 词云配置
  */
-function renderWordCloudChart(canvasId,canvasData,radarObj){}
+function renderWordCloudChart(canvasId,canvasData,wordCloudObj){
+    console.log(wordCloudObj)
+    $('#'+canvasId).width(wordCloudObj.canvasWidth);
+    $('#'+canvasId).height(wordCloudObj.canvasHeight);
+    //更新canvas容器的大小
+    $('#'+canvasId+'canvas').width(wordCloudObj.canvasWidth);
+    $('#'+canvasId+'canvas').height(wordCloudObj.canvasHeight);
+    var option1=hescEchartWordCloud.select(canvasId+'canvas')
+        .background(wordCloudObj.backgroundColor)
+        .title(wordCloudObj.title)
+        .subtitle(wordCloudObj.subtitle)
+        .titleBackgroundColor(wordCloudObj.titleBackgroundColor)
+        .titleTop(wordCloudObj.titleTop)
+        .titleLeft(wordCloudObj.titleLeft)
+        .titleTextStyleFontSize(wordCloudObj.titleTextStyleFontSize)
+        .titleTextStyleColor(wordCloudObj.titleTextStyleColor)
+        .seriesName(wordCloudObj.seriesName)
+        .seriesSizeMin(wordCloudObj.seriesSizeMin+'%')
+        .seriesSizeMax(wordCloudObj.seriesSizeMax+'%')
+        .seriesSizeRangeMin(wordCloudObj.seriesSizeRangeMin)
+        .seriesSizeRangeMax(wordCloudObj.seriesSizeRangeMax)
+        .seriesTextRotation(wordCloudObj.seriesTextRotation)
+        .seriesRotationRangeMin(wordCloudObj.seriesRotationRangeMin)
+        .seriesRotationRangeMax(wordCloudObj.seriesRotationRangeMax)
+        .seriesShape(wordCloudObj.seriesShape)
+        .maskImage(wordCloudObj.maskImage)
+        .wordCloud(canvasData)
+        .render();
+    saveOption(canvasId,option1);
+
+}
+
+/*
+每次调用存入option
+ */
+function saveOption(canvasId,option){
+    for(var saveOption1 in hescList){
+        if(hescList[saveOption1].divId==canvasId){
+            hescList[saveOption1].option=option;
+            break;
+        }
+    }
+}

@@ -23,7 +23,9 @@
     <script src="../js/hescEchartPieChart.js"></script>
     <script src="../js/hescEchartCalendarMapChart.js"></script>
     <script src="../js/hescEchartRadarChart.js"></script>
+    <script src="../js/hescEchartWordCloudChart.js"> </script>
     <script src="../js/hescEchartCore.js"></script>
+    <script src="../js/worldcloud.js"></script>
     <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jsoneditor.js"></script>
@@ -36,7 +38,10 @@
     <script src="../js/renderChart.js"></script>
 </head>
 <body>
+
 <div id="screen" class="screen">
+    <!--隐藏的按钮用于输入input 的file-->
+    <input id="imgFileInput" type="file" style="visibility:hidden" />
     <!--resize and drag div test-->
     <!--<div id='bar随即id' class="Monitor">-->
         <!--<div id="barChild" style="height:calc(100% - 3px);width:calc(100% - 3px);"></div>-->
@@ -46,7 +51,7 @@
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="../" class="navbar-brand">HESCEchart</a>
+            <a href="../" class="navbar-brand">HESCharts</a>
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -77,7 +82,7 @@
         </div>
     </div>
 </div>
-<div class="tabs" >
+<div class="tabs " >
     <ul id="myTab" class="nav nav-tabs">
         <li class="active">
             <a href="#tabConfig" data-toggle="tab">
@@ -146,10 +151,40 @@
     </div>
 </div>
 
+<!--下载option的模态框-->
+<div class="modal fade" id="downloadOptionModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" style="height: 700px;width:500px;z-index: 1001;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="30"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 <!--初始化screen高度-->
 <script>
     $('#screen').css('height',$(window).height()-80);
     $('#screen').css('width',$(window).width()-350);
+    /*
+     添加词云的本地文件
+     */
+    FileReaderJS.setupInput(document.getElementById('imgFileInput'), {
+        on: {
+            load: function (event, file) {
+//                editor.setText(event.target.result);
+                wordCloudObj.maskImage=event.target.result;
+            },
+            loadend:function () {
+                renderWordCloudChart();
+            }
+        }
+    });
 </script>
 
 <!----------------------------------------------------JS-------------------------------------------------------->
@@ -177,7 +212,10 @@
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
         }
         else if(addChartEle=='calendar'){
-
+            var chartId=addChartDiv($('#screen'),'calendar');
+            addCalendarDatGui(chartId);
+            divChartId=chartId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
         }
         else if(addChartEle=='pie'){
             var chartId=addChartDiv($('#screen'),'pie');
@@ -186,25 +224,56 @@
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
         }
         else if(addChartEle=='wordCloud'){
-
+            var chartId=addChartDiv($('#screen'),'wordCloud');
+            addWordCloudDatGui(chartId);
+            divChartId=chartId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
         }
+
+        /*
+         样式更新
+         */
+        //用户选择时，打开该div的控制面板
+        //首先清除其他控制面板
+        $('#screen .divControlPannel').each(function () {
+            $(this).css('display','none')
+        });
+        //然后打开指定id的div的控制面板
+        $('#'+divChartId+' .divControlPannel').each(function (e1) {
+            $(this).css('display','inline');
+        });
 
     });
     /*
     screen上面的点击
      */
     $('#screen').click(function (e) {
-        //获取到唯一的图形id
-//        console.log()
-        //divchartId全局变量之一，在Index.js中声明，获取用户选择的div的id
-        divChartId=$(e.target).parent().parent().parent().attr('id');
+        //判断是否是canvas的点击
+        if($(e.target).attr('id')=='downloadOption'||$(e.target).attr('id')=='removediv'){
+            return;
+        }
+        else {
+            //divchartId全局变量之一，在Index.js中声明，获取用户选择的div的id
 
-        //根据screen上面的点击id，刷新dat.gui内容和图形
-        screenClick(divChartId);
-        //更新canvasData
-        jsonEditorEditor.set(addCanvasData(divChartId).data);
-        console.log('canvasdata');
-        console.log(addCanvasData(divChartId).data)
+            divChartId = $(e.target).parent().parent().parent().attr('id');
+            //根据screen上面的点击id，刷新dat.gui内容和图形
+            screenClick(divChartId);
+            //更新canvasData
+            jsonEditorEditor.set(addCanvasData(divChartId).data);
+        }
+        /*
+        样式更新
+         */
+        //用户选择时，打开该div的控制面板
+        //首先清除其他控制面板
+        $('#screen .divControlPannel').each(function () {
+            $(this).css('display','none')
+        });
+        //然后打开指定id的div的控制面板
+        $('#'+divChartId+' .divControlPannel').each(function (e1) {
+            $(this).css('display','inline');
+        });
+
     });
     //根据screen上面的点击内容，更新dat.gui和图形图形
     function screenClick(divChartId1){
@@ -221,6 +290,13 @@
         else if(divChartIdSplit[0]=='radar'){
             addRadarDatGui(divChartId1);
         }
+        else if(divChartIdSplit[0]=='calendar'){
+            addCalendarDatGui(divChartId1);
+        }
+        else if(divChartIdSplit[0]=='wordCloud'){
+            addWordCloudDatGui(divChartId1);
+        }
+
     }
     $('#submitData').click(function () {
         updateHescEleByIdToCanvasData(divChartId,JSON.parse(jsonEditorEditor.getText()));
@@ -360,164 +436,5 @@
 
 
 </script>
-
-<script>
-    var barData='';
-    /*
-    生成Dat.gui
-     */
-    var barObj ={
-        canvasWidth:400,
-        canvasHeight:300,
-        backgroundColor:"#ffffff",
-        title:'我是标题，请修改',
-        subtitle:'',
-        titleBackgroundColor:'#fff',
-        titleTop:0,
-        titleLeft:0,
-        titleTextStyleFontSize:18,
-        titleTextStyleColor:'#000',
-        gridLeft:50,
-        gridRight:50,
-        gridTop:50,
-        gridBottom:50,
-        tooltipAxisPointerType:'shadow',
-        legend:'',
-        legendAlign:'left',
-        legendLeft:200,
-        legendTop:1,
-        xAxisData:'',
-        xAxisGridLine:false,
-        xAxisPosition:'bottom',
-        xAxisInverse:false,
-        xAxisSplitAreaShow:false,
-        xAxisAxisLineShow:true,
-        xAxisAxisLabelInside:false,
-        xAxisAxisLabelTextStyleColor:'#000',
-        xAxisAxisTickShow:true,
-        xAxisBoundaryGap:true,
-        yAxisData:'',
-        yAxisGridLine:true,
-        yAxisPosition:'left',
-        yAxisInverse:false,
-        yAxisSplitAreaShow:false,
-        yAxisAxisLineShow:true,
-        yAxisAxisLabelInside:false,
-        yAxisAxisLabelTextStyleColor:'#000',
-        yAxisAxisTickShow:true,
-        reverse:false,
-        stack:''
-    };
-
-//    window.onload = function() {
-//        var barGui = new dat.GUI({autoPlace:false});
-//        //添加柱状图至控制面板
-//        var customContainer = document.getElementById('tabConfig');
-//        customContainer.appendChild(barGui.domElement);
-//        //添加画布大小
-//        var barCanvas=barGui.addFolder('画布大小');
-//        barCanvas.add(barObj,'canvasWidth',200,1000).name('画布宽').listen().onChange(renderBarChart);
-//        barCanvas.add(barObj,'canvasHeight',150,800).name("画布高").listen().onChange(renderBarChart);
-//
-//        barGui.addColor(barObj,'backgroundColor').name('背景色').onChange(renderBarChart);
-//        var barTitle=barGui.addFolder('标题属性');
-//        barTitle.add(barObj, 'title').name('图表标题').onChange(renderBarChart);
-//        barTitle.add(barObj,'subtitle').name('图标副标题').onChange(renderBarChart);
-//        barTitle.add(barObj,'titleTextStyleFontSize').name('标题大小').onChange(renderBarChart);
-//        barTitle.addColor(barObj,'titleBackgroundColor').name('背景色').onChange(renderBarChart);
-//        barTitle.addColor(barObj,'titleTextStyleColor').name('标题颜色').onChange(renderBarChart);
-//        barTitle.add(barObj,'titleTop',0,100).name('上边距').onChange(renderBarChart);
-//        barTitle.add(barObj,'titleLeft',0,100).name('左边距').onChange(renderBarChart);
-//        var barGrid=barGui.addFolder("绘图区属性");
-//        barGrid.add(barObj,'gridTop').name('上边距').onChange(renderBarChart);
-//        barGrid.add(barObj,'gridBottom').name('下边距').onChange(renderBarChart);
-//        barGrid.add(barObj,"gridLeft").name('左边距').onChange(renderBarChart);
-//        barGrid.add(barObj,"gridRight").name('右边距').onChange(renderBarChart);
-//        barGui.add(barObj,'tooltipAxisPointerType',{阴影:'shadow',交叉线:'cross',垂直线:'line'}).name('ToolTip类型').onChange(renderBarChart);
-//        var barLegend=barGui.addFolder("图例属性");
-//        barLegend.add(barObj,'legend').name('图例值').onChange(renderBarChart);
-//        barLegend.add(barObj,'legendAlign',{左:'left',右:'right'}).name('图例朝向').onChange(renderBarChart);
-//        barLegend.add(barObj,'legendTop').name('图例上边距').onChange(renderBarChart);
-//        barLegend.add(barObj,'legendLeft').name('图例左边距').onChange(renderBarChart);
-//        var barX=barGui.addFolder('x轴属性');
-//        barX.add(barObj,'xAxisData').name('x轴坐标点').onChange(renderBarChart);
-//        barX.add(barObj,'xAxisPosition',{上:'top',下:'bottom'}).name('x轴位置').onChange(renderBarChart);
-//        barX.addColor(barObj,'xAxisAxisLabelTextStyleColor').name('字体颜色').onChange(renderBarChart);
-//        barX.add(barObj,'xAxisGridLine').name('x轴网格').onChange(renderBarChart);
-//        barX.add(barObj,'xAxisInverse').name('x轴反向').onChange(renderBarChart);
-//        barX.add(barObj,'xAxisSplitAreaShow').name('x轴分割区域').onChange(renderBarChart);
-//        barX.add(barObj,'xAxisAxisLineShow').name('x轴轴线').onChange(renderBarChart);
-//        barX.add(barObj,'xAxisAxisTickShow').name('x轴刻度').onChange(renderBarChart);
-//        barX.add(barObj,'xAxisAxisLabelInside').name('图内刻度').onChange(renderBarChart);
-//        barX.add(barObj,'xAxisBoundaryGap').name('左右边界').onChange(renderBarChart);
-//        var barY=barGui.addFolder('y轴属性');
-//        barY.add(barObj,'yAxisData').name('y轴坐标点').onChange(renderBarChart);
-//        barY.add(barObj,'yAxisPosition',{左:'left',右:'right'}).name('y轴位置').onChange(renderBarChart);
-//        barY.addColor(barObj,'yAxisAxisLabelTextStyleColor').name('字体颜色').onChange(renderBarChart);
-//        barY.add(barObj,'yAxisGridLine').name('y轴网格').onChange(renderBarChart);
-//        barY.add(barObj,'yAxisInverse').name('y轴反向').onChange(renderBarChart);
-//        barY.add(barObj,'yAxisSplitAreaShow').name('y轴分割区域').onChange(renderBarChart);
-//        barY.add(barObj,'yAxisAxisLineShow').name('y轴轴线').onChange(renderBarChart);
-//        barY.add(barObj,'yAxisAxisTickShow').name('y轴刻度').onChange(renderBarChart);
-//        barY.add(barObj,'yAxisAxisLabelInside').name('图内刻度').onChange(renderBarChart);
-//        barGui.add(barObj,'reverse').name('坐标轴是否转置').onChange(renderBarChart);
-//        barGui.add(barObj,'stack').name('多维堆叠柱状图数据模型').onChange(renderBarChart);
-//        //gui.add(text, 'speed', -5, 5);
-//        renderBarChart();
-//    };
-//    function renderBarChart() {
-//        $('#barChild').parent().width(barObj.canvasWidth);
-//        $('#barChild').parent().height(barObj.canvasHeight);
-//        hescEchart.json('../Data/barChartTest.Data',function(error,data){
-//            hescEchart.select('barChild')
-//                .background(barObj.backgroundColor)
-//                .title(barObj.title)
-//                .subtitle(barObj.subtitle)
-//                .titleBackgroundColor(barObj.titleBackgroundColor)
-//                .titleTop(barObj.titleTop+'%')
-//                .titleLeft(barObj.titleLeft+'%')
-//                .titleTextStyleFontSize(barObj.titleTextStyleFontSize)
-//                .titleTextStyleColor(barObj.titleTextStyleColor)
-//                .gridLeft(barObj.gridLeft)
-//                .gridRight(barObj.gridRight)
-//                .gridTop(barObj.gridTop)
-//                .gridBottom(barObj.gridBottom)
-//                .tooltipAxisPointerType(barObj.tooltipAxisPointerType)
-//                .legendAttr(barObj.legend)
-//                .legendAlign(barObj.legendAlign)
-//                .legendLeft(barObj.legendLeft)
-//                .legendTop(barObj.legendTop)
-//                .xAxisData(barObj.xAxisData)
-//                .xAxisGridLineAttr(barObj.xAxisGridLine)
-//                .xAxisPosition(barObj.xAxisPosition)
-//                .xAxisInverse(barObj.xAxisInverse)
-//                .xAxisSplitAreaShow(barObj.xAxisSplitAreaShow)
-//                .xAxisAxisLineShow(barObj.xAxisAxisLineShow)
-//                .xAxisAxisLabelInside(barObj.xAxisAxisLabelInside)
-//                .xAxisAxisLabelTextStyleColor(barObj.xAxisAxisLabelTextStyleColor)
-//                .xAxisAxisTickShow(barObj.xAxisAxisTickShow)
-//                .xAxisBoundaryGap(barObj.xAxisBoundaryGap)
-//                .yAxisInverse(barObj.yAxisInverse)
-//                .yAxisSplitAreaShow(barObj.yAxisSplitAreaShow)
-//                .yAxisAxisLineShow(barObj.yAxisAxisLineShow)
-//                .yAxisAxisLabelInside(barObj.yAxisAxisLabelInside)
-//                .yAxisAxisLabelTextStyleColor(barObj.yAxisAxisLabelTextStyleColor)
-//                .yAxisAxisTickShow(barObj.yAxisAxisTickShow)
-//                .yAxisData(barObj.yAxisData)
-//                .yAxisGridLineAttr(barObj.yAxisGridLine)
-//                .reverse(barObj.reverse)
-//                .stack(barObj.stack)
-//                .bar(barData)
-//                .render();
-//            console.log(hescEchart.option);
-//        });
-//    }
-
-
-</script>
-
-
-
-
 </body>
 </html>
