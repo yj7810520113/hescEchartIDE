@@ -1643,7 +1643,7 @@ function removeDivFun() {
 }
 function downloadOptionFun() {
     console.log(findOptionById(divChartId));
-    $('#downloadOptionModal textarea').val(formatJson(JSON.stringify(findOptionById(divChartId))));
+    $('#downloadOptionModal textarea').val(formatJson(JSON.stringify(findOptionById(divChartId))).replace(/"([a-zA-Z0-9]*?)":/g,'$1:'));
     $("#downloadOptionModal").modal({
 //            remote:"test/test.jsp";//可以填写一个url，会调用jquery load方法加载数据
 //        backdrop:"static",//指定一个静态背景，当用户点击背景处，modal界面不会消失

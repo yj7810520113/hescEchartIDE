@@ -115,7 +115,8 @@ function renderLineChart(canvasId,canvasData,lineObj){
         .reverse(lineObj.reverse)
         .seriesAreaStyle(lineObj.seriesAreaStyle)
         .line(canvasData)
-        .render();
+        .render()
+        .option();
     saveOption(canvasId,option1);
 
 }
@@ -155,7 +156,8 @@ function renderPieChart(canvasId,canvasData,pieObj) {
         .seriesRoseType(pieObj.seriesRoseType=='false'?false:pieObj.seriesRoseType)
         .seriesLabelNormalShow(pieObj.seriesLabelNormalShow)
         .pie(canvasData)
-        .render();
+        .render()
+        .option();
     saveOption(canvasId,option1);
 
 }
@@ -205,7 +207,8 @@ function renderRadarChart(canvasId,canvasData,radarObj) {
         .seriesLineStyleNormalType(radarObj.seriesLineStyleNormalType)
         .seriesLineStyleNormalOpacity(radarObj.seriesLineStyleNormalOpacity)
         .radar(canvasData)
-        .render();
+        .render()
+        .option();
     saveOption(canvasId,option1);
 
 
@@ -253,7 +256,8 @@ function renderCalendarChart(canvasId,canvasData,calendarObj){
         .seriesLabelNormalTextStyleFontsize(calendarObj.seriesLabelNormalTextStyleFontsize)
         .seriesSymbolSize(calendarObj.seriesSymbolSize)
         .calendar(canvasData)
-        .render();
+        .render()
+        .option();
     saveOption(canvasId,option1);
 
 }
@@ -287,7 +291,8 @@ function renderWordCloudChart(canvasId,canvasData,wordCloudObj){
         .seriesShape(wordCloudObj.seriesShape)
         .maskImage(wordCloudObj.maskImage)
         .wordCloud(canvasData)
-        .render();
+        .render()
+        .option();
     saveOption(canvasId,option1);
 
 }

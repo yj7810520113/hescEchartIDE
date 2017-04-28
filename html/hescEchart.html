@@ -233,7 +233,7 @@
         /*
          样式更新
          */
-        //用户选择时，打开该div的控制面板
+        //用户选择时，打开该div的控制面板(控制面板是打开textarea或者是关闭div)
         //首先清除其他控制面板
         $('#screen .divControlPannel').each(function () {
             $(this).css('display','none')
@@ -254,7 +254,7 @@
         }
         else {
             //divchartId全局变量之一，在Index.js中声明，获取用户选择的div的id
-
+            //这里是获取到divchartid即为div的唯一的id
             divChartId = $(e.target).parent().parent().parent().attr('id');
             //根据screen上面的点击id，刷新dat.gui内容和图形
             screenClick(divChartId);

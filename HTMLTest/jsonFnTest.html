@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jsonfn.js"></script>
+</head>
+<body>
+<input type="text" id="ta">
+<script>
+
+        obj={
+            1:'1111',
+            2:'2222',
+            3:'1111',
+            4:'2222'
+        }
+        var str = JSONfn.stringify(obj);
+    //    JSON.parse(eval(str))
+        //console.log(JSON.parse(obj))
+        //str.replace(/".*?" /)
+       // var obj = JSONfn.parse(str);
+        console.log(str);
+        str1=
+            {
+                "backgroundColor": "#feefff",
+                "title": {
+                    "text": "我是标题，请修改",
+                    "subtext": "",
+                    "backgroundColor": "#fff",
+                    "top": 10,
+                    "left": 10,
+                    "textStyle": {
+                        "fontSize": 18,
+                        "color": "#000"
+                    }
+                },
+                "legend": {
+                    "data": [
+                        "默认值0",
+                        "默认值1",
+                        "默认值2",
+                        "默认值3"
+                    ],
+                    "align": "left",
+                    "left": 200,
+                    "top": 10,
+                    "orient": "horizontal"
+                },
+                "toolbox": {
+                },
+                "tooltip": {
+                    "trigger": "axis",
+                    "axisPointer": {
+                        "type": "shadow"
+                    }
+                },
+                "xAxis": {
+                    "data": [
+                        "2011",
+                        "2012",
+                        "2014",
+                        "2015"
+                    ],
+                    "silent": false,
+                    "type": "category",
+                    "splitLine": {
+                        "show": false
+                    },
+                    "position": "bottom",
+                    "inverse": false,
+                    "splitArea": {
+                        "show": false
+                    },
+                    "axisLine": {
+                        "show": true
+                    },
+                    "axisLabel": {
+                        "inside": false,
+                        "textStyle": {
+                            "color": "#000"
+                        }
+                    },
+                    "axisTick": {
+                        "show": true
+                    },
+                    "boundaryGap": true
+                },
+                "yAxis": {
+                    "data": false,
+                    "silent": false,
+                    "type": "value",
+                    "splitLine": {
+                        "show": true
+                    },
+                    "position": "left",
+                    "inverse": false,
+                    "splitArea": {
+                        "show": false
+                    },
+                    "axisLine": {
+                        "show": true
+                    },
+                    "axisLabel": {
+                        "inside": false,
+                        "textStyle": {
+                            "color": "#000"
+                        }
+                    },
+                    "axisTick": {
+                        "show": true
+                    }
+                },
+                "grid": {
+                    "left": 50,
+                    "right": 50,
+                    "top": 50,
+                    "bottom": 50
+                },
+                "series": [
+                    {
+                        "name": "默认值0",
+                        "type": "bar",
+                        "areaStyle": {
+                            "normal": {
+                            }
+                        },
+                        "stack": null,
+                        "data": [
+                            2,
+                            6,
+                            5,
+                            8
+                        ]
+                    },
+                    {
+                        "name": "默认值1",
+                        "type": "bar",
+                        "areaStyle": {
+                            "normal": {
+                            }
+                        },
+                        "stack": null,
+                        "data": [
+                            4,
+                            8,
+                            2,
+                            6
+                        ]
+                    },
+                    {
+                        "name": "默认值2",
+                        "type": "bar",
+                        "areaStyle": {
+                            "normal": {
+                            }
+                        },
+                        "stack": null,
+                        "data": [
+                            4,
+                            4,
+                            9,
+                            1
+                        ]
+                    },
+                    {
+                        "name": "默认值3",
+                        "type": "bar",
+                        "areaStyle": {
+                            "normal": {
+                            }
+                        },
+                        "stack": null,
+                        "data": [
+                            4,
+                            4,
+                            1,
+                            7
+                        ]
+                    }
+                ],
+                "animationEasing": "elasticOut",
+                "itemStyle": {
+                    "normal": {
+                    },
+                    "emphasis": {
+                        "barBorderWidth": 1,
+                        "shadowBlur": 10,
+                        "shadowOffsetX": 0,
+                        "shadowOffsetY": 0,
+                        "shadowColor": "rgba(0,0,0,0.5)"
+        }
+        }
+        }
+
+
+        console.log(JSONfn.stringify(str1).replace(/"([a-zA-Z0-9]*?)":/g,'$1:'));
+        console.log(JSONfn.stringify(obj).replace(/"(.*?)":/g,'$1:'))
+    //
+    //    console.log(obj2)
+
+
+//    var obj1 = {
+//        name: "fdkfj",
+//        age: "55",
+//        111: [1, 2, 3, 4]
+//    }
+//    var c = ""
+//    object1(obj1)
+//    function object1(obj) {
+//        Object.keys(obj).forEach(function (e, i) {
+//            if(!(obj[e] instanceof Object)) {
+//                c += e + ":\"" + obj[e] + "\","
+//            }
+//            else {
+//                object1(obj[e]);
+//            }
+//        })
+//    }
+//    c = "{" + c.slice(0, c.length - 1) + "}"
+//    document.getElementById("ta").value = c;
+
+</script>
+
+</body>
+</html>
