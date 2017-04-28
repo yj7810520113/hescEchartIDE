@@ -12,10 +12,14 @@
 柱状图的配置
  */
 function renderBarChart(canvasId,canvasData,barObj){
-    // console.log('renderbarchart')
-    // console.log(canvasId+' .render')
-    // console.log(barObj)
-    hescEchart.select(canvasId+'canvas')
+    //更新顶层容器大小
+    $('#'+canvasId).width(barObj.canvasWidth);
+    $('#'+canvasId).height(barObj.canvasHeight);
+    //更新canvas容器的大小
+    $('#'+canvasId+'canvas').width(barObj.canvasWidth);
+    $('#'+canvasId+'canvas').height(barObj.canvasHeight);
+
+    hescEchartBar.select(canvasId+'canvas')
         .background(barObj.backgroundColor)
         .title(barObj.title)
         .subtitle(barObj.subtitle)
@@ -55,5 +59,97 @@ function renderBarChart(canvasId,canvasData,barObj){
         .reverse(barObj.reverse)
         .stack(barObj.stack)
         .bar(canvasData)
+        .render();
+}
+/*
+折线图配置
+ */
+function renderLineChart(canvasId,canvasData,lineObj){
+    // console.log(lineObj)
+    //更新顶层容器大小
+    $('#'+canvasId).width(lineObj.canvasWidth);
+    $('#'+canvasId).height(lineObj.canvasHeight);
+    //更新canvas容器的大小
+    $('#'+canvasId+'canvas').width(lineObj.canvasWidth);
+    $('#'+canvasId+'canvas').height(lineObj.canvasHeight);
+
+    hescEchartLine.select(canvasId+'canvas')
+        .background(lineObj.backgroundColor)
+        .title(lineObj.title)
+        .subtitle(lineObj.subtitle)
+        .titleBackgroundColor(lineObj.titleBackgroundColor)
+        .titleTop(lineObj.titleTop)
+        .titleLeft(lineObj.titleLeft)
+        .titleTextStyleFontSize(lineObj.titleTextStyleFontSize)
+        .titleTextStyleColor(lineObj.titleTextStyleColor)
+        .gridLeft(lineObj.gridLeft)
+        .gridRight(lineObj.gridRight)
+        .gridTop(lineObj.gridTop)
+        .gridBottom(lineObj.gridBottom)
+        .tooltipAxisPointerType(lineObj.tooltipAxisPointerType)
+        .legendAttr(lineObj.legend)
+        .legendAlign(lineObj.legendAlign)
+        .legendLeft(lineObj.legendLeft)
+        .legendTop(lineObj.legendTop)
+        .legendOrient(lineObj.legendOrient)
+        .xAxisData(lineObj.xAxisData)
+        .xAxisGridLineAttr(lineObj.xAxisGridLine)
+        .xAxisPosition(lineObj.xAxisPosition)
+        .xAxisInverse(lineObj.xAxisInverse)
+        .xAxisSplitAreaShow(lineObj.xAxisSplitAreaShow)
+        .xAxisAxisLineShow(lineObj.xAxisAxisLineShow)
+        .xAxisAxisLabelInside(lineObj.xAxisAxisLabelInside)
+        .xAxisAxisLabelTextStyleColor(lineObj.xAxisAxisLabelTextStyleColor)
+        .xAxisAxisTickShow(lineObj.xAxisAxisTickShow)
+        .xAxisBoundaryGap(lineObj.xAxisBoundaryGap)
+        .yAxisInverse(lineObj.yAxisInverse)
+        .yAxisSplitAreaShow(lineObj.yAxisSplitAreaShow)
+        .yAxisAxisLineShow(lineObj.yAxisAxisLineShow)
+        .yAxisAxisLabelInside(lineObj.yAxisAxisLabelInside)
+        .yAxisAxisLabelTextStyleColor(lineObj.yAxisAxisLabelTextStyleColor)
+        .yAxisAxisTickShow(lineObj.yAxisAxisTickShow)
+        .yAxisData(lineObj.yAxisData)
+        .yAxisGridLineAttr(lineObj.yAxisGridLine)
+        .reverse(lineObj.reverse)
+        .seriesAreaStyle(lineObj.seriesAreaStyle)
+        .line(canvasData)
+        .render();
+}
+/*
+饼图配置
+ */
+function renderPieChart(canvasId,canvasData,pieObj) {
+    $('#'+canvasId).width(pieObj.canvasWidth);
+    $('#'+canvasId).height(pieObj.canvasHeight);
+    //更新canvas容器的大小
+    $('#'+canvasId+'canvas').width(pieObj.canvasWidth);
+    $('#'+canvasId+'canvas').height(pieObj.canvasHeight);
+    hescEchartPie.select(canvasId+'canvas')
+        .background(pieObj.backgroundColor)
+        .title(pieObj.title)
+        .subtitle(pieObj.subtitle)
+        .titleBackgroundColor(pieObj.titleBackgroundColor)
+        .titleTop(pieObj.titleTop)
+        .titleLeft(pieObj.titleLeft)
+        .titleTextStyleFontSize(pieObj.titleTextStyleFontSize)
+        .titleTextStyleColor(pieObj.titleTextStyleColor)
+        .gridLeft(pieObj.gridLeft)
+        .gridRight(pieObj.gridRight)
+        .gridTop(pieObj.gridTop)
+        .gridBottom(pieObj.gridBottom)
+        .tooltipAxisPointerType(pieObj.tooltipAxisPointerType)
+        .legendAttr(pieObj.legend)
+        .legendAlign(pieObj.legendAlign)
+        .legendLeft(pieObj.legendLeft)
+        .legendTop(pieObj.legendTop)
+        .legendOrient(pieObj.legendOrient)
+        .seriesName(pieObj.seriesName)
+        .seriesRadiusOutter(pieObj.seriesRadiusOutter+'%')
+        .seriesRadiusInner(pieObj.seriesRadiusInner+'%')
+        .seriesCenterLeft(pieObj.seriesCenterLeft+'%')
+        .seriesCenterTop(pieObj.seriesCenterTop+'%')
+        .seriesRoseType(pieObj.seriesRoseType=='false'?false:pieObj.seriesRoseType)
+        .seriesLabelNormalShow(pieObj.seriesLabelNormalShow)
+        .pie(canvasData)
         .render();
 }

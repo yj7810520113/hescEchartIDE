@@ -19,6 +19,10 @@
     <script src="../js/DAT.GUI.js"></script>
     <script src="../js/echarts.js"></script>
     <script src="../js/hescEchartBarChart.js"></script>
+    <script src="../js/hescEchartLineChart.js"></script>
+    <script src="../js/hescEchartPieChart.js"></script>
+    <script src="../js/hescEchartCalendarMapChart.js"></script>
+    <script src="../js/hescEchartRadarChart.js"></script>
     <script src="../js/hescEchartCore.js"></script>
     <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -97,7 +101,7 @@
                 <ul id="myTab1" class="nav nav-tabs">
 
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <a class="dropdown-toggle" datatog-gle="dropdown" href="#" aria-expanded="false">
                             数据源类型 <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="dataSource">
@@ -145,14 +149,20 @@
 <!----------------------------------------------------JS-------------------------------------------------------->
 <!--添加图形-->
 <script>
+    //顶端的添加图形按钮,点击按钮也是一种screen上面的点击行为，点击的div可以直接被选中
     $('#addChart').click(function (e) {
         var addChartEle=$(e.target).attr('id');
         if(addChartEle=='bar'){
-             var chartId=addChartDiv($('#screen'),'bar')
+             var chartId=addChartDiv($('#screen'),'bar');
             addBarDatGui(chartId);
+            divChartId=chartId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
         }
         else if(addChartEle=='line'){
-
+            var chartId=addChartDiv($('#screen'),'line');
+            addLineDatGui(chartId);
+            divChartId=chartId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
         }
         else if(addChartEle=='radar'){
 
@@ -161,7 +171,10 @@
 
         }
         else if(addChartEle=='pie'){
-
+            var chartId=addChartDiv($('#screen'),'pie');
+            addPieDatGui(chartId);
+            divChartId=chartId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
         }
         else if(addChartEle=='wordCloud'){
 
@@ -169,28 +182,40 @@
 
     });
     /*
-    测试在screen上面点击是否能触发div
+    screen上面的点击
      */
     $('#screen').click(function (e) {
         //获取到唯一的图形id
 //        console.log()
-        var divChartId=$(e.target).parent().parent().parent().attr('id');
-        console.log(divChartId)
-        addBarDatGui(divChartId);
+        //divchartId全局变量之一，在Index.js中声明，获取用户选择的div的id
+        divChartId=$(e.target).parent().parent().parent().attr('id');
 
-    })
-//    function addChart() {
-//        console.log()
-//        $('#bar').click(function () {
-//            console.log('bar');
-//        })
-//        $('#line').click(function () {
-//            console.log('line');
-//        })
-//        $('#pie').click(function () {
-//            console.log('pie');
-//        })
-//    }
+        //根据screen上面的点击id，刷新dat.gui内容和图形
+        screenClick(divChartId);
+        //更新canvasData
+        jsonEditorEditor.set(addCanvasData(divChartId).data);
+        console.log('canvasdata');
+        console.log(addCanvasData(divChartId).data)
+    });
+    //根据screen上面的点击内容，更新dat.gui和图形图形
+    function screenClick(divChartId1){
+        var divChartIdSplit=divChartId1.split('-');
+        if(divChartIdSplit[0]=='bar'){
+            addBarDatGui(divChartId1);
+        }
+        else if(divChartIdSplit[0]=='line'){
+            addLineDatGui(divChartId1);
+        }
+        else if(divChartIdSplit[0]=='pie'){
+            addPieDatGui(divChartId1);
+        }
+    }
+    $('#submitData').click(function () {
+        updateHescEleByIdToCanvasData(divChartId,JSON.parse(jsonEditorEditor.getText()));
+        //借用addBarDatGui的方法更新绘图区数据
+        console.log('我click:'+divChartId)
+        screenClick(divChartId)
+    });
 
 </script>
 
@@ -200,52 +225,57 @@
     /*
     添加鼠标移动过和click事件
      */
-    $('#barChild').parent().mouseover(function () {
-        console.log("出发了barchild 的parent");
-//        console.log($('#barChild').parent().css('border'))
-        $('#barChild').parent().css('outline','2px dotted blue');
-    });
-    $('#barChild').parent().mouseout(function () {
-        console.log('我俩开了')
-        $('#barChild').parent().css('outline','0px');
-    });
-    $('#barChild').parent().click(function () {
-        console.log('我点击了');
-        $('#barChild').parent().css('outline','2px solid blue');
-    });
-    $(function() {
-        //how to use it
-        $('#barChild').parent().mutate('height width', function(el,info) {
-            console.log($(el).height());
-            barObj.canvasHeight=$(el).height();
-            barObj.canvasWidth=$(el).width();
-            renderBarChart();
-//            expanded = true;
-//            $('#heighter').text('height changed:' + $(el).height());
-//            $('#widther').text('Width changed:' + $(el).width());
-        });
-        $('#barChild').parent().mutate('top left right bottom', function(el,info) {
-//            $('#topper').text('box has moved either (top,left,right or bottom):' + parseInt($(el).css('top')));
-//            if(parseInt($(el).css('top'))>=250) $('#topper2').html('Element Moved top to more than 250:<strong class="red">' + parseInt($(el).css('top'))+'px</strong> this is especially usefull when you need to make a game. Exact 250px maybe be a little more tricky, as some pixels may skip due to animation time so it\'s better to use more than or less than ');
-        });
-//        $('div.monitor').mutate('hide', function(el,info) {
-//            $('#hidder').text('Element was hidden:'+iii++);
+    /*
+    同步更新大小测试
+     */
+
+//
+//    $('#barChild').parent().mouseover(function () {
+//        console.log("出发了barchild 的parent");
+////        console.log($('#barChild').parent().css('border'))
+//        $('#barChild').parent().css('outline','2px dotted blue');
+//    });
+//    $('#barChild').parent().mouseout(function () {
+//        console.log('我俩开了')
+//        $('#barChild').parent().css('outline','0px');
+//    });
+//    $('#barChild').parent().click(function () {
+//        console.log('我点击了');
+//        $('#barChild').parent().css('outline','2px solid blue');
+//    });
+//    $(function() {
+//        //how to use it
+//        $('#barChild').parent().mutate('height width', function(el,info) {
+//            console.log($(el).height());
+//            barObj.canvasHeight=$(el).height();
+//            barObj.canvasWidth=$(el).width();
+//            renderBarChart();
+////            expanded = true;
+////            $('#heighter').text('height changed:' + $(el).height());
+////            $('#widther').text('Width changed:' + $(el).width());
 //        });
-//        $('div.monitor').mutate('show', function(el,info) {
-//            $('#shower').text('Element is now visible:'+ iii++);
+//        $('#barChild').parent().mutate('top left right bottom', function(el,info) {
+////            $('#topper').text('box has moved either (top,left,right or bottom):' + parseInt($(el).css('top')));
+////            if(parseInt($(el).css('top'))>=250) $('#topper2').html('Element Moved top to more than 250:<strong class="red">' + parseInt($(el).css('top'))+'px</strong> this is especially usefull when you need to make a game. Exact 250px maybe be a little more tricky, as some pixels may skip due to animation time so it\'s better to use more than or less than ');
 //        });
-//        //illustration purpuso only
-//        $('#subm3').click(function() {
-//            $('#my1').stop(true,true).css({width:300,height:100}).animate({width: 500,height:500},1000);
-//        });
-//        $('#subm2').click(function() {
-//            $('#my1').toggle();
-//        });
-//        $('#subm').click(function() {
-//            $('#my1').stop(true,true).css('top',0).animate({'top':300},2000);
-//        });
-        $('.Monitor').resizable().draggable();
-    })
+////        $('div.monitor').mutate('hide', function(el,info) {
+////            $('#hidder').text('Element was hidden:'+iii++);
+////        });
+////        $('div.monitor').mutate('show', function(el,info) {
+////            $('#shower').text('Element is now visible:'+ iii++);
+////        });
+////        //illustration purpuso only
+////        $('#subm3').click(function() {
+////            $('#my1').stop(true,true).css({width:300,height:100}).animate({width: 500,height:500},1000);
+////        });
+////        $('#subm2').click(function() {
+////            $('#my1').toggle();
+////        });
+////        $('#subm').click(function() {
+////            $('#my1').stop(true,true).css('top',0).animate({'top':300},2000);
+////        });
+//        $('.Monitor').resizable().draggable();
+//    })
 </script>
 
 <!--jsonEditor对应的数据-->
@@ -267,12 +297,12 @@
     /*
      初始化dropdown上面的文字描述,和静态数据的初始化
      */
-    $(function(){
-        jsonEditorEditor.set(jsonEditorJson);
-        barData=JSON.parse(jsonEditorEditor.getText());
-        console.log(barData);
-        renderBarChart();
-    })
+//    $(function(){
+//        jsonEditorEditor.set(jsonEditorJson);
+//        barData=JSON.parse(jsonEditorEditor.getText());
+//        console.log(barData);
+//        renderBarChart();
+//    })
     /*
     根据dropdown的选择不同更新jsoneditor里面的数据
      */
@@ -280,12 +310,10 @@
         console.log(e.target);
         if($(e.target).attr('href')=='#dropdownstaticData'){
             //将默认值赋值给jsoneditor
-            console.log("actice")
             jsonEditorEditor.set(jsonEditorJson);
         }
         else if($(e.target).attr('href')=='#dropdownLocalData') {
             // Load a JSON document
-            console.log('localdata');
             FileReaderJS.setupInput(document.getElementById('loadLocalData'), {
                 readAsDefault: 'Text',
                 on: {
@@ -315,10 +343,7 @@
     /*
     更新数据
      */
-    $('#submitData').click(function () {
-        barData=JSON.parse(jsonEditorEditor.getText());
-        renderBarChart();
-    });
+
 
 
 

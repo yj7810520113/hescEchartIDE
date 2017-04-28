@@ -91,7 +91,7 @@
         "remembered": {
             "default": {
                 "0": {
-                    "backgroundColor": "#fff",
+                    "backgroundColor": "#eee",
                     "tooltipAxisPointerType": "shadow",
                     "reverse": false,
                     "stack": "",
@@ -163,7 +163,7 @@
         }
     };
     var barGui = new dat.GUI({load:json});
-        barGui.remember(barObj)
+    barGui.remember(barObj)
     barGui.addColor(barObj,'backgroundColor').name('背景色');
     var barTitle=barGui.addFolder('标题属性');
     barTitle.add(barObj, 'title').name('图表标题');
