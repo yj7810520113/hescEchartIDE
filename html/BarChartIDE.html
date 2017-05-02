@@ -26,17 +26,20 @@
     </style>
 </head>
 <body>
-<div id="test" style="width: 600px;height:400px;margin:50px 500px">
+<div style="width: 600px;height:400px;margin:50px 500px;position: absolute">
+    <span>testestsetdsfsdfs</span>
+</div>
+<div id="test" style="width: 600px;height:400px;margin:50px 500px;position: absolute">
 <script>
     var barObj ={
         test:{
             test1:'',
             test2:''
         },
-        backgroundColor:"#ffffff",
+        backgroundColor:[ 0, 128, 255, 0.3 ],
         title:'我是标题，请修改',
         subtitle:'',
-        titleBackgroundColor:'#fff',
+        titleBackgroundColor:[ 0, 128, 255, 0.3 ],
         titleTop:10,
         titleLeft:10,
         titleTextStyleFontSize:18,
@@ -128,7 +131,7 @@
     };
     function renderBarChart() {
         hescEchart.json('../Data/barChartTest.Data',function(error,data){
-            hescEchart.select('test')
+            hescEchartBar.select('test')
                 .background(barObj.backgroundColor)
                 .title(barObj.title)
                 .subtitle(barObj.subtitle)

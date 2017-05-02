@@ -90,7 +90,7 @@
     };
     function renderWordCloudChart() {
         hescEchart.json('../Data/wordCloudChartTest.Data',function(error,data){
-            hescEchart.select('test')
+            hescEchartWordCloud.select('test')
                 .background(wordCloudObj.backgroundColor)
                 .title(wordCloudObj.title)
                 .subtitle(wordCloudObj.subtitle)
