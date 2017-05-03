@@ -51,7 +51,7 @@
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="../" class="navbar-brand">HESCharts</a>
+            <a href="../html/hescEchart.html" class="navbar-brand">HESCharts</a>
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -84,12 +84,12 @@
 </div>
 <div class="tabs " >
     <ul id="myTab" class="nav nav-tabs">
-        <li class="active">
+        <li class="active" style="width: 50%">
             <a href="#tabConfig" data-toggle="tab">
                 配置
             </a>
         </li>
-        <li><a href="#tabData" data-toggle="tab">数据</a></li>
+        <li style="width: 50%"><a href="#tabData" data-toggle="tab">数据</a></li>
     </ul>
     <div id="myTabContent1" class="tab-content" style="overflow-y:visible;">
         <div class="tab-pane fade in active" id="tabConfig">
@@ -261,6 +261,17 @@
             screenClick(divChartId);
             //更新canvasData
             jsonEditorEditor.set(addCanvasData(divChartId).data);
+
+            /*
+            *更新div的层叠关系
+            * update:2017.5.3
+            */
+            //其他层级为1
+            $('.Monitor').each(function () {
+                $(this).css('z-index',1);
+            });
+            //选中的层级为10
+            $('#'+divChartId).css('z-index',10);
         }
         /*
         样式更新

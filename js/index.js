@@ -16,10 +16,10 @@ var barInitialCanvasData=[[{"2011":2},{"2011":4},{"2011":4},{"2011":4}],[{"2012"
 var barInitialDatGuiData ={
     canvasWidth:500,
     canvasHeight:400,
-    backgroundColor:"#feefff",
+    backgroundColor:'rgba(255,255,255,0)',
     title:'我是标题，请修改',
     subtitle:'',
-    titleBackgroundColor:'#fff',
+    titleBackgroundColor:'rgba(255,255,255,0)',
     titleTop:10,
     titleLeft:10,
     titleTextStyleFontSize:18,
@@ -60,10 +60,10 @@ var lineInitialCanvasData=[[{"2011":2},{"2011":4},{"2011":4},{"2011":4}],[{"2012
 var lineInitialDatGuiData={
     canvasWidth:500,
     canvasHeight:400,
-    backgroundColor:"#ffffff",
+    backgroundColor:'rgba(255,255,255,0)',
     title:'我是标题，请修改',
     subtitle:'',
-    titleBackgroundColor:'#fff',
+    titleBackgroundColor:'rgba(255,255,255,0)',
     titleTop:10,
     titleLeft:10,
     titleTextStyleFontSize:18,
@@ -105,10 +105,10 @@ var pieInitialCanvasData=[{"name":"2011","value":2},{"name":"2012","value":1},{"
 var pieInitailDatGuiData={
     canvasWidth:500,
     canvasHeight:400,
-    backgroundColor:"#ffffff",
+    backgroundColor:'rgba(255,255,255,0)',
     title:'我是标题，请修改',
     subtitle:'',
-    titleBackgroundColor:'#fff',
+    titleBackgroundColor:'rgba(255,255,255,0)',
     titleTop:10,
     titleLeft:10,
     titleTextStyleFontSize:18,
@@ -138,10 +138,10 @@ var radarInitialCanvasData=[[{"推塔":2},{"输出":4},{"承受伤害":4},{"KDA"
 var radarInitialDatGuiData={
     canvasWidth:500,
     canvasHeight:400,
-    backgroundColor:"#ffffff",
+    backgroundColor:'rgba(255,255,255,0)',
     title:'我是标题，请修改',
     subtitle:'',
-    titleBackgroundColor:'#fff',
+    titleBackgroundColor:'rgba(255,255,255,0)',
     titleTop:10,
     titleLeft:10,
     titleTextStyleFontSize:18,
@@ -185,10 +185,10 @@ var calendarInitialCanvasData=[{"2017-01-01":713},{"2017-01-02":871},{"2017-01-0
 var calendarInitialDatGuiData={
     canvasWidth:500,
     canvasHeight:400,
-    backgroundColor:"#ffffff",
+    backgroundColor:'rgba(255,255,255,0)',
     title:'我是标题，请修改',
     subtitle:'',
-    titleBackgroundColor:'#fff',
+    titleBackgroundColor:'rgba(255,255,255,0)',
     titleTop:10,
     titleLeft:10,
     titleTextStyleFontSize:18,
@@ -576,10 +576,10 @@ var wordCloudInitialCanvasData={
 var wordCloudInitialDatGuiData= {
     canvasWidth:500,
     canvasHeight:400,
-    backgroundColor:"#ffffff",
+    backgroundColor:'rgba(255,255,255,0)',
     title:'我是标题，请修改',
     subtitle:'',
-    titleBackgroundColor:'#fff',
+    titleBackgroundColor:'rgba(255,255,255,0)',
     titleTop:10,
     titleLeft:10,
     titleTextStyleFontSize:18,
@@ -690,7 +690,7 @@ function addChartDiv(parent,chartType){
 //         </div>
     var ids=chartType+'-'+uniqueDivId(hescList.length);
     //这里的长宽为monitor的长宽-3
-    var divContent='<div id="'+ids+'" class="Monitor">    <div  class="divControlPannel"><span class="glyphicon glyphicon-remove divControlPannelIcon removediv" id="removediv" onclick="removeDivFun()"></span> <span class="glyphicon glyphicon-download-alt divControlPannelIcon downloadOption" id="downloadOption" onclick="downloadOptionFun()"></span> </div><div id='+ids+'canvas class="canvasclass" style="height:'+(400)+'px;width:'+(500)+'px;"></div>';
+    var divContent='<div id="'+ids+'" class="Monitor" style="z-index: 11">    <div  class="divControlPannel"><span class="glyphicon glyphicon-remove divControlPannelIcon removediv" id="removediv" onclick="removeDivFun()"></span> <span class="glyphicon glyphicon-download-alt divControlPannelIcon downloadOption" id="downloadOption" onclick="downloadOptionFun()"></span> </div><div id='+ids+'canvas class="canvasclass" style="height:'+(400)+'px;width:'+(500)+'px;"></div>';
     $(parent).append(divContent);
     $('.Monitor').resizable().draggable();
 
