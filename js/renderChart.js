@@ -20,6 +20,7 @@ function renderBarChart(canvasId,canvasData,barObj){
     $('#'+canvasId+'canvas').height(barObj.canvasHeight);
 
     var option1=hescEchartBar.select(canvasId+'canvas')
+        .theme(barObj.theme)
         .background(barObj.backgroundColor)
         .title(barObj.title)
         .subtitle(barObj.subtitle)
@@ -76,6 +77,8 @@ function renderLineChart(canvasId,canvasData,lineObj){
     $('#'+canvasId+'canvas').height(lineObj.canvasHeight);
 
     var option1=hescEchartLine.select(canvasId+'canvas')
+        .theme(lineObj.theme)
+
         .background(lineObj.backgroundColor)
         .title(lineObj.title)
         .subtitle(lineObj.subtitle)
@@ -130,6 +133,7 @@ function renderPieChart(canvasId,canvasData,pieObj) {
     $('#'+canvasId+'canvas').width(pieObj.canvasWidth);
     $('#'+canvasId+'canvas').height(pieObj.canvasHeight);
     var option1=hescEchartPie.select(canvasId+'canvas')
+        .theme(pieObj.theme)
         .background(pieObj.backgroundColor)
         .title(pieObj.title)
         .subtitle(pieObj.subtitle)
@@ -171,6 +175,7 @@ function renderRadarChart(canvasId,canvasData,radarObj) {
     $('#'+canvasId+'canvas').width(radarObj.canvasWidth);
     $('#'+canvasId+'canvas').height(radarObj.canvasHeight);
     var option1=hescEchartRadar.select(canvasId+'canvas')
+        .theme(radarObj.theme)
         .background(radarObj.backgroundColor)
         .title(radarObj.title)
         .subtitle(radarObj.subtitle)
@@ -224,6 +229,7 @@ function renderCalendarChart(canvasId,canvasData,calendarObj){
     $('#'+canvasId+'canvas').width(calendarObj.canvasWidth);
     $('#'+canvasId+'canvas').height(calendarObj.canvasHeight);
     var option1=hescEchartCalendar.select(canvasId+'canvas')
+        .theme(calendarObj.theme)
         .background(calendarObj.backgroundColor)
         .title(calendarObj.title)
         .subtitle(calendarObj.subtitle)
@@ -272,6 +278,7 @@ function renderWordCloudChart(canvasId,canvasData,wordCloudObj){
     $('#'+canvasId+'canvas').width(wordCloudObj.canvasWidth);
     $('#'+canvasId+'canvas').height(wordCloudObj.canvasHeight);
     var option1=hescEchartWordCloud.select(canvasId+'canvas')
+        .theme(wordCloudObj.theme)
         .background(wordCloudObj.backgroundColor)
         .title(wordCloudObj.title)
         .subtitle(wordCloudObj.subtitle)

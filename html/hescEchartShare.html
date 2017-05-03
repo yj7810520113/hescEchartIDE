@@ -15,20 +15,15 @@
     <link rel="stylesheet" href="../css/index.css"/>
     <link rel="stylesheet" href="../css/DAT.GUI.css"/>
     <link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="../css/owl.carousel.css">
+    <link rel="stylesheet" href="../css/owl.theme.css">
+
     <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/owlcarousel.js"></script>
 </head>
 <body>
 
-<div id="screen" class="screen">
-    <!--隐藏的按钮用于输入input 的file-->
-    <input id="imgFileInput" type="file" style="display: none" />
-    <!--resize and drag div test-->
-    <!--<div id='bar随即id' class="Monitor">-->
-        <!--<div id="barChild" style="height:calc(100% - 3px);width:calc(100% - 3px);"></div>-->
-    <!--</div>-->
-
-</div>
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -41,13 +36,48 @@
         </div>
     </div>
 </div>
-<div class="shareScreen"></div>
 
 
 
 
+<div class="shareScreen">
+    <div class="container" style="margin: 0 auto;text-align: center;">
+        <div class="row">
+            <div class="span12">
+                <div id="owl-demo" class="owl-carousel">
 
 
+                    <div class="item"><img src="../images/案例集/人口构成.png" alt="Owl Image" style="max-width:900px;height:auto;"></div>
+                    <div class="item"><img src="../images/案例集/人口构成.png" alt="Owl Image" style="max-width:900px;height:auto;"></div>
+                    <div class="item"><img src="../images/案例集/人口构成.png" alt="Owl Image" style="max-width:900px;height:auto;"></div>
+                    <div class="item"><img src="../images/案例集/人口构成.png" alt="Owl Image" style="max-width:900px;height:auto;"></div>
+                    <div class="item"><img src="../images/案例集/人口构成.png" alt="Owl Image" style="max-width:900px;height:auto;"></div>
+                    <!--<div class="item"><img src="assets/owl6.jpg" alt="Owl Image" style="max-width:300px;height:auto;"></div>-->
+                    <!--<div class="item"><img src="assets/owl7.jpg" alt="Owl Image" style="max-width:300px;height:auto;"></div>-->
+                    <!--<div class="item"><img src="assets/owl8.jpg" alt="Owl Image" style="max-width:300px;height:auto;"></div>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#owl-demo").owlCarousel({
+
+        navigation : true, // Show next and prev buttons
+        slideSpeed : 300,
+        paginationSpeed : 400,
+        singleItem:true
+
+        // "singleItem:true" is a shortcut for:
+        // items : 1,
+        // itemsDesktop : false,
+        // itemsDesktopSmall : false,
+        // itemsTablet: false,
+        // itemsMobile : false
+
+    });
+</script>
 
 <!--下载option的模态框-->
 <div class="modal fade" id="downloadOptionModal" tabindex="-1" role="dialog"

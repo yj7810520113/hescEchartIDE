@@ -3,199 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="../js/jsonfn.js"></script>
+    <script src="../js/jquery.js"></script>
 </head>
 <body>
 <input type="text" id="ta">
+<input type="button" id="button1">
 <script>
 
-        obj={
-            1:'1111',
-            2:'2222',
-            3:'1111',
-            4:'2222'
+//        obj=
+var option = {
+    backgroundColor: "rgba(254,248,239,1)",
+    title: {
+        text: "我是标题，请修改",
+        subtext: "",
+        backgroundColor: "rgba(255,255,255,0)",
+        top: 10,
+        left: 10,
+        textStyle: {fontSize: 18, color: "#333333"},
+        subtextStyle: {color: "#aaaaaa"}
+    },
+    legend: {
+        data: ["默认值0", "默认值1", "默认值2", "默认值3"],
+        align: "left",
+        left: 200,
+        top: 10,
+        orient: "horizontal",
+        textStyle: {color: "#333333"}
+    },
+    toolbox: {iconStyle: {normal: {borderColor: "#999999"}, emphasis: {borderColor: "#666666"}}},
+    tooltip: {
+        trigger: "axis",
+        axisPointer: {type: "shadow", lineStyle: {color: "#cccccc", width: 1}, crossStyle: {color: "#cccccc", width: 1}}
+    },
+    xAxis: {
+        data: ["2011", "2012", "2014", "2015"],
+        silent: false,
+        type: "category",
+        splitLine: {show: false},
+        position: "bottom",
+        inverse: false,
+        splitArea: {show: false},
+        axisLine: {show: true},
+        axisLabel: {inside: false, textStyle: {color: "#000"}},
+        axisTick: {show: true},
+        boundaryGap: true
+    },
+    yAxis: {
+        data: false,
+        silent: false,
+        type: "value",
+        splitLine: {show: true},
+        position: "left",
+        inverse: false,
+        splitArea: {show: false},
+        axisLine: {show: true},
+        axisLabel: {inside: false, textStyle: {color: "#000"}},
+        axisTick: {show: true}
+    },
+    grid: {left: 50, right: 50, top: 50, bottom: 50},
+    series: [{name: "默认值0", type: "bar", areaStyle: {normal: {}}, stack: null, data: [2, 6, 5, 8]}, {
+        name: "默认值1",
+        type: "bar",
+        areaStyle: {normal: {}},
+        stack: null,
+        data: [4, 8, 2, 6]
+    }, {name: "默认值2", type: "bar", areaStyle: {normal: {}}, stack: null, data: [4, 4, 9, 1]}, {
+        name: "默认值3",
+        type: "bar",
+        areaStyle: {normal: {}},
+        stack: null,
+        data: [4, 4, 1, 7]
+    }],
+    animationEasing: "elasticOut",
+    itemStyle: {
+        normal: {},
+        emphasis: {
+            barBorderWidth: 1,
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowColor: "rgba(0,0,0,0.5)"
         }
-        var str = JSONfn.stringify(obj);
-    //    JSON.parse(eval(str))
-        //console.log(JSON.parse(obj))
-        //str.replace(/".*?" /)
-       // var obj = JSONfn.parse(str);
-        console.log(str);
-        str1=
-            {
-                "backgroundColor": "#feefff",
-                "title": {
-                    "text": "我是标题，请修改",
-                    "subtext": "",
-                    "backgroundColor": "#fff",
-                    "top": 10,
-                    "left": 10,
-                    "textStyle": {
-                        "fontSize": 18,
-                        "color": "#000"
-                    }
-                },
-                "legend": {
-                    "data": [
-                        "默认值0",
-                        "默认值1",
-                        "默认值2",
-                        "默认值3"
-                    ],
-                    "align": "left",
-                    "left": 200,
-                    "top": 10,
-                    "orient": "horizontal"
-                },
-                "toolbox": {
-                },
-                "tooltip": {
-                    "trigger": "axis",
-                    "axisPointer": {
-                        "type": "shadow"
-                    }
-                },
-                "xAxis": {
-                    "data": [
-                        "2011",
-                        "2012",
-                        "2014",
-                        "2015"
-                    ],
-                    "silent": false,
-                    "type": "category",
-                    "splitLine": {
-                        "show": false
-                    },
-                    "position": "bottom",
-                    "inverse": false,
-                    "splitArea": {
-                        "show": false
-                    },
-                    "axisLine": {
-                        "show": true
-                    },
-                    "axisLabel": {
-                        "inside": false,
-                        "textStyle": {
-                            "color": "#000"
-                        }
-                    },
-                    "axisTick": {
-                        "show": true
-                    },
-                    "boundaryGap": true
-                },
-                "yAxis": {
-                    "data": false,
-                    "silent": false,
-                    "type": "value",
-                    "splitLine": {
-                        "show": true
-                    },
-                    "position": "left",
-                    "inverse": false,
-                    "splitArea": {
-                        "show": false
-                    },
-                    "axisLine": {
-                        "show": true
-                    },
-                    "axisLabel": {
-                        "inside": false,
-                        "textStyle": {
-                            "color": "#000"
-                        }
-                    },
-                    "axisTick": {
-                        "show": true
-                    }
-                },
-                "grid": {
-                    "left": 50,
-                    "right": 50,
-                    "top": 50,
-                    "bottom": 50
-                },
-                "series": [
-                    {
-                        "name": "默认值0",
-                        "type": "bar",
-                        "areaStyle": {
-                            "normal": {
-                            }
-                        },
-                        "stack": null,
-                        "data": [
-                            2,
-                            6,
-                            5,
-                            8
-                        ]
-                    },
-                    {
-                        "name": "默认值1",
-                        "type": "bar",
-                        "areaStyle": {
-                            "normal": {
-                            }
-                        },
-                        "stack": null,
-                        "data": [
-                            4,
-                            8,
-                            2,
-                            6
-                        ]
-                    },
-                    {
-                        "name": "默认值2",
-                        "type": "bar",
-                        "areaStyle": {
-                            "normal": {
-                            }
-                        },
-                        "stack": null,
-                        "data": [
-                            4,
-                            4,
-                            9,
-                            1
-                        ]
-                    },
-                    {
-                        "name": "默认值3",
-                        "type": "bar",
-                        "areaStyle": {
-                            "normal": {
-                            }
-                        },
-                        "stack": null,
-                        "data": [
-                            4,
-                            4,
-                            1,
-                            7
-                        ]
-                    }
-                ],
-                "animationEasing": "elasticOut",
-                "itemStyle": {
-                    "normal": {
-                    },
-                    "emphasis": {
-                        "barBorderWidth": 1,
-                        "shadowBlur": 10,
-                        "shadowOffsetX": 0,
-                        "shadowOffsetY": 0,
-                        "shadowColor": "rgba(0,0,0,0.5)"
+    },
+    color: ["#d87c7c", "#919e8b", "#d7ab82", "#6e7074", "#61a0a8", "#efa18d", "#787464", "#cc7e63", "#724e58", "#4b565b"],
+    textStyle: {},
+    line: {
+        itemStyle: {normal: {borderWidth: 1}},
+        lineStyle: {normal: {width: 2}},
+        symbolSize: 4,
+        symbol: "emptyCircle",
+        smooth: false
+    },
+    radar: {
+        itemStyle: {normal: {borderWidth: 1}},
+        lineStyle: {normal: {width: 2}},
+        symbolSize: 4,
+        symbol: "emptyCircle",
+        smooth: false
+    },
+    bar: {
+        itemStyle: {
+            normal: {barBorderWidth: 0, barBorderColor: "#ccc"},
+            emphasis: {barBorderWidth: 0, barBorderColor: "#ccc"}
         }
+    },
+    pie: {itemStyle: {normal: {borderWidth: 0, borderColor: "#ccc"}, emphasis: {borderWidth: 0, borderColor: "#ccc"}}},
+    scatter: {
+        itemStyle: {
+            normal: {borderWidth: 0, borderColor: "#ccc"},
+            emphasis: {borderWidth: 0, borderColor: "#ccc"}
         }
+    },
+    boxplot: {
+        itemStyle: {
+            normal: {borderWidth: 0, borderColor: "#ccc"},
+            emphasis: {borderWidth: 0, borderColor: "#ccc"}
         }
+    },
+    parallel: {
+        itemStyle: {
+            normal: {borderWidth: 0, borderColor: "#ccc"},
+            emphasis: {borderWidth: 0, borderColor: "#ccc"}
+        }
+    },
+    sankey: {
+        itemStyle: {
+            normal: {borderWidth: 0, borderColor: "#ccc"},
+            emphasis: {borderWidth: 0, borderColor: "#ccc"}
+        }
+    },
+    funnel: {
+        itemStyle: {
+            normal: {borderWidth: 0, borderColor: "#ccc"},
+            emphasis: {borderWidth: 0, borderColor: "#ccc"}
+        }
+    },
+    gauge: {
+        itemStyle: {
+            normal: {borderWidth: 0, borderColor: "#ccc"},
+            emphasis: {borderWidth: 0, borderColor: "#ccc"}
+        }
+    },
+    candlestick: {
+        itemStyle: {
+            normal: {
+                color: "#c23531",
+                color0: "#314656",
+                borderColor: "#c23531",
+                borderColor0: "#314656",
+                borderWidth: 1
+            }
+        }
+    },
+    graph: {
+        itemStyle: {normal: {borderWidth: 0, borderColor: "#ccc"}},
+        lineStyle: {normal: {width: 1, color: "#aaaaaa"}},
+        symbolSize: 4,
+        symbol: "emptyCircle",
+        smooth: false,
+        color: ["#d87c7c", "#919e8b", "#d7ab82", "#6e7074", "#61a0a8", "#efa18d", "#787464", "#cc7e63", "#724e58", "#4b565b"],
+        label: {normal: {textStyle: {color: "#eeeeee"}}}
+    },
+    map: {
+        itemStyle: {
+            normal: {areaColor: "#eeeeee", borderColor: "#444444", borderWidth: 0.5},
+            emphasis: {areaColor: "rgba(255,215,0,0.8)", borderColor: "#444444", borderWidth: 1}
+        }, label: {normal: {textStyle: {color: "#000000"}}, emphasis: {textStyle: {color: "rgb(100,0,0)"}}}
+    },
+    geo: {
+        itemStyle: {
+            normal: {areaColor: "#eeeeee", borderColor: "#444444", borderWidth: 0.5},
+            emphasis: {areaColor: "rgba(255,215,0,0.8)", borderColor: "#444444", borderWidth: 1}
+        }, label: {normal: {textStyle: {color: "#000000"}}, emphasis: {textStyle: {color: "rgb(100,0,0)"}}}
+    },
+    categoryAxis: {
+        axisLine: {show: true, lineStyle: {color: "#333"}},
+        axisTick: {show: true, lineStyle: {color: "#333"}},
+        axisLabel: {show: true, textStyle: {color: "#333"}},
+        splitLine: {show: false, lineStyle: {color: ["#ccc"]}},
+        splitArea: {show: false, areaStyle: {color: ["rgba(250,250,250,0.3)", "rgba(200,200,200,0.3)"]}}
+    },
+    valueAxis: {
+        axisLine: {show: true, lineStyle: {color: "#333"}},
+        axisTick: {show: true, lineStyle: {color: "#333"}},
+        axisLabel: {show: true, textStyle: {color: "#333"}},
+        splitLine: {show: true, lineStyle: {color: ["#ccc"]}},
+        splitArea: {show: false, areaStyle: {color: ["rgba(250,250,250,0.3)", "rgba(200,200,200,0.3)"]}}
+    },
+    logAxis: {
+        axisLine: {show: true, lineStyle: {color: "#333"}},
+        axisTick: {show: true, lineStyle: {color: "#333"}},
+        axisLabel: {show: true, textStyle: {color: "#333"}},
+        splitLine: {show: true, lineStyle: {color: ["#ccc"]}},
+        splitArea: {show: false, areaStyle: {color: ["rgba(250,250,250,0.3)", "rgba(200,200,200,0.3)"]}}
+    },
+    timeAxis: {
+        axisLine: {show: true, lineStyle: {color: "#333"}},
+        axisTick: {show: true, lineStyle: {color: "#333"}},
+        axisLabel: {show: true, textStyle: {color: "#333"}},
+        splitLine: {show: true, lineStyle: {color: ["#ccc"]}},
+        splitArea: {show: false, areaStyle: {color: ["rgba(250,250,250,0.3)", "rgba(200,200,200,0.3)"]}}
+    },
+    timeline: {
+        lineStyle: {color: "#293c55", width: 1},
+        itemStyle: {normal: {color: "#293c55", borderWidth: 1}, emphasis: {color: "#a9334c"}},
+        controlStyle: {
+            normal: {color: "#293c55", borderColor: "#293c55", borderWidth: 0.5},
+            emphasis: {color: "#293c55", borderColor: "#293c55", borderWidth: 0.5}
+        },
+        checkpointStyle: {color: "#e43c59", borderColor: "rgba(194,53,49,0.5)"},
+        label: {normal: {textStyle: {color: "#293c55"}}, emphasis: {textStyle: {color: "#293c55"}}}
+    },
+    visualMap: {color: ["#bf444c", "#d88273", "#f6efa6"]},
+    dataZoom: {
+        backgroundColor: "rgba(47,69,84,0)",
+        dataBackgroundColor: "rgba(47,69,84,0.3)",
+        fillerColor: "rgba(167,183,204,0.4)",
+        handleColor: "#a7b7cc",
+        handleSize: "100%",
+        textStyle: {color: "#333333"}
+    },
+    markPoint: {label: {normal: {textStyle: {color: "#eeeeee"}}, emphasis: {textStyle: {color: "#eeeeee"}}}}
+}
 
+//        console.log(JSON.stringify(obj).replace(/"([a-zA-Z0-9]*?)":/g,'$1:'));
 
-        console.log(JSONfn.stringify(str1).replace(/"([a-zA-Z0-9]*?)":/g,'$1:'));
-        console.log(JSONfn.stringify(obj).replace(/"(.*?)":/g,'$1:'))
+        $('#button1').click(function () {
+            console.log(11)
+            console.log(($('#ta').val()).replace(/"([a-zA-Z0-9]*?)":/g,'$1:').replace(/\s*/g,''));
+        })
+
     //
     //    console.log(obj2)
 

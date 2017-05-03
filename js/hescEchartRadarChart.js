@@ -35,6 +35,7 @@
     var selectID = null;
     //option相关属性
     var option = null,
+        theme='vintage',
         backgroundColor = '#ffffff',
         /*
          title相关属性
@@ -233,13 +234,14 @@
 
     }
 
+
     var selectFun = function (selector) {
         selectID = selector;
         return this;
     }
     var render = function () {
         console.log(option);
-        var chart = echarts.init(document.getElementById(selectID));
+        var chart = echarts.init(document.getElementById(selectID),theme);
         chart.setOption(option);
         return this;
     }
@@ -388,6 +390,12 @@
     var getOptionFun=function () {
         return option;
     }
+    var themeFun=function (x) {
+        theme=x;
+        return this;
+    }
+
+    exports.theme=themeFun;
 
     exports.option=getOptionFun;
     exports.select = selectFun;

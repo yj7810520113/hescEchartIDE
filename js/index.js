@@ -14,6 +14,7 @@ var divChartId='';
 //bar相关的配置数据和数据
 var barInitialCanvasData=[[{"2011":2},{"2011":4},{"2011":4},{"2011":4}],[{"2012":6},{"2012":8},{"2013":4},{"2013":4}],[{"2014":5},{"2014":2},{"2014":9},{"2014":1}],[{"2015":8},{"2015":6},{"2015":1},{"2015":7}]];
 var barInitialDatGuiData ={
+    theme:'vintage',
     canvasWidth:500,
     canvasHeight:400,
     backgroundColor:'rgba(255,255,255,0)',
@@ -58,6 +59,7 @@ var barInitialDatGuiData ={
 };
 var lineInitialCanvasData=[[{"2011":2},{"2011":4},{"2011":4},{"2011":4}],[{"2012":6},{"2012":8},{"2013":4},{"2013":4}],[{"2014":5},{"2014":2},{"2014":9},{"2014":1}],[{"2015":8},{"2015":6},{"2015":1},{"2015":7}]];
 var lineInitialDatGuiData={
+    theme:'vintage',
     canvasWidth:500,
     canvasHeight:400,
     backgroundColor:'rgba(255,255,255,0)',
@@ -103,6 +105,7 @@ var lineInitialDatGuiData={
 };
 var pieInitialCanvasData=[{"name":"2011","value":2},{"name":"2012","value":1},{"name":"2013","value":3},{"name":"2014","value":4}];
 var pieInitailDatGuiData={
+    theme:'vintage',
     canvasWidth:500,
     canvasHeight:400,
     backgroundColor:'rgba(255,255,255,0)',
@@ -136,6 +139,7 @@ var pieInitailDatGuiData={
 };
 var radarInitialCanvasData=[[{"推塔":2},{"输出":4},{"承受伤害":4},{"KDA":4},{"胜率":78}],[{"推塔":3},{"输出":5},{"承受伤害":5},{"KDA":10},{"胜率":60}],[{"推塔":4},{"输出":1},{"承受伤害":1},{"KDA":5},{"胜率":65}],[{"推塔":5},{"输出":4},{"承受伤害":2},{"KDA":8},{"胜率":70}]];
 var radarInitialDatGuiData={
+    theme:'vintage',
     canvasWidth:500,
     canvasHeight:400,
     backgroundColor:'rgba(255,255,255,0)',
@@ -183,6 +187,7 @@ var radarInitialDatGuiData={
 };
 var calendarInitialCanvasData=[{"2017-01-01":713},{"2017-01-02":871},{"2017-01-03":65},{"2017-01-04":629},{"2017-01-05":468},{"2017-01-06":532},{"2017-01-07":823},{"2017-01-08":458},{"2017-01-09":525},{"2017-01-10":200},{"2017-01-11":884},{"2017-01-12":760},{"2017-01-13":845},{"2017-01-14":11},{"2017-01-15":46},{"2017-01-16":458},{"2017-01-17":302},{"2017-01-18":850},{"2017-01-19":485},{"2017-01-20":710},{"2017-01-21":511},{"2017-01-22":931},{"2017-01-23":631},{"2017-01-24":332},{"2017-01-25":675},{"2017-01-26":424},{"2017-01-27":536},{"2017-01-28":540},{"2017-01-29":917},{"2017-01-30":9},{"2017-01-31":26},{"2017-02-01":278},{"2017-02-02":135},{"2017-02-03":629},{"2017-02-04":86},{"2017-02-05":981},{"2017-02-06":91},{"2017-02-07":326},{"2017-02-08":134},{"2017-02-09":932},{"2017-02-10":813},{"2017-02-11":237},{"2017-02-12":664},{"2017-02-13":273},{"2017-02-14":622},{"2017-02-15":360},{"2017-02-16":17},{"2017-02-17":980},{"2017-02-18":870},{"2017-02-19":908},{"2017-02-20":544},{"2017-02-21":734},{"2017-02-22":255},{"2017-02-23":186},{"2017-02-24":4},{"2017-02-25":68},{"2017-02-26":811},{"2017-02-27":751},{"2017-02-28":115},{"2017-03-01":272},{"2017-03-02":819},{"2017-03-03":739},{"2017-03-04":969},{"2017-03-05":488},{"2017-03-06":332},{"2017-03-07":829},{"2017-03-08":867},{"2017-03-09":802},{"2017-03-10":215},{"2017-03-11":858},{"2017-03-12":888},{"2017-03-13":188},{"2017-03-14":866},{"2017-03-15":246},{"2017-03-16":143},{"2017-03-17":1},{"2017-03-18":347},{"2017-03-19":943},{"2017-03-20":796},{"2017-03-21":254},{"2017-03-22":23},{"2017-03-23":373},{"2017-03-24":424},{"2017-03-25":502},{"2017-03-26":899},{"2017-03-27":876},{"2017-03-28":662},{"2017-03-29":56},{"2017-03-30":155},{"2017-03-31":977},{"2017-04-01":578},{"2017-04-02":557},{"2017-04-03":3},{"2017-04-04":730},{"2017-04-05":388},{"2017-04-06":736},{"2017-04-07":915},{"2017-04-08":653},{"2017-04-09":654},{"2017-04-10":353},{"2017-04-11":628},{"2017-04-12":563},{"2017-04-13":799},{"2017-04-14":972},{"2017-04-15":841},{"2017-04-16":702},{"2017-04-17":331},{"2017-04-18":728},{"2017-04-19":723},{"2017-04-20":13},{"2017-04-21":922},{"2017-04-22":20},{"2017-04-23":849},{"2017-04-24":903},{"2017-04-25":736},{"2017-04-26":945},{"2017-04-27":521},{"2017-04-28":349},{"2017-04-29":279},{"2017-04-30":279},{"2017-05-01":924},{"2017-05-02":802},{"2017-05-03":86},{"2017-05-04":344},{"2017-05-05":332},{"2017-05-06":270},{"2017-05-07":613},{"2017-05-08":485},{"2017-05-09":752},{"2017-05-10":733},{"2017-05-11":49},{"2017-05-12":110},{"2017-05-13":456},{"2017-05-14":507},{"2017-05-15":833},{"2017-05-16":259},{"2017-05-17":266},{"2017-05-18":872},{"2017-05-19":700},{"2017-05-20":588},{"2017-05-21":592},{"2017-05-22":68},{"2017-05-23":491},{"2017-05-24":898},{"2017-05-25":313},{"2017-05-26":877},{"2017-05-27":666},{"2017-05-28":326},{"2017-05-29":186},{"2017-05-30":920},{"2017-05-31":496},{"2017-06-01":818},{"2017-06-02":12},{"2017-06-03":34},{"2017-06-04":914},{"2017-06-05":720},{"2017-06-06":535},{"2017-06-07":788},{"2017-06-08":891},{"2017-06-09":565},{"2017-06-10":832},{"2017-06-11":575},{"2017-06-12":225},{"2017-06-13":68},{"2017-06-14":650},{"2017-06-15":131},{"2017-06-16":478},{"2017-06-17":963},{"2017-06-18":906},{"2017-06-19":102},{"2017-06-20":72},{"2017-06-21":834},{"2017-06-22":638},{"2017-06-23":933},{"2017-06-24":631},{"2017-06-25":595},{"2017-06-26":411},{"2017-06-27":960},{"2017-06-28":871},{"2017-06-29":681},{"2017-06-30":930},{"2017-07-01":346},{"2017-07-02":265},{"2017-07-03":770},{"2017-07-04":618},{"2017-07-05":260},{"2017-07-06":550},{"2017-07-07":385},{"2017-07-08":460},{"2017-07-09":137},{"2017-07-10":783},{"2017-07-11":55},{"2017-07-12":522},{"2017-07-13":501},{"2017-07-14":121},{"2017-07-15":975},{"2017-07-16":532},{"2017-07-17":474},{"2017-07-18":78},{"2017-07-19":233},{"2017-07-20":489},{"2017-07-21":629},{"2017-07-22":76},{"2017-07-23":156},{"2017-07-24":131},{"2017-07-25":473},{"2017-07-26":155},{"2017-07-27":925},{"2017-07-28":664},{"2017-07-29":440},{"2017-07-30":381},{"2017-07-31":939},{"2017-08-01":690},{"2017-08-02":407},{"2017-08-03":933},{"2017-08-04":667},{"2017-08-05":272},{"2017-08-06":880},{"2017-08-07":265},{"2017-08-08":261},{"2017-08-09":897},{"2017-08-10":609},{"2017-08-11":735},{"2017-08-12":428},{"2017-08-13":547},{"2017-08-14":735},{"2017-08-15":330},{"2017-08-16":95},{"2017-08-17":80},{"2017-08-18":449},{"2017-08-19":425},{"2017-08-20":51},{"2017-08-21":334},{"2017-08-22":13},{"2017-08-23":981},{"2017-08-24":413},{"2017-08-25":507},{"2017-08-26":753},{"2017-08-27":657},{"2017-08-28":462},{"2017-08-29":574},{"2017-08-30":363},{"2017-08-31":287},{"2017-09-01":203},{"2017-09-02":213},{"2017-09-03":216},{"2017-09-04":166},{"2017-09-05":9},{"2017-09-06":0},{"2017-09-07":15},{"2017-09-08":558},{"2017-09-09":784},{"2017-09-10":833},{"2017-09-11":797},{"2017-09-12":64},{"2017-09-13":847},{"2017-09-14":673},{"2017-09-15":78},{"2017-09-16":901},{"2017-09-17":339},{"2017-09-18":239},{"2017-09-19":543},{"2017-09-20":476},{"2017-09-21":225},{"2017-09-22":43},{"2017-09-23":151},{"2017-09-24":894},{"2017-09-25":728},{"2017-09-26":310},{"2017-09-27":608},{"2017-09-28":545},{"2017-09-29":272},{"2017-09-30":331},{"2017-10-01":207},{"2017-10-02":100},{"2017-10-03":662},{"2017-10-04":326},{"2017-10-05":384},{"2017-10-06":382},{"2017-10-07":20},{"2017-10-08":628},{"2017-10-09":240},{"2017-10-10":399},{"2017-10-11":315},{"2017-10-12":204},{"2017-10-13":117},{"2017-10-14":317},{"2017-10-15":52},{"2017-10-16":420},{"2017-10-17":339},{"2017-10-18":66},{"2017-10-19":785},{"2017-10-20":326},{"2017-10-21":611},{"2017-10-22":423},{"2017-10-23":231},{"2017-10-24":796},{"2017-10-25":109},{"2017-10-26":198},{"2017-10-27":440},{"2017-10-28":322},{"2017-10-29":760},{"2017-10-30":238},{"2017-10-31":982},{"2017-11-01":119},{"2017-11-02":776},{"2017-11-03":808},{"2017-11-04":847},{"2017-11-05":870},{"2017-11-06":617},{"2017-11-07":838},{"2017-11-08":868},{"2017-11-09":547},{"2017-11-10":970},{"2017-11-11":405},{"2017-11-12":681},{"2017-11-13":628},{"2017-11-14":835},{"2017-11-15":164},{"2017-11-16":790},{"2017-11-17":823},{"2017-11-18":765},{"2017-11-19":926},{"2017-11-20":469},{"2017-11-21":117},{"2017-11-22":656},{"2017-11-23":505},{"2017-11-24":23},{"2017-11-25":886},{"2017-11-26":651},{"2017-11-27":987},{"2017-11-28":269},{"2017-11-29":687},{"2017-11-30":204},{"2017-12-01":649},{"2017-12-02":482},{"2017-12-03":989},{"2017-12-04":321},{"2017-12-05":63},{"2017-12-06":917},{"2017-12-07":97},{"2017-12-08":445},{"2017-12-09":56},{"2017-12-10":650},{"2017-12-11":688},{"2017-12-12":973},{"2017-12-13":859},{"2017-12-14":264},{"2017-12-15":364},{"2017-12-16":918},{"2017-12-17":887},{"2017-12-18":461},{"2017-12-19":925},{"2017-12-20":635},{"2017-12-21":679},{"2017-12-22":514},{"2017-12-23":2},{"2017-12-24":86},{"2017-12-25":193},{"2017-12-26":450},{"2017-12-27":284},{"2017-12-28":133},{"2017-12-29":646},{"2017-12-30":813},{"2017-12-31":1}];
 var calendarInitialDatGuiData={
+    theme:'vintage',
     canvasWidth:500,
     canvasHeight:400,
     backgroundColor:'rgba(255,255,255,0)',
@@ -574,6 +579,7 @@ var wordCloudInitialCanvasData={
     "brush": 3
 };
 var wordCloudInitialDatGuiData= {
+    theme:'vintage',
     canvasWidth:500,
     canvasHeight:400,
     backgroundColor:'rgba(255,255,255,0)',
@@ -784,6 +790,10 @@ function addBarDatGui(chartId){
 
             renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             //添加事件监听
+        datGuiPannel.add(barDefaultDatGUiObj,'theme',{vintage:'vintage',westeros:'westeros',wonderland:'wonderland',chalk:'chalk',macarons:'macarons',shine:'shine',halloween:'halloween',dark:'dark',essos:'essos',walden:'walden',infographic:'infographic',roma:'roma',purplePassion:'purplepassion'}).name('主题').listen().onChange(function () {
+            renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+        });
+
             var barCanvas=datGuiPannel.addFolder('画布大小');
             barCanvas.add(barDefaultDatGUiObj,'canvasWidth',200,1000).name('画布宽').listen().onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
@@ -1026,6 +1036,9 @@ function addLineDatGui(chartId) {
 
         renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);
         //添加事件监听
+        datGuiPannel.add(lineDefaultDatGUiObj,'theme',{vintage:'vintage',westeros:'westeros',wonderland:'wonderland',chalk:'chalk',macarons:'macarons',shine:'shine',halloween:'halloween',dark:'dark',essos:'essos',walden:'walden',infographic:'infographic',roma:'roma',purplePassion:'purplepassion'}).name('主题').listen().onChange(function () {
+            renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);
+        });
         var lineCanvas=datGuiPannel.addFolder('画布大小');
         lineCanvas.add(lineDefaultDatGUiObj,'canvasWidth',200,1000).name('画布宽').listen().onChange(function () {
             renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);
@@ -1095,6 +1108,9 @@ function addPieDatGui(chartId) {
 
         renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         //添加事件监听
+        datGuiPannel.add(pieDefaultDatGUiObj,'theme',{vintage:'vintage',westeros:'westeros',wonderland:'wonderland',chalk:'chalk',macarons:'macarons',shine:'shine',halloween:'halloween',dark:'dark',essos:'essos',walden:'walden',infographic:'infographic',roma:'roma',purplePassion:'purplepassion'}).name('主题').listen().onChange(function () {
+            renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
+        });
         var pieCanvas = datGuiPannel.addFolder('画布大小');
         pieCanvas.add(pieDefaultDatGUiObj, 'canvasWidth', 200, 1000).name('画布宽').listen().onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
@@ -1186,6 +1202,9 @@ function addRadarDatGui(chartId) {
 
         renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         //添加事件监听
+        datGuiPannel.add(radarDefaultDatGUiObj,'theme',{vintage:'vintage',westeros:'westeros',wonderland:'wonderland',chalk:'chalk',macarons:'macarons',shine:'shine',halloween:'halloween',dark:'dark',essos:'essos',walden:'walden',infographic:'infographic',roma:'roma',purplePassion:'purplepassion'}).name('主题').listen().onChange(function () {
+            renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
+        });
         var radarCanvas = datGuiPannel.addFolder('画布大小');
         radarCanvas.add(radarDefaultDatGUiObj, 'canvasWidth', 200, 1000).name('画布宽').listen().onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
@@ -1339,6 +1358,9 @@ function addCalendarDatGui(chartId) {
 
         renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         //添加事件监听
+        datGuiPannel.add(CalendarDefaultDatGUiObj,'theme',{vintage:'vintage',westeros:'westeros',wonderland:'wonderland',chalk:'chalk',macarons:'macarons',shine:'shine',halloween:'halloween',dark:'dark',essos:'essos',walden:'walden',infographic:'infographic',roma:'roma',purplePassion:'purplepassion'}).name('主题').listen().onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
         var calendarCanvas = datGuiPannel.addFolder('画布大小');
         calendarCanvas.add(CalendarDefaultDatGUiObj, 'canvasWidth', 200, 1000).name('画布宽').listen().onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
@@ -1462,6 +1484,9 @@ function addWordCloudDatGui(chartId) {
 
         renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data,WordCloudDefaultDatGUiObj);
         //添加事件监听
+        datGuiPannel.add(WordCloudDefaultDatGUiObj,'theme',{vintage:'vintage',westeros:'westeros',wonderland:'wonderland',chalk:'chalk',macarons:'macarons',shine:'shine',halloween:'halloween',dark:'dark',essos:'essos',walden:'walden',infographic:'infographic',roma:'roma',purplePassion:'purplepassion'}).name('主题').listen().onChange(function () {
+            renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
+        });
         var wordCloudCanvas = datGuiPannel.addFolder('画布大小');
         wordCloudCanvas.add(WordCloudDefaultDatGUiObj, 'canvasWidth', 200, 1000).name('画布宽').listen().onChange(function () {
             renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);

@@ -34,6 +34,7 @@
     var selectID=null;
     //option相关属性
     var option=null,
+        theme='vintage',
         backgroundColor = '#ffffff',
         //绘图区相对于画布偏移属性
         /*
@@ -166,7 +167,7 @@
 
     var render=function(){
         console.log(option);
-        var chart = echarts.init(document.getElementById(selectID));
+        var chart = echarts.init(document.getElementById(selectID),theme);
         chart.setOption(option);
         return this;
     }
@@ -264,7 +265,12 @@
     var getOptionFun=function () {
         return option;
     }
+    var themeFun=function (x) {
+        theme=x;
+        return this;
+    }
 
+    exports.theme=themeFun;
     exports.option=getOptionFun;
 
 

@@ -1,0 +1,38 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/5/3
+ * Time:15:54
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.js"></script>
+</head>
+<body>
+
+<script>
+
+    var obj1={
+        1:111,
+        2:222,
+        3:{
+            1:111,
+            2:222
+        }
+    }
+    var obj2={
+        1:111,
+        2:999,
+        3:{
+            2:444,
+            5:555
+        }
+    }
+    console.log($.extend(true,obj1,obj2));
+</script>
+</body>
+</html>
