@@ -826,7 +826,7 @@ function addHescEle(divId,dataType,data,datGuiConfig){
 function addScreenDatGui(){
     addScreenDatGUiPannel(findDatGuiDataById('screen'));
     function  addScreenDatGUiPannel(screenDefaultDatGUiObj) {
-        $('#tabconfig').children().remove();
+        $('#tabConfig').children().remove();
         datGuiPannel=new dat.GUI({autoPlace:false});
         var customContainer=document.getElementById('tabConfig');
         customContainer.appendChild(datGuiPannel.domElement);

@@ -209,6 +209,16 @@
        refreshTransformScale();
     });
 
+
+    /*
+    *选择screencontainer时候的dat.gui
+    */
+    $('#screenContainer').click(function (e) {
+        if($(e.target).attr('id')=='screenContainer'){
+            addScreenDatGui();
+        }
+    })
+
 //    var screenGap=50;
 //    var screenContainerHeight=$(window).height()-60;
 //    var sceenContainerWidth=$(window).width()-315;
