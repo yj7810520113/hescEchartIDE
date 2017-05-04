@@ -701,6 +701,9 @@ var selectDivId='';
  */
 function  addScreen() {
     addHescEle('screen','','',screenInitialDatGuiData);
+    //设置screen的高度和宽度
+    $("#screen").height(1080);
+    $("#screen").width(1920);
 }
 function addChartDiv(parent,chartType){
 // <div id='bar随即id' class="Monitor">
@@ -839,8 +842,8 @@ function addScreenDatGui(){
         datGuiPannel.addColor(screenDefaultDatGUiObj,"background").name("背景色").listen().onChange(function () {
             $('#screen').css('background',screenDefaultDatGUiObj.background);
             refreshTransformScale();
-
         });
+
     }
 }
 function addBarDatGui(chartId){

@@ -71,7 +71,7 @@ div.screenContainer{
     width:600px;height:600px;left:320px;top:60px;position: absolute;background: white;overflow: hidden;
 }
 div.screen{
-    width:1920px;height:1080px;position: absolute;background: grey;overflow: hidden;
+    position: absolute;background: grey;overflow: hidden;
 }
 div.Monitor{width: 500px;height: 400px;overflow: hidden;cursor: move;background: white;position: absolute; }
 
