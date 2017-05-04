@@ -12,7 +12,7 @@
 /*}*/
 ::-webkit-scrollbar
 {
-    width: 16px;
+    width: 5px;
     height: 16px;
     background-color: #F5F5F5;
 }
@@ -56,14 +56,17 @@
 .dg .main{
     width: 300px;
 }
+.dg .close-button{
+    display: none;
+}
 *{
     margin:0;
     padding: 0;
 }
-body{
-overflow-x:hidden;
-overflow-y:hidden;
-}
+/*body{*/
+/*overflow-x:hidden;*/
+/*overflow-y:hidden;*/
+/*}*/
 div.screenContainer{
     width:600px;height:600px;left:320px;top:60px;position: absolute;background: white;overflow: hidden;
 }
@@ -72,7 +75,7 @@ div.screen{
 }
 div.Monitor{width: 500px;height: 400px;overflow: hidden;cursor: move;background: white;position: absolute; }
 
-div.Monitor:hover{ background:gray;opacity: 0.6;outline:1px solid red;}
+div.Monitor:hover{ background:gray;opacity: 0.8;outline:1px solid red;}
 /*div.Monitor:active{width: 500px;height: 400px; outline:2px solid red; overflow: hidden;background: whitesmoke;cursor: move;}*/
 /*div.divControlPannel:hover{width: 500px;height: 400px;overflow: hidden;cursor: move;background: white;position: absolute; }*/
 
