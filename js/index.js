@@ -698,7 +698,40 @@ function addChartDiv(parent,chartType){
     //这里的长宽为monitor的长宽-3
     var divContent='<div id="'+ids+'" class="Monitor" style="z-index: 11">    <div  class="divControlPannel"><span class="glyphicon glyphicon-remove divControlPannelIcon removediv" id="removediv" onclick="removeDivFun()"></span> <span class="glyphicon glyphicon-download-alt divControlPannelIcon downloadOption" id="downloadOption" onclick="downloadOptionFun()"></span> </div><div id='+ids+'canvas class="canvasclass" style="height:'+(400)+'px;width:'+(500)+'px;"></div>';
     $(parent).append(divContent);
-    $('.Monitor').resizable().draggable();
+    //transformScale
+    var click = {
+        x: 0,
+        y: 0
+    };
+    //解决tranform的draggle不粘手的问题
+    $('.Monitor').resizable({
+        minWidth: -($(this).width()) * 10,  // these need to be large and negative
+        minHeight: -($(this).height()) * 10, // so we can shrink our resizable while scaled
+        resize: resizeFix
+        }
+    ).draggable({
+
+        start: function(event) {
+            click.x = event.clientX;
+            click.y = event.clientY;
+        },
+
+        drag: function(event, ui) {
+
+            // This is the parameter for scale()
+            var zoom = 1.5;
+
+            var original = ui.originalPosition;
+
+            // jQuery will simply use the same object we alter here
+            ui.position = {
+                left: (event.clientX - click.x + original.left) / transformScale,
+                top:  (event.clientY - click.y + original.top ) / transformScale
+            };
+
+        }
+
+    });
 
     //根据chartType的类型初始化hesclist中的对象
     if(chartType=='bar') {
@@ -1756,3 +1789,15 @@ var formatJson = function(json, options) {
 
     return formatted;
 };
+
+//resize不粘手的问题
+function resizeFix(event, ui) {
+    var changeWidth = ui.size.width - ui.originalSize.width; // find change in width
+    var newWidth = ui.originalSize.width + changeWidth / transformScale; // adjust new width by our zoomScale
+
+    var changeHeight = ui.size.height - ui.originalSize.height; // find change in height
+    var newHeight = ui.originalSize.height + changeHeight / transformScale; // adjust new height by our zoomScale
+
+    ui.size.width = newWidth;
+    ui.size.height = newHeight;
+}
