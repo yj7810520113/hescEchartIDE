@@ -203,22 +203,27 @@
         console.log($(window).height())
     });
     $('.tabs').height($(window).height()-60);
+    $(function () {
+       addScreen();
+       addScreenDatGui();
+       refreshTransformScale();
+    });
 
-    var screenGap=50;
-    var screenContainerHeight=$(window).height()-60;
-    var sceenContainerWidth=$(window).width()-315;
-    //缩放系数
-    var transformScale=(((screenContainerHeight-screenGap)/1080)<((sceenContainerWidth-screenGap)/1920))?((screenContainerHeight-screenGap)/1080):((sceenContainerWidth-screenGap)/1920);
-    //设置screenContainer
-    $('#screenContainer').css('height',screenContainerHeight);
-    $('#screenContainer').css('width',sceenContainerWidth);
-    $('#screenContainer').css('left','315px');
-    $('#screenContainer').css('top','60px');
-    //设置
-    $('#screen').css('top',(screenContainerHeight-$('#screen').height()*transformScale)/2);
-    $('#screen').css('left',(sceenContainerWidth-$('#screen').width()*transformScale)/2);
-    $('#screen').css('transform','scale('+transformScale+')');
-    $('#screen').css('transform-origin','left top');
+//    var screenGap=50;
+//    var screenContainerHeight=$(window).height()-60;
+//    var sceenContainerWidth=$(window).width()-315;
+//    //缩放系数
+//    var transformScale=(((screenContainerHeight-screenGap)/1080)<((sceenContainerWidth-screenGap)/1920))?((screenContainerHeight-screenGap)/1080):((sceenContainerWidth-screenGap)/1920);
+//    //设置screenContainer
+//    $('#screenContainer').css('height',screenContainerHeight);
+//    $('#screenContainer').css('width',sceenContainerWidth);
+//    $('#screenContainer').css('left','315px');
+//    $('#screenContainer').css('top','60px');
+//    //设置
+//    $('#screen').css('top',(screenContainerHeight-$('#screen').height()*transformScale)/2);
+//    $('#screen').css('left',(sceenContainerWidth-$('#screen').width()*transformScale)/2);
+//    $('#screen').css('transform','scale('+transformScale+')');
+//    $('#screen').css('transform-origin','left top');
 
     /*
      添加词云的本地文件

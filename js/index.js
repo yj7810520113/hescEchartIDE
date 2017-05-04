@@ -11,7 +11,13 @@ var hashids=new Hashids('hescEchart',5);
 //用于datGui控制面板的生成
 var datGuiPannel='';
 var divChartId='';
-//bar相关的配置数据和数据
+//缩放系数
+var transformScale=1;
+var screenInitialDatGuiData={
+    width:1920,
+    height:1080,
+    background:'#757575'
+}
 var barInitialCanvasData=[[{"2011":2},{"2011":4},{"2011":4},{"2011":4}],[{"2012":6},{"2012":8},{"2013":4},{"2013":4}],[{"2014":5},{"2014":2},{"2014":9},{"2014":1}],[{"2015":8},{"2015":6},{"2015":1},{"2015":7}]];
 var barInitialDatGuiData ={
     theme:'vintage',
@@ -690,6 +696,12 @@ var selectDivId='';
 /*
 添加div的方法,返回值为随机id,这里需要对图的类型进行判断
  */
+/*
+添加screen
+ */
+function  addScreen() {
+    addHescEle('screen','','',screenInitialDatGuiData);
+}
 function addChartDiv(parent,chartType){
 // <div id='bar随即id' class="Monitor">
 //         <div id="barChild" style="height:calc(100% - 3px);wid    th:calc(100% - 3px);"></div>
@@ -808,6 +820,29 @@ function addHescEle(divId,dataType,data,datGuiConfig){
 /*
 柱状图dat.gui初始化配置方法,即为dat.gui添加方法
  */
+function addScreenDatGui(){
+    addScreenDatGUiPannel(findDatGuiDataById('screen'));
+    function  addScreenDatGUiPannel(screenDefaultDatGUiObj) {
+        $('#tabconfig').children().remove();
+        datGuiPannel=new dat.GUI({autoPlace:false});
+        var customContainer=document.getElementById('tabConfig');
+        customContainer.appendChild(datGuiPannel.domElement);
+        datGuiPannel.add(screenDefaultDatGUiObj,'width',1024,4096).name("屏幕宽").listen().onChange(function () {
+            $('#screen').css('width',screenDefaultDatGUiObj.width);
+            refreshTransformScale();
+        });
+        datGuiPannel.add(screenDefaultDatGUiObj,'height',800,2160).name("屏幕高").listen().onChange(function () {
+            $('#screen').css('height',screenDefaultDatGUiObj.height);
+            refreshTransformScale();
+
+        });
+        datGuiPannel.addColor(screenDefaultDatGUiObj,"background").name("背景色").listen().onChange(function () {
+            $('#screen').css('background',screenDefaultDatGUiObj.background);
+            refreshTransformScale();
+
+        });
+    }
+}
 function addBarDatGui(chartId){
     //selectDivId=chartId;
     addBarDatGuiPannel(findDatGuiDataById(chartId),findCanvasDataById(chartId));
@@ -1802,6 +1837,28 @@ function resizeFix(event, ui) {
 
     ui.size.width = newWidth;
     ui.size.height = newHeight;
+}
+/*
+刷新screen的transform的scale系数
+ */
+function refreshTransformScale(){
+    var screenGap=50;
+    var screenContainerHeight=$(window).height()-60;
+    var sceenContainerWidth=$(window).width()-315;
+    //缩放系数
+    console.log($('#screen').height())
+    transformScale=(((screenContainerHeight-screenGap)/$('#screen').height())<((sceenContainerWidth-screenGap)/$('#screen').width()))?((screenContainerHeight-screenGap)/$('#screen').height()):((sceenContainerWidth-screenGap)/$('#screen').width());
+    //设置screenContainer
+    $('#screenContainer').css('height',screenContainerHeight);
+    $('#screenContainer').css('width',sceenContainerWidth);
+    $('#screenContainer').css('left','315px');
+    $('#screenContainer').css('top','60px');
+    //设置
+    $('#screen').css('top',(screenContainerHeight-$('#screen').height()*transformScale)/2);
+    $('#screen').css('left',(sceenContainerWidth-$('#screen').width()*transformScale)/2);
+    $('#screen').css('transform','scale('+transformScale+')');
+    $('#screen').css('transform-origin','left top');
+    console.log(transformScale);
 }
 
 //保存screen配置
