@@ -1,0 +1,488 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/4/17
+ * Time:14:28
+ -->
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/jsoneditor.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/index.css"/>
+    <link rel="stylesheet" href="../css/DAT.GUI.css"/>
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+
+    <script src="../js/DAT.GUI.js"></script>
+    <script src="../js/echarts.js"></script>
+    <script src="../js/hescEchartBarChart.js"></script>
+    <script src="../js/hescEchartLineChart.js"></script>
+    <script src="../js/hescEchartPieChart.js"></script>
+    <script src="../js/hescEchartCalendarMapChart.js"></script>
+    <script src="../js/hescEchartRadarChart.js"></script>
+    <script src="../js/hescEchartWordCloudChart.js"> </script>
+    <script src="../js/hescEchartCore.js"></script>
+    <script src="../js/worldcloud.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jsoneditor.js"></script>
+    <script src="../js/fileReader.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script src="../js/jQuery-mutate-event.js"></script>
+    <script src="../js/jQuery-mutate-mutate.js"></script>
+    <script src="../js/hashids.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/renderChart.js"></script>
+    <script src="../js/ETheme/echartTheme.js"></script>
+    <script src="../js/ETheme/chalk.js"></script>
+    <script src="../js/ETheme/dark.js"></script>
+    <script src="../js/ETheme/essos.js"></script>
+    <script src="../js/ETheme/halloween.js"></script>
+    <script src="../js/ETheme/infographic.js"></script>
+    <script src="../js/ETheme/macarons.js"></script>
+    <script src="../js/ETheme/purple-passion.js"></script>
+    <script src="../js/ETheme/roma.js"></script>
+    <script src="../js/ETheme/shine.js"></script>
+    <script src="../js/ETheme/vintage.js"></script>
+    <script src="../js/ETheme/walden.js"></script>
+    <script src="../js/ETheme/westeros.js"></script>
+    <script src="../js/ETheme/wonderland.js"></script>
+</head>
+<body>
+
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="../html/hescEchart.html" class="navbar-brand">HESCharts</a>
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+            <ul class="nav navbar-nav" id="addChart">
+                <li>
+                    <a href="#" id="bar">柱状</a>
+                </li>
+                <li>
+                    <a href="#" id="line">折线</a>
+                </li>
+                <li>
+                    <a href="#" id="pie">饼图</a>
+                </li>
+                <li>
+                    <a href="#" id="radar">雷达</a>
+                </li>
+                <li>
+                    <a href="#" id="calendar">日历热图</a>
+                </li>
+                <li>
+                    <a href="#" id="wordCloud">词云</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="screenContainer" class="screenContainer">
+    <div id="screen" class="screen">
+        <!--隐藏的按钮用于输入input 的file-->
+        <input id="imgFileInput" type="file" style="display: none"/>
+        <!--resize and drag div test-->
+        <!--<div id='bar随即id' class="Monitor">-->
+        <!--<div id="barChild" style="height:calc(100% - 3px);width:calc(100% - 3px);"></div>-->
+        <!--</div>-->
+
+    </div>
+</div>
+
+<div class="tabs " >
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active" style="width: 50%">
+            <a href="#tabConfig" data-toggle="tab">
+                配置
+            </a>
+        </li>
+        <li style="width: 50%"><a href="#tabData" data-toggle="tab">数据</a></li>
+    </ul>
+    <div id="myTabContent1" class="tab-content" style="overflow-y:visible;">
+        <div class="tab-pane fade in active" id="tabConfig">
+        </div>
+        <div class="tab-pane fade" id="tabData">
+            <div id="dataDescription">
+                <label>数据说明：</label>
+                <!--数据说明待添加-->
+            </div>
+
+
+            <!--<input type="file" id="loadDocument" value="Load"/>-->
+            <!--选择文件，静态文件，webAPI或者本地文件-->
+                <ul id="myTab1" class="nav nav-tabs">
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" datatog-gle="dropdown" href="#" aria-expanded="false">
+                            数据源类型 <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="dataSource">
+                            <li><a href="#dropdownstaticData" data-toggle="tab" aria-expanded="true">静态数据</a></li>
+                            <li><a href="#dropdownWebAPI" data-toggle="tab" aria-expanded="false">Web API</a>
+                            <li><a href="#dropdownLocalData" data-toggle="tab" aria-expanded="false">本地数据</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div id="DataSourceSelector" class="tab-content">
+                    <!--静态文件-->
+                    <div class="tab-pane fade in active" id="dropdownstaticData">
+                    </div>
+                    <!--WebAPI-->
+                    <div class="tab-pane fade" id="dropdownWebAPI">
+                            <div class="form-group">
+                                <label >WebAPI地址：</label>
+                                <input type="text" class="form-control" id="webAPIUrl"
+                                       placeholder="请输入URL，如http://example.com/API" style="width: 280px">
+                            </div>
+                            <button type="submit" class="btn btn-default" style="width: 280px" id="webAPIButton">确定</button>
+                    </div>
+                    <!--本地文件-->
+                    <div class="tab-pane fade" id="dropdownLocalData">
+                        <form role="form">
+                            <div class="form-group">
+                                <label >本地文件：</label>
+                                <!--<div class="tab-pane fade" id="tabData">-->
+                                <input type="file" id="loadLocalData" value="Load"/>
+                                <!--</div>-->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--添加jsoneditor模块-->
+                <div id="jsonEditorData" style="width: 280px; height: 400px;">
+                    <!--<input type="file" id="loadDocument" value="Load"/>-->
+                </div>
+                <button type="submit" class="btn btn-default" id="submitData" style="width: 280px">确定</button>
+        </div>
+    </div>
+</div>
+
+<!--下载option的模态框-->
+<div class="modal fade" id="downloadOptionModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" style="height: 700px;width:500px;z-index: 1001;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="30"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<!--初始化screen高度及缩放系数-->
+<script>
+    $(window).resize(function() {
+        console.log($(window).height())
+    });
+
+    var screenGap=50;
+    var screenContainerHeight=$(window).height()-60;
+    var sceenContainerWidth=$(window).width()-315;
+    //缩放系数
+    var transformScale=(((screenContainerHeight-screenGap)/1080)<((sceenContainerWidth-screenGap)/1920))?((screenContainerHeight-screenGap)/1080):((sceenContainerWidth-screenGap)/1920);
+    //设置screenContainer
+    $('#screenContainer').css('height',screenContainerHeight);
+    $('#screenContainer').css('width',sceenContainerWidth);
+    $('#screenContainer').css('left','315px');
+    $('#screenContainer').css('top','60px');
+    //设置
+    $('#screen').css('top',(screenContainerHeight-$('#screen').height()*transformScale)/2);
+    $('#screen').css('left',(sceenContainerWidth-$('#screen').width()*transformScale)/2);
+    $('#screen').css('transform','scale('+transformScale+')');
+    $('#screen').css('transform-origin','left top');
+
+    /*
+     添加词云的本地文件
+     */
+    FileReaderJS.setupInput(document.getElementById('imgFileInput'), {
+        on: {
+            load: function (event, file) {
+//                editor.setText(event.target.result);
+                wordCloudObj.maskImage=event.target.result;
+            },
+            loadend:function () {
+                renderWordCloudChart();
+            }
+        }
+    });
+</script>
+
+<!----------------------------------------------------JS-------------------------------------------------------->
+<!--添加图形-->
+<script>
+    //顶端的添加图形按钮,点击按钮也是一种screen上面的点击行为，点击的div可以直接被选中
+    $('#addChart').click(function (e) {
+        var addChartEle=$(e.target).attr('id');
+        if(addChartEle=='bar'){
+             var chartId=addChartDiv($('#screen'),'bar');
+            addBarDatGui(chartId);
+            divChartId=chartId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle=='line'){
+            var chartId=addChartDiv($('#screen'),'line');
+            addLineDatGui(chartId);
+            divChartId=chartId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle=='radar'){
+            var chartId=addChartDiv($('#screen'),'radar');
+            addRadarDatGui(chartId);
+            divChartId=chartId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle=='calendar'){
+            var chartId=addChartDiv($('#screen'),'calendar');
+            addCalendarDatGui(chartId);
+            divChartId=chartId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle=='pie'){
+            var chartId=addChartDiv($('#screen'),'pie');
+            addPieDatGui(chartId);
+            divChartId=chartId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle=='wordCloud'){
+            var chartId=addChartDiv($('#screen'),'wordCloud');
+            addWordCloudDatGui(chartId);
+            divChartId=chartId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+
+        /*
+         样式更新
+         */
+        //用户选择时，打开该div的控制面板(控制面板是打开textarea或者是关闭div)
+        //首先清除其他控制面板
+        $('#screen .divControlPannel').each(function () {
+            $(this).css('display','none')
+        });
+        //然后打开指定id的div的控制面板
+        $('#'+divChartId+' .divControlPannel').each(function (e1) {
+            $(this).css('display','inline');
+        });
+
+    });
+    /*
+    screen上面的点击
+     */
+    $('#screen').click(function (e) {
+        //判断是否是canvas的点击
+        if($(e.target).attr('id')=='downloadOption'||$(e.target).attr('id')=='removediv'){
+            return;
+        }
+        else {
+            //divchartId全局变量之一，在Index.js中声明，获取用户选择的div的id
+            //这里是获取到divchartid即为div的唯一的id
+            divChartId = $(e.target).parent().parent().parent().attr('id');
+            //根据screen上面的点击id，刷新dat.gui内容和图形
+            screenClick(divChartId);
+            //更新canvasData
+            jsonEditorEditor.set(addCanvasData(divChartId).data);
+
+            /*
+            *更新div的层叠关系
+            * update:2017.5.3
+            */
+            //其他层级为1
+            $('.Monitor').each(function () {
+                $(this).css('z-index',1);
+            });
+            //选中的层级为10
+            $('#'+divChartId).css('z-index',10);
+        }
+        /*
+        样式更新
+         */
+        //用户选择时，打开该div的控制面板
+        //首先清除其他控制面板
+        $('#screen .divControlPannel').each(function () {
+            $(this).css('display','none')
+        });
+        //然后打开指定id的div的控制面板
+        $('#'+divChartId+' .divControlPannel').each(function (e1) {
+            $(this).css('display','inline');
+        });
+
+    });
+    //根据screen上面的点击内容，更新dat.gui和图形图形
+    function screenClick(divChartId1){
+        var divChartIdSplit=divChartId1.split('-');
+        if(divChartIdSplit[0]=='bar'){
+            addBarDatGui(divChartId1);
+        }
+        else if(divChartIdSplit[0]=='line'){
+            addLineDatGui(divChartId1);
+        }
+        else if(divChartIdSplit[0]=='pie'){
+            addPieDatGui(divChartId1);
+        }
+        else if(divChartIdSplit[0]=='radar'){
+            addRadarDatGui(divChartId1);
+        }
+        else if(divChartIdSplit[0]=='calendar'){
+            addCalendarDatGui(divChartId1);
+        }
+        else if(divChartIdSplit[0]=='wordCloud'){
+            addWordCloudDatGui(divChartId1);
+        }
+
+    }
+    $('#submitData').click(function () {
+        updateHescEleByIdToCanvasData(divChartId,JSON.parse(jsonEditorEditor.getText()));
+        //借用addBarDatGui的方法更新绘图区数据
+        console.log('我click:'+divChartId)
+        screenClick(divChartId)
+    });
+
+</script>
+
+
+<!--drag and resize-->
+<script>
+    /*
+    添加鼠标移动过和click事件
+     */
+    /*
+    同步更新大小测试
+     */
+
+//
+//    $('#barChild').parent().mouseover(function () {
+//        console.log("出发了barchild 的parent");
+////        console.log($('#barChild').parent().css('border'))
+//        $('#barChild').parent().css('outline','2px dotted blue');
+//    });
+//    $('#barChild').parent().mouseout(function () {
+//        console.log('我俩开了')
+//        $('#barChild').parent().css('outline','0px');
+//    });
+//    $('#barChild').parent().click(function () {
+//        console.log('我点击了');
+//        $('#barChild').parent().css('outline','2px solid blue');
+//    });
+//    $(function() {
+//        //how to use it
+//        $('#barChild').parent().mutate('height width', function(el,info) {
+//            console.log($(el).height());
+//            barObj.canvasHeight=$(el).height();
+//            barObj.canvasWidth=$(el).width();
+//            renderBarChart();
+////            expanded = true;
+////            $('#heighter').text('height changed:' + $(el).height());
+////            $('#widther').text('Width changed:' + $(el).width());
+//        });
+//        $('#barChild').parent().mutate('top left right bottom', function(el,info) {
+////            $('#topper').text('box has moved either (top,left,right or bottom):' + parseInt($(el).css('top')));
+////            if(parseInt($(el).css('top'))>=250) $('#topper2').html('Element Moved top to more than 250:<strong class="red">' + parseInt($(el).css('top'))+'px</strong> this is especially usefull when you need to make a game. Exact 250px maybe be a little more tricky, as some pixels may skip due to animation time so it\'s better to use more than or less than ');
+//        });
+////        $('div.monitor').mutate('hide', function(el,info) {
+////            $('#hidder').text('Element was hidden:'+iii++);
+////        });
+////        $('div.monitor').mutate('show', function(el,info) {
+////            $('#shower').text('Element is now visible:'+ iii++);
+////        });
+////        //illustration purpuso only
+////        $('#subm3').click(function() {
+////            $('#my1').stop(true,true).css({width:300,height:100}).animate({width: 500,height:500},1000);
+////        });
+////        $('#subm2').click(function() {
+////            $('#my1').toggle();
+////        });
+////        $('#subm').click(function() {
+////            $('#my1').stop(true,true).css('top',0).animate({'top':300},2000);
+////        });
+//        $('.Monitor').resizable().draggable();
+//    })
+</script>
+
+<!--jsonEditor对应的数据-->
+<script>
+
+    var jsonEditorOptions = {
+        mode: 'view',
+        modes: [ 'text', 'tree', 'view'], // allowed modes
+        onError: function (err) {
+            alert(err.toString());
+        },
+        onModeChange: function (newMode, oldMode) {
+            console.log('Mode switched from', oldMode, 'to', newMode);
+        }
+    };
+    var jsonEditorJson=[[{"2011":2},{"2011":4},{"2011":4},{"2011":4}],[{"2012":6},{"2012":8},{"2013":4},{"2013":4}],[{"2014":5},{"2014":2},{"2014":9},{"2014":1}],[{"2015":8},{"2015":6},{"2015":1},{"2015":7}]];
+    var jsonEditorEditor=new JSONEditor(document.getElementById('jsonEditorData'),jsonEditorOptions);
+
+    /*
+     初始化dropdown上面的文字描述,和静态数据的初始化
+     */
+//    $(function(){
+//        jsonEditorEditor.set(jsonEditorJson);
+//        barData=JSON.parse(jsonEditorEditor.getText());
+//        console.log(barData);
+//        renderBarChart();
+//    })
+    /*
+    根据dropdown的选择不同更新jsoneditor里面的数据
+     */
+    $('#dataSource a[data-toggle="tab"]').on('shown.bs.tab',function(e){
+        console.log(e.target);
+        if($(e.target).attr('href')=='#dropdownstaticData'){
+            //将默认值赋值给jsoneditor
+            jsonEditorEditor.set(jsonEditorJson);
+        }
+        else if($(e.target).attr('href')=='#dropdownLocalData') {
+            // Load a JSON document
+            FileReaderJS.setupInput(document.getElementById('loadLocalData'), {
+                readAsDefault: 'Text',
+                on: {
+                    load: function (event, file) {
+                        jsonEditorEditor.setText(event.target.result);
+                    }
+                }
+            });
+        }
+        });
+    $('#webAPIButton').click(function () {
+            $.get('http://localhost:8080/webapiproxy/ajax/proxy',{url:$('#webAPIUrl').val()},function (d) {
+//                console.log(d)
+                jsonEditorEditor.setText(d);
+     })});
+//        else if($(e.target).attr('href')=='#dropdownWebAPI'){
+//            console.log('webAPIdata');
+//            /*
+//            发送ajax请求
+//             */
+//
+////            $.get('',{url:$('#webAPIUrl').val()},function () {
+////
+////            })
+//        }
+//    });
+    /*
+    更新数据
+     */
+
+
+
+
+</script>
+</body>
+</html>
