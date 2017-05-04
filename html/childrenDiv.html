@@ -1,0 +1,29 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/5/4
+ * Time:16:27
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.js"></script>
+</head>
+<body>
+<div id="test1">
+    <div id="test2" style="background: #000;">
+        <div id="test4"></div>
+    </div>
+    <div id="test3"></div>
+</div>
+<script>
+    $('#test1').children().each(function (e) {
+        console.log($(e.target).attr('style'));
+    })
+
+</script>
+</body>
+</html>

@@ -705,6 +705,8 @@ function addChartDiv(parent,chartType){
     };
     //解决tranform的draggle不粘手的问题
     $('.Monitor').resizable({
+        handles:'all',
+        autoHide:true,
         minWidth: -($(this).width()) * 10,  // these need to be large and negative
         minHeight: -($(this).height()) * 10, // so we can shrink our resizable while scaled
         resize: resizeFix
@@ -1800,4 +1802,11 @@ function resizeFix(event, ui) {
 
     ui.size.width = newWidth;
     ui.size.height = newHeight;
+}
+
+//保存screen配置
+function saveScreenConfig(){
+    $("#screen").children().each(function () {
+        console.log($(this))
+    })
 }
