@@ -168,7 +168,10 @@
                 align: legendAlign,
                 left: legendLeft,
                 top: legendTop,
-                orient: legendOrient
+                orient: legendOrient,
+                textStyle:{
+                    color:'#fff'
+                }
                 //  align:left
             },
             toolbox: {},

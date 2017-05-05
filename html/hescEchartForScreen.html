@@ -50,8 +50,9 @@
     <script src="../js/ETheme/walden.js"></script>
     <script src="../js/ETheme/westeros.js"></script>
     <script src="../js/ETheme/wonderland.js"></script>
+    <script src="../js/D3.js"></script>
 </head>
-<body >
+<body>
 
 
 <div class="navbar navbar-default navbar-fixed-top">
@@ -92,6 +93,19 @@
                 <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
             </ul>
 
+            <!--测试保存数据按钮-->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="javascript:saveScreenConfig()" target="_blank">保存</a></li>
+                <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
+            </ul>
+
+
+            <ul id="preview" class="nav navbar-nav navbar-right">
+                <li><a href="#">预览</a></li>
+                <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
+            </ul>
+
+
         </div>
 
 
@@ -102,7 +116,6 @@
 <div id="screenContainer" class="screenContainer">
     <div id="screen" class="screen">
         <!--隐藏的按钮用于输入input 的file-->
-        <input id="imgFileInput" type="file" style="display: none"/>
         <!--resize and drag div test-->
         <!--<div id='bar随即id' class="Monitor">-->
         <!--<div id="barChild" style="height:calc(100% - 3px);width:calc(100% - 3px);"></div>-->
@@ -179,6 +192,9 @@
     </div>
 </div>
 
+<!--隐藏的图片输入框-->
+<input id="imgFileInput" type="file" style="display: none"/>
+
 <!--下载option的模态框-->
 <div class="modal fade" id="downloadOptionModal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true" >
@@ -194,6 +210,26 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+
+
+<!--预览窗口D3实现-->
+<script>
+    $('#preview').click(function () {
+        console.log("预览点击了")
+        d3.select("#screenContainer").transition()
+            .style("transform","scale(1)")
+            .style("top",0)
+            .style("left",0)
+            .style("position","fixed")
+            .style("overflow","auto")
+            .style("height",'2000px')
+            .style("width",'4000px')
+    });
+
+
+</script>
+
+
 
 
 <!--初始化screen高度及缩放系数-->
@@ -307,6 +343,14 @@
             $(this).css('display','inline');
         });
 
+        /*
+         *更新div的选中情况的边框情况
+         */
+        $('.Monitor').each(function () {
+            $(this).css("outline",'');
+        });
+        $('#'+divChartId).css("outline",'1px solid #419bf9');
+
     });
     /*
     screen上面的点击
@@ -335,6 +379,15 @@
             });
             //选中的层级为10
             $('#'+divChartId).css('z-index',10);
+
+
+            /*
+            *更新div的选中情况的边框情况
+            */
+            $('.Monitor').each(function () {
+                $(this).css("outline",'');
+            });
+            $('#'+divChartId).css("outline",'1px solid #419bf9');
         }
         /*
         样式更新

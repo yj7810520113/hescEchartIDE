@@ -166,6 +166,9 @@
                 align:legendAlign,
                 left:legendLeft,
                 top:legendTop,
+                textStyle:{
+                    color:'#fff'
+                }
               //  align:left
             },
             toolbox:{

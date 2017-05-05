@@ -68,14 +68,17 @@
 /*overflow-y:hidden;*/
 /*}*/
 div.screenContainer{
-    width:600px;height:600px;left:320px;top:60px;position: absolute;background: white;overflow: hidden;
+    width:600px;height:600px;left:320px;top:60px;position: absolute;overflow: hidden;
+    background-image: url("../css/img/grid.png");background-repeat: repeat;
 }
 div.screen{
-    position: absolute;background: grey;overflow: hidden;
+    position: absolute;background: #0d2a42;overflow: hidden;
 }
-div.Monitor{width: 500px;height: 400px;overflow: hidden;cursor: move;background: white;position: absolute; }
+div.Monitor{width: 500px;height: 400px;overflow: hidden;cursor: move;position: absolute; }
 
-div.Monitor:hover{ background:gray;opacity: 0.8;outline:1px solid red;}
+div.Monitor:hover{ outline: 1px solid #419bf9;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .5);
+    background: rgba(0, 192, 222, .2);}
 /*div.Monitor:active{width: 500px;height: 400px; outline:2px solid red; overflow: hidden;background: whitesmoke;cursor: move;}*/
 /*div.divControlPannel:hover{width: 500px;height: 400px;overflow: hidden;cursor: move;background: white;position: absolute; }*/
 
@@ -84,10 +87,11 @@ div.Monitor:hover{ background:gray;opacity: 0.8;outline:1px solid red;}
     right: 5px;
     top: 5px;
     width: 50px;
-    height:18px;
+    height:20px;
     text-align: center;
     z-index: 1000;
     display: inline;
+    background: #00C1DE;
 }
 .divControlPannelIcon{
     margin-left: 5px;
