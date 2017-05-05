@@ -185,7 +185,14 @@
                             //返回默认xAxis坐标点的值
                             if (seriesNum == 1 &&legendAttr.length!=0) {
                                 //若为一维普通普通柱状图返回legendAttr即为坐标点值
-                                return legendAttr;
+                                var defaultXAxisData = [];
+                                for (var i = 0; i < dataNum; i++) {
+                                    var jsonO=(asyncData[i])[0];
+                                    for(var jsonKey in jsonO){
+                                        defaultXAxisData.push(jsonKey);
+                                    }
+                                }
+                                return defaultXAxisData;
                             }
                             else {
                                 var defaultXAxisData = [];
