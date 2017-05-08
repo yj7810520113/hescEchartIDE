@@ -711,7 +711,7 @@ function addChartDiv(parent,chartType){
 //         </div>
     var ids=chartType+'-'+uniqueDivId(hescList.length);
     //这里的长宽为monitor的长宽-3
-    var divContent='<div id="'+ids+'" class="Monitor" style="z-index: 11">    <div  class="divControlPannel"><span class="glyphicon glyphicon-remove divControlPannelIcon removediv" style="color: white" id="removediv" onclick="removeDivFun()"></span> <span class="glyphicon glyphicon-download-alt divControlPannelIcon downloadOption" style="color: white" id="downloadOption" onclick="downloadOptionFun()"></span> </div><div id='+ids+'canvas class="canvasclass" style="height:'+(400)+'px;width:'+(500)+'px;"></div>';
+    var divContent='<div id="'+ids+'" class="Monitor" style="z-index: 11;position:absolute">    <div  class="divControlPannel"><span class="glyphicon glyphicon-remove divControlPannelIcon removediv" style="color: white" id="removediv" onclick="removeDivFun()"></span> <span class="glyphicon glyphicon-download-alt divControlPannelIcon downloadOption" style="color: white" id="downloadOption" onclick="downloadOptionFun()"></span> </div><div id='+ids+'canvas class="canvasclass" style="height:'+(400)+'px;width:'+(500)+'px;"></div>';
     $(parent).append(divContent);
     //transformScale
     var click = {
@@ -1091,6 +1091,8 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
+
+
     }
 
 }

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../css/index.css"/>
     <link rel="stylesheet" href="../css/DAT.GUI.css"/>
     <link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="../css/JSONFormatter.css">
 
     <script src="../js/DAT.GUI.js"></script>
     <script src="../js/echarts.js"></script>
@@ -36,6 +37,9 @@
     <script src="../js/hashids.js"></script>
     <script src="../js/index.js"></script>
     <script src="../js/renderChart.js"></script>
+    <script src="../js/JSONFormatter.js"></script>
+
+
     <script src="../js/ETheme/echartTheme.js"></script>
     <script src="../js/ETheme/chalk.js"></script>
     <script src="../js/ETheme/dark.js"></script>
@@ -89,7 +93,7 @@
 
             <!--header右侧-->
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../html/hescEchartShare.html" target="_blank">案例集</a></li>
+                <li><a href="heacEchartCases.html" target="_blank">案例集</a></li>
                 <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
             </ul>
 
@@ -215,15 +219,7 @@
 <!--预览窗口D3实现-->
 <script>
     $('#preview').click(function () {
-        console.log("预览点击了")
-        d3.select("#screenContainer").transition()
-            .style("transform","scale(1)")
-            .style("top",0)
-            .style("left",0)
-            .style("position","fixed")
-            .style("overflow","auto")
-            .style("height",'2000px')
-            .style("width",'4000px')
+        window.open('http://localhost:63342/hescEchartIDE/html/hescEchartForPreView.html');
     });
 
 

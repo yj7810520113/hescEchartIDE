@@ -1,0 +1,101 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/4/17
+ * Time:14:28
+ -->
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/index.css"/>
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+
+    <script src="../js/echarts.js"></script>
+    <script src="../js/hescEchartBarChart.js"></script>
+    <script src="../js/hescEchartLineChart.js"></script>
+    <script src="../js/hescEchartPieChart.js"></script>
+    <script src="../js/hescEchartCalendarMapChart.js"></script>
+    <script src="../js/hescEchartRadarChart.js"></script>
+    <script src="../js/hescEchartWordCloudChart.js"> </script>
+    <script src="../js/hescEchartCore.js"></script>
+    <script src="../js/worldcloud.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script src="../js/hashids.js"></script>
+    <script src="../js/index.js"></script>
+
+    <script src="../js/ETheme/echartTheme.js"></script>
+    <script src="../js/ETheme/chalk.js"></script>
+    <script src="../js/ETheme/dark.js"></script>
+    <script src="../js/ETheme/essos.js"></script>
+    <script src="../js/ETheme/halloween.js"></script>
+    <script src="../js/ETheme/infographic.js"></script>
+    <script src="../js/ETheme/macarons.js"></script>
+    <script src="../js/ETheme/purple-passion.js"></script>
+    <script src="../js/ETheme/roma.js"></script>
+    <script src="../js/ETheme/shine.js"></script>
+    <script src="../js/ETheme/vintage.js"></script>
+    <script src="../js/ETheme/walden.js"></script>
+    <script src="../js/ETheme/westeros.js"></script>
+    <script src="../js/ETheme/wonderland.js"></script>
+</head>
+<body>
+
+
+<div id="screen" class="screen" style="">
+    <div  class="divPreviewControlPannel">
+        <span class="glyphicon glyphicon-download-alt divControlPannelIcon downloadOption" style="color: white" id="downloadHTML">
+        </span>
+</div>
+
+<!--向后台获取配置文件-->
+<script>
+
+    var userName='admin';
+    var screenName='test';
+    $.get('http://localhost:8080/webapiproxy/ajax/screen/find/config',{userName:userName,screenName:screenName},function (d) {
+        //获取的d为gridConfig和hescList的配置文件
+        console.log(d);
+        var gridConfig=d.gridConfig;
+        var hescList=d.hescList;
+        /*
+        1.根据gridConfig生成div
+         */
+        for(var i in gridConfig){
+            //设置screen
+            if(gridConfig[i].divId=="screen"){
+                $("#screen").attr("style",gridConfig[i].style.replace(/(height[\s\S]*?);[\s\S]*?(width[\s\S]*?);[\s\S]*/g,'$1;$2'));
+            }
+            else{
+                $("#screen").append('<div id='+gridConfig[i].divId+' style="'+gridConfig[i].style+'"></div>');
+            }
+            //去除某个选中的div的outline
+            $('#screen div').css("outline","");
+        }
+
+        /*
+        2.根据hescList生成图形
+         */
+        for(var i in hescList){
+            if(hescList[i].divId!='screen'){
+                var chart = echarts.init(document.getElementById(hescList[i].divId),hescList[i].datGuiConfig.theme);
+                chart.setOption(hescList[i].option);
+            }
+        }
+
+
+
+//        console.log((d.gridConfig)[0].style.replace(/(height[\s\S]*?);[\s\S]*?(width[\s\S]*?);[\s\S]*/g,'$1 $2'))
+    })
+
+
+
+</script>
+
+</body>
+</html>
