@@ -21,6 +21,7 @@ var screenInitialDatGuiData={
 var barInitialCanvasData=[[{"2011":2},{"2011":4},{"2011":4},{"2011":4}],[{"2012":6},{"2012":8},{"2013":4},{"2013":4}],[{"2014":5},{"2014":2},{"2014":9},{"2014":1}],[{"2015":8},{"2015":6},{"2015":1},{"2015":7}]];
 var barInitialDatGuiData ={
     theme:'walden',
+    color:'',
     canvasWidth:500,
     canvasHeight:400,
     backgroundColor:'rgba(0,0,0,0)',
@@ -41,6 +42,7 @@ var barInitialDatGuiData ={
     legendLeft:200,
     legendTop:10,
     legendOrient:'horizontal',
+    legendTextStyleColor:'#fff',
     xAxisData:'',
     xAxisGridLine:false,
     xAxisPosition:'bottom',
@@ -49,6 +51,8 @@ var barInitialDatGuiData ={
     xAxisAxisLineShow:true,
     xAxisAxisLabelInside:false,
     xAxisAxisLabelTextStyleColor:'#fff',
+    xAxisAxisLabelInterval:0,
+    xAxisAxisLabelRotate:0,
     xAxisAxisTickShow:true,
     xAxisBoundaryGap:true,
     yAxisData:'',
@@ -59,9 +63,13 @@ var barInitialDatGuiData ={
     yAxisAxisLineShow:true,
     yAxisAxisLabelInside:false,
     yAxisAxisLabelTextStyleColor:'#fff',
+    yAxisAxisLabelInterval:0,
+    yAxisAxisLabelRotate:0,
     yAxisAxisTickShow:true,
     reverse:false,
-    stack:''
+    stack:'',
+    seriesBarGap:0,
+    seriesBarWidth:15,
 };
 var lineInitialCanvasData=[[{"2011":2},{"2011":4},{"2011":4},{"2011":4}],[{"2012":6},{"2012":8},{"2013":4},{"2013":4}],[{"2014":5},{"2014":2},{"2014":9},{"2014":1}],[{"2015":8},{"2015":6},{"2015":1},{"2015":7}]];
 var lineInitialDatGuiData={
@@ -870,6 +878,9 @@ function addBarDatGui(chartId){
         datGuiPannel.add(barDefaultDatGUiObj,'theme',{vintage:'vintage',westeros:'westeros',wonderland:'wonderland',chalk:'chalk',macarons:'macarons',shine:'shine',halloween:'halloween',dark:'dark',essos:'essos',walden:'walden',infographic:'infographic',roma:'roma',purplePassion:'purplepassion'}).name('主题').listen().onChange(function () {
             renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
         });
+        datGuiPannel.add(barDefaultDatGUiObj,'color').name('配色方案').listen().onChange(function () {
+            renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+        });
 
             var barCanvas=datGuiPannel.addFolder('画布大小');
             barCanvas.add(barDefaultDatGUiObj,'canvasWidth',200,1000).name('画布宽').listen().onChange(function () {
@@ -950,7 +961,10 @@ function addBarDatGui(chartId){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
             var barLegend = datGuiPannel.addFolder("图例属性");
-            barLegend.add(barDefaultDatGUiObj, 'legend').name('图例值').onChange(function () {
+        barLegend.addColor(barDefaultDatGUiObj, 'legendTextStyleColor').name('图例字体颜色').onChange(function () {
+            renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+        });
+        barLegend.add(barDefaultDatGUiObj, 'legend').name('图例值').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
@@ -981,6 +995,7 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
+
             var barX = datGuiPannel.addFolder('x轴属性');
             barX.add(barDefaultDatGUiObj, 'xAxisData').name('x轴坐标点').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
@@ -1000,6 +1015,17 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
+        barX.add(barDefaultDatGUiObj, 'xAxisAxisLabelInterval',0,20).name('x轴刻度间隔').onChange(function () {
+            renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+        }).onFinishChange(function(){
+            updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
+        });
+        barX.add(barDefaultDatGUiObj, 'xAxisAxisLabelRotate',-180,180).name('x轴字体旋转角度').onChange(function () {
+            renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+        }).onFinishChange(function(){
+            updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
+        });
+
             barX.add(barDefaultDatGUiObj, 'xAxisGridLine').name('x轴网格').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
@@ -1025,11 +1051,12 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barX.add(barDefaultDatGUiObj, 'xAxisAxisLabelInside').name('x轴图内刻度').onChange(function () {
-                renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
-            }).onFinishChange(function(){
-                updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
-            });
+        barX.add(barDefaultDatGUiObj, 'xAxisAxisLabelInside').name('x轴图内刻度').onChange(function () {
+            renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+        }).onFinishChange(function(){
+            updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
+        });
+
             barX.add(barDefaultDatGUiObj, 'xAxisBoundaryGap').name('x轴左右边界').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
@@ -1049,11 +1076,21 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barY.addColor(barDefaultDatGUiObj, 'yAxisAxisLabelTextStyleColor').name('y轴字体颜色').onChange(function () {
-                renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
-            }).onFinishChange(function(){
-                updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
-            });
+        barY.addColor(barDefaultDatGUiObj, 'yAxisAxisLabelTextStyleColor').name('y轴字体颜色').onChange(function () {
+            renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+        }).onFinishChange(function(){
+            updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
+        });
+        barY.add(barDefaultDatGUiObj, 'yAxisAxisLabelInterval',0,20).name('y轴刻度间隔').onChange(function () {
+            renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+        }).onFinishChange(function(){
+            updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
+        });
+        barY.add(barDefaultDatGUiObj, 'yAxisAxisLabelRotate',-180,180).name('y轴字体旋转角度').onChange(function () {
+            renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+        }).onFinishChange(function(){
+            updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
+        });
             barY.add(barDefaultDatGUiObj, 'yAxisGridLine').name('y轴网格').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
@@ -1084,6 +1121,16 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
+        datGuiPannel.add(barDefaultDatGUiObj, 'seriesBarGap',-100,100).name('柱状图间隔').onChange(function () {
+            renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+        }).onFinishChange(function(){
+            updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
+        });
+        datGuiPannel.add(barDefaultDatGUiObj, 'seriesBarWidth',0,100).name('柱状图宽度').onChange(function () {
+            renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+        }).onFinishChange(function(){
+            updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
+        });
             datGuiPannel.add(barDefaultDatGUiObj, 'reverse').name('坐标轴是否转置').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
@@ -1352,10 +1399,10 @@ function addRadarDatGui(chartId) {
         radarRadar.add(radarDefaultDatGUiObj, 'radarIndicator').name('坐标轴文本').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.add(radarDefaultDatGUiObj, 'radarCenterTop').name('图心上边距').onChange(function () {
+        radarRadar.add(radarDefaultDatGUiObj, 'radarCenterTop',0,100).name('图心上边距').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.add(radarDefaultDatGUiObj, 'radarCenterLeft').name('图心左边距').onChange(function () {
+        radarRadar.add(radarDefaultDatGUiObj, 'radarCenterLeft',0,100).name('图心左边距').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
         radarRadar.add(radarDefaultDatGUiObj, 'radarRadius').name('雷达图半径').onChange(function () {
@@ -1403,7 +1450,7 @@ function addRadarDatGui(chartId) {
             矩形: 'rect',
             三角形: 'triangle',
             箭头: 'arrow'
-        }).name('标记点').onChange(function () {
+        }).name('雷达图标记点').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
         radarSeries.add(radarDefaultDatGUiObj, 'seriesSymbolSize', 0, 20).name('雷达图标记点大小').onChange(function () {
@@ -1456,7 +1503,7 @@ function addCalendarDatGui(chartId) {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
 
-        datGuiPannel.addColor(CalendarDefaultDatGUiObj,'backgroundColor').name('背景色').onChange(function () {
+        datGuiPannel.addColor(CalendarDefaultDatGUiObj,'backgroundColor').name('画布背景色').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
         var calendarTitle=datGuiPannel.addFolder('标题属性');
@@ -1469,88 +1516,89 @@ function addCalendarDatGui(chartId) {
         calendarTitle.add(CalendarDefaultDatGUiObj,'titleTextStyleFontSize').name('标题大小').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarTitle.addColor(CalendarDefaultDatGUiObj,'titleBackgroundColor').name('背景色').onChange(function () {
+        calendarTitle.addColor(CalendarDefaultDatGUiObj,'titleBackgroundColor').name('标题背景色').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
         calendarTitle.addColor(CalendarDefaultDatGUiObj,'titleTextStyleColor').name('标题颜色').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarTitle.add(CalendarDefaultDatGUiObj,'titleTop').name('上边距').onChange(function () {
+        calendarTitle.add(CalendarDefaultDatGUiObj,'titleTop').name('标题上边距').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarTitle.add(CalendarDefaultDatGUiObj,'titleLeft').name('左边距').onChange(function () {
+        calendarTitle.add(CalendarDefaultDatGUiObj,'titleLeft').name('标题左边距').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
         var calendarVisualMap=datGuiPannel.addFolder("图示区属性");
-        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualShow').name('是否显示').onChange(function () {
+        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualShow').name('映射显示').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapOrient',{水平:'horizontal',垂直:'vertical'}).name('图示朝向').onChange(function () {
+        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapOrient',{水平:'horizontal',垂直:'vertical'}).name('映射图示朝向').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
         calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapMin').name('映射最小值').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapMax').name('映射最大值').onChange(function () {
-            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
-        });
-        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapTop').name('上边距').onChange(function () {
-            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
-        });
-        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapLeft').name('左边距').onChange(function () {
-            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
-        });
         calendarVisualMap.addColor(CalendarDefaultDatGUiObj,'visualMapColorStart').name('映射颜色起始').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapMax').name('映射最大值').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
         calendarVisualMap.addColor(CalendarDefaultDatGUiObj,'visualMapColorEnd').name('映射颜色终止').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
+        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapTop').name('映射上边距').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+        calendarVisualMap.add(CalendarDefaultDatGUiObj,'visualMapLeft').name('映射左边距').onChange(function () {
+            renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
+        });
+
         var calendarCalendar=datGuiPannel.addFolder("日历图属性");
-        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarTop').name('上边距').onChange(function () {
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarTop').name('日历图上边距').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarLeft').name('左边距').onChange(function () {
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarLeft').name('日历图左边距').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarOrient',{水平:'horizontal',垂直:'vertical'}).name('朝向').onChange(function () {
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarOrient',{水平:'horizontal',垂直:'vertical'}).name('日历图朝向').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarRangeStart').name('起始日期(yyyy-mm-dd)').onChange(function () {
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarRangeStart').name('日历图起始日期').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarRangeEnd').name('终止日期((yyyy-mm-dd))').onChange(function () {
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarRangeEnd').name('日历图终止日期').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarYearLabelMargin').name('年份边距').onChange(function () {
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarYearLabelMargin').name('日历图年份边距').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarMonthLabelMargin').name('月份边距').onChange(function () {
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarMonthLabelMargin').name('日历图月份边距').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
         calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarDayLabelFirstDay',{星期天:0,星期一:1,星期二:2,星期三:3,星期四:4,星期五:5,星期六:6}).name('一周起始日期').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarCellSizeWidth',5,40).name('Cell宽度').onChange(function () {
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarCellSizeWidth',5,40).name('日历图Cell宽度').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarCellSizeHeight',5,40).name('Cell高度').onChange(function () {
+        calendarCalendar.add(CalendarDefaultDatGUiObj,'calendarCellSizeHeight',5,40).name('日历图Cell高度').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
         var calendarSeries=datGuiPannel.addFolder("日历图填充属性");
-        calendarSeries.add(CalendarDefaultDatGUiObj,'seriesType',{填充:'heatmap',散点:'scatter'}).name('热图展现').onChange(function () {
+        calendarSeries.add(CalendarDefaultDatGUiObj,'seriesType',{填充:'heatmap',散点:'scatter'}).name('日历图展现形式').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarSeries.add(CalendarDefaultDatGUiObj,'seriesLabelNormalShow').name('标签').onChange(function () {
+        calendarSeries.add(CalendarDefaultDatGUiObj,'seriesLabelNormalShow').name('日历图标签').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarSeries.addColor(CalendarDefaultDatGUiObj,'seriesLabelNormalTextStyleColor').name('字体颜色').onChange(function () {
+        calendarSeries.addColor(CalendarDefaultDatGUiObj,'seriesLabelNormalTextStyleColor').name('散点字体颜色').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarSeries.add(CalendarDefaultDatGUiObj,'seriesLabelNormalTextStyleFontsize',2,20).name('字体大小').onChange(function () {
+        calendarSeries.add(CalendarDefaultDatGUiObj,'seriesLabelNormalTextStyleFontsize',2,20).name('散点字体大小').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
-        calendarSeries.add(CalendarDefaultDatGUiObj,'seriesSymbolSize').name('填充系数').onChange(function () {
+        calendarSeries.add(CalendarDefaultDatGUiObj,'seriesSymbolSize').name('散点填充系数').onChange(function () {
             renderCalendarChart(chartId, CalendarDefaultCanvasData.data, CalendarDefaultDatGUiObj);
         });
     }
@@ -1583,29 +1631,29 @@ function addWordCloudDatGui(chartId) {
         wordCloudCanvas.add(WordCloudDefaultDatGUiObj, 'canvasHeight', 150, 800).name("画布高").listen().onChange(function () {
             renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
         });
-        datGuiPannel.addColor(WordCloudDefaultDatGUiObj,'backgroundColor').name('背景色').onChange(function () {
+        datGuiPannel.addColor(WordCloudDefaultDatGUiObj,'backgroundColor').name('画布背景色').onChange(function () {
             renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
         });
         var wordCloudTitle=datGuiPannel.addFolder('标题属性');
         wordCloudTitle.add(WordCloudDefaultDatGUiObj, 'title').name('图表标题').onChange(function () {
             renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
         });
-        wordCloudTitle.add(WordCloudDefaultDatGUiObj,'subtitle').name('图标副标题').onChange(function () {
+        wordCloudTitle.add(WordCloudDefaultDatGUiObj,'subtitle').name('图表副标题').onChange(function () {
             renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
         });
         wordCloudTitle.add(WordCloudDefaultDatGUiObj,'titleTextStyleFontSize').name('标题大小').onChange(function () {
             renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
         });
-        wordCloudTitle.addColor(WordCloudDefaultDatGUiObj,'titleBackgroundColor').name('背景色').onChange(function () {
+        wordCloudTitle.addColor(WordCloudDefaultDatGUiObj,'titleBackgroundColor').name('标题背景色').onChange(function () {
             renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
         });
         wordCloudTitle.addColor(WordCloudDefaultDatGUiObj,'titleTextStyleColor').name('标题颜色').onChange(function () {
             renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
         });
-        wordCloudTitle.add(WordCloudDefaultDatGUiObj,'titleTop').name('上边距').onChange(function () {
+        wordCloudTitle.add(WordCloudDefaultDatGUiObj,'titleTop').name('标题上边距').onChange(function () {
             renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
         });
-        wordCloudTitle.add(WordCloudDefaultDatGUiObj,'titleLeft').name('左边距').onChange(function () {
+        wordCloudTitle.add(WordCloudDefaultDatGUiObj,'titleLeft').name('标题左边距').onChange(function () {
             renderWordCloudChart(chartId, WordCloudDefaultCanvasData.data, WordCloudDefaultDatGUiObj);
         });
         var wordCloudGrid=datGuiPannel.addFolder("绘图区属性");

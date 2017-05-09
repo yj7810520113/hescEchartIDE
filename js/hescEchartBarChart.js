@@ -36,6 +36,7 @@
     var option=null,
         theme='vintage',
         backgroundColor = '#ffffff',
+        color='',
         //绘图区相对于画布偏移属性
         gridLeft=50,
         gridTop=50,
@@ -64,6 +65,7 @@
         legendTop=10,
         legendBottom=10,
         legendOrient='horizontal',
+        legendTextStyleColor='#fff',
         //另存为图片等部分
         toolboxAttr = 'default',
         /*
@@ -79,6 +81,8 @@
         xAxisAxisLineShow=true,
         xAxisAxisLabelInside=false,
         xAxisAxisLabelTextStyleColor='#000',
+        xAixsAxisLabelInterval=1,
+        xAxisAxisLabelRotate=0,
         xAxisAxisTickShow=true,
         xAxisBoundaryGap=true,
         //y轴显示的坐标文字
@@ -91,9 +95,14 @@
         yAxisAxisLineShow=true,
         yAxisAxisLabelInside=false,
         yAxisAxisLabelTextStyleColor='#000',
+        yAxisAxisLabelInterval=1,
+        yAxisAxisLabelRotate=0,
         yAxisAxisTickShow=true,
         //stack的设置,默认情况下为一维普通柱状图
         stackAttr='',
+
+        seriesBarGap='50%',
+        seriesBarWidth='0%',
         //判断x，y轴是否转置，即为条形图横过来画
         reverse=false;
 
@@ -164,7 +173,7 @@
                 top:legendTop,
                 orient:legendOrient,
                 textStyle:{
-                    color:'#fff'
+                    color:legendTextStyleColor
                 }
               //  align:left
             },
@@ -235,7 +244,9 @@
                     inside:xAxisAxisLabelInside,
                     textStyle:{
                         color:xAxisAxisLabelTextStyleColor
-                    }
+                    },
+                    interval:xAixsAxisLabelInterval,
+                    rotate:xAxisAxisLabelRotate
                 },
                 axisTick:{
                     show:xAxisAxisTickShow
@@ -293,7 +304,9 @@
                     inside:yAxisAxisLabelInside,
                     textStyle:{
                         color:yAxisAxisLabelTextStyleColor
-                    }
+                    },
+                    interval:yAxisAxisLabelInterval,
+                    rotate:yAxisAxisLabelRotate
                 },
                 axisTick:{
                     show:yAxisAxisTickShow
@@ -316,6 +329,8 @@
                         name:legendAttr[i],
                         type:'bar',
                         areaStyle:{normal:{}},
+                        barGap:seriesBarGap,
+                        barWidth:seriesBarWidth,
                         stack:(function () {
                             if(stackAttr.length==0){
                                 return null;
@@ -348,6 +363,10 @@
             })(),
             animationEasing: 'elasticOut',
             itemStyle: itemStyle
+        }
+        //判断color的情况，如果有color则color的配色方案
+        if(color.length!=0){
+            option.color=stringToArray(color);
         }
         return this;
 
@@ -428,6 +447,10 @@
         legendOrient=x;
         return this;
     }
+    var lengendTextStyleColorFun=function (x) {
+        legendTextStyleColor=x;
+        return this;
+    }
     var xAxisDataFun=function(x){
         xAxisData=x;
         return this;
@@ -502,6 +525,14 @@
         xAxisBoundaryGap=x;
         return this;
     }
+    var xAxisAxisLabelIntervalFun=function (x) {
+        xAixsAxisLabelInterval=x;
+        return this;
+    }
+    var xAxisAxisLabelRotateFun=function (x) {
+        xAxisAxisLabelRotate=x;
+        return this;
+    }
     var yAxisPositionFun=function (x) {
         yAxisPosition=x;
         return this;
@@ -530,6 +561,14 @@
         yAxisAxisTickShow=x;
         return this;
     }
+    var yAxisAxisLabelIntervalFun=function (x) {
+        yAxisAxisLabelInterval=x;
+        return this;
+    }
+    var yAxisAxisLabelRotateFun=function (x) {
+        yAxisAxisLabelRotate=x;
+        return this;
+    }
     var getOptionFun=function () {
         return option;
     }
@@ -538,6 +577,20 @@
         theme=x;
         return this;
     }
+    var colorFun=function (x) {
+        color=x;
+        return this;
+    }
+    var seriesBarGapFun=function (x) {
+        seriesBarGap=x;
+        return this;
+    }
+    var seriesBarWidthFun=function (x) {
+        seriesBarWidth=x;
+        return this;
+    }
+
+
 
     exports.theme=themeFun;
     exports.select = selectFun;
@@ -572,6 +625,7 @@
     exports.legendLeft=legendLeftFun;
     exports.legendTop=legendTopFun;
     exports.legendOrient=legendOrientFun;
+    exports.legendTextStyleColor=lengendTextStyleColorFun;
 
 
     /*
@@ -583,6 +637,8 @@
     exports.xAxisAxisLineShow=xAxisAxisLineShowFun;
     exports.xAxisAxisLabelInside=xAxisAxisLabelInsideFun;
     exports.xAxisAxisLabelTextStyleColor=xAxisAxisLabelTextStyleColorFun;
+    exports.xAxisAxisLabelInterval=xAxisAxisLabelIntervalFun;
+    exports.xAxisAxisLabelRotate=xAxisAxisLabelRotateFun;
     exports.xAxisAxisTickShow=xAxisAxisTickShowFun;
     exports.xAxisData=xAxisDataFun;
     exports.xAxisGridLineAttr=xAxisGridLineAttrFun;
@@ -595,9 +651,14 @@
     exports.yAxisAxisLineShow=yAxisAxisLineShowFun;
     exports.yAxisAxisLabelInside=yAxisAxisLabelInsideFun;
     exports.yAxisAxisLabelTextStyleColor=yAxisAxisLabelTextStyleColorFun;
+    exports.yAxisAxisLabelInterval=yAxisAxisLabelIntervalFun;
+    exports.yAxisAxisLabelRotate=yAxisAxisLabelRotateFun;
     exports.yAxisAxisTickShow=yAxisAxisTickShowFun;
     exports.option=getOptionFun;
 
+    exports.seriesBarGap=seriesBarGapFun;
+    exports.seriesBarWidth=seriesBarWidthFun;
+    exports.color=colorFun;
 
     exports.reverse=reverseFun;
 })));
