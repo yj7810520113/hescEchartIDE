@@ -16,8 +16,12 @@
     <link rel="stylesheet" href="../css/DAT.GUI.css"/>
     <link rel="stylesheet" href="../css/jquery-ui.css">
     <link rel="stylesheet" href="../css/JSONFormatter.css">
+    <link rel="stylesheet" href="../css/tooltipster.bundle.css">
 
+    <script src="../js/jquery.js"></script>
     <script src="../js/DAT.GUI.js"></script>
+    <script src="../js/tooltipHelp.js"></script>
+    <script src="../js/tooltipster.bundle.js"></script>
     <script src="../js/echarts.js"></script>
     <script src="../js/hescEchartBarChart.js"></script>
     <script src="../js/hescEchartLineChart.js"></script>
@@ -27,7 +31,6 @@
     <script src="../js/hescEchartWordCloudChart.js"> </script>
     <script src="../js/hescEchartCore.js"></script>
     <script src="../js/worldcloud.js"></script>
-    <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jsoneditor.js"></script>
     <script src="../js/fileReader.js"></script>
@@ -55,6 +58,16 @@
     <script src="../js/ETheme/westeros.js"></script>
     <script src="../js/ETheme/wonderland.js"></script>
     <script src="../js/D3.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.datGuiTooltip').tooltipster({
+                contentAsHTML:true,
+                maxWidth:400
+            });
+        });
+    </script>
+
 </head>
 <body>
 

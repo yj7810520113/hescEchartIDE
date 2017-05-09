@@ -825,6 +825,8 @@ function addHescEle(divId,dataType,data,datGuiConfig){
  */
 function addScreenDatGui(){
     addScreenDatGUiPannel(findDatGuiDataById('screen'));
+    toolTipHelper();
+
     function  addScreenDatGUiPannel(screenDefaultDatGUiObj) {
         $('#tabConfig').children().remove();
         datGuiPannel=new dat.GUI({autoPlace:false});
@@ -840,7 +842,7 @@ function addScreenDatGui(){
             refreshTransformScale();
 
         });
-        datGuiPannel.addColor(screenDefaultDatGUiObj,"background").name("背景色").onChange(function () {
+        datGuiPannel.addColor(screenDefaultDatGUiObj,"background").name("幕布背景色").onChange(function () {
             $('#screen').css('background',screenDefaultDatGUiObj.background);
             refreshTransformScale();
         });
@@ -850,6 +852,7 @@ function addScreenDatGui(){
 function addBarDatGui(chartId){
     //selectDivId=chartId;
     addBarDatGuiPannel(findDatGuiDataById(chartId),findCanvasDataById(chartId));
+    toolTipHelper();
     function addBarDatGuiPannel(barDefaultDatGUiObj,barDefaultCanvasData){
         /*
         移除之前的dat.gui
@@ -875,7 +878,7 @@ function addBarDatGui(chartId){
             barCanvas.add(barDefaultDatGUiObj,'canvasHeight',150,800).name("画布高").listen().onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             })  ;
-            datGuiPannel.addColor(barDefaultDatGUiObj, 'backgroundColor').name('背景色').onChange(function () {
+            datGuiPannel.addColor(barDefaultDatGUiObj, 'backgroundColor').name('画布背景色').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
@@ -886,7 +889,7 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barTitle.add(barDefaultDatGUiObj, 'subtitle').name('图标副标题').onChange(function () {
+            barTitle.add(barDefaultDatGUiObj, 'subtitle').name('图表副标题').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
@@ -896,7 +899,7 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barTitle.addColor(barDefaultDatGUiObj, 'titleBackgroundColor').name('背景色').onChange(function () {
+            barTitle.addColor(barDefaultDatGUiObj, 'titleBackgroundColor').name('标题背景色').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
@@ -906,33 +909,33 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barTitle.add(barDefaultDatGUiObj, 'titleTop').name('上边距').onChange(function () {
+            barTitle.add(barDefaultDatGUiObj, 'titleTop').name('标题上边距').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barTitle.add(barDefaultDatGUiObj, 'titleLeft').name('左边距').onChange(function () {
+            barTitle.add(barDefaultDatGUiObj, 'titleLeft').name('标题左边距').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
             var barGrid = datGuiPannel.addFolder("绘图区属性");
-            barGrid.add(barDefaultDatGUiObj, 'gridTop').name('上边距').onChange(function () {
+            barGrid.add(barDefaultDatGUiObj, 'gridTop').name('绘图区上边距').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barGrid.add(barDefaultDatGUiObj, 'gridBottom').name('下边距').onChange(function () {
+            barGrid.add(barDefaultDatGUiObj, 'gridBottom').name('绘图区下边距').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barGrid.add(barDefaultDatGUiObj, "gridLeft").name('左边距').onChange(function () {
+            barGrid.add(barDefaultDatGUiObj, "gridLeft").name('绘图区左边距').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barGrid.add(barDefaultDatGUiObj, "gridRight").name('右边距').onChange(function () {
+            barGrid.add(barDefaultDatGUiObj, "gridRight").name('绘图区右边距').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
@@ -941,7 +944,7 @@ function addBarDatGui(chartId){
                 阴影: 'shadow',
                 交叉线: 'cross',
                 垂直线: 'line'
-            }).name('ToolTip类型').onChange(function () {
+            }).name('提示框类型').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
@@ -992,7 +995,7 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barX.addColor(barDefaultDatGUiObj, 'xAxisAxisLabelTextStyleColor').name('字体颜色').onChange(function () {
+            barX.addColor(barDefaultDatGUiObj, 'xAxisAxisLabelTextStyleColor').name('x轴字体颜色').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
@@ -1022,12 +1025,12 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barX.add(barDefaultDatGUiObj, 'xAxisAxisLabelInside').name('图内刻度').onChange(function () {
+            barX.add(barDefaultDatGUiObj, 'xAxisAxisLabelInside').name('x轴图内刻度').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barX.add(barDefaultDatGUiObj, 'xAxisBoundaryGap').name('左右边界').onChange(function () {
+            barX.add(barDefaultDatGUiObj, 'xAxisBoundaryGap').name('x轴左右边界').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
@@ -1046,7 +1049,7 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barY.addColor(barDefaultDatGUiObj, 'yAxisAxisLabelTextStyleColor').name('字体颜色').onChange(function () {
+            barY.addColor(barDefaultDatGUiObj, 'yAxisAxisLabelTextStyleColor').name('y轴字体颜色').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
@@ -1076,7 +1079,7 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            barY.add(barDefaultDatGUiObj, 'yAxisAxisLabelInside').name('图内刻度').onChange(function () {
+            barY.add(barDefaultDatGUiObj, 'yAxisAxisLabelInside').name('y轴图内刻度').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
@@ -1086,7 +1089,7 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
-            datGuiPannel.add(barDefaultDatGUiObj, 'stack').name('多维堆叠柱状图数据模型').onChange(function () {
+            datGuiPannel.add(barDefaultDatGUiObj, 'stack').name('堆叠柱状图').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
@@ -1098,6 +1101,8 @@ function addBarDatGui(chartId){
 }
 function addLineDatGui(chartId) {
     addLineDatGuiPannel(findDatGuiDataById(chartId),findCanvasDataById(chartId));
+    toolTipHelper();
+
     function addLineDatGuiPannel(lineDefaultDatGUiObj,lineDefaultCanvasData) {
         /*
          移除之前的dat.gui
@@ -1122,20 +1127,20 @@ function addLineDatGui(chartId) {
         lineCanvas.add(lineDefaultDatGUiObj,'canvasHeight',150,800).name("画布高").listen().onChange(function () {
             renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);
         });
-        datGuiPannel.addColor(lineDefaultDatGUiObj,'backgroundColor').name('背景色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        datGuiPannel.addColor(lineDefaultDatGUiObj,'backgroundColor').name('画布背景色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         var barTitle=datGuiPannel.addFolder('标题属性');
         barTitle.add(lineDefaultDatGUiObj, 'title').name('图表标题').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        barTitle.add(lineDefaultDatGUiObj,'subtitle').name('图标副标题').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barTitle.add(lineDefaultDatGUiObj,'subtitle').name('图表副标题').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barTitle.add(lineDefaultDatGUiObj,'titleTextStyleFontSize').name('标题大小').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        barTitle.addColor(lineDefaultDatGUiObj,'titleBackgroundColor').name('背景色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barTitle.addColor(lineDefaultDatGUiObj,'titleBackgroundColor').name('标题背景色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barTitle.addColor(lineDefaultDatGUiObj,'titleTextStyleColor').name('标题颜色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        barTitle.add(lineDefaultDatGUiObj,'titleTop').name('上边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        barTitle.add(lineDefaultDatGUiObj,'titleLeft').name('左边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barTitle.add(lineDefaultDatGUiObj,'titleTop').name('标题上边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barTitle.add(lineDefaultDatGUiObj,'titleLeft').name('标题左边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         var barGrid=datGuiPannel.addFolder("绘图区属性");
-        barGrid.add(lineDefaultDatGUiObj,'gridTop').name('上边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        barGrid.add(lineDefaultDatGUiObj,'gridBottom').name('下边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        barGrid.add(lineDefaultDatGUiObj,"gridLeft").name('左边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        barGrid.add(lineDefaultDatGUiObj,"gridRight").name('右边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barGrid.add(lineDefaultDatGUiObj,'gridTop').name('绘图区上边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barGrid.add(lineDefaultDatGUiObj,'gridBottom').name('绘图区下边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barGrid.add(lineDefaultDatGUiObj,"gridLeft").name('绘图区左边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barGrid.add(lineDefaultDatGUiObj,"gridRight").name('绘图区右边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         var barLegend=datGuiPannel.addFolder("图例属性");
         barLegend.add(lineDefaultDatGUiObj,'legend').name('图例值').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barLegend.add(lineDefaultDatGUiObj,'legendOrient',{水平:'horizontal',垂直:'vertical'}).name('图例方向').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
@@ -1145,31 +1150,33 @@ function addLineDatGui(chartId) {
         var barX=datGuiPannel.addFolder('x轴属性');
         barX.add(lineDefaultDatGUiObj,'xAxisData').name('x轴坐标点').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.add(lineDefaultDatGUiObj,'xAxisPosition',{上:'top',下:'bottom'}).name('x轴位置').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        barX.addColor(lineDefaultDatGUiObj,'xAxisAxisLabelTextStyleColor').name('字体颜色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barX.addColor(lineDefaultDatGUiObj,'xAxisAxisLabelTextStyleColor').name('x轴字体颜色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.add(lineDefaultDatGUiObj,'xAxisGridLine').name('x轴网格').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.add(lineDefaultDatGUiObj,'xAxisInverse').name('x轴反向').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.add(lineDefaultDatGUiObj,'xAxisSplitAreaShow').name('x轴分割区域').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.add(lineDefaultDatGUiObj,'xAxisAxisLineShow').name('x轴轴线').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.add(lineDefaultDatGUiObj,'xAxisAxisTickShow').name('x轴刻度').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        barX.add(lineDefaultDatGUiObj,'xAxisAxisLabelInside').name('图内刻度').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        barX.add(lineDefaultDatGUiObj,'xAxisBoundaryGap').name('左右边界').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barX.add(lineDefaultDatGUiObj,'xAxisAxisLabelInside').name('x轴图内刻度').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barX.add(lineDefaultDatGUiObj,'xAxisBoundaryGap').name('x轴左右边界').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         var barY=datGuiPannel.addFolder('y轴属性');
         barY.add(lineDefaultDatGUiObj,'yAxisData').name('y轴坐标点').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisPosition',{左:'left',右:'right'}).name('y轴位置').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        barY.addColor(lineDefaultDatGUiObj,'yAxisAxisLabelTextStyleColor').name('字体颜色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barY.addColor(lineDefaultDatGUiObj,'yAxisAxisLabelTextStyleColor').name('y轴字体颜色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisGridLine').name('y轴网格').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisInverse').name('y轴反向').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisSplitAreaShow').name('y轴分割区域').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisAxisLineShow').name('y轴轴线').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisAxisTickShow').name('y轴刻度').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        barY.add(lineDefaultDatGUiObj,'yAxisAxisLabelInside').name('图内刻度').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
-        datGuiPannel.add(lineDefaultDatGUiObj,'tooltipAxisPointerType',{阴影:'shadow',交叉线:'cross',垂直线:'line'}).name('ToolTip类型').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barY.add(lineDefaultDatGUiObj,'yAxisAxisLabelInside').name('y轴图内刻度').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        datGuiPannel.add(lineDefaultDatGUiObj,'tooltipAxisPointerType',{阴影:'shadow',交叉线:'cross',垂直线:'line'}).name('提示框类型').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         datGuiPannel.add(lineDefaultDatGUiObj,'reverse').name('坐标轴是否转置').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         datGuiPannel.add(lineDefaultDatGUiObj,'seriesAreaStyle').name('流图').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
     }
 }
 function addPieDatGui(chartId) {
     addPieDatGuiPannel(findDatGuiDataById(chartId), findCanvasDataById(chartId));
+    toolTipHelper();
+
     function addPieDatGuiPannel(pieDefaultDatGUiObj, pieDefaultCanvasData) {
         /*
          移除之前的dat.gui
@@ -1194,36 +1201,36 @@ function addPieDatGui(chartId) {
         pieCanvas.add(pieDefaultDatGUiObj, 'canvasHeight', 150, 800).name("画布高").listen().onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
-        datGuiPannel.addColor(pieDefaultDatGUiObj, 'backgroundColor').name('背景色').onChange(function () {
+        datGuiPannel.addColor(pieDefaultDatGUiObj, 'backgroundColor').name('画布背景色').onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
         var pieTitle = datGuiPannel.addFolder('标题属性');
         pieTitle.add(pieDefaultDatGUiObj, 'title').name('图表标题').onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
-        pieTitle.add(pieDefaultDatGUiObj, 'subtitle').name('图标副标题').onChange(function () {
+        pieTitle.add(pieDefaultDatGUiObj, 'subtitle').name('图表副标题').onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
         pieTitle.add(pieDefaultDatGUiObj, 'titleTextStyleFontSize').name('标题大小').onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
-        pieTitle.addColor(pieDefaultDatGUiObj, 'titleBackgroundColor').name('背景色').onChange(function () {
+        pieTitle.addColor(pieDefaultDatGUiObj, 'titleBackgroundColor').name('标题背景色').onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
         pieTitle.addColor(pieDefaultDatGUiObj, 'titleTextStyleColor').name('标题颜色').onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
-        pieTitle.add(pieDefaultDatGUiObj, 'titleTop').name('上边距').onChange(function () {
+        pieTitle.add(pieDefaultDatGUiObj, 'titleTop').name('标题上边距').onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
-        pieTitle.add(pieDefaultDatGUiObj, 'titleLeft').name('左边距').onChange(function () {
+        pieTitle.add(pieDefaultDatGUiObj, 'titleLeft').name('标题左边距').onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
         var pieGrid = datGuiPannel.addFolder("绘图区属性");
         pieGrid.add(pieDefaultDatGUiObj, 'seriesCenterTop', 0, 100).name("圆心上边距").onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
-        pieGrid.add(pieDefaultDatGUiObj, 'seriesCenterLeft', 0, 100).name("圆心下边距").onChange(function () {
+        pieGrid.add(pieDefaultDatGUiObj, 'seriesCenterLeft', 0, 100).name("圆心左边距").onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
         var pieLegend = datGuiPannel.addFolder("图例属性");
@@ -1264,6 +1271,8 @@ function addPieDatGui(chartId) {
 }
 function addRadarDatGui(chartId) {
     addRadarDatGuiPannel(findDatGuiDataById(chartId), findCanvasDataById(chartId));
+    toolTipHelper();
+
     function addRadarDatGuiPannel(radarDefaultDatGUiObj, radarDefaultCanvasData) {
         /*
          移除之前的dat.gui
@@ -1289,29 +1298,29 @@ function addRadarDatGui(chartId) {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
 
-        datGuiPannel.addColor(radarDefaultDatGUiObj, 'backgroundColor').name('背景色').onChange(function () {
+        datGuiPannel.addColor(radarDefaultDatGUiObj, 'backgroundColor').name('画布背景色').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
         var radarTitle = datGuiPannel.addFolder('标题属性');
         radarTitle.add(radarDefaultDatGUiObj, 'title').name('图表标题').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarTitle.add(radarDefaultDatGUiObj, 'subtitle').name('图标副标题').onChange(function () {
+        radarTitle.add(radarDefaultDatGUiObj, 'subtitle').name('图表副标题').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
         radarTitle.add(radarDefaultDatGUiObj, 'titleTextStyleFontSize').name('标题大小').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarTitle.addColor(radarDefaultDatGUiObj, 'titleBackgroundColor').name('背景色').onChange(function () {
+        radarTitle.addColor(radarDefaultDatGUiObj, 'titleBackgroundColor').name('标题背景色').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
         radarTitle.addColor(radarDefaultDatGUiObj, 'titleTextStyleColor').name('标题颜色').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarTitle.add(radarDefaultDatGUiObj, 'titleTop').name('上边距').onChange(function () {
+        radarTitle.add(radarDefaultDatGUiObj, 'titleTop').name('标题上边距').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarTitle.add(radarDefaultDatGUiObj, 'titleLeft').name('左边距').onChange(function () {
+        radarTitle.add(radarDefaultDatGUiObj, 'titleLeft').name('标题左边距').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
         var radarLegend = datGuiPannel.addFolder("图例属性");
@@ -1337,22 +1346,22 @@ function addRadarDatGui(chartId) {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
         var radarRadar = datGuiPannel.addFolder("绘图区属性");
-        radarRadar.add(radarDefaultDatGUiObj, 'tooltipShow').name('Tooltip').onChange(function () {
+        radarRadar.add(radarDefaultDatGUiObj, 'tooltipShow').name('提示框').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.add(radarDefaultDatGUiObj, 'radarIndicator').name('坐标轴Label').onChange(function () {
+        radarRadar.add(radarDefaultDatGUiObj, 'radarIndicator').name('坐标轴文本').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.add(radarDefaultDatGUiObj, 'radarCenterTop').name('上边距').onChange(function () {
+        radarRadar.add(radarDefaultDatGUiObj, 'radarCenterTop').name('图心上边距').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.add(radarDefaultDatGUiObj, 'radarCenterLeft').name('左边距').onChange(function () {
+        radarRadar.add(radarDefaultDatGUiObj, 'radarCenterLeft').name('图心左边距').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.add(radarDefaultDatGUiObj, 'radarRadius').name('半径').onChange(function () {
+        radarRadar.add(radarDefaultDatGUiObj, 'radarRadius').name('雷达图半径').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.add(radarDefaultDatGUiObj, 'radarStartAngle', 0, 360).name('旋转角度').onChange(function () {
+        radarRadar.add(radarDefaultDatGUiObj, 'radarStartAngle', 0, 360).name('雷达图旋转角度').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
         radarRadar.add(radarDefaultDatGUiObj, 'radarSplitNumber', 0, 20).name('网格横向数量').onChange(function () {
@@ -1364,25 +1373,25 @@ function addRadarDatGui(chartId) {
         }).name('雷达图外观').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.addColor(radarDefaultDatGUiObj, 'radarNameTextStyleColor').name('标签字体颜色').onChange(function () {
+        radarRadar.addColor(radarDefaultDatGUiObj, 'radarNameTextStyleColor').name('雷达图字体颜色').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.add(radarDefaultDatGUiObj, 'radarNameTextStyleFontSize', 1, 30).name('标签字体大小').onChange(function () {
+        radarRadar.add(radarDefaultDatGUiObj, 'radarNameTextStyleFontSize', 1, 30).name('雷达图字体大小').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.add(radarDefaultDatGUiObj, 'radarAxisLineShow').name('坐标线').onChange(function () {
+        radarRadar.add(radarDefaultDatGUiObj, 'radarAxisLineShow').name('雷达图坐标线').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.add(radarDefaultDatGUiObj, 'radarSplitLineShow').name('分隔线').onChange(function () {
+        radarRadar.add(radarDefaultDatGUiObj, 'radarSplitLineShow').name('雷达图分隔线').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.addColor(radarDefaultDatGUiObj, 'radarAxisLineLineStyle').name('坐标线颜色').onChange(function () {
+        radarRadar.addColor(radarDefaultDatGUiObj, 'radarAxisLineLineStyle').name('雷达图坐标线颜色').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.addColor(radarDefaultDatGUiObj, 'radarSplitLineLineStyle').name('分割线颜色').onChange(function () {
+        radarRadar.addColor(radarDefaultDatGUiObj, 'radarSplitLineLineStyle').name('雷达图分割线颜色').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarRadar.add(radarDefaultDatGUiObj, 'radarAxisLineShow').name('坐标线').onChange(function () {
+        radarRadar.add(radarDefaultDatGUiObj, 'radarAxisLineShow').name('雷达图坐标线').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
         var radarSeries = datGuiPannel.addFolder('雷达图属性')
@@ -1397,29 +1406,31 @@ function addRadarDatGui(chartId) {
         }).name('标记点').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarSeries.add(radarDefaultDatGUiObj, 'seriesSymbolSize', 0, 20).name('标记点大小').onChange(function () {
+        radarSeries.add(radarDefaultDatGUiObj, 'seriesSymbolSize', 0, 20).name('雷达图标记点大小').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
         radarSeries.add(radarDefaultDatGUiObj, 'seriesLineStyleNormalShow').name('show?').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarSeries.add(radarDefaultDatGUiObj, 'seriesLineStyleNormalWidth', 0, 5).name('线宽度').onChange(function () {
+        radarSeries.add(radarDefaultDatGUiObj, 'seriesLineStyleNormalWidth', 0, 5).name('雷达图线宽度').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
         radarSeries.add(radarDefaultDatGUiObj, 'seriesLineStyleNormalType', {
             实线: 'solid',
             虚线: 'dashed',
             点阵: 'dotted'
-        }).name('线段类型').onChange(function () {
+        }).name('雷达图线段类型').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
-        radarSeries.add(radarDefaultDatGUiObj, 'seriesLineStyleNormalOpacity', 0, 1).name('线段透明度').onChange(function () {
+        radarSeries.add(radarDefaultDatGUiObj, 'seriesLineStyleNormalOpacity', 0, 1).name('雷达图线段透明度').onChange(function () {
             renderRadarChart(chartId, radarDefaultCanvasData.data, radarDefaultDatGUiObj);
         });
     }
 }
 function addCalendarDatGui(chartId) {
     addCalendarDatGuiPannel(findDatGuiDataById(chartId), findCanvasDataById(chartId));
+    toolTipHelper();
+
     function addCalendarDatGuiPannel(CalendarDefaultDatGUiObj, CalendarDefaultCanvasData) {
         /*
          移除之前的dat.gui
@@ -1546,6 +1557,8 @@ function addCalendarDatGui(chartId) {
 }
 function addWordCloudDatGui(chartId) {
     addWordCloudDatGuiPannel(findDatGuiDataById(chartId), findCanvasDataById(chartId));
+    toolTipHelper();
+
     function addWordCloudDatGuiPannel(WordCloudDefaultDatGUiObj, WordCloudDefaultCanvasData) {
         /*
          移除之前的dat.gui
@@ -1865,6 +1878,30 @@ function refreshTransformScale(){
     $('#screen').css('transform','scale('+transformScale+')');
     $('#screen').css('transform-origin','left top');
     console.log(transformScale);
+}
+/*
+添加tooltip
+ */
+function toolTipHelper() {
+    $('.dg .property-name').each(function () {
+        $(this).append('&nbsp;<span class="datGuiTooltip" data-tooltip-content="#tooltip_content"><img  src="../css/img/信息.png"   style="height: 12px;width: 12px;cursor:help"><div class="tooltip_templates"> <span id="tooltip_content"></span></div></span>  ');
+    });
+    $('.datGuiTooltip').tooltipster({
+        contentAsHTML:true,
+        maxWidth:400
+    });
+    //阻止点击帮助按钮时，时间冒泡
+    $('.datGuiTooltip').each(function () {
+        $(this).click(function (e) {
+            e.stopPropagation();
+        });
+        $(this).mouseover(function (e) {
+            $('.datGuiTooltip').tooltipster('content', hescToolTipHelp.text($(this).parent().text()));
+        });
+        $(this).mouseout(function (e) {
+            $('.datGuiTooltip').tooltipster('content', '');
+        });
+    });
 }
 
 //保存screen配置

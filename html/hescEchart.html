@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../css/DAT.GUI.css"/>
     <link rel="stylesheet" href="../css/jquery-ui.css">
     <link rel="stylesheet" href="../css/JSONFormatter.css">
+    <link rel="stylesheet" href="../css/tooltipster.bundle.css">
 
     <script src="../js/DAT.GUI.js"></script>
     <script src="../js/echarts.js"></script>
@@ -38,6 +39,8 @@
     <script src="../js/index.js"></script>
     <script src="../js/renderChart.js"></script>
     <script src="../js/JSONFormatter.js"></script>
+    <script src="../js/tooltipster.bundle.js"></script>
+    <script src="../js/tooltipHelp.js"></script>
 
     <script src="../js/ETheme/echartTheme.js"></script>
     <script src="../js/ETheme/chalk.js"></script>
@@ -53,6 +56,15 @@
     <script src="../js/ETheme/walden.js"></script>
     <script src="../js/ETheme/westeros.js"></script>
     <script src="../js/ETheme/wonderland.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.datGuiTooltip').tooltipster({
+                contentAsHTML:true,
+                maxWidth:400
+            });
+        });
+    </script>
+
 </head>
 <body>
 

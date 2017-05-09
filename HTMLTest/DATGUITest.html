@@ -14,13 +14,16 @@
 
     <script src="../js/DAT.GUI.js"></script>
     <script src="../js/echarts.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
     <script src="../js/tooltipster.bundle.js"></script>
+    <script src="../js/tooltipHelp.js"></script>
 
     <script>
         $(document).ready(function() {
-            console.log('111')
-            $('.datGuiTooltip').tooltipster();
+            $('.datGuiTooltip').tooltipster({
+                contentAsHTML:true,
+                maxWidth:400
+            });
         });
     </script>
 
@@ -248,7 +251,7 @@
     barY.add(barObj,'yAxisAxisTickShow').name('y轴刻度');
     barY.add(barObj,'yAxisAxisLabelInside').name('图内刻度');
     barGui.add(barObj,'reverse').name('坐标轴是否转置');
-    barGui.add(barObj,'stack').name('多维堆叠柱状图数据模型');
+    barGui.add(barObj,'stack').name('堆叠柱状图');
     //gui.add(text, 'speed', -5, 5);
 //    barGui.remember(barObj);
     console.log(barGui.getSaveObject());
@@ -257,18 +260,19 @@
     添加图片测试
      */
     $('.dg .property-name').each(function () {
-        $(this).append('&nbsp;<span class="datGuiTooltip" data-tooltip-content="#tooltip_content"><img  src="../css/img/信息.png"   style="height: 12px;width: 12px;cursor:help"><div class="tooltip_templates"> <span id="tooltip_content"></span>  </div></span>  ');
+        $(this).append('&nbsp;<span class="datGuiTooltip" data-tooltip-content="#tooltip_content"><img  src="../css/img/信息.png"   style="height: 12px;width: 12px;cursor:help"><div class="tooltip_templates"> <span id="tooltip_content"></span></div></span>  ');
     });
     //阻止点击帮助按钮时，时间冒泡
     $('.datGuiTooltip').each(function () {
         $(this).click(function (e) {
             e.stopPropagation();
-            console.log(e.originalEvent.x+'  '+e.originalEvent.y);
         });
         $(this).mouseover(function (e) {
-            console.log($(this).parent().text())
-            $('.datGuiTooltip').tooltipster('content', 'My new content');
-        })
+            $('.datGuiTooltip').tooltipster('content', hescToolTipHelp.text($(this).parent().text()));
+        });
+        $(this).mouseout(function (e) {
+            $('.datGuiTooltip').tooltipster('content', '');
+        });
     });
 </script>
 
