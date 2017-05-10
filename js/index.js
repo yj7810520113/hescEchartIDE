@@ -70,6 +70,10 @@ var barInitialDatGuiData ={
     stack:'',
     seriesBarGap:0,
     seriesBarWidth:15,
+
+
+
+
 };
 var lineInitialCanvasData=[[{"2011":2},{"2011":4},{"2011":4},{"2011":4}],[{"2012":6},{"2012":8},{"2013":4},{"2013":4}],[{"2014":5},{"2014":2},{"2014":9},{"2014":1}],[{"2015":8},{"2015":6},{"2015":1},{"2015":7}]];
 var lineInitialDatGuiData={
@@ -115,11 +119,24 @@ var lineInitialDatGuiData={
     yAxisAxisLabelTextStyleColor:'#fff',
     yAxisAxisTickShow:true,
     reverse:false,
-    stack:''
+    stack:'',
+
+    /*
+    5.10添加属性，提取自bar
+     */
+    color:'',
+    yAxisAxisLabelInterval:0,
+    yAxisAxisLabelRotate:0,
+    xAxisAxisLabelInterval:0,
+    xAxisAxisLabelRotate:0,
+    legendTextStyleColor:'#fff',
+    //平滑曲线
+    smooth:false,
 };
 var pieInitialCanvasData=[{"name":"2011","value":2},{"name":"2012","value":1},{"name":"2013","value":3},{"name":"2014","value":4}];
 var pieInitailDatGuiData={
     theme:'walden',
+    color:'',
     canvasWidth:500,
     canvasHeight:400,
     backgroundColor:'rgba(255,255,255,0)',
@@ -140,6 +157,7 @@ var pieInitailDatGuiData={
     legendLeft:200,
     legendTop:10,
     legendOrient:'horizontal',
+    legendTextStyleColor:'#fff',
     /*
      series相关属性
      */
@@ -149,7 +167,7 @@ var pieInitailDatGuiData={
     seriesCenterTop: 50,
     seriesCenterLeft: 50,
     seriesRoseType:'false',
-    seriesLabelNormalShow: false
+    seriesLabelNormalShow: true
 };
 var radarInitialCanvasData=[[{"推塔":2},{"输出":4},{"承受伤害":4},{"KDA":4},{"胜率":78}],[{"推塔":3},{"输出":5},{"承受伤害":5},{"KDA":10},{"胜率":60}],[{"推塔":4},{"输出":1},{"承受伤害":1},{"KDA":5},{"胜率":65}],[{"推塔":5},{"输出":4},{"承受伤害":2},{"KDA":8},{"胜率":70}]];
 var radarInitialDatGuiData={
@@ -1167,6 +1185,7 @@ function addLineDatGui(chartId) {
         datGuiPannel.add(lineDefaultDatGUiObj,'theme',{vintage:'vintage',westeros:'westeros',wonderland:'wonderland',chalk:'chalk',macarons:'macarons',shine:'shine',halloween:'halloween',dark:'dark',essos:'essos',walden:'walden',infographic:'infographic',roma:'roma',purplePassion:'purplepassion'}).name('主题').listen().onChange(function () {
             renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);
         });
+        datGuiPannel.add(lineDefaultDatGUiObj,'color').name('配色方案').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         var lineCanvas=datGuiPannel.addFolder('画布大小');
         lineCanvas.add(lineDefaultDatGUiObj,'canvasWidth',200,1000).name('画布宽').listen().onChange(function () {
             renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);
@@ -1190,12 +1209,15 @@ function addLineDatGui(chartId) {
         barGrid.add(lineDefaultDatGUiObj,"gridRight").name('绘图区右边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         var barLegend=datGuiPannel.addFolder("图例属性");
         barLegend.add(lineDefaultDatGUiObj,'legend').name('图例值').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barLegend.addColor(lineDefaultDatGUiObj,'legendTextStyleColor').name('图例字体颜色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barLegend.add(lineDefaultDatGUiObj,'legendOrient',{水平:'horizontal',垂直:'vertical'}).name('图例方向').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barLegend.add(lineDefaultDatGUiObj,'legendAlign',{左:'left',右:'right'}).name('图例朝向').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barLegend.add(lineDefaultDatGUiObj,'legendTop').name('图例上边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barLegend.add(lineDefaultDatGUiObj,'legendLeft').name('图例左边距').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         var barX=datGuiPannel.addFolder('x轴属性');
         barX.add(lineDefaultDatGUiObj,'xAxisData').name('x轴坐标点').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barX.add(lineDefaultDatGUiObj,'xAxisAxisLabelInterval',0,20).name('x轴刻度间隔').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barX.add(lineDefaultDatGUiObj,'xAxisAxisLabelRotate',-180,180).name('x轴字体旋转角度').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.add(lineDefaultDatGUiObj,'xAxisPosition',{上:'top',下:'bottom'}).name('x轴位置').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.addColor(lineDefaultDatGUiObj,'xAxisAxisLabelTextStyleColor').name('x轴字体颜色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.add(lineDefaultDatGUiObj,'xAxisGridLine').name('x轴网格').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
@@ -1207,6 +1229,8 @@ function addLineDatGui(chartId) {
         barX.add(lineDefaultDatGUiObj,'xAxisBoundaryGap').name('x轴左右边界').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         var barY=datGuiPannel.addFolder('y轴属性');
         barY.add(lineDefaultDatGUiObj,'yAxisData').name('y轴坐标点').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barY.add(lineDefaultDatGUiObj,'yAxisAxisLabelInterval',0,20).name('y轴刻度间隔').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barY.add(lineDefaultDatGUiObj,'yAxisAxisLabelRotate',-180,180).name('y轴字体旋转角度').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisPosition',{左:'left',右:'right'}).name('y轴位置').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.addColor(lineDefaultDatGUiObj,'yAxisAxisLabelTextStyleColor').name('y轴字体颜色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisGridLine').name('y轴网格').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
@@ -1216,6 +1240,7 @@ function addLineDatGui(chartId) {
         barY.add(lineDefaultDatGUiObj,'yAxisAxisTickShow').name('y轴刻度').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisAxisLabelInside').name('y轴图内刻度').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         datGuiPannel.add(lineDefaultDatGUiObj,'tooltipAxisPointerType',{阴影:'shadow',交叉线:'cross',垂直线:'line'}).name('提示框类型').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        datGuiPannel.add(lineDefaultDatGUiObj,'smooth').name('折线是否平滑').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         datGuiPannel.add(lineDefaultDatGUiObj,'reverse').name('坐标轴是否转置').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         datGuiPannel.add(lineDefaultDatGUiObj,'seriesAreaStyle').name('流图').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
     }
@@ -1239,6 +1264,9 @@ function addPieDatGui(chartId) {
         renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         //添加事件监听
         datGuiPannel.add(pieDefaultDatGUiObj,'theme',{vintage:'vintage',westeros:'westeros',wonderland:'wonderland',chalk:'chalk',macarons:'macarons',shine:'shine',halloween:'halloween',dark:'dark',essos:'essos',walden:'walden',infographic:'infographic',roma:'roma',purplePassion:'purplepassion'}).name('主题').listen().onChange(function () {
+            renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
+        });
+        datGuiPannel.add(pieDefaultDatGUiObj,'color').name('配色方案').listen().onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
         var pieCanvas = datGuiPannel.addFolder('画布大小');
@@ -1281,6 +1309,9 @@ function addPieDatGui(chartId) {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
         var pieLegend = datGuiPannel.addFolder("图例属性");
+        pieLegend.addColor(pieDefaultDatGUiObj, 'legendTextStyleColor').name('图例字体颜色').onChange(function () {
+            renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
+        });
         pieLegend.add(pieDefaultDatGUiObj, 'legendOrient', {水平: 'horizontal', 垂直: 'vertical'}).name('图例方向').onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
@@ -1293,6 +1324,7 @@ function addPieDatGui(chartId) {
         pieLegend.add(pieDefaultDatGUiObj, 'legendLeft').name('图例左边距').onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
+
         var pieSeries = datGuiPannel.addFolder("数据属性");
         pieSeries.add(pieDefaultDatGUiObj, 'seriesName').name("数据名").onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
@@ -1799,13 +1831,16 @@ var cloneObj = function(obj){
 样式更新
  */
 function removeDivFun() {
+    console.log("准备移除的divchartid为："+divChartId)
     if($('#'+divChartId).attr('class').indexOf('Monitor')>=0) {
         $('#' + divChartId).remove();
+        //移除div后，控制面板跳转到screen的控制面板
+        addScreenDatGui();
     }
 }
 function downloadOptionFun() {
     console.log(findOptionById(divChartId));
-    $('#downloadOptionModal textarea').val(formatJson(JSON.stringify(findOptionById(divChartId))).replace(/"([a-zA-Z0-9]*?)":/g,'$1:'));
+    $('#downloadOptionModal textarea').val((formatJson(JSON.stringify(findOptionById(divChartId)))).replace(/"([a-zA-Z0-9]*?)":/g,'$1:').replace(/(rgba\(\d*,)\s*(\d*,)\s*(\d*,)\s*([0-9\.]*\)\")/g,'$1$2$3$4'));
     $("#downloadOptionModal").modal({
 //            remote:"test/test.jsp";//可以填写一个url，会调用jquery load方法加载数据
 //        backdrop:"static",//指定一个静态背景，当用户点击背景处，modal界面不会消失
@@ -1909,7 +1944,7 @@ function resizeFix(event, ui) {
 刷新screen的transform的scale系数
  */
 function refreshTransformScale(){
-    var screenGap=50;
+    var screenGap=30;
     var screenContainerHeight=$(window).height()-60;
     var sceenContainerWidth=$(window).width()-315;
     //缩放系数
@@ -1928,13 +1963,15 @@ function refreshTransformScale(){
     console.log(transformScale);
 }
 /*
-添加tooltip
+添加图形控制面板每个参数的tooltip
  */
 function toolTipHelper() {
     $('.dg .property-name').each(function () {
         $(this).append('&nbsp;<span class="datGuiTooltip" data-tooltip-content="#tooltip_content"><img  src="../css/img/信息.png"   style="height: 12px;width: 12px;cursor:help"><div class="tooltip_templates"> <span id="tooltip_content"></span></div></span>  ');
     });
     $('.datGuiTooltip').tooltipster({
+        animation: 'swing',
+        animationDuration:[200,0],
         contentAsHTML:true,
         maxWidth:400
     });
