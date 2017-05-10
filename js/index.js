@@ -1799,9 +1799,9 @@ var cloneObj = function(obj){
 样式更新
  */
 function removeDivFun() {
-    console.log(divChartId)
-    console.log("准备移除元素了")
-    $('#'+divChartId).remove();
+    if($('#'+divChartId).attr('class').indexOf('Monitor')>=0) {
+        $('#' + divChartId).remove();
+    }
 }
 function downloadOptionFun() {
     console.log(findOptionById(divChartId));

@@ -366,6 +366,7 @@
      */
     $('#screen').click(function (e) {
         //判断是否是canvas的点击
+        console.log(e.target)
         if($(e.target).attr('id')=='downloadOption'||$(e.target).attr('id')=='removediv'){
             return;
         }
