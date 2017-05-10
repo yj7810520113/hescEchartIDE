@@ -59,15 +59,6 @@
     <script src="../js/ETheme/wonderland.js"></script>
     <script src="../js/D3.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('.datGuiTooltip').tooltipster({
-                contentAsHTML:true,
-                maxWidth:400
-            });
-        });
-    </script>
-
 </head>
 <body>
 
@@ -144,11 +135,11 @@
 <div class="tabs " >
     <ul id="myTab" class="nav nav-tabs">
         <li class="active" style="width: 50%">
-            <a href="#tabConfig" data-toggle="tab">
+            <a href="#tabConfig" data-toggle="tab" style="text-align: center;">
                 配置
             </a>
         </li>
-        <li style="width: 50%"><a href="#tabData" data-toggle="tab">数据</a></li>
+        <li style="width: 50%;"><a href="#tabData" style="text-align: center;" data-toggle="tab">数据</a></li>
     </ul>
     <div id="myTabContent1" class="tab-content" style="overflow-y:visible;">
         <div class="tab-pane fade in active" id="tabConfig">
@@ -165,7 +156,7 @@
                 <ul id="myTab1" class="nav nav-tabs">
 
                     <li class="dropdown">
-                        <a class="dropdown-toggle" datatog-gle="dropdown" href="#" aria-expanded="false">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                             数据源类型 <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="dataSource">
@@ -184,9 +175,9 @@
                             <div class="form-group">
                                 <label >WebAPI地址：</label>
                                 <input type="text" class="form-control" id="webAPIUrl"
-                                       placeholder="请输入URL，如http://example.com/API" style="width: 280px">
+                                       placeholder="请输入URL，如http://example.com/API" style="width: 310px;height: 40px;">
                             </div>
-                            <button type="submit" class="btn btn-default" style="width: 280px" id="webAPIButton">确定</button>
+                            <button type="submit" class="btn btn-default" style="width: 310px" id="webAPIButton">确定</button>
                     </div>
                     <!--本地文件-->
                     <div class="tab-pane fade" id="dropdownLocalData">
@@ -200,6 +191,9 @@
                         </form>
                     </div>
                 </div>
+            <ul class="nav nav-list">
+                <li class="divider"></li>
+            </ul>
                 <!--添加jsoneditor模块-->
                 <div id="jsonEditorData" style="width: 310px; height: 400px;">
                     <!--<input type="file" id="loadDocument" value="Load"/>-->
@@ -569,7 +563,7 @@
         }
         });
     $('#webAPIButton').click(function () {
-            $.get('http://localhost:8080/webapiproxy/ajax/proxy',{url:$('#webAPIUrl').val()},function (d) {
+            $.get('http://192.168.71.179:8080/webapiproxy/ajax/proxy',{url:$('#webAPIUrl').val()},function (d) {
 //                console.log(d)
                 jsonEditorEditor.setText(d);
      })});

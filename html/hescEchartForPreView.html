@@ -58,7 +58,7 @@
 
     var userName='admin';
     var screenName='test';
-    $.get('http://localhost:8080/webapiproxy/ajax/screen/find/config',{userName:userName,screenName:screenName},function (d) {
+    $.get('http://192.168.71.179:8080/webapiproxy/ajax/screen/find/config',{userName:userName,screenName:screenName},function (d) {
         //获取的d为gridConfig和hescList的配置文件
         console.log(d);
         var gridConfig=d.gridConfig;

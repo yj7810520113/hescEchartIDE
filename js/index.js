@@ -896,7 +896,7 @@ function addBarDatGui(chartId){
         datGuiPannel.add(barDefaultDatGUiObj,'theme',{vintage:'vintage',westeros:'westeros',wonderland:'wonderland',chalk:'chalk',macarons:'macarons',shine:'shine',halloween:'halloween',dark:'dark',essos:'essos',walden:'walden',infographic:'infographic',roma:'roma',purplePassion:'purplepassion'}).name('主题').listen().onChange(function () {
             renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
         });
-        datGuiPannel.add(barDefaultDatGUiObj,'color').name('配色方案').listen().onChange(function () {
+        datGuiPannel.add(barDefaultDatGUiObj,'color').name('配色方案').onChange(function () {
             renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
         });
 
@@ -1971,7 +1971,7 @@ function toolTipHelper() {
     });
     $('.datGuiTooltip').tooltipster({
         animation: 'swing',
-        animationDuration:[200,0],
+        // animationDuration:[200,200],
         contentAsHTML:true,
         maxWidth:400
     });
@@ -2007,7 +2007,7 @@ function saveScreenConfig(){
     var userName='admin';
     var screenName='test';
     console.log('加密之后值'+(hashids.encode(userName,screenName)))
-    $.post('http://localhost:8080/webapiproxy/ajax/screen/add/config',{userName:userName,screenName:screenName,gridConfig:JSON.stringify(gridConfig),hescList:JSON.stringify(hescList),hashUrl:hashids.encodeHex(userName+screenName)},function (d) {
+    $.post('http://192.168.71.179:8080/webapiproxy/ajax/screen/add/config',{userName:userName,screenName:screenName,gridConfig:JSON.stringify(gridConfig),hescList:JSON.stringify(hescList),hashUrl:hashids.encodeHex(userName+screenName)},function (d) {
         console.log(d);
     })
 
