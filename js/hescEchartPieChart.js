@@ -35,6 +35,7 @@
     //option相关属性
     var option=null,
         theme='vintage',
+        color='',
         backgroundColor = '#ffffff',
         //绘图区相对于画布偏移属性
         gridLeft=50,
@@ -64,6 +65,7 @@
         legendTop=10,
         legendBottom=10,
         legendOrient='horizontal',
+        legendTextStyleColor='#fff',
         //另存为图片等部分
         toolboxAttr = 'default',
         /*
@@ -131,7 +133,7 @@
                 top:legendTop,
                 orient:legendOrient,
                 textStyle:{
-                    color:'#fff'
+                    color:legendTextStyleColor
                 }
                 //  align:left
             },
@@ -181,6 +183,10 @@
             animationEasing: 'elasticOut',
             itemStyle: itemStyle
         }
+        //判断color的情况，如果有color则color的配色方案
+        if(color.length!=0){
+            option.color=stringToArray(color);
+        }
         return this;
 
     }
@@ -189,8 +195,10 @@
         theme=x;
         return this;
     }
-
-    exports.theme=themeFun;
+    var colorFun=function (x) {
+        color=x;
+        return this;
+    }
     var render=function(){
         console.log(option);
         var chart = echarts.init(document.getElementById(selectID),theme);
@@ -261,6 +269,10 @@
         legendOrient=x;
         return this;
     }
+    var legendTextStyleColorFun=function (x) {
+        legendTextStyleColor=x;
+        return this;
+    }
 
     var gridLeftFun=function (x) {
         gridLeft=x;
@@ -319,6 +331,8 @@
     exports.option=getOptionFun;
 
     exports.select = selectFun;
+    exports.theme=themeFun;
+    exports.color=colorFun;
 
     exports.pie = pie;
     exports.render=render;
@@ -349,6 +363,7 @@
     exports.legendLeft=legendLeftFun;
     exports.legendTop=legendTopFun;
     exports.legendOrient=legendOrientFun;
+    exports.legendTextStyleColor=legendTextStyleColorFun;
     /*
     series相关属性
      */

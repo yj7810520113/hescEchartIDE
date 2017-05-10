@@ -99,7 +99,19 @@
         //stack的设置,默认情况下为一维普通柱状图
         stackAttr='',
         //判断x，y轴是否转置，即为条形图横过来画
-        reverse=false;
+        reverse=false,
+        
+        /*
+        5.10新加属性
+         */
+        color='',
+        yAxisAxisLabelInterval=0,
+        yAxisAxisLabelRotate=0,
+        xAxisAxisLabelInterval=0,
+        xAxisAxisLabelRotate=0,
+        legendTextStyleColor='#fff',
+        //平滑曲线
+        smooth=false;
 
     var line=function (asyncData) {
             //----------------图形相关属性--------
@@ -167,7 +179,7 @@
                 left:legendLeft,
                 top:legendTop,
                 textStyle:{
-                    color:'#fff'
+                    color:legendTextStyleColor
                 }
               //  align:left
             },
@@ -231,7 +243,9 @@
                     inside:xAxisAxisLabelInside,
                     textStyle:{
                         color:xAxisAxisLabelTextStyleColor
-                    }
+                    },
+                    interval:xAxisAxisLabelInterval,
+                    rotate:xAxisAxisLabelRotate
                 },
                 axisTick:{
                     show:xAxisAxisTickShow
@@ -289,7 +303,9 @@
                     inside:yAxisAxisLabelInside,
                     textStyle:{
                         color:yAxisAxisLabelTextStyleColor
-                    }
+                    },
+                    interval:yAxisAxisLabelInterval,
+                    rotate:yAxisAxisLabelRotate
                 },
                 axisTick:{
                     show:yAxisAxisTickShow
@@ -313,6 +329,7 @@
                     var series1={
                         name:legendAttr[i],
                         type:'line',
+                        smooth:smooth,
                         areaStyle:(function(){
                             if(seriesAreaStyle==false)
                                 return null;
@@ -351,6 +368,10 @@
             })(),
             animationEasing: 'elasticOut',
             itemStyle: itemStyle
+        }
+        //判断color的情况，如果有color则color的配色方案
+        if(color.length!=0){
+            option.color=stringToArray(color);
         }
         return this;
 
@@ -544,8 +565,43 @@
         theme=x;
         return this;
     }
+    /*
+    5.10新加属性
+     */
+    /*
+     5.10添加属性，提取自bar
+     */
+    var colorFun=function (x) {
+        color=x;
+        return this;
+    }
+    var yAxisAxisLabelIntervalFun=function (x) {
+        yAxisAxisLabelInterval=x;
+        return this;
+    }
+    var yAxisAxisLabelRotateFun=function (x) {
+        yAxisAxisLabelRotate=x;
+        return this;
+    }
+    var xAxisAxisLabelIntervalFun=function (x) {
+        xAxisAxisLabelInterval=x;
+        return this;
+    }
+    var xAxisAxisLabelRotateFun=function (x) {
+        xAxisAxisLabelRotate=x;
+        return this;
+    }
+    var legendTextStyleColorFun=function (x) {
+        legendTextStyleColor=x;
+        return this;
+    }
+    var smoothFun=function (x) {
+        smooth=x;
+        return this;
+    }
 
     exports.theme=themeFun;
+    exports.color=colorFun;
     exports.option=getOptionFun;
 
     exports.select = selectFun;
@@ -580,6 +636,7 @@
     exports.legendLeft=legendLeftFun;
     exports.legendTop=legendTopFun;
     exports.legendOrient=legendOrientFun;
+    exports.legendTextStyleColor=legendTextStyleColorFun;
 
 
     exports.seriesAreaStyle=seriesAreaStyleFun;
@@ -593,6 +650,8 @@
     exports.xAxisAxisLineShow=xAxisAxisLineShowFun;
     exports.xAxisAxisLabelInside=xAxisAxisLabelInsideFun;
     exports.xAxisAxisLabelTextStyleColor=xAxisAxisLabelTextStyleColorFun;
+    exports.xAxisAxisLabelInterval=xAxisAxisLabelIntervalFun;
+    exports.xAxisAxisLabelRotate=xAxisAxisLabelRotateFun;
     exports.xAxisAxisTickShow=xAxisAxisTickShowFun;
     exports.xAxisData=xAxisDataFun;
     exports.xAxisGridLineAttr=xAxisGridLineAttrFun;
@@ -605,8 +664,11 @@
     exports.yAxisAxisLineShow=yAxisAxisLineShowFun;
     exports.yAxisAxisLabelInside=yAxisAxisLabelInsideFun;
     exports.yAxisAxisLabelTextStyleColor=yAxisAxisLabelTextStyleColorFun;
+    exports.yAxisAxisLabelInterval=yAxisAxisLabelIntervalFun;
+    exports.yAxisAxisLabelRotate=yAxisAxisLabelRotateFun;
     exports.yAxisAxisTickShow=yAxisAxisTickShowFun;
 
 
+    exports.smooth=smoothFun;
     exports.reverse=reverseFun;
 })));

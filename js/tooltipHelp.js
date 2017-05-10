@@ -13,7 +13,7 @@ hescToolTipHelp=(function () {
         screenWidthHelp:'整个画布的宽度，即为右边蓝色区域的大小<br/><b>PS:右边蓝色的区域为根据画布大小和用户屏幕显示区域等比例放缩，为下一版本大屏预览预留功能</b><br/><b>目前支持范围为720p-4K</b>',
         screenBackgroundHelp:'整个画布的背景色',
         themeHelp:'图表的主题，内置多重配色',
-        colorHelp:'留空采用主题的配色方案，用户可以修改配色方案，每个颜色之间用逗号隔开，支持hsl<br/><b>例如：#123456,#111111,#533fef</b><p style="color: red">建议，自定义的配色方案个数=图例的个数</p><p style="color: red;font-weight: bold">注意：不支持rgb和rgba</p>',
+        colorHelp:'留空采用主题的配色方案，用户可以修改配色方案，每个颜色之间用逗号隔开，支持hsl<br/><b>例如：#123456,#111111,#533fef</b><p style="color: red">建议，自定义的配色方案个数=图例的个数</p><p style="color: red;font-weight: bold">注意：不支持rgb和rgba</p><p style="color: red;font-weight: bold">注意：修改配色方案会覆盖主题配色！！！</p>',
         canvasHeightHelp:'绘图区高度，用于调整绘图区大小',
         canvasWidthHelp:'绘图区宽度，用于调整绘图区大小',
         backgroundColorHelp:'绘图区的背景色，默认为白色，透明度为0',
@@ -61,7 +61,7 @@ hescToolTipHelp=(function () {
         yAxisAxisLabelRotateHelp:'刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠',
         yAxisAxisTickShowHelp:'是否在y轴上显示坐标刻度点',
         reverseHelp:'是否转置坐标轴，即为x，y轴互换<p style="color:red">建议，勾选转置坐标轴的同时，勾选 x轴属性->x轴左右边界</p>',
-        stackAttrHelp:'用于区分堆叠柱状图，留空即为柱状图的维度=数据种类，用户可以修改柱状图的堆叠情况，每个值之间用逗号隔开<br/><b>例如：1,1,2,2</b> 表示柱状图维度为2，第1个维度堆叠层为2，第二个维度堆叠层为2<br><b>例如：1,2,2,2</b> 表示柱状图维度为2，第1个维度堆叠层为1，第2个维度堆叠层为3<br/><b>例如：1,2,3,4</b> 表示柱状图维度为4，每个维度堆叠层都为1',
+        stackAttrHelp:'用于区分堆叠柱状图，留空即为柱状图的维度=数据种类，用户可以修改柱状图的堆叠情况，每个值之间用逗号隔开,每个值代表每一个图例所属的类型<br/><p style="color: red;"><b>现在图例为：图例1，图例2，图例3，图例4<br/>1. 堆叠柱状图设置为：类型1，类型1，类型2，类型2。表示图例1和图例2属于类型1，图例3和图例4属于类型2，所以画出来的堆叠柱状图维度为2，第一个维度有2个叠加层（图例1，图例2），第二个维度有2个叠加层（图例3，图例4）<br><b>2. 再例如，堆叠柱状图设置为：类型1，类型1，类型1，类型2。表示图例1、图例2和图例3属于类型1，图例4属于类型2，所以画出来的堆叠柱状图维度为2，第1个维度有3个叠加层（图例1，图例2，图例3），第二个为只有一个叠加层（图例4）</b></p>',
         /*
         柱状图属性
          */
@@ -71,6 +71,7 @@ hescToolTipHelp=(function () {
         折线图属性
          */
         seriesAreaStyleHelp:'是否为面积图，面积图即为堆叠的折线图<br/><b>建议：勾选流图同时勾选 x轴属性->x轴左右边界</b>',
+        smoothHelp:'是否平滑曲线显示',
         /*
         饼图属性
          */
@@ -303,6 +304,9 @@ hescToolTipHelp=(function () {
          */
         else if(divText.trim()=='流图'){
             return toolTipHelp.seriesAreaStyleHelp;
+        }
+        else  if(divText.trim=='折线是否平滑'){
+            return toolTipHelp.smoothHelp;
         }
         /*
         饼图
