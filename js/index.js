@@ -4,6 +4,12 @@
  * Date:2017/4/27
  * Time:8:57
  **/
+//一些常量
+    //后端服务器的baseUrl
+    const serviceBaseUrl='http://192.168.71.179:8080/webapiproxy';
+    // const htmlHead=
+
+
 //存储数据结构
 var hescList=[];
 //产生随机id的seed
@@ -13,6 +19,7 @@ var datGuiPannel='';
 var divChartId='';
 //缩放系数
 var transformScale=1;
+
 var screenInitialDatGuiData={
     width:1920,
     height:1080,
@@ -731,6 +738,13 @@ function  addScreen() {
     $("#screen").height(1080);
     $("#screen").width(1920);
 }
+function addScreenByShare() {
+    $('#screen').height(findDatGuiDataById('screen').height);
+    $('#screen').width(findDatGuiDataById('screen').width);
+}
+/*
+初始化添加chartDiv
+ */
 function addChartDiv(parent,chartType){
 // <div id='bar随即id' class="Monitor">
 //         <div id="barChild" style="height:calc(100% - 3px);wid    th:calc(100% - 3px);"></div>
@@ -834,6 +848,86 @@ function addChartDiv(parent,chartType){
 
 }
 /*
+读取配置添加chartDiv,这里的ids是从gridConfig里面读取的
+ */
+function addChartDivByShare(parent,ids) {
+    //这里的长宽为monitor的长宽-3
+    var divContent='<div id="'+ids+'" class="Monitor" style="z-index: 11;position:absolute">    <div  class="divControlPannel"><span class="glyphicon glyphicon-remove divControlPannelIcon removediv" style="color: white" id="removediv" onclick="removeDivFun()"></span> <span class="glyphicon glyphicon-download-alt divControlPannelIcon downloadOption" style="color: white" id="downloadOption" onclick="downloadOptionFun()"></span> </div><div id='+ids+'canvas class="canvasclass" style="height:'+(400)+'px;width:'+(500)+'px;"></div>';
+    $(parent).append(divContent);
+    //transformScale
+    var click = {
+        x: 0,
+        y: 0
+    };
+    //解决tranform的draggle不粘手的问题
+    $('.Monitor').resizable({
+            handles:'all',
+            autoHide:true,
+            minWidth: -($(this).width()) * 10,  // these need to be large and negative
+            minHeight: -($(this).height()) * 10, // so we can shrink our resizable while scaled
+            resize: resizeFix
+        }
+    ).draggable({
+
+        start: function(event) {
+            click.x = event.clientX;
+            click.y = event.clientY;
+        },
+
+        drag: function(event, ui) {
+
+            // This is the parameter for scale()
+            var zoom = 1.5;
+
+            var original = ui.originalPosition;
+
+            // jQuery will simply use the same object we alter here
+            ui.position = {
+                left: (event.clientX - click.x + original.left) / transformScale,
+                top:  (event.clientY - click.y + original.top ) / transformScale
+            };
+
+        }
+
+    });
+    /*
+     因为monitor需要对hesclist进行操作，所以放在后面
+     为每一个monitor设立width，height改变监听器
+     */
+    $('.Monitor').each(function () {
+        $(this).mutate('height width',function (e1,info) {
+            var ids1=$(e1).attr('id').split('-');
+            //查找到hescList中指定的元素并替换height和width的值
+            for(var hescListHeightWidth in hescList){
+                if(hescList[hescListHeightWidth].divId==$(e1).attr('id')){
+                    hescList[hescListHeightWidth].datGuiConfig.canvasHeight=$(e1).height();
+                    hescList[hescListHeightWidth].datGuiConfig.canvasWidth=$(e1).width();
+                    if(ids1[0]=='bar') {
+                        renderBarChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
+                    }
+                    else if(ids1[0]=='line'){
+                        renderLineChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
+                    }
+                    else if(ids1[0]=='pie'){
+                        renderPieChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
+                    }
+                    else if(ids1[0]=='radar'){
+                        renderRadarChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
+                    }
+                    else if(ids1[0]=='calendar'){
+                        renderCalendarChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
+                    }
+                    else if(ids1[0]=='wordCloud'){
+                        renderWordCloudChart($(e1).attr('id'),findCanvasDataById($(e1).attr('id')).data,findDatGuiDataById($(e1).attr('id')));
+                    }
+                }
+            }
+        })
+    })
+    return ids;
+
+}
+/*
 添加数据结构的方法
  */
 function addHescEle(divId,dataType,data,datGuiConfig){
@@ -890,6 +984,9 @@ function addBarDatGui(chartId){
             //添加柱状图至控制面板
             var customContainer = document.getElementById('tabConfig');
             customContainer.appendChild(datGuiPannel.domElement);
+
+            console.log(chartId);
+            console.log(hescList)
 
             renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             //添加事件监听
@@ -1761,6 +1858,7 @@ function findHescEle(divId){
             break;
         }
     }
+    return false;
 }
 /*
 更新数据结构的方法

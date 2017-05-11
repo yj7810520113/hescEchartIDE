@@ -15,6 +15,8 @@
     <script src="../js/hescEchartBarChart.js"></script>
     <script src="../js/hescEchartCore.js"></script>
     <script src="../js/ETheme/chalk.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/html2canvas.js"></script>
     <style>
         *{
             margin: 0px;
@@ -177,5 +179,12 @@
 
 
 </script>
+    <script>
+            function screenShot() {
+                console.log('准备截图了');
+                html2canvas(document.getElementById('test')).then(function(canvas) {document.body.appendChild(canvas);});
+            }
+            setTimeout("screenShot()",1000)
+    </script>
 </body>
 </html>

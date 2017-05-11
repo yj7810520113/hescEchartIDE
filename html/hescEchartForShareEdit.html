@@ -109,7 +109,7 @@
 
 
             <ul id="preview" class="nav navbar-nav navbar-right">
-                <li><a href="./hescEchartForPreView.html" target="_blank">预览</a></li>
+                <li><a href="./hescEchartForPreView.html">预览</a></li>
                 <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
             </ul>
 
@@ -228,17 +228,55 @@
 
 
 
-<!--初始化screen高度及缩放系数-->
+<!--读取screen高度、计算缩放系数-->
 <!--初始化tab的高度-->
 <script>
-    $(window).resize(function() {
-        console.log($(window).height())
+    var userName='admin',screenName='test';
+    $(function () {
+        $.get(serviceBaseUrl+'/ajax/screen/find/config',{userName:userName,screenName:screenName},function (d) {
+            console.log(d.hescList);
+            console.log(d.gridConfig)
+            hescList=d.hescList;
+            addScreenByShare();
+            addScreenDatGui();
+            refreshTransformScale();
+            //根据gridConfig的divId创建div和生成图形
+            for(var i=0;i<d.gridConfig.length;i++){
+                //排除gridConfig里面的screen的配置
+                if((d.gridConfig)[i].divId!='screen') {
+                    //添加图形的div
+                    addChartDivByShare($('#screen'), (d.gridConfig)[i].divId);
+                    //绘制图形和dat.gui
+                    addDatGuiAndRenderChartAndCssSettingByShare((d.gridConfig[i]).divId);
+                    //移动图形到合适的位置(动画)
+                    console.log((d.gridConfig)[i].style.replace(/[\s\S]*height:([\s\S]*?);[\s\S]*/g,'$1'));
+                    d3.select('#'+(d.gridConfig)[i].divId)
+                        .transition()
+                        .duration(3000)
+                        .style('top',(d.gridConfig)[i].style.replace(/[\s\S]*top:([\s\S]*?);[\s\S]*/g,'$1'))
+                        .style('left',(d.gridConfig)[i].style.replace(/[\s\S]*left:([\s\S]*?);[\s\S]*/g,'$1'));
+
+
+                }
+            }
+            //清除所有的div选中状态，即控制面板默认为screen的配置
+            addScreenDatGui();
+            $('#screen .divControlPannel').each(function () {
+                $(this).css('display','none')
+            });
+            /*
+             *清除所有div的边框
+             */
+            $('.Monitor').each(function () {
+                $(this).css("outline",'');
+            });
+
+        });
     });
+
     $('.tabs').height($(window).height()-60);
     $(function () {
-       addScreen();
-       addScreenDatGui();
-       refreshTransformScale();
+
     });
 
 
@@ -265,6 +303,7 @@
         }
     });
 
+
     /*
      添加词云的本地文件
      */
@@ -282,13 +321,20 @@
 </script>
 
 <!----------------------------------------------------JS-------------------------------------------------------->
-<!--添加图形-->
+<!--1.初始化添加图形-->
+<!--2.读取配置添加图形-->
+<!--3.在screen上面点击图形时候的操作及css变化-->
+<!--4.数据源提交的时候的变化-->
 <script>
     //顶端的添加图形按钮,点击按钮也是一种screen上面的点击行为，点击的div可以直接被选中
     $('#addChart').click(function (e) {
         var addChartEle=$(e.target).attr('id');
+        addDatGuiAndRenderChartAndCSSSettingInitial(addChartEle);
+    });
+    //初始化添加datGUI、渲染图形、css设置
+    function addDatGuiAndRenderChartAndCSSSettingInitial(addChartEle) {
         if(addChartEle=='bar'){
-             var chartId=addChartDiv($('#screen'),'bar');
+            var chartId=addChartDiv($('#screen'),'bar');
             addBarDatGui(chartId);
             divChartId=chartId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
@@ -344,8 +390,69 @@
             $(this).css("outline",'');
         });
         $('#'+divChartId).css("outline",'1px solid #419bf9');
+    };
+    //读取配置添加datgui、渲染图形、css设置
+    function addDatGuiAndRenderChartAndCssSettingByShare(divId) {
+        var addChartEle=divId.split('-');
+        if(addChartEle[0]=='bar'){
+            var chartId=addChartEle[0];
+            addBarDatGui(divId);
+            divChartId=divId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle[0]=='line'){
+            var chartId=addChartEle[0];
+            addLineDatGui(divId);
+            divChartId=divId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle[0]=='radar'){
+            var chartId=addChartEle[0];
+            addRadarDatGui(divId);
+            divChartId=divId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle[0]=='calendar'){
+            var chartId=addChartEle[0];
+            addCalendarDatGui(divId);
+            divChartId=divId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle[0]=='pie'){
+            var chartId=addChartEle[0];
+            addPieDatGui(divId);
+            divChartId=divId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle[0]=='wordCloud'){
+            var chartId=addChartEle[0];
+            addWordCloudDatGui(divId);
+            divChartId=divId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
 
-    });
+        /*
+         样式更新
+         */
+        //用户选择时，打开该div的控制面板(控制面板是打开textarea或者是关闭div)
+        //首先清除其他控制面板
+        $('#screen .divControlPannel').each(function () {
+            $(this).css('display','none')
+        });
+        //然后打开指定id的div的控制面板
+        console.log('#'+divChartId)
+        $('#'+divChartId+' .divControlPannel').each(function (e1) {
+            $(this).css('display','inline');
+        });
+
+        /*
+         *更新div的选中情况的边框情况
+         */
+        $('.Monitor').each(function () {
+            $(this).css("outline",'');
+        });
+        $('#'+divChartId).css("outline",'1px solid #419bf9');
+    }
     /*
     screen上面的点击
      */
@@ -430,65 +537,6 @@
 
 </script>
 
-
-<!--drag and resize-->
-<script>
-    /*
-    添加鼠标移动过和click事件
-     */
-    /*
-    同步更新大小测试
-     */
-
-//
-//    $('#barChild').parent().mouseover(function () {
-//        console.log("出发了barchild 的parent");
-////        console.log($('#barChild').parent().css('border'))
-//        $('#barChild').parent().css('outline','2px dotted blue');
-//    });
-//    $('#barChild').parent().mouseout(function () {
-//        console.log('我俩开了')
-//        $('#barChild').parent().css('outline','0px');
-//    });
-//    $('#barChild').parent().click(function () {
-//        console.log('我点击了');
-//        $('#barChild').parent().css('outline','2px solid blue');
-//    });
-//    $(function() {
-//        //how to use it
-//        $('#barChild').parent().mutate('height width', function(el,info) {
-//            console.log($(el).height());
-//            barObj.canvasHeight=$(el).height();
-//            barObj.canvasWidth=$(el).width();
-//            renderBarChart();
-////            expanded = true;
-////            $('#heighter').text('height changed:' + $(el).height());
-////            $('#widther').text('Width changed:' + $(el).width());
-//        });
-//        $('#barChild').parent().mutate('top left right bottom', function(el,info) {
-////            $('#topper').text('box has moved either (top,left,right or bottom):' + parseInt($(el).css('top')));
-////            if(parseInt($(el).css('top'))>=250) $('#topper2').html('Element Moved top to more than 250:<strong class="red">' + parseInt($(el).css('top'))+'px</strong> this is especially usefull when you need to make a game. Exact 250px maybe be a little more tricky, as some pixels may skip due to animation time so it\'s better to use more than or less than ');
-//        });
-////        $('div.monitor').mutate('hide', function(el,info) {
-////            $('#hidder').text('Element was hidden:'+iii++);
-////        });
-////        $('div.monitor').mutate('show', function(el,info) {
-////            $('#shower').text('Element is now visible:'+ iii++);
-////        });
-////        //illustration purpuso only
-////        $('#subm3').click(function() {
-////            $('#my1').stop(true,true).css({width:300,height:100}).animate({width: 500,height:500},1000);
-////        });
-////        $('#subm2').click(function() {
-////            $('#my1').toggle();
-////        });
-////        $('#subm').click(function() {
-////            $('#my1').stop(true,true).css('top',0).animate({'top':300},2000);
-////        });
-//        $('.Monitor').resizable().draggable();
-//    })
-</script>
-
 <!--jsonEditor对应的数据-->
 <script>
 
@@ -505,18 +553,6 @@
     var jsonEditorJson=[[{"2011":2},{"2011":4},{"2011":4},{"2011":4}],[{"2012":6},{"2012":8},{"2013":4},{"2013":4}],[{"2014":5},{"2014":2},{"2014":9},{"2014":1}],[{"2015":8},{"2015":6},{"2015":1},{"2015":7}]];
     var jsonEditorEditor=new JSONEditor(document.getElementById('jsonEditorData'),jsonEditorOptions);
 
-    /*
-     初始化dropdown上面的文字描述,和静态数据的初始化
-     */
-//    $(function(){
-//        jsonEditorEditor.set(jsonEditorJson);
-//        barData=JSON.parse(jsonEditorEditor.getText());
-//        console.log(barData);
-//        renderBarChart();
-//    })
-    /*
-    根据dropdown的选择不同更新jsoneditor里面的数据
-     */
     $('#dataSource a[data-toggle="tab"]').on('shown.bs.tab',function(e){
         console.log(e.target);
         if($(e.target).attr('href')=='#dropdownstaticData'){
@@ -540,23 +576,6 @@
 //                console.log(d)
                 jsonEditorEditor.setText(d);
      })});
-//        else if($(e.target).attr('href')=='#dropdownWebAPI'){
-//            console.log('webAPIdata');
-//            /*
-//            发送ajax请求
-//             */
-//
-////            $.get('',{url:$('#webAPIUrl').val()},function () {
-////
-////            })
-//        }
-//    });
-    /*
-    更新数据
-     */
-
-
-
 
 </script>
 </body>
