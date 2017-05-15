@@ -6,8 +6,30 @@
  **/
 //一些常量
     //后端服务器的baseUrl
-    const serviceBaseUrl='http://192.168.71.179:8080/webapiproxy';
-    // const htmlHead=
+const serviceBaseUrl = 'http://192.168.71.179:8080/webapiproxy';
+const htmlDownloadTemplate = '<!DOCTYPE html>\n' +
+    '<html lang="en">\n' +
+    '<head>\n' +
+    '\t<meta charset="UTF-8">\n' +
+    '\t<title>Title</title>\n' +
+    '\t<script src="http://echarts.baidu.com/dist/echarts.common.min.js"></script>\n' +
+    '\t<script src="http://echarts.baidu.com/asset/theme/roma.js"></script>\n' +
+    '\t<script src="http://echarts.baidu.com/asset/theme/vintage.js"></script>\n' +
+    '\t<script src="http://echarts.baidu.com/asset/theme/dark.js"></script>\n' +
+    '\t<script src="http://echarts.baidu.com/asset/theme/infographic.js"></script>\n' +
+    '\t<script src="http://echarts.baidu.com/asset/theme/shine.js"></script>\n' +
+    '\t<script src="http://echarts.baidu.com/asset/theme/macarons.js"></script>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '\t<div style="height:100px;width:100px;background:rgb(0,0,0);">\n'+
+    '\t\t<div id="renderChart" style="height:100px;width:100px;background:rgb(0,0,0);"></div>\n\t</div>\n' +
+    '<script>\n' +
+    '\tvar option={}\n' +
+    '\tvar chart = echarts.init(document.getElementById("renderChart"),theme);\n' +
+    '\tchart.setOption(option);\n' +
+    '</script>\n' +
+    '</body>\n' +
+    '</html>\n';
 
 
 //存储数据结构
@@ -16,6 +38,7 @@ var hescList=[];
 var hashids=new Hashids('hescEchart',5);
 //用于datGui控制面板的生成
 var datGuiPannel='';
+//当前选中的chart的ID
 var divChartId='';
 //缩放系数
 var transformScale=1;
@@ -1936,14 +1959,24 @@ function removeDivFun() {
         addScreenDatGui();
     }
 }
+//下载配置选项
 function downloadOptionFun() {
     console.log(findOptionById(divChartId));
-    $('#downloadOptionModal textarea').val((formatJson(JSON.stringify(findOptionById(divChartId)))).replace(/"([a-zA-Z0-9]*?)":/g,'$1:').replace(/(rgba\(\d*,)\s*(\d*,)\s*(\d*,)\s*([0-9\.]*\)\")/g,'$1$2$3$4'));
+    //option下载
+    var optionText=(formatJson(JSON.stringify(findOptionById(divChartId)))).replace(/"([a-zA-Z0-9]*?)":/g,'$1:').replace(/(rgba\(\d*,)\s*(\d*,)\s*(\d*,)\s*([0-9\.]*\)\")/g,'$1$2$3$4')
+    $('#downloadOptionModal textarea').val(optionText);
+    //html下载
+    var htmlDownloadText=htmlDownloadTemplate.replace(/option\=(\{[\s\S]*?\})/g,'option='+optionText);
+    //更新html中的height、width和background
+    htmlDownloadText=htmlDownloadText.replace(/(style\="height\:)\d*?(px;width\:)\d*?(px;background\:)[\s\S]*?;"/g,'$1'+findDatGuiDataById(divChartId).canvasHeight+'$2'+findDatGuiDataById(divChartId).canvasWidth+'$3'+findDatGuiDataById('screen').background+';"');
+    //更新html中的theme选项
+    htmlDownloadText=htmlDownloadText.replace(/(renderChart"\),).*?\)/g,'$1\''+findDatGuiDataById(divChartId).theme+'\')');
     $("#downloadOptionModal").modal({
 //            remote:"test/test.jsp";//可以填写一个url，会调用jquery load方法加载数据
 //        backdrop:"static",//指定一个静态背景，当用户点击背景处，modal界面不会消失
         keyboard:true//当按下esc键时，modal框消失
     });
+    return htmlDownloadText;
 }
 //格式化json
 var formatJson = function(json, options) {

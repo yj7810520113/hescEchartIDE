@@ -41,6 +41,7 @@
     <script src="../js/index.js"></script>
     <script src="../js/renderChart.js"></script>
     <script src="../js/JSONFormatter.js"></script>
+    <script src="../js/fileSaver.min.js"></script>
 
 
     <script src="../js/ETheme/echartTheme.js"></script>
@@ -212,16 +213,21 @@
     <div class="modal-dialog" style="height: 700px;width:500px;z-index: 1001;">
 
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="display: block">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <p><配置文件></配置文件>（Echart的Option）</p>
             </div>
             <div class="modal-body">
                 <form role="form">
                     <div class="form-group">
-                        <textarea class="form-control" rows="30"></textarea>
+                        <textarea class="form-control" rows="25"></textarea>
                     </div>
                 </form>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block btn-sm" id="downloadHTMLToLocal">下载HTML</button>
+            </div>
+        </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
@@ -282,13 +288,25 @@
 </script>
 
 <!----------------------------------------------------JS-------------------------------------------------------->
-<!--添加图形-->
+<!--1.初始化添加图形-->
+<!--2.读取配置添加图形-->
+<!--3.在screen上面点击图形时候的操作及css变化-->
+<!--4.数据源提交的时候的变化-->
 <script>
+    //点击下载html的动作
+    $('#downloadHTMLToLocal').click(function (e) {
+        var file = new File([downloadOptionFun()], "HESCharts.html", {type: "text/html;charset=utf-8"});
+        saveAs(file);
+    })
     //顶端的添加图形按钮,点击按钮也是一种screen上面的点击行为，点击的div可以直接被选中
     $('#addChart').click(function (e) {
         var addChartEle=$(e.target).attr('id');
+        addDatGuiAndRenderChartAndCSSSettingInitial(addChartEle);
+    });
+    //初始化添加datGUI、渲染图形、css设置
+    function addDatGuiAndRenderChartAndCSSSettingInitial(addChartEle) {
         if(addChartEle=='bar'){
-             var chartId=addChartDiv($('#screen'),'bar');
+            var chartId=addChartDiv($('#screen'),'bar');
             addBarDatGui(chartId);
             divChartId=chartId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
@@ -344,10 +362,71 @@
             $(this).css("outline",'');
         });
         $('#'+divChartId).css("outline",'1px solid #419bf9');
+    };
+    //读取配置添加datgui、渲染图形、css设置
+    function addDatGuiAndRenderChartAndCssSettingByShare(divId) {
+        var addChartEle=divId.split('-');
+        if(addChartEle[0]=='bar'){
+            var chartId=addChartEle[0];
+            addBarDatGui(divId);
+            divChartId=divId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle[0]=='line'){
+            var chartId=addChartEle[0];
+            addLineDatGui(divId);
+            divChartId=divId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle[0]=='radar'){
+            var chartId=addChartEle[0];
+            addRadarDatGui(divId);
+            divChartId=divId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle[0]=='calendar'){
+            var chartId=addChartEle[0];
+            addCalendarDatGui(divId);
+            divChartId=divId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle[0]=='pie'){
+            var chartId=addChartEle[0];
+            addPieDatGui(divId);
+            divChartId=divId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
+        else if(addChartEle[0]=='wordCloud'){
+            var chartId=addChartEle[0];
+            addWordCloudDatGui(divId);
+            divChartId=divId;
+            jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+        }
 
-    });
+        /*
+         样式更新
+         */
+        //用户选择时，打开该div的控制面板(控制面板是打开textarea或者是关闭div)
+        //首先清除其他控制面板
+        $('#screen .divControlPannel').each(function () {
+            $(this).css('display','none')
+        });
+        //然后打开指定id的div的控制面板
+        console.log('#'+divChartId)
+        $('#'+divChartId+' .divControlPannel').each(function (e1) {
+            $(this).css('display','inline');
+        });
+
+        /*
+         *更新div的选中情况的边框情况
+         */
+        $('.Monitor').each(function () {
+            $(this).css("outline",'');
+        });
+        $('#'+divChartId).css("outline",'1px solid #419bf9');
+    }
     /*
-    screen上面的点击
+     screen上面的点击
      */
     $('#screen').click(function (e) {
         //判断是否是canvas的点击
@@ -365,9 +444,9 @@
             jsonEditorEditor.set(addCanvasData(divChartId).data);
 
             /*
-            *更新div的层叠关系
-            * update:2017.5.3
-            */
+             *更新div的层叠关系
+             * update:2017.5.3
+             */
             //其他层级为1
             $('.Monitor').each(function () {
                 $(this).css('z-index',1);
@@ -377,15 +456,15 @@
 
 
             /*
-            *更新div的选中情况的边框情况
-            */
+             *更新div的选中情况的边框情况
+             */
             $('.Monitor').each(function () {
                 $(this).css("outline",'');
             });
             $('#'+divChartId).css("outline",'1px solid #419bf9');
         }
         /*
-        样式更新
+         样式更新
          */
         //用户选择时，打开该div的控制面板
         //首先清除其他控制面板

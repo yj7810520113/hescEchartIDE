@@ -364,10 +364,13 @@
             animationEasing: 'elasticOut',
             itemStyle: itemStyle
         }
+
         //判断color的情况，如果有color则color的配色方案
-        if(color.length!=0){
-            option.color=stringToArray(color);
+        if(color.length!=0) {
+            option.color = stringToArray(color);
         }
+
+
         return this;
 
     }
