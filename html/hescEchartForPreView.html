@@ -55,10 +55,8 @@
 
 <!--向后台获取配置文件-->
 <script>
-
-    var userName='admin';
-    var screenName='test';
-    $.get('http://192.168.71.179:8080/webapiproxy/ajax/screen/find/config',{userName:userName,screenName:screenName},function (d) {
+    var id=getQueryString('id');
+    $.get(serviceBaseUrl+'/ajax/screen/find/config',{id:id},function (d) {
         //获取的d为gridConfig和hescList的配置文件
         console.log(d);
         var gridConfig=d.gridConfig;
@@ -81,10 +79,12 @@
         /*
         2.根据hescList生成图形
          */
-        for(var i in hescList){
-            if(hescList[i].divId!='screen'){
-                var chart = echarts.init(document.getElementById(hescList[i].divId),hescList[i].datGuiConfig.theme);
-                chart.setOption(hescList[i].option);
+        for(var i in gridConfig){
+            for(var j in hescList) {
+                if ((hescList[j].divId != 'screen')&&hescList[j].divId==gridConfig[i].divId) {
+                    var chart = echarts.init(document.getElementById(hescList[j].divId), hescList[j].datGuiConfig.theme);
+                    chart.setOption(hescList[j].option);
+                }
             }
         }
 

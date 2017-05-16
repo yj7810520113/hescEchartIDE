@@ -35,6 +35,9 @@
 
 
   <link rel="stylesheet" href="../css/home.css">
+  <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <script src="../js/hashids.js"></script>
+  <script src="../js/index.js"></script>
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -62,17 +65,17 @@
           <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
         </ul>
 
-        <!--测试保存数据按钮-->
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="javascript:saveScreenConfig()" target="_blank">保存</a></li>
-          <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
-        </ul>
+        <!--&lt;!&ndash;测试保存数据按钮&ndash;&gt;-->
+        <!--<ul class="nav navbar-nav navbar-right">-->
+          <!--<li><a href="javascript:saveScreenConfig()" target="_blank">保存</a></li>-->
+          <!--&lt;!&ndash;<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>&ndash;&gt;-->
+        <!--</ul>-->
 
 
-        <ul id="preview" class="nav navbar-nav navbar-right">
-          <li><a href="./hescEchartForPreView.html" target="_blank">预览</a></li>
-          <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
-        </ul>
+        <!--<ul id="preview" class="nav navbar-nav navbar-right">-->
+          <!--<li><a href="./hescEchartForPreView.html" target="_blank">预览</a></li>-->
+          <!--&lt;!&ndash;<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>&ndash;&gt;-->
+        <!--</ul>-->
       </div>
     </nav>
   </header>
@@ -109,56 +112,72 @@
         <small>我的案例集</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i>控制面板</a></li>
+        <li class="active">我的案例集</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
       <!-- Small boxes (Stat box) -->
-      <div class="row">
+      <div class="row" id="screenStart">
+        <!--每个大屏的卡片开始的标签-->
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="screen" >
-            <div class="image-wrap" >
-              <img src="//img.alicdn.com/tfs/TB1VpagQFXXXXcJXVXXXXXXXXXX-1920-1080.jpg?spm=1494837372820" alt="screenshot" class="screen_image" data-reactid=".0.0.1.0.$0/=11=2$0.1.1.0.0.$41251.0.0">
-              <div class="mask" data-reactid=".0.0.1.0.$0/=11=2$0.1.1.0.0.$41251.0.1">
-                <a href="/admin/screen/41251" target="_blank" class="edit-wrap">
-                <button class="edit">编辑</button>
+
+
+          <div class="screen" id="addScreen">
+            <div class="new-wrap">
+              <a href="#" class="screen_new_link">
+                <i class="iconfont icon-xinjian">
+                </i>
+                <span>新建可视化</span>
               </a>
-                <div class="delete" >
-                  <i class="iconfont icon-shanchu"></i>
-                </div>
-              </div>
-            </div>
-            <div class="screen-bottom-wrap">
-              <div class="color-B2C1D5 screen_bottom">
-                <i class="iconfont icon-bianji fl"></i>
-                <!--<p>test</p>-->
-              </div>
-              <div class="screen-actions-box">
-                <div class="screenActions">
-                  <ul class="clearfix">
-                    <li>
-                      <i class="iconfont icon-fuzhi">
-                      </i>
-                      <span>复制</span>
-                    </li>
-                    <li>
-                      <i class="iconfont icon-yulan">
-                      </i>
-                      <span>预览</span>
-                    </li>
-                    <li>
-                    </li>
-                  </ul>
-                </div>
+              <span>
                 <noscript></noscript>
-              </div>
+              </span>
             </div>
-            <noscript></noscript>
-          </di  v>
+          </div>
+
+
+          <!--<div class="screen" >-->
+            <!--<div class="image-wrap" >-->
+              <!--<img src="//img.alicdn.com/tfs/TB1VpagQFXXXXcJXVXXXXXXXXXX-1920-1080.jpg?spm=1494837372820" alt="screenshot" class="screen_image" data-reactid=".0.0.1.0.$0/=11=2$0.1.1.0.0.$41251.0.0">-->
+              <!--<div class="mask" data-reactid=".0.0.1.0.$0/=11=2$0.1.1.0.0.$41251.0.1">-->
+                <!--<a href="/admin/screen/41251" target="_blank" class="edit-wrap">-->
+                <!--<button class="edit">编辑</button>-->
+              <!--</a>-->
+                <!--<div class="delete" >-->
+                  <!--<i class="iconfont icon-shanchu"></i>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="screen-bottom-wrap">-->
+              <!--<div class="color-B2C1D5 screen_bottom">-->
+                <!--<i class="iconfont icon-bianji fl"></i>-->
+                <!--&lt;!&ndash;<p>test</p>&ndash;&gt;-->
+              <!--</div>-->
+              <!--<div class="screen-actions-box">-->
+                <!--<div class="screenActions">-->
+                  <!--<ul class="clearfix">-->
+                    <!--<li>-->
+                      <!--<i class="iconfont icon-fuzhi">-->
+                      <!--</i>-->
+                      <!--<span>复制</span>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<i class="iconfont icon-yulan">-->
+                      <!--</i>-->
+                      <!--<span>预览</span>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--</li>-->
+                  <!--</ul>-->
+                <!--</div>-->
+                <!--<noscript></noscript>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<noscript></noscript>-->
+          <!--</div>-->
 
 
           <!--<div class="small-box bg-aqua">-->
@@ -170,11 +189,10 @@
             <!--<div class="icon">-->
               <!--<i class="ion ion-bag"></i>-->
             <!--</div>-->
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
-      </div>
+
       <!-- /.row (main row) -->
 
     </section>
@@ -189,12 +207,182 @@
     reserved.
   </footer>
 
+
+  <!--添加新数据大屏的模态框-->
+  <div class="modal fade" id="addScreenModal" tabindex="-1" role="dialog"
+       aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" style="height: 700px;width:500px;z-index: 1001;">
+
+      <div class="modal-content">
+        <div class="modal-header" style="display: block">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <p>新建可视化大屏</p>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <div class="form-group">
+              <label>可视化大屏名称：</label>
+              <input id="ScreenModalScreenNameInput" type="text " class="form-control" check-type="required" required-message="可视化大屏名称不能为空！" />
+              <label>大屏描述：</label>
+              <textarea id="ScreenModalScreenDescriptionTextarea"  class="form-control" rows="7"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="addScreenModalButton">添加大屏</button>
+        </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal -->
+</div>
+
+
+<!--添加大屏删除确认的的模态框-->
+<div class="modal fade" id="deleteScreenModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" style="height: 700px;width:500px;z-index: 1001;">
+
+    <div class="modal-content">
+      <div class="modal-header" style="display: block">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <p>删除可视化大屏</p>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label>删除后无法恢复，确认删除？</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal" id="cancelDeleteScreenModalButton">取消</button>
+        <button type="button" class="btn btn-primary" id="deleteScreenModalButton">删除</button>
+      </div>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+
+  <script>
+    $(function () {
+        $("form").validation();
+
+    });
+    function showDeleteScreenModal(id) {
+        $('#deleteScreenModal').modal({
+            keyboard:true//当按下esc键时，modal框消失
+        });
+        $('#deleteScreenModalButton').click(function () {
+           $.get(serviceBaseUrl+'/ajax/screen/delete/config',{id:id},function (d) {
+               location.reload();
+           })
+        });
+    }
+
+
+    //模态框展开
+    $('#addScreen').click(function () {
+        console.log('我点击了')
+        $("#addScreenModal").modal({
+            keyboard:true//当按下esc键时，modal框消失
+        });
+    });
+    //添加模态框名称时候的提示信息更新
+    $('#addScreenModalScreenName').change(function () {
+        if ($("form").valid(this,"error!")==false){
+            $(".alert-warning").remove();
+            return true;
+        }
+    });
+
+
+
+    //点击模态框确定按钮产生的事件
+    $('#addScreenModalButton').click(function () {
+        // 2.最后要调用 valid()方法。
+        if ($("form").valid(this,"error!")==false){
+            $(".alert-warning").text("大屏名称不能为空!");
+            return true;
+        }
+        else{
+            $.post(serviceBaseUrl+'/ajax/home/my/find',{screenName:$('#ScreenModalScreenNameInput').val(),description:$('#ScreenModalScreenDescriptionTextarea').val()},function (d) {
+                console.log(d);
+                //大屏名称重复
+                if(d==false){
+                    alert('大屏名称重复');
+                }
+                //大屏添加成功
+                else{
+                    alert('大屏添加成功');
+                    location.reload();
+                }
+            })
+        }
+    });
+
+
+
+
+    $.get(serviceBaseUrl+'/ajax/home/all',function (d) {
+      var templateHtml='';
+      d.forEach(function (d,i) {
+         templateHtml+='<div class="col-lg-3 col-xs-6">'+
+             '<div class="screen" >'+
+             '<div class="image-wrap" >'+
+             '<img src="'+serviceBaseUrl+d.imgUrl+'" alt="screenshot" class="screen_image">'+
+             '<div class="mask">'+
+             '<a href="../html/hescEchartForShareEdit.html?id='+d.id+'" target="_blank" class="edit-wrap">'+
+             '<button class="edit">编辑</button>'+
+             '</a>'+
+             '<div class="delete" onclick="javascript:showDeleteScreenModal('+d.id+')">'+
+             '<i class="iconfont icon-shanchu"></i>'+
+             '</div>'+
+          '</div>'+
+          '</div>'+
+          ' <div class="screen-bottom-wrap">'+
+          '   <div class="color-B2C1D5 screen_bottom">'+
+//          '   <i class="iconfont icon-bianji fl"></i>'+
+          '   <p>'+d.screenName+'</p>'+
+          '   </div>'+
+          '   <div class="screen-actions-box">'+
+          '   <div class="screenActions">'+
+          '   <ul class="clearfix">'+
+          '   <li>'+
+          '   <i class="iconfont icon-fuzhi">'+
+          '   </i>'+
+          '   <span>复制</span>'+
+          '   </li>'+
+          '   <li onclick="javascript:window.open(\'../html/hescEchartForPreView.html?id='+d.id+'\')">'+
+          '   <i class="iconfont icon-yulan">'+
+          '   </i>'+
+          '   <span>预览' +
+             '</span>'+
+          '   </li>'+
+          '   <li>'+
+          '   </li>'+
+          '   </ul>'+
+          '   </div>'+
+          '   <noscript></noscript>'+
+          '   </div>'+
+          '   </div>'+
+          '   <noscript></noscript>'+
+          '   </div>'+
+             '</div>';
+      });
+      $('#screenStart').append(templateHtml);
+    })
+
+  </script>
+
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
-<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="../js/bootstrap-validation.js"></script>
+
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button);
@@ -212,7 +400,6 @@
 <!-- jQuery Knob Chart -->
 <script src="../plugins/knob/jquery.knob.js"></script>
 <!-- daterangepicker -->
-<script src="../https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="../plugins/daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="../plugins/datepicker/bootstrap-datepicker.js"></script>

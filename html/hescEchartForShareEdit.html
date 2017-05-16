@@ -60,6 +60,7 @@
     <script src="../js/ETheme/westeros.js"></script>
     <script src="../js/ETheme/wonderland.js"></script>
     <script src="../js/D3.js"></script>
+    <script src="../js/html2canvas.js"></script>
 
 </head>
 <body>
@@ -97,15 +98,15 @@
                 </li>
             </ul>
 
-            <!--header右侧-->
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="heacEchartCases.html" target="_blank">案例集</a></li>
-                <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
-            </ul>
+            <!--&lt;!&ndash;header右侧&ndash;&gt;-->
+            <!--<ul class="nav navbar-nav navbar-right">-->
+                <!--<li><a href="heacEchartCases.html" target="_blank">案例集</a></li>-->
+                <!--&lt;!&ndash;<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>&ndash;&gt;-->
+            <!--</ul>-->
 
             <!--测试保存数据按钮-->
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="javascript:saveScreenConfig()" target="_blank">保存</a></li>
+                <li><a href="javascript:updateScreenConfig(id)" target="_blank">保存</a></li>
                 <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
             </ul>
 
@@ -214,16 +215,21 @@
     <div class="modal-dialog" style="height: 700px;width:500px;z-index: 1001;">
 
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="display: block">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <p><配置文件></配置文件>（Echart的Option）</p>
             </div>
             <div class="modal-body">
                 <form role="form">
                     <div class="form-group">
-                        <textarea class="form-control" rows="30"></textarea>
+                        <textarea class="form-control" rows="25"></textarea>
                     </div>
                 </form>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-block btn-sm" id="downloadHTMLToLocal">下载HTML</button>
+            </div>
+        </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
@@ -233,9 +239,15 @@
 <!--读取screen高度、计算缩放系数-->
 <!--初始化tab的高度-->
 <script>
-    var userName='admin',screenName='test';
+    //定义id防止用户进行修改
+    var id=getQueryString('id');
+    //修改预览窗口的id
+    (function () {
+        $('#preview a').attr('href','./hescEchartForPreView.html?id='+id);
+    })();
+
     $(function () {
-        $.get(serviceBaseUrl+'/ajax/screen/find/config',{userName:userName,screenName:screenName},function (d) {
+        $.get(serviceBaseUrl+'/ajax/screen/find/config',{id:id},function (d) {
             console.log(d.hescList);
             console.log(d.gridConfig)
             hescList=d.hescList;
@@ -328,6 +340,11 @@
 <!--3.在screen上面点击图形时候的操作及css变化-->
 <!--4.数据源提交的时候的变化-->
 <script>
+    //点击下载html的动作
+    $('#downloadHTMLToLocal').click(function (e) {
+        var file = new File([downloadOptionFun()], "HESCharts.html", {type: "text/html;charset=utf-8"});
+        saveAs(file);
+    })
     //顶端的添加图形按钮,点击按钮也是一种screen上面的点击行为，点击的div可以直接被选中
     $('#addChart').click(function (e) {
         var addChartEle=$(e.target).attr('id');
@@ -574,7 +591,7 @@
         }
         });
     $('#webAPIButton').click(function () {
-            $.get('http://192.168.71.179:8080/webapiproxy/ajax/proxy',{url:$('#webAPIUrl').val()},function (d) {
+            $.get(serviceBaseUrl+'/webapiproxy/ajax/proxy',{url:$('#webAPIUrl').val()},function (d) {
 //                console.log(d)
                 jsonEditorEditor.setText(d);
      })});

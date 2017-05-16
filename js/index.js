@@ -2121,7 +2121,7 @@ function toolTipHelper() {
 }
 
 //保存screen配置
-function saveScreenConfig(){
+function updateScreenConfig(id){
     var gridConfig=[];
     //添加screen的配置
     gridConfig.push({
@@ -2135,13 +2135,42 @@ function saveScreenConfig(){
             style:$(this).attr("style")
         })
     });
-    var userName='admin';
-    var screenName='test';
-    console.log('加密之后值'+(hashids.encode(userName,screenName)))
-    $.post('http://192.168.71.179:8080/webapiproxy/ajax/screen/add/config',{userName:userName,screenName:screenName,gridConfig:JSON.stringify(gridConfig),hescList:JSON.stringify(hescList),hashUrl:hashids.encodeHex(userName+screenName)},function (d) {
+    //保存屏幕的位置信息和hesclist
+    $.post(serviceBaseUrl+'/ajax/screen/update/config',{id:id,gridConfig:JSON.stringify(gridConfig),hescList:JSON.stringify(hescList)},function (d) {
         console.log(d);
-    })
+    });
+    //保存图片
+    screenShot(id);
 
     console.log(gridConfig);
     console.log(hescList);
+}
+//保存屏幕截图
+function screenShot(id) {
+    console.log('准备截图了');
+    html2canvas(document.getElementById('screen'), {
+        height: $('#screen').height() * transformScale,
+        width: $('#screen').width() * transformScale
+    }).then(function (canvas) {
+        $.ajax({
+            type: "POST",
+            url: serviceBaseUrl + "/ajax/screen/update/imgBase64?id=" + id,
+            data: {file: canvas.toDataURL('image/png')},
+            cache: false,
+            success: function (data) {
+                alert("保存成功！");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("保存失败，请检查网络后重试");
+            }
+        });
+    });
+}
+
+//获取url参数
+function getQueryString(name)
+{
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
 }

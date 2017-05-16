@@ -182,7 +182,24 @@
     <script>
             function screenShot() {
                 console.log('准备截图了');
-                html2canvas(document.getElementById('test')).then(function(canvas) {document.body.appendChild(canvas);});
+                html2canvas(document.getElementById('test')).then(function(canvas) {
+                    console.log(canvas.toDataURL('image/png'));
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8080/webapiproxy/ajax/screen/update/imgBase64?id=21",
+                        data: { file: canvas.toDataURL('image/png') },
+                        cache: false,
+                        success: function(data) {
+                            alert("上传成功");
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            alert("上传失败，请检查网络后重试");
+                        }
+                    });
+
+
+                    document.body.appendChild(canvas);});
             }
             setTimeout("screenShot()",1000)
     </script>
