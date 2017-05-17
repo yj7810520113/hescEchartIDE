@@ -28,6 +28,7 @@
     <script src="../js/jquery-ui.min.js"></script>
     <script src="../js/hashids.js"></script>
     <script src="../js/index.js"></script>
+    <script src="../js/checkToken.js"></script>
 
     <script src="../js/ETheme/echartTheme.js"></script>
     <script src="../js/ETheme/chalk.js"></script>
@@ -56,42 +57,86 @@
 <!--向后台获取配置文件-->
 <script>
     var id=getQueryString('id');
-    $.get(serviceBaseUrl+'/ajax/screen/find/config',{id:id},function (d) {
-        //获取的d为gridConfig和hescList的配置文件
-        console.log(d);
-        var gridConfig=d.gridConfig;
-        var hescList=d.hescList;
-        /*
-        1.根据gridConfig生成div
-         */
-        for(var i in gridConfig){
-            //设置screen
-            if(gridConfig[i].divId=="screen"){
-                $("#screen").attr("style",gridConfig[i].style.replace(/(height[\s\S]*?);[\s\S]*?(width[\s\S]*?);[\s\S]*/g,'$1;$2'));
+    $.ajax({
+        type:"get",
+        dataType:"json",
+        url:serviceBaseUrl+'/ajax/screen/find/config',
+        data:{id:id},
+        headers:{
+            token:localStorage.getItem("token")//将token放到请求头中
+        },
+        success:function(d){
+            checkSuccessStatus(d);
+            //获取的d为gridConfig和hescList的配置文件
+            console.log(d);
+            var gridConfig=d.gridConfig;
+            var hescList=d.hescList;
+            /*
+             1.根据gridConfig生成div
+             */
+            for(var i in gridConfig){
+                //设置screen
+                if(gridConfig[i].divId=="screen"){
+                    $("#screen").attr("style",gridConfig[i].style.replace(/(height[\s\S]*?);[\s\S]*?(width[\s\S]*?);[\s\S]*/g,'$1;$2'));
+                }
+                else{
+                    $("#screen").append('<div id='+gridConfig[i].divId+' style="'+gridConfig[i].style+'"></div>');
+                }
+                //去除某个选中的div的outline
+                $('#screen div').css("outline","");
             }
-            else{
-                $("#screen").append('<div id='+gridConfig[i].divId+' style="'+gridConfig[i].style+'"></div>');
-            }
-            //去除某个选中的div的outline
-            $('#screen div').css("outline","");
-        }
 
-        /*
-        2.根据hescList生成图形
-         */
-        for(var i in gridConfig){
-            for(var j in hescList) {
-                if ((hescList[j].divId != 'screen')&&hescList[j].divId==gridConfig[i].divId) {
-                    var chart = echarts.init(document.getElementById(hescList[j].divId), hescList[j].datGuiConfig.theme);
-                    chart.setOption(hescList[j].option);
+            /*
+             2.根据hescList生成图形
+             */
+            for(var i in gridConfig){
+                for(var j in hescList) {
+                    if ((hescList[j].divId != 'screen')&&hescList[j].divId==gridConfig[i].divId) {
+                        var chart = echarts.init(document.getElementById(hescList[j].divId), hescList[j].datGuiConfig.theme);
+                        chart.setOption(hescList[j].option);
+                    }
                 }
             }
         }
+    });
 
 
-
-//        console.log((d.gridConfig)[0].style.replace(/(height[\s\S]*?);[\s\S]*?(width[\s\S]*?);[\s\S]*/g,'$1 $2'))
-    })
+//    $.get(serviceBaseUrl+'/ajax/screen/find/config',{id:id},function (d) {
+//        //获取的d为gridConfig和hescList的配置文件
+//        console.log(d);
+//        var gridConfig=d.gridConfig;
+//        var hescList=d.hescList;
+//        /*
+//        1.根据gridConfig生成div
+//         */
+//        for(var i in gridConfig){
+//            //设置screen
+//            if(gridConfig[i].divId=="screen"){
+//                $("#screen").attr("style",gridConfig[i].style.replace(/(height[\s\S]*?);[\s\S]*?(width[\s\S]*?);[\s\S]*/g,'$1;$2'));
+//            }
+//            else{
+//                $("#screen").append('<div id='+gridConfig[i].divId+' style="'+gridConfig[i].style+'"></div>');
+//            }
+//            //去除某个选中的div的outline
+//            $('#screen div').css("outline","");
+//        }
+//
+//        /*
+//        2.根据hescList生成图形
+//         */
+//        for(var i in gridConfig){
+//            for(var j in hescList) {
+//                if ((hescList[j].divId != 'screen')&&hescList[j].divId==gridConfig[i].divId) {
+//                    var chart = echarts.init(document.getElementById(hescList[j].divId), hescList[j].datGuiConfig.theme);
+//                    chart.setOption(hescList[j].option);
+//                }
+//            }
+//        }
+//
+//
+//
+////        console.log((d.gridConfig)[0].style.replace(/(height[\s\S]*?);[\s\S]*?(width[\s\S]*?);[\s\S]*/g,'$1 $2'))
+//    })
 
 
 

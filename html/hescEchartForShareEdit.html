@@ -42,8 +42,7 @@
     <script src="../js/renderChart.js"></script>
     <script src="../js/JSONFormatter.js"></script>
     <script src="../js/fileSaver.min.js"></script>
-
-
+    <script src="../js/checkToken.js"></script>
 
     <script src="../js/ETheme/echartTheme.js"></script>
     <script src="../js/ETheme/chalk.js"></script>
@@ -255,45 +254,59 @@
 
 
     $(function () {
-        $.get(serviceBaseUrl+'/ajax/screen/find/config',{id:id},function (d) {
-            console.log(d.hescList);
-            console.log(d.gridConfig)
-            hescList=d.hescList;
-            addScreenByShare();
-            addScreenDatGui();
-            refreshTransformScale();
-            //根据gridConfig的divId创建div和生成图形
-            for(var i=0;i<d.gridConfig.length;i++){
-                //排除gridConfig里面的screen的配置
-                if((d.gridConfig)[i].divId!='screen') {
-                    //添加图形的div
-                    addChartDivByShare($('#screen'), (d.gridConfig)[i].divId);
-                    //绘制图形和dat.gui
-                    addDatGuiAndRenderChartAndCssSettingByShare((d.gridConfig[i]).divId);
-                    //移动图形到合适的位置(动画)
-                    console.log((d.gridConfig)[i].style.replace(/[\s\S]*height:([\s\S]*?);[\s\S]*/g,'$1'));
-                    d3.select('#'+(d.gridConfig)[i].divId)
-                        .transition()
-                        .duration(3000)
-                        .style('top',(d.gridConfig)[i].style.replace(/[\s\S]*top:([\s\S]*?);[\s\S]*/g,'$1'))
-                        .style('left',(d.gridConfig)[i].style.replace(/[\s\S]*left:([\s\S]*?);[\s\S]*/g,'$1'));
+        $.ajax({
+            type:"get",
+            dataType:"json",
+            url:serviceBaseUrl+'/ajax/screen/find/config',
+            data:{id:id},
+            headers:{
+                token:localStorage.getItem("token")//将token放到请求头中
+            },
+            success:function(d){
+                checkSuccessStatus(d);
+                console.log(d.hescList);
+                console.log(d.gridConfig)
+                hescList=d.hescList;
+                addScreenByShare();
+                addScreenDatGui();
+                refreshTransformScale();
+                //根据gridConfig的divId创建div和生成图形
+                for(var i=0;i<d.gridConfig.length;i++){
+                    //排除gridConfig里面的screen的配置
+                    if((d.gridConfig)[i].divId!='screen') {
+                        //添加图形的div
+                        addChartDivByShare($('#screen'), (d.gridConfig)[i].divId);
+                        //绘制图形和dat.gui
+                        addDatGuiAndRenderChartAndCssSettingByShare((d.gridConfig[i]).divId);
+                        //移动图形到合适的位置(动画)
+                        console.log((d.gridConfig)[i].style.replace(/[\s\S]*height:([\s\S]*?);[\s\S]*/g,'$1'));
+                        d3.select('#'+(d.gridConfig)[i].divId)
+                            .transition()
+                            .duration(3000)
+                            .style('top',(d.gridConfig)[i].style.replace(/[\s\S]*top:([\s\S]*?);[\s\S]*/g,'$1'))
+                            .style('left',(d.gridConfig)[i].style.replace(/[\s\S]*left:([\s\S]*?);[\s\S]*/g,'$1'));
 
 
+                    }
                 }
+                //清除所有的div选中状态，即控制面板默认为screen的配置
+                addScreenDatGui();
+                $('#screen .divControlPannel').each(function () {
+                    $(this).css('display','none')
+                });
+                /*
+                 *清除所有div的边框
+                 */
+                $('.Monitor').each(function () {
+                    $(this).css("outline",'');
+                });
+            },
+            error:function () {
+              alert('权限非法！请编辑自己的可视化大屏！');
+              location.href='../html/index.html';
             }
-            //清除所有的div选中状态，即控制面板默认为screen的配置
-            addScreenDatGui();
-            $('#screen .divControlPannel').each(function () {
-                $(this).css('display','none')
-            });
-            /*
-             *清除所有div的边框
-             */
-            $('.Monitor').each(function () {
-                $(this).css("outline",'');
-            });
-
         });
+
     });
 
     $('.tabs').height($(window).height()-60);
@@ -599,10 +612,22 @@
         }
         });
     $('#webAPIButton').click(function () {
-            $.get(serviceBaseUrl+'/webapiproxy/ajax/proxy',{url:$('#webAPIUrl').val()},function (d) {
-//                console.log(d)
+
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: serviceBaseUrl + '/webapiproxy/ajax/proxy',
+            data: {url: $('#webAPIUrl').val()},
+            headers: {
+                token: localStorage.getItem("token")//将token放到请求头中
+            },
+            success: function (d) {
+                checkSuccessStatus(d);
                 jsonEditorEditor.setText(d);
-     })});
+            }
+        });
+    });
+
 
 </script>
 </body>

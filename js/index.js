@@ -2136,31 +2136,46 @@ function updateScreenConfig(id){
         })
     });
     //保存屏幕的位置信息和hesclist
-    $.post(serviceBaseUrl+'/ajax/screen/update/config',{id:id,gridConfig:JSON.stringify(gridConfig),hescList:JSON.stringify(hescList)},function (d) {
-        console.log(d);
+    $.ajax({
+        type:"post",
+        dataType:"json",
+        url:serviceBaseUrl+'/ajax/screen/update/config',
+        data:{id:id,gridConfig:JSON.stringify(gridConfig),hescList:JSON.stringify(hescList)},
+        headers:{
+            token:localStorage.getItem("token")//将token放到请求头中
+        },
+        success:function(d){
+            checkSuccessStatus(d);
+        }
     });
+
     //保存图片
     screenShot(id);
 
-    console.log(gridConfig);
-    console.log(hescList);
 }
 //保存屏幕截图
 function screenShot(id) {
     console.log('准备截图了');
     html2canvas(document.getElementById('screen'), {
+        //根据屏幕的缩放系数转换截图的分辨率
         height: $('#screen').height() * transformScale,
         width: $('#screen').width() * transformScale
     }).then(function (canvas) {
         $.ajax({
-            type: "POST",
-            url: serviceBaseUrl + "/ajax/screen/update/imgBase64?id=" + id,
-            data: {file: canvas.toDataURL('image/png')},
-            cache: false,
-            success: function (data) {
+            type:"post",
+            dataType:"text",
+            url:serviceBaseUrl + "/ajax/screen/update/imgBase64?id=" + id,
+            data:{file: canvas.toDataURL('image/png')},
+            headers:{
+                token:localStorage.getItem("token")//将token放到请求头中
+            },
+            success: function (d) {
+                console.log(d)
+                checkSuccessStatus(d);
                 alert("保存成功！");
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(errorThrown)
                 alert("保存失败，请检查网络后重试");
             }
         });
