@@ -9,7 +9,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>大屏编辑</title>
     <link href="../css/jsoneditor.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="../css/bootstrap.css"/>
     <link rel="stylesheet" href="../css/index.css"/>
@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="../css/jquery-ui.css">
     <link rel="stylesheet" href="../css/JSONFormatter.css">
     <link rel="stylesheet" href="../css/tooltipster.bundle.css">
+    <link rel="stylesheet" href="../css/nprogress.css">
+
 
     <script src="../js/jquery.js"></script>
     <script src="../js/DAT.GUI.js"></script>
@@ -43,6 +45,9 @@
     <script src="../js/JSONFormatter.js"></script>
     <script src="../js/fileSaver.min.js"></script>
     <script src="../js/checkToken.js"></script>
+
+    <script src="../js/nprogress.js"></script>
+    <script src="../js/bootstrap-growl.js"></script>
 
     <script src="../js/ETheme/echartTheme.js"></script>
     <script src="../js/ETheme/chalk.js"></script>
@@ -246,6 +251,11 @@
     //修改预览窗口的id
     (function () {
         $('#preview a').attr('href','./hescEchartForPreView.html?id='+id);
+        //初始化nprpgress
+        NProgress.configure({ parent: '#screenContainer' });
+        NProgress.inc(0.4);
+        setTimeout("NProgress.done(true)",3000);
+
     })();
 
     window.onbeforeunload = function(){
@@ -285,8 +295,6 @@
                             .duration(3000)
                             .style('top',(d.gridConfig)[i].style.replace(/[\s\S]*top:([\s\S]*?);[\s\S]*/g,'$1'))
                             .style('left',(d.gridConfig)[i].style.replace(/[\s\S]*left:([\s\S]*?);[\s\S]*/g,'$1'));
-
-
                     }
                 }
                 //清除所有的div选中状态，即控制面板默认为screen的配置

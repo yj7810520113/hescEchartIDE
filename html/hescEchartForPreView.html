@@ -9,7 +9,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>大屏预览</title>
     <link rel="stylesheet" href="../css/bootstrap.css"/>
     <link rel="stylesheet" href="../css/index.css"/>
     <link rel="stylesheet" href="../css/jquery-ui.css">
@@ -60,7 +60,7 @@
     $.ajax({
         type:"get",
         dataType:"json",
-        url:serviceBaseUrl+'/ajax/screen/find/config',
+        url:serviceBaseUrl+'/ajax/screen/find/config/preview',
         data:{id:id},
         headers:{
             token:localStorage.getItem("token")//将token放到请求头中

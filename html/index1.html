@@ -103,8 +103,8 @@
           <!--<i class="fa fa-angle-left pull-right"></i>-->
           <!--</span>-->
           <!--</a>-->
-        <li class="active"><a href="index.html"><i class="glyphicon glyphicon-th-list"></i>我的案例</a></li>
-        <li><a href="index1.html"><i class="glyphicon glyphicon-th"></i>推荐案例</a></li>
+        <li><a href="index.html"><i class="glyphicon glyphicon-th-list"></i>我的案例</a></li>
+        <li  class="active"><a href="index1.html"><i class="glyphicon glyphicon-th"></i>推荐案例</a></li>
         </li>
       </ul>
     </section>
@@ -117,11 +117,11 @@
     <section class="content-header">
       <h1>
         案例集
-        <small>我的案例集</small>
+        <small>推荐案例集</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>控制面板</a></li>
-        <li class="active">我的案例集</li>
+        <li class="active">推荐案例集</li>
       </ol>
     </section>
 
@@ -129,23 +129,6 @@
     <section class="content">
       <!-- Small boxes (Stat box) -->
       <div class="row" id="screenStart">
-        <!--每个大屏的卡片开始的标签-->
-        <div class="col-lg-3 col-xs-6">
-
-
-          <div class="screen" id="addScreen">
-            <div class="new-wrap">
-              <a href="#" class="screen_new_link">
-                <i class="iconfont icon-xinjian">
-                </i>
-                <span>新建可视化</span>
-              </a>
-              <span>
-                <noscript></noscript>
-              </span>
-            </div>
-          </div>
-
 
           <!--<div class="screen" >-->
             <!--<div class="image-wrap" >-->
@@ -279,7 +262,7 @@
     <div class="modal-content">
       <div class="modal-header" style="display: block">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <p>复制可视化大屏</p>
+        <p>复制推荐案例到我的可视化案例</p>
       </div>
       <div class="modal-body">
         <form role="form">
@@ -329,7 +312,7 @@
         $('#copyScreenModal').modal({
             keyboard:true//当按下esc键时，modal框消失
         });
-        //添加大屏模态框按钮产生的事件
+        //复制大屏模态框按钮产生的事件
         $('#copyaddScreenModalButton').click(function () {
             if ($("#copyScreenModal form").valid(this,"error!")==false){
                 $(".alert-warning").text("大屏名称不能为空!");
@@ -355,7 +338,7 @@
                         //大屏添加成功
                         else{
                             alert('大屏复制成功');
-                            location.reload();
+                            location.href="index.html";
                         }
                     }
                 });
@@ -443,7 +426,7 @@
     $.ajax({
         type:"get",
         dataType:"json",
-        url:serviceBaseUrl+'/ajax/home/my',
+        url:serviceBaseUrl+'/ajax/home/all/share',
         headers:{
             token:localStorage.getItem("token")//将token放到请求头中
         },
@@ -456,12 +439,9 @@
                     '<div class="image-wrap" >'+
                     '<img src="'+serviceBaseUrl+d.imgUrl+'" alt="screenshot" class="screen_image">'+
                     '<div class="mask">'+
-                    '<a href="../html/hescEchartForShareEdit.html?id='+d.id+'" target="_blank" class="edit-wrap">'+
-                    '<button class="edit">编辑</button>'+
+                    '<a href="javascript:showCopyScreenModal('+d.id+')" target="_blank" class="edit-wrap">'+
+                    '<button class="edit">复制到我的案例</button>'+
                     '</a>'+
-                    '<div class="delete" onclick="javascript:showDeleteScreenModal('+d.id+')">'+
-                    '<i class="iconfont icon-shanchu"></i>'+
-                    '</div>'+
                     '</div>'+
                     '</div>'+
                     ' <div class="screen-bottom-wrap">'+

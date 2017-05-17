@@ -2122,6 +2122,12 @@ function toolTipHelper() {
 
 //保存screen配置
 function updateScreenConfig(id){
+    /*
+     nprogress
+     */
+    NProgress.inc(0.4);
+
+
     var gridConfig=[];
     //添加screen的配置
     gridConfig.push({
@@ -2136,6 +2142,7 @@ function updateScreenConfig(id){
         })
     });
     //保存屏幕的位置信息和hesclist
+
     $.ajax({
         type:"post",
         dataType:"json",
@@ -2148,13 +2155,14 @@ function updateScreenConfig(id){
             checkSuccessStatus(d);
         }
     });
-
+    NProgress.set(0.5);     // Sorta same as .done()
     //保存图片
     screenShot(id);
 
 }
 //保存屏幕截图
 function screenShot(id) {
+    NProgress.inc(0.4);
     console.log('准备截图了');
     html2canvas(document.getElementById('screen'), {
         //根据屏幕的缩放系数转换截图的分辨率
@@ -2172,14 +2180,40 @@ function screenShot(id) {
             success: function (d) {
                 console.log(d)
                 checkSuccessStatus(d);
-                alert("保存成功！");
+                $.bootstrapGrowl("保存成功!", {
+                    ele: '#screenContainer', // which element to append to
+                    type: 'success', // (null, 'info', 'danger', 'success')
+                    offset: {from: 'top', amount: 0}, // 'top', or 'bottom'
+                    align: 'center', // ('left', 'right', or 'center')
+                    width: 250, // (integer, or 'auto')
+                    height:20,
+                    delay: 2000, // Time while the message will be displayed. It's not equivalent to the *demo* timeOut!
+                    allow_dismiss: true, // If true then will display a cross to close the popup.
+                    stackup_spacing: 10 // spacing between consecutively stacked growls.
+                });
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log(errorThrown)
-                alert("保存失败，请检查网络后重试");
+                $.bootstrapGrowl("保存失败，请检查网络后重试!", {
+                    ele: '#screenContainer', // which element to append to
+                    type: 'danger', // (null, 'info', 'danger', 'success')
+                    offset: {from: 'top', amount: 0}, // 'top', or 'bottom'
+                    align: 'center', // ('left', 'right', or 'center')
+                    width: 250, // (integer, or 'auto')
+                    height:20,
+                    delay: 2000, // Time while the message will be displayed. It's not equivalent to the *demo* timeOut!
+                    allow_dismiss: true, // If true then will display a cross to close the popup.
+                    stackup_spacing: 10 // spacing between consecutively stacked growls.
+                });
             }
         });
     });
+
+    /*
+    nprogress和notify
+     */
+    NProgress.done(true);
+
 }
 
 //获取url参数
