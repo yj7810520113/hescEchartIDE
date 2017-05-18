@@ -15,7 +15,7 @@
   <!-- Theme style -->
   <!-- Theme style -->
   <!-- Theme style -->
-  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../dist/css/AdminLTE.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
@@ -113,6 +113,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <div class="top-alert" ><strong class="fl">公告：</strong>目前 HESCharts 仅测试谷歌 Chrome 浏览器版本 50 以上、Microsoft Edge。其他浏览器尚未测试。问题反馈：<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=494713188&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:494713188:52" alt=" 反馈问题" title="反馈问题"/></a></div>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -337,7 +338,7 @@
             }
             else{
                 $.ajax({
-                    type:"get",
+                    type:"post",
                     dataType:"json",
                     url:serviceBaseUrl+'/ajax/home/my/copy',
                     data:{id:id,screenName:$('#copyScreenModalScreenNameInput').val(),description:$('#copyScreenModalScreenDescriptionTextarea').val()},

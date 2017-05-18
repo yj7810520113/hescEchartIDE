@@ -1949,15 +1949,21 @@ var cloneObj = function(obj){
 
 //-----------------------------------------------------------------------------------------------
 /*
-样式更新
+移除可视化组件，样式更新
  */
 function removeDivFun() {
     console.log("准备移除的divchartid为："+divChartId)
-    if($('#'+divChartId).attr('class').indexOf('Monitor')>=0) {
-        $('#' + divChartId).remove();
-        //移除div后，控制面板跳转到screen的控制面板
-        addScreenDatGui();
-    }
+    $('#deleteScreenModal').modal({
+        keyboard:true//当按下esc键时，modal框消失
+    });
+    $('#deleteScreenModalButton').click(function () {
+        console.log('删除确定了')
+        if($('#'+divChartId).attr('class').indexOf('Monitor')>=0) {
+            $('#' + divChartId).remove();
+            //移除div后，控制面板跳转到screen的控制面板
+            addScreenDatGui();
+        }
+    })
 }
 //下载配置选项
 function downloadOptionFun() {
@@ -2213,6 +2219,53 @@ function screenShot(id) {
     nprogress和notify
      */
     NProgress.done(true);
+
+}
+//点击预览时的动画
+function previewScreenLoading(id) {
+    $('#previewScreenModal').modal({
+        keyboard:true//当按下esc键时，modal框消失
+    });
+    /*
+    代码复制自updateScreenConfig，在保存完成之后再展开预览.
+     */
+
+    NProgress.inc(0.4);
+
+
+    var gridConfig=[];
+    //添加screen的配置
+    gridConfig.push({
+        divId:'screen',
+        style:$('#screen').attr('style')
+    });
+    //添加screen的子元素(DivId)
+    $("#screen").children().each(function () {
+        gridConfig.push({
+            divId:$(this).attr('id'),
+            style:$(this).attr("style")
+        })
+    });
+    //保存屏幕的位置信息和hesclist
+
+    $.ajax({
+        type:"post",
+        dataType:"json",
+        url:serviceBaseUrl+'/ajax/screen/update/config',
+        data:{id:id,gridConfig:JSON.stringify(gridConfig),hescList:JSON.stringify(hescList)},
+        headers:{
+            token:localStorage.getItem("token")//将token放到请求头中
+        },
+        success:function(d){
+            checkSuccessStatus(d);
+            $('#previewScreenModal').modal('hide');
+            console.log('预览前，保存完毕')
+            NProgress.done(true);
+            window.open('./hescEchartForPreView.html?id='+id);
+        }
+    });
+    //保存图片
+    screenShot(id);
 
 }
 

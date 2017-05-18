@@ -116,7 +116,7 @@
 
 
             <ul id="preview" class="nav navbar-nav navbar-right">
-                <li><a href="./hescEchartForPreView.html" target="_blank">预览</a></li>
+                <li><a href="javascript:previewScreenLoading(id)" >预览</a></li>
                 <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
             </ul>
 
@@ -239,6 +239,43 @@
 </div>
 
 
+<!--大屏删除确认的的模态框-->
+<div class="modal fade" id="deleteScreenModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" style="top:20%;">
+    <div class="modal-dialog" style="height: 700px;width:500px;z-index: 1001;">
+
+        <div class="modal-content">
+            <div class="modal-header" style="display: block">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <p>删除组件</p>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <span class="glyphicon glyphicon-alert" style="display: block;font-size: 40px;color:#d62c1a" aria-hidden="true"></span>
+                <label>组件删除后无法恢复，确认删除？</label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-sm" style="width: 15%" data-dismiss="modal" id="cancelDeleteScreenModalButton">取消</button>
+                <button type="button" class="btn-sm btn-danger" style="width: 15%" data-dismiss="modal" id="deleteScreenModalButton">删除</button>
+            </div>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+
+<!--大屏预览模态框-->
+<div class="modal fade" id="previewScreenModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" style="top:20%;">
+    <div class="modal-dialog" style="height: 700px;width:500px;z-index: 1001;">
+
+        <div class="modal-content">
+            <div class="modal-body" style="text-align: center">
+                <img src="../css/img/previewLoading.gif">
+                <label>生成预览中</label>
+            </div>
+            </div>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+
 
 <!--读取screen高度、计算缩放系数-->
 <!--初始化tab的高度-->
@@ -250,7 +287,13 @@
 
     //修改预览窗口的id
     (function () {
-        $('#preview a').attr('href','./hescEchartForPreView.html?id='+id);
+//        $('#preview a').each(function (i,d) {
+//            if($(d).attr('href')!='#') {
+//                $(d).attr('href', './hescEchartForPreView.html?id=' + id);
+//            };
+//        });
+
+
         //初始化nprpgress
         NProgress.configure({ parent: '#screenContainer' });
         NProgress.inc(0.4);
@@ -311,6 +354,7 @@
             },
             error:function () {
               alert('权限非法！请编辑自己的可视化大屏！');
+                window.onbeforeunload=function(){};
               location.href='../html/index.html';
             }
         });

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic);
+
 /*!
  *   AdminLTE v2.3.12
  *   Author: Almsaeed Studio
@@ -10,6 +10,8 @@
  * Core: General Layout Style
  * -------------------------
  */
+
+
 html,
 body {
   height: 100%;
@@ -62,6 +64,7 @@ body {
   transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
   margin-left: 230px;
   z-index: 820;
+  padding:20px 0px 0px 0px;
 }
 .layout-top-nav .content-wrapper,
 .layout-top-nav .right-side,
@@ -4939,4 +4942,20 @@ table.text-center th {
   .table-responsive > .table tr td {
     white-space: normal !important;
   }
+}
+
+
+/*我添加的css*/
+.top-alert {
+  padding: 6px 0;
+  font-size: 12px;
+  background: #FFF;
+  color: #999;
+  position: absolute;
+  height:30px;
+  width: 100%;
+  margin: 0;
+  top: 50px;
+  z-index: 1;
+  display: inline;
 }
