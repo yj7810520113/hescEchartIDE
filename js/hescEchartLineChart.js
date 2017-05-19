@@ -201,9 +201,17 @@
                         }
                         else {
                             //返回默认xAxis坐标点的值
-                            if (seriesNum == 1 &&legendAttr.length!=0) {
+                            if (seriesNum == 1) {
                                 //若为一维普通普通柱状图返回legendAttr即为坐标点值
-                                return legendAttr;
+                                var defaultXAxisData = [];
+                                for (var i = 0; i < dataNum; i++) {
+                                    var jsonO=asyncData[i];
+                                    for(var jsonKey1 in jsonO){
+                                        for(var jsonKey2 in jsonO[jsonKey1])
+                                            defaultXAxisData.push(jsonKey2);
+                                    }
+                                }
+                                return defaultXAxisData;
                             }
                             else {
                                 var defaultXAxisData = [];
@@ -261,9 +269,17 @@
                         }
                         else {
                             //返回默认xAxis坐标点的值
-                            if (seriesNum == 1 &&legendAttr.length!=0) {
+                            if (seriesNum == 1) {
                                 //若为一维普通普通柱状图返回legendAttr即为坐标点值
-                                return legendAttr;
+                                var defaultXAxisData = [];
+                                for (var i = 0; i < dataNum; i++) {
+                                    var jsonO=asyncData[i];
+                                    for(var jsonKey1 in jsonO){
+                                        for(var jsonKey2 in jsonO[jsonKey1])
+                                            defaultXAxisData.push(jsonKey2);
+                                    }
+                                }
+                                return defaultXAxisData;
                             }
                             else {
                                 var defaultXAxisData = [];
