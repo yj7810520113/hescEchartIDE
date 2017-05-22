@@ -144,7 +144,7 @@
                 trigger:'item',
                 axisPointer:{
                     type:tooltipAxisPointerType
-                }
+                },
             },
             grid:{
                 left:gridLeft,

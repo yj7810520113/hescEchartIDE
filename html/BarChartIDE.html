@@ -129,11 +129,11 @@
         barGui.add(barObj,'stack').name('多维堆叠柱状图数据模型').onChange(renderBarChart);
         //gui.add(text, 'speed', -5, 5);
         barGui.remember(barObj);
-        renderBarChart();
+//        renderBarChart();
     };
     function renderBarChart() {
         hescEchart.json('../Data/barChartTest.Data',function(error,data){
-            console.log((data[0])[0].x)
+            console.log((data[0])[0].x+'11111111111111111111111')
 
 
             hescEchartBar.select('test')

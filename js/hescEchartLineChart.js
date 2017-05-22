@@ -190,7 +190,7 @@
                 trigger:'axis',
                 axisPointer:{
                     type:tooltipAxisPointerType
-                }
+                },
             },
             xAxis:{
                 data:(function () {
@@ -200,29 +200,12 @@
                             return stringToArray(xAxisData);
                         }
                         else {
-                            //返回默认xAxis坐标点的值
-                            if (seriesNum == 1) {
-                                //若为一维普通普通柱状图返回legendAttr即为坐标点值
-                                var defaultXAxisData = [];
-                                for (var i = 0; i < dataNum; i++) {
-                                    var jsonO=asyncData[i];
-                                    for(var jsonKey1 in jsonO){
-                                        for(var jsonKey2 in jsonO[jsonKey1])
-                                            defaultXAxisData.push(jsonKey2);
-                                    }
-                                }
-                                return defaultXAxisData;
+                            var defaultXAxisData = [];
+                            for(var i in asyncData){
+                                defaultXAxisData.push((asyncData[i])[0].x)
                             }
-                            else {
-                                var defaultXAxisData = [];
-                                for (var i = 0; i < dataNum; i++) {
-                                    var jsonO=(asyncData[i])[0];
-                                    for(var jsonKey in jsonO){
-                                        defaultXAxisData.push(jsonKey);
-                                    }
-                                }
-                                return defaultXAxisData;
-                            }
+                            return defaultXAxisData;
+
 
                         }
                     }
@@ -268,29 +251,11 @@
                             return stringToArray(xAxisData);
                         }
                         else {
-                            //返回默认xAxis坐标点的值
-                            if (seriesNum == 1) {
-                                //若为一维普通普通柱状图返回legendAttr即为坐标点值
-                                var defaultXAxisData = [];
-                                for (var i = 0; i < dataNum; i++) {
-                                    var jsonO=asyncData[i];
-                                    for(var jsonKey1 in jsonO){
-                                        for(var jsonKey2 in jsonO[jsonKey1])
-                                            defaultXAxisData.push(jsonKey2);
-                                    }
-                                }
-                                return defaultXAxisData;
+                            var defaultXAxisData = [];
+                            for(var i in asyncData){
+                                defaultXAxisData.push((asyncData[i])[0].x)
                             }
-                            else {
-                                var defaultXAxisData = [];
-                                for (var i = 0; i < dataNum; i++) {
-                                    var jsonO=(asyncData[i])[0];
-                                    for(var jsonKey in jsonO){
-                                        defaultXAxisData.push(jsonKey);
-                                    }
-                                }
-                                return defaultXAxisData;
-                            }
+                            return defaultXAxisData;
 
                         }
                     }
@@ -364,9 +329,13 @@
                         data:(function () {
                             var seriesData=[];
                             asyncData.forEach(function(d1){
-                                for(var key in d1[i]){
-                                    seriesData.push((d1[i])[key]);
-                                }
+                                seriesData.push((d1[i]).y);
+
+
+
+                                // for(var key in d1[i]){
+                                //     seriesData.push((d1[i])[key]);
+                                // }
                             });
                             return seriesData;
                         })(),

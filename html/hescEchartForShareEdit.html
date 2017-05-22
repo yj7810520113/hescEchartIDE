@@ -35,6 +35,7 @@
     <script src="../js/worldcloud.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/ace.js"></script>
+    <script src="../js/ajv.js"></script>
     <script src="../js/jsoneditor.js"></script>
     <script src="../js/fileReader.js"></script>
     <script src="../js/jquery-ui.min.js"></script>
@@ -142,12 +143,12 @@
 
 <div class="tabs " >
     <ul id="myTab" class="nav nav-tabs">
-        <li class="active" style="width: 50%">
-            <a href="#tabConfig" data-toggle="tab" style="text-align: center;">
+        <li class="active" style="width: 50%" >
+            <a href="#tabConfig" id="configTab" data-toggle="tab" style="text-align: center;">
                 配置
             </a>
         </li>
-        <li style="width: 50%;"><a href="#tabData" style="text-align: center;" data-toggle="tab">数据</a></li>
+        <li style="width: 50%;display: none;" id="dataTab"><a href="#tabData" style="text-align: center;" data-toggle="tab">数据</a></li>
     </ul>
     <div id="myTabContent1" class="tab-content" style="overflow-y:visible;">
         <div class="tab-pane fade in active" id="tabConfig">
@@ -207,9 +208,12 @@
                     <!--<input type="file" id="loadDocument" value="Load"/>-->
                 </div>
 
-            <span id="validateData" class="help-block" style="color: #d62c1a;"><div class="alert alert-danger" role="danger" style="padding:10px;">数据格式错误！</div></span>
+            <!--json格式错误的提示-->
+            <div id="jsoneditorWarning" style="background: #ffef8b;color:black;font-size: 10px;visibility: hidden;"><table class="jsoneditor-text-errors"><tbody><tr><td><button class="jsoneditor-schema-error"></button></td><td id='jsonerror'></td></tr></tbody></table></div>
 
-                <button type="submit" class="btn btn-default" id="submitData" style="width: 310px">确定</button>
+
+
+            <button type="submit" class="btn btn-default" id="submitData" style="width: 310px">确定</button>
         </div>
     </div>
 </div>
@@ -371,28 +375,6 @@
     });
 
 
-    /*
-    *选择screencontainer时候的dat.gui
-    */
-    $('#screenContainer').click(function (e) {
-        if($(e.target).attr('id')=='screenContainer'){
-            addScreenDatGui();
-            /*
-            更新样式
-             */
-            //首先清除其他控制面板
-            $('#screen .divControlPannel').each(function () {
-                $(this).css('display','none')
-            });
-            /*
-             *清除所有div的边框
-             */
-            $('.Monitor').each(function () {
-                $(this).css("outline",'');
-            });
-
-        }
-    });
 
 
     /*
@@ -429,41 +411,56 @@
     });
     //初始化添加datGUI、渲染图形、css设置
     function addDatGuiAndRenderChartAndCSSSettingInitial(addChartEle) {
+        //显示数据tab
+        $('#dataTab').css('display','block');
+
         if(addChartEle=='bar'){
             var chartId=addChartDiv($('#screen'),'bar');
             addBarDatGui(chartId);
             divChartId=chartId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+            jsonEditorEditor.setSchema(jsonSchema.barSchema);
+
         }
         else if(addChartEle=='line'){
             var chartId=addChartDiv($('#screen'),'line');
             addLineDatGui(chartId);
             divChartId=chartId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+            jsonEditorEditor.setSchema(jsonSchema.lineSchema);
+
         }
         else if(addChartEle=='radar'){
             var chartId=addChartDiv($('#screen'),'radar');
             addRadarDatGui(chartId);
             divChartId=chartId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+            jsonEditorEditor.setSchema(jsonSchema.radarSchema);
+
         }
         else if(addChartEle=='calendar'){
             var chartId=addChartDiv($('#screen'),'calendar');
             addCalendarDatGui(chartId);
             divChartId=chartId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+            jsonEditorEditor.setSchema(jsonSchema.calendarSchema);
+
         }
         else if(addChartEle=='pie'){
             var chartId=addChartDiv($('#screen'),'pie');
             addPieDatGui(chartId);
             divChartId=chartId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+            jsonEditorEditor.setSchema(jsonSchema.pieSchema);
+
         }
         else if(addChartEle=='wordCloud'){
             var chartId=addChartDiv($('#screen'),'wordCloud');
             addWordCloudDatGui(chartId);
             divChartId=chartId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+            jsonEditorEditor.setSchema(jsonSchema.wordCloudSchema);
+
         }
 
         /*
@@ -489,42 +486,56 @@
     };
     //读取配置添加datgui、渲染图形、css设置
     function addDatGuiAndRenderChartAndCssSettingByShare(divId) {
+        //显示数据tab
+        $('#dataTab').css('display','block');
+
         var addChartEle=divId.split('-');
         if(addChartEle[0]=='bar'){
             var chartId=addChartEle[0];
             addBarDatGui(divId);
             divChartId=divId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+            jsonEditorEditor.setSchema(jsonSchema.barSchema);
         }
         else if(addChartEle[0]=='line'){
             var chartId=addChartEle[0];
             addLineDatGui(divId);
             divChartId=divId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+            jsonEditorEditor.setSchema(jsonSchema.lineSchema);
+
         }
         else if(addChartEle[0]=='radar'){
             var chartId=addChartEle[0];
             addRadarDatGui(divId);
             divChartId=divId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+            jsonEditorEditor.setSchema(jsonSchema.radarSchema);
+
         }
         else if(addChartEle[0]=='calendar'){
             var chartId=addChartEle[0];
             addCalendarDatGui(divId);
             divChartId=divId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+            jsonEditorEditor.setSchema(jsonSchema.calendarSchema);
+
         }
         else if(addChartEle[0]=='pie'){
             var chartId=addChartEle[0];
             addPieDatGui(divId);
             divChartId=divId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+            jsonEditorEditor.setSchema(jsonSchema.pieSchema);
+
         }
         else if(addChartEle[0]=='wordCloud'){
             var chartId=addChartEle[0];
             addWordCloudDatGui(divId);
             divChartId=divId;
             jsonEditorEditor.set(findCanvasDataById(divChartId).data);
+            jsonEditorEditor.setSchema(jsonSchema.wordCloudSchema);
+
         }
 
         /*
@@ -549,6 +560,37 @@
         });
         $('#'+divChartId).css("outline",'1px solid #419bf9');
     }
+
+
+
+    /*
+     *选择screencontainer时候的dat.gui
+     */
+    $('#screenContainer').click(function (e) {
+        if($(e.target).attr('id')=='screenContainer'){
+            //隐藏数据tab
+            $('#configTab').click();
+            $('#dataTab').css('display', 'none');
+
+            addScreenDatGui();
+            /*
+             更新样式
+             */
+            //首先清除其他控制面板
+            $('#screen .divControlPannel').each(function () {
+                $(this).css('display','none')
+            });
+            /*
+             *清除所有div的边框
+             */
+            $('.Monitor').each(function () {
+                $(this).css("outline",'');
+            });
+
+        }
+    });
+
+
     /*
     screen上面的点击
      */
@@ -556,12 +598,23 @@
         //判断是否是canvas的点击
         console.log($(e.target).attr('id'))
         if($(e.target).attr('id')=='downloadOption'||$(e.target).attr('id')=='removediv'||$(e.target).attr('id')=='screen'){
+            //显示数据tab
+            if($(e.target).attr('id')=='screen') {
+                $('#configTab').click();
+                $('#dataTab').css('display', 'none');
+            }
             return;
         }
         else {
+            //显示数据tab
+            $('#dataTab').css('display','block');
+
             //divchartId全局变量之一，在Index.js中声明，获取用户选择的div的id
-            //这里是获取到divchartid即为div的唯一的id
-            divChartId = $(e.target).parent().parent().parent().attr('id');
+            //这里是获取到divchartid即为div的唯一的id，根据id之间有-判断是否是id
+
+            divChartId=getDivChartId(e.target);
+
+//            divChartId = $(e.target).parent().parent().parent().attr('id');
             //根据screen上面的点击id，刷新dat.gui内容和图形
             screenClick(divChartId);
             //更新canvasData
@@ -606,21 +659,33 @@
         var divChartIdSplit=divChartId1.split('-');
         if(divChartIdSplit[0]=='bar'){
             addBarDatGui(divChartId1);
+            jsonEditorEditor.setSchema(jsonSchema.barSchema);
+
         }
         else if(divChartIdSplit[0]=='line'){
             addLineDatGui(divChartId1);
+            jsonEditorEditor.setSchema(jsonSchema.lineSchema);
+
         }
         else if(divChartIdSplit[0]=='pie'){
             addPieDatGui(divChartId1);
+            jsonEditorEditor.setSchema(jsonSchema.pieSchema);
+
         }
         else if(divChartIdSplit[0]=='radar'){
             addRadarDatGui(divChartId1);
+            jsonEditorEditor.setSchema(jsonSchema.radarSchema);
+
         }
         else if(divChartIdSplit[0]=='calendar'){
             addCalendarDatGui(divChartId1);
+            jsonEditorEditor.setSchema(jsonSchema.calendarSchema);
+
         }
         else if(divChartIdSplit[0]=='wordCloud'){
             addWordCloudDatGui(divChartId1);
+            jsonEditorEditor.setSchema(jsonSchema.wordCloudSchema);
+
         }
 
     }
@@ -630,27 +695,135 @@
         console.log('我click:'+divChartId)
         screenClick(divChartId)
     });
+    //根据屏幕上的点击获取divChartId，根据class是否为monitor判断是否为id
+    function getDivChartId(target) {
+        if($(target).attr('class')!=undefined&&$(target).attr('class').indexOf('Monitor')>=0){
+            return $(target).attr('id');
+        }
+        else{
+           return getDivChartId($(target).parent());
+        }
+    }
 
 </script>
 
 <!--jsonEditor对应的数据-->
 <script>
 
+    var jsonSchema={
+        barSchema:{
+            "type":"array",
+            "items": {
+                "type": "array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "x": {
+                            "type":["string","number"]
+                        },
+                        "y":{
+                            "type":["string","number"]
+                        }
+                    },
+                    "required": ["x", "y"],
+                    "additionalProperties":false
+                }
+            }
+        },
+        lineSchema:{
+            "type":"array",
+            "items": {
+                "type": "array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "x": {
+                            "type":["string","number"]
+                        },
+                        "y":{
+                            "type":["string","number"]
+                        }
+                    },
+                    "required": ["x", "y"],
+                    "additionalProperties":false
+                }
+            }
+        },
+        pieSchema:{
+            "type": "array",
+            "items":{
+                "type":"object",
+                "properties":{
+                    "name": {
+                        "type":["string","number"]
+                    },
+                    "value":{
+                        "type":["string","number"]
+                    }
+                },
+                "required": ["name", "value"],
+                "additionalProperties":false
+            }
+        },
+        radarSchema:{
+            "type":"array",
+            "items": {
+                "type": "array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "x": {
+                            "type":["string","number"]
+                        },
+                        "y":{
+                            "type":["string","number"]
+                        }
+                    },
+                    "required": ["x", "y"],
+                    "additionalProperties":false
+                }
+            }
+        },
+        calendarSchema:{
+
+        },
+        wordCloudSchema:{
+
+        }
+    }
+    var ajv = new Ajv();
+
+
     var jsonEditorOptions = {
-        mode: 'view',
-        modes: [ 'text', 'tree', 'view'], // allowed modes
+        mode: 'code',
+        modes: [ 'code','text', 'tree', 'view'], // allowed modes
         onError: function (err) {
             alert(err.toString());
         },
         onModeChange: function (newMode, oldMode) {
             console.log('Mode switched from', oldMode, 'to', newMode);
+        },
+        schema:null,
+        // show_errors:"always",
+        ace: ace,
+        // ajv:ajv,
+        ajv: Ajv({ allErrors: true, verbose: true }),
+        onChange:function(e){
+            try{
+                jsonEditorEditor.get();
+                $('#jsoneditorWarning').css('visibility','hidden');
+            }catch(err){
+                var error=String(err).split('\n');
+                $('#jsoneditorWarning').css('visibility','visible');
+                $('#jsoneditorWarning #jsonerror').text("JSON错误！"+(error[0].slice(error[0].indexOf("on "))+error[1].replace(/\s/g,'')));
+
+            }
         }
     };
     var jsonEditorJson=[[{"2011":2},{"2011":4},{"2011":4},{"2011":4}],[{"2012":6},{"2012":8},{"2013":4},{"2013":4}],[{"2014":5},{"2014":2},{"2014":9},{"2014":1}],[{"2015":8},{"2015":6},{"2015":1},{"2015":7}]];
     var jsonEditorEditor=new JSONEditor(document.getElementById('jsonEditorData'),jsonEditorOptions);
 
     $('#dataSource a[data-toggle="tab"]').on('shown.bs.tab',function(e){
-        console.log(e.target);
         if($(e.target).attr('href')=='#dropdownstaticData'){
             //将默认值赋值给jsoneditor
             jsonEditorEditor.set(jsonEditorJson);

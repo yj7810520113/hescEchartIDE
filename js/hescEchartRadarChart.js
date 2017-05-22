@@ -1,4 +1,4 @@
-/**
+    /**
  * Created by WebStorm
  * User:maomao,http://www.mmcode.top
  * Date:2017/4/11
@@ -100,23 +100,19 @@
         for(var i=0;i<dataNum;i++){
            // console.log(asyncData[i])
             var seriesDataSingle=[];
-            for (var seriesData in asyncData[i]) {
-                // console.log();
-                for (var seriesDataKey in (asyncData[i])[seriesData]) {
-                    seriesDataSingle.push(((asyncData[i])[seriesData])[seriesDataKey]);
-                }
-            }
+            asyncData[i].forEach(function (d,i) {
+                seriesDataSingle.push(d.y);
+            });
             seriesDatas.push(seriesDataSingle);
+            console.log(seriesDatas)
         }
-
+        //console.log(seriesDatas)
 
         //radarIndicator 格式为{text:'KDA',text:'输出'}
         if (radarIndicators.length==0) {
             var radarIndicator = [];
             asyncData[0].forEach(function (data2, i) {
-                for (var radarIndicatorO in data2) {
-                    radarIndicator.push({text: radarIndicatorO});
-                }
+                radarIndicator.push({text: data2.x});
             });
         }
         else {
@@ -176,7 +172,7 @@
             },
             toolbox: {},
             tooltip: {
-                trigger: 'item',
+                trigger: 'item'
             },
             radar: [{
                 indicator: radarIndicator,
