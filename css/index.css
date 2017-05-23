@@ -36,7 +36,8 @@
 
 .tabs{
       position: absolute;
-      margin:60px 2px;
+    top:60px;
+      margin:0px 2px;
       width: 315px;
       height:600px;
       border:1px;
@@ -73,6 +74,7 @@ div.screenContainer{
 }
 div.screen{
     position: absolute;background: #0d2a42;overflow: hidden;
+    box-shadow: 0px 0px 30px   grey;
 }
 div.Monitor{width: 500px;height: 400px;overflow: hidden;cursor: move;position: absolute; }
 
