@@ -293,7 +293,7 @@
 
 
 
-    //修改预览窗口的id
+    //初始化nprogress
     (function () {
 //        $('#preview a').each(function (i,d) {
 //            if($(d).attr('href')!='#') {
@@ -312,6 +312,31 @@
     window.onbeforeunload = function(){
         return "您的文章尚未保存！";
     }
+    //每次在页面编辑初始化的时候，检测是否添加了datGui的属性，如果添加了datGui的属性则向已经保存的配置中添加新属性
+    function updateDatGuiConfigOnLoad(updateHescList){
+        for(var i in updateHescList){
+            var chartType=(updateHescList[i].divId).split('-');
+            if(chartType[0]=='bar'){
+                updateHescList[i].datGuiConfig=$.extend({},barInitialDatGuiData,updateHescList[i].datGuiConfig);
+            }
+            else if(chartType[0]=='line'){
+                updateHescList[i].datGuiConfig=$.extend({},lineInitialDatGuiData,updateHescList[i].datGuiConfig);
+            }
+            else if(chartType[0]=='radar'){
+                updateHescList[i].datGuiConfig=$.extend({},radarInitialDatGuiData,updateHescList[i].datGuiConfig);
+            }
+            else if(chartType[0]=='pie'){
+                updateHescList[i].datGuiConfig=$.extend({},pieInitailDatGuiData,updateHescList[i].datGuiConfig);
+            }
+            else if(chartType[0]=='calendar'){
+                updateHescList[i].datGuiConfig=$.extend({},calendarInitialDatGuiData,updateHescList[i].datGuiConfig);
+            }
+            else if(chartType[0]=='wordCloud'){
+                updateHescList[i].datGuiConfig=$.extend({},wordCloudInitialDatGuiData,updateHescList[i].datGuiConfig);
+            }
+        }
+        return updateHescList;
+    }
 
 
     $(function () {
@@ -326,8 +351,11 @@
             success:function(d){
                 checkSuccessStatus(d);
                 console.log(d.hescList);
-                console.log(d.gridConfig)
-                hescList=d.hescList;
+                console.log(d.gridConfig);
+
+                //根据初始化的控制面板去更新hesclist的属性信息
+                hescList=updateDatGuiConfigOnLoad(d.hescList);
+
                 addScreenByShare();
                 addScreenDatGui();
                 refreshTransformScale();
@@ -340,7 +368,6 @@
                         //绘制图形和dat.gui
                         addDatGuiAndRenderChartAndCssSettingByShare((d.gridConfig[i]).divId);
                         //移动图形到合适的位置(动画)
-                        console.log((d.gridConfig)[i].style.replace(/[\s\S]*height:([\s\S]*?);[\s\S]*/g,'$1'));
                         d3.select('#'+(d.gridConfig)[i].divId)
                             .transition()
                             .duration(3000)
@@ -370,9 +397,6 @@
     });
 
     $('.tabs').height($(window).height()-60);
-    $(function () {
-
-    });
 
 
 
