@@ -86,6 +86,7 @@ var barInitialDatGuiData ={
     xAxisAxisLineShow:true,
     xAxisAxisLabelInside:false,
     xAxisAxisLabelTextStyleColor:'#fff',
+    xAxisAxisLabelTextStyleFontSize:12,
     xAxisAxisLabelInterval:0,
     xAxisAxisLabelRotate:0,
     xAxisAxisTickShow:true,
@@ -98,6 +99,7 @@ var barInitialDatGuiData ={
     yAxisAxisLineShow:true,
     yAxisAxisLabelInside:false,
     yAxisAxisLabelTextStyleColor:'#fff',
+    yAxisAxisLabelTextStyleFontSize:12,
     yAxisAxisLabelInterval:0,
     yAxisAxisLabelRotate:0,
     yAxisAxisTickShow:true,
@@ -142,6 +144,7 @@ var lineInitialDatGuiData={
     xAxisAxisLineShow:true,
     xAxisAxisLabelInside:false,
     xAxisAxisLabelTextStyleColor:'#fff',
+    xAxisAxisLabelTextStyleFontSize:12,
     xAxisAxisTickShow:true,
     xAxisBoundaryGap:true,
     yAxisData:'',
@@ -152,6 +155,7 @@ var lineInitialDatGuiData={
     yAxisAxisLineShow:true,
     yAxisAxisLabelInside:false,
     yAxisAxisLabelTextStyleColor:'#fff',
+    yAxisAxisLabelTextStyleFontSize:12,
     yAxisAxisTickShow:true,
     reverse:false,
     stack:'',
@@ -202,7 +206,8 @@ var pieInitailDatGuiData={
     seriesCenterTop: 50,
     seriesCenterLeft: 50,
     seriesRoseType:'false',
-    seriesLabelNormalShow: true
+    seriesLabelNormalShow: true,
+    seriesLabelNormalTextStyleFontSize:12
 };
 var radarInitialCanvasData=[[{"x":"推塔","y":2},{"x":"输出","y":4},{"x":"承受伤害","y":4},{"x":"KDA","y":4},{"x":"胜率","y":78}],[{"x":"推塔","y":3},{"x":"输出","y":5},{"x":"承受伤害","y":5},{"x":"KDA","y":10},{"x":"胜率","y":60}],[{"x":"推塔","y":4},{"x":"输出","y":1},{"x":"承受伤害","y":1},{"x":"KDA","y":5},{"x":"胜率","y":65}],[{"x":"推塔","y":5},{"x":"输出","y":4},{"x":"承受伤害","y":2},{"x":"KDA","y":8},{"x":"胜率","y":70}]];
 var radarInitialDatGuiData={
@@ -985,7 +990,7 @@ function addScreenDatGui(){
             $('#screen').css('width',screenDefaultDatGUiObj.width);
             refreshTransformScale();
         });
-        datGuiPannel.add(screenDefaultDatGUiObj,'height',800,2160).name("屏幕高").onChange(function () {
+        datGuiPannel.add(screenDefaultDatGUiObj,'height',600,2160).name("屏幕高").onChange(function () {
             $('#screen').css('height',screenDefaultDatGUiObj.height);
             refreshTransformScale();
 
@@ -1153,6 +1158,11 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
+            barX.add(barDefaultDatGUiObj, 'xAxisAxisLabelTextStyleFontSize',1,50).name('x轴字体大小').onChange(function () {
+                renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+            }).onFinishChange(function(){
+                updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
+            });
             barX.addColor(barDefaultDatGUiObj, 'xAxisAxisLabelTextStyleColor').name('x轴字体颜色').onChange(function () {
                 renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
             }).onFinishChange(function(){
@@ -1219,6 +1229,11 @@ function addBarDatGui(chartId){
             }).onFinishChange(function(){
                 updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
             });
+        barY.add(barDefaultDatGUiObj, 'yAxisAxisLabelTextStyleFontSize',1,50).name('y轴字体大小').onChange(function () {
+            renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
+        }).onFinishChange(function(){
+            updateHescEleByIdToDatGuiConfig(chartId,barDefaultDatGUiObj);
+        });
         barY.addColor(barDefaultDatGUiObj, 'yAxisAxisLabelTextStyleColor').name('y轴字体颜色').onChange(function () {
             renderBarChart(chartId, barDefaultCanvasData.data, barDefaultDatGUiObj);
         }).onFinishChange(function(){
@@ -1344,6 +1359,7 @@ function addLineDatGui(chartId) {
         barX.add(lineDefaultDatGUiObj,'xAxisAxisLabelInterval',0,20).name('x轴刻度间隔').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.add(lineDefaultDatGUiObj,'xAxisAxisLabelRotate',-180,180).name('x轴字体旋转角度').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.add(lineDefaultDatGUiObj,'xAxisPosition',{上:'top',下:'bottom'}).name('x轴位置').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barX.add(lineDefaultDatGUiObj,'xAxisAxisLabelTextStyleFontSize',1,50).name('x轴字体大小').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.addColor(lineDefaultDatGUiObj,'xAxisAxisLabelTextStyleColor').name('x轴字体颜色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.add(lineDefaultDatGUiObj,'xAxisGridLine').name('x轴网格').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barX.add(lineDefaultDatGUiObj,'xAxisInverse').name('x轴反向').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
@@ -1357,6 +1373,7 @@ function addLineDatGui(chartId) {
         barY.add(lineDefaultDatGUiObj,'yAxisAxisLabelInterval',0,20).name('y轴刻度间隔').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisAxisLabelRotate',-180,180).name('y轴字体旋转角度').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisPosition',{左:'left',右:'right'}).name('y轴位置').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
+        barY.add(lineDefaultDatGUiObj,'yAxisAxisLabelTextStyleFontSize',1,50).name('y轴字体大小').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.addColor(lineDefaultDatGUiObj,'yAxisAxisLabelTextStyleColor').name('y轴字体颜色').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisGridLine').name('y轴网格').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
         barY.add(lineDefaultDatGUiObj,'yAxisInverse').name('y轴反向').onChange(function(){renderLineChart(chartId, lineDefaultCanvasData.data, lineDefaultDatGUiObj);});
@@ -1469,6 +1486,9 @@ function addPieDatGui(chartId) {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
         pieSeries.add(pieDefaultDatGUiObj, 'seriesLabelNormalShow').name("外标签").onChange(function () {
+            renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
+        });
+        pieSeries.add(pieDefaultDatGUiObj, 'seriesLabelNormalTextStyleFontSize',1,50).name("标签字体大小").onChange(function () {
             renderPieChart(chartId, pieDefaultCanvasData.data, pieDefaultDatGUiObj);
         });
     }

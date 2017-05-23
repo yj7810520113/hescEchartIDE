@@ -83,6 +83,7 @@
         xAxisAxisLineShow=true,
         xAxisAxisLabelInside=false,
         xAxisAxisLabelTextStyleColor='#000',
+        xAxisAxisLabelTextStyleFontSize=12,
         xAxisAxisTickShow=true,
         xAxisBoundaryGap=true,
         //y轴显示的坐标文字
@@ -95,6 +96,7 @@
         yAxisAxisLineShow=true,
         yAxisAxisLabelInside=false,
         yAxisAxisLabelTextStyleColor='#000',
+        yAxisAxisLabelTextStyleFontSize=12,
         yAxisAxisTickShow=true,
         //stack的设置,默认情况下为一维普通柱状图
         stackAttr='',
@@ -233,7 +235,8 @@
                 axisLabel:{
                     inside:xAxisAxisLabelInside,
                     textStyle:{
-                        color:xAxisAxisLabelTextStyleColor
+                        color:xAxisAxisLabelTextStyleColor,
+                        fontSize:xAxisAxisLabelTextStyleFontSize
                     },
                     interval:xAxisAxisLabelInterval,
                     rotate:xAxisAxisLabelRotate
@@ -283,7 +286,8 @@
                 axisLabel:{
                     inside:yAxisAxisLabelInside,
                     textStyle:{
-                        color:yAxisAxisLabelTextStyleColor
+                        color:yAxisAxisLabelTextStyleColor,
+                        fontSize:yAxisAxisLabelTextStyleFontSize
                     },
                     interval:yAxisAxisLabelInterval,
                     rotate:yAxisAxisLabelRotate
@@ -507,6 +511,10 @@
         xAxisAxisLabelTextStyleColor=x;
         return this;
     }
+    var xAxisAxisLabelTextStyleFontSizeFun=function (x) {
+        xAxisAxisLabelTextStyleFontSize=x;
+        return this;
+    }
     var xAxisAxisTickShowFun=function (x) {
         xAxisAxisTickShow=x;
         return this;
@@ -537,6 +545,10 @@
     }
     var yAxisAxisLabelTextStyleColorFun=function (x) {
         yAxisAxisLabelTextStyleColor=x;
+        return this;
+    }
+    var yAxisAxisLabelTextStyleFontSizeFun=function (x) {
+        yAxisAxisLabelTextStyleFontSize=x;
         return this;
     }
     var yAxisAxisTickShowFun=function (x) {
@@ -635,6 +647,7 @@
     exports.xAxisAxisLineShow=xAxisAxisLineShowFun;
     exports.xAxisAxisLabelInside=xAxisAxisLabelInsideFun;
     exports.xAxisAxisLabelTextStyleColor=xAxisAxisLabelTextStyleColorFun;
+    exports.xAxisAxisLabelTextStyleFontSize=xAxisAxisLabelTextStyleFontSizeFun;
     exports.xAxisAxisLabelInterval=xAxisAxisLabelIntervalFun;
     exports.xAxisAxisLabelRotate=xAxisAxisLabelRotateFun;
     exports.xAxisAxisTickShow=xAxisAxisTickShowFun;
@@ -649,6 +662,7 @@
     exports.yAxisAxisLineShow=yAxisAxisLineShowFun;
     exports.yAxisAxisLabelInside=yAxisAxisLabelInsideFun;
     exports.yAxisAxisLabelTextStyleColor=yAxisAxisLabelTextStyleColorFun;
+    exports.yAxisAxisLabelTextStyleFontSize=yAxisAxisLabelTextStyleFontSizeFun;
     exports.yAxisAxisLabelInterval=yAxisAxisLabelIntervalFun;
     exports.yAxisAxisLabelRotate=yAxisAxisLabelRotateFun;
     exports.yAxisAxisTickShow=yAxisAxisTickShowFun;

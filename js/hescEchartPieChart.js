@@ -77,7 +77,8 @@
         seriesCenterTop='',
         seriesCenterLeft='',
         seriesRoseType=false,
-        seriesLabelNormalShow=false;
+        seriesLabelNormalShow=false,
+        seriesLabelNormalTextStyleFontSize=12;
 
     var pie=function (asyncData) {
             //----------------图形相关属性--------
@@ -174,6 +175,9 @@
                     label:{
                         normal:{
                             show:seriesLabelNormalShow,
+                            textStyle:{
+                                fontSize:seriesLabelNormalTextStyleFontSize
+                            }
                         }
                     }
                 }
@@ -324,6 +328,10 @@
         seriesLabelNormalShow=x;
         return this;
     }
+    var seriesLabelNormalTextStyleFontSizeFun=function (x) {
+        seriesLabelNormalTextStyleFontSize=x;
+        return this;
+    }
     var getOptionFun=function () {
         return option;
     }
@@ -383,6 +391,7 @@
     exports.seriesCenterLeft=seriesCenterLeftFun;
     exports.seriesRoseType=seriesRoseTypeFun;
     exports.seriesLabelNormalShow=seriesLabelNormalShowFun;
+    exports.seriesLabelNormalTextStyleFontSize=seriesLabelNormalTextStyleFontSizeFun;
 
 
 
