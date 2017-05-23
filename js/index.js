@@ -1964,6 +1964,11 @@ function removeDivFun() {
     $('#deleteScreenModalButton').click(function () {
         console.log('删除确定了')
         if($('#'+divChartId).attr('class').indexOf('Monitor')>=0) {
+            //隐藏数据tab
+            $('#configTab').click();
+            $('#dataTab').css('display', 'none');
+
+
             $('#' + divChartId).remove();
             //移除div后，控制面板跳转到screen的控制面板
             addScreenDatGui();
