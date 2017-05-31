@@ -350,8 +350,8 @@
             },
             success:function(d){
                 checkSuccessStatus(d);
-                console.log(d.hescList);
-                console.log(d.gridConfig);
+//                console.log(d.hescList);
+//                console.log(d.gridConfig);
 
                 //根据初始化的控制面板去更新hesclist的属性信息
                 hescList=updateDatGuiConfigOnLoad(d.hescList);
@@ -368,6 +368,9 @@
                         //绘制图形和dat.gui
                         addDatGuiAndRenderChartAndCssSettingByShare((d.gridConfig[i]).divId);
                         //移动图形到合适的位置(动画)
+                        $('#'+(d.gridConfig)[i].divId)
+                            .css('top',$('#screen').height()*1/4)
+                            .css('left',$('#screen').width()*1/4);
                         d3.select('#'+(d.gridConfig)[i].divId)
                             .transition()
                             .duration(3000)
