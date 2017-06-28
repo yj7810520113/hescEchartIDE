@@ -1,0 +1,557 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/6/1
+ * Time:11:34
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/mdui.css">
+    <script src="../js/mdui.min.js"></script>
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar  mdui-theme-primary-pink mdui-theme-accent-pink mdui-loaded mdui-theme-primary-blue ">
+
+
+<!--appbar-->
+<header class="mdui-appbar mdui-appbar-fixed mdui-shadow-6">
+    <div class="mdui-toolbar mdui-color-indigo">
+        <a href="javascript:;" class="mdui-typo-title">
+            <b>HESC</b>harts
+        </a>
+        <div class="mdui-toolbar-spacer"></div>
+        <a href="javascript:;" class="mdui-ripple mdui-ripple-white">
+            <i class="mdui-icon material-icons">&#xe8b6;</i>
+            <label>其他案例集</label>
+        </a>
+
+        <a href="javascript:;" class="mdui-ripple mdui-ripple-white">
+            <i class="mdui-icon material-icons">&#xe5d4;</i>
+        </a>
+    </div>
+</header>
+
+<!--导航栏-->
+<!-- 默认抽屉栏在左侧 -->
+<div class="mdui-drawer mdui-shadow-10 ">
+    <ul class="mdui-list">
+        <a href="#111">
+            <li class="mdui-list-item mdui-ripple mdui-list-item-active">
+                <i class="mdui-list-item-icon mdui-icon material-icons">&#xe168;</i>
+                <div class="mdui-list-item-content">我的案例集</div>
+            </li>
+        </a>
+    </ul>
+
+    <ul class="mdui-list">
+        <a href="#111">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">&#xe168;</i>
+                <div class="mdui-list-item-content">推荐案例集</div>
+            </li>
+        </a>
+    </ul>
+</div>
+
+<div class="mdui-container-fluid" style="background-color:#ecf0f5">
+    <div class="top-alert mdui-valign mdui-shadow-1">
+        <strong class="fl">公告：</strong>目前 HESCharts 仅测试谷歌 Chrome 浏览器版本 50 以上、Microsoft Edge。其他浏览器尚未测试。问题反馈：
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=494713188&amp;site=qq&amp;menu=yes"><img
+                style=" vertical-align: middle;" src="http://wpa.qq.com/pa?p=2:494713188:52" alt=" 反馈问题"
+                title="反馈问题"></a>
+    </div>
+
+    <div style="padding-top: 16px;">
+
+        <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-3 mdui-col-lg-3 mdui-col-xl-3 mdui-p-b-1">
+
+
+            <div class="mdui-card mdui-hoverable mdui-shadow-3">
+
+                <!--&lt;!&ndash; 卡片头部，包含头像、标题、副标题 &ndash;&gt;-->
+                <!--<div class="mdui-card-header">-->
+                <!--<img class="mdui-card-header-avatar" src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>-->
+                <!--<div class="mdui-card-header-title">Title</div>-->
+                <!--</div>-->
+
+                <!-- 卡片的媒体内容，可以包含图片、视频等媒体内容，以及标题、副标题 -->
+                <div class="mdui-card-media ">
+                    <img class="mdui-img-rounded mdui-valign mdui-center"
+                         src="http://192.168.71.179:8080/webapiproxy/img/107-1496368990037.png"/>
+
+
+                </div>
+
+                <!-- 卡片的标题和副标题 -->
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title"
+                         style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏
+                    </div>
+                    <!--<div class="mdui-card-primary-subtitle">Subtitle</div>-->
+                </div>
+
+                <!-- 卡片的内容 -->
+                <div class="mdui-card-content"
+                     style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+                    子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知，而不愠，不亦君子乎？」
+                </div>
+
+
+                <!--分割线-->
+                <div class="mdui-divider-dark"></div>
+
+
+                <!-- 卡片的按钮 -->
+                <div class="mdui-card-actions ">
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-left">复制大屏</button>
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-right">预览大屏</button>
+                    <!--<button class="mdui-btn mdui-btn-icon mdui-float-right"><i class="mdui-icon material-icons">&#xe5cf;</i></button>-->
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-3 mdui-col-lg-3 mdui-col-xl-3 mdui-p-b-1">
+
+
+            <div class="mdui-card mdui-hoverable mdui-shadow-3">
+
+                <!--&lt;!&ndash; 卡片头部，包含头像、标题、副标题 &ndash;&gt;-->
+                <!--<div class="mdui-card-header">-->
+                <!--<img class="mdui-card-header-avatar" src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>-->
+                <!--<div class="mdui-card-header-title">Title</div>-->
+                <!--</div>-->
+
+                <!-- 卡片的媒体内容，可以包含图片、视频等媒体内容，以及标题、副标题 -->
+                <div class="mdui-card-media">
+                    <img class="mdui-img-rounded"
+                         src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>
+
+
+                </div>
+
+                <!-- 卡片的标题和副标题 -->
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title"
+                         style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏
+                    </div>
+                    <!--<div class="mdui-card-primary-subtitle">Subtitle</div>-->
+                </div>
+
+                <!-- 卡片的内容 -->
+                <div class="mdui-card-content"
+                     style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+                    子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知，而不愠，不亦君子乎？」
+                </div>
+
+
+                <!--分割线-->
+                <div class="mdui-divider-dark"></div>
+
+
+                <!-- 卡片的按钮 -->
+                <div class="mdui-card-actions ">
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-left">复制大屏</button>
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-right">预览大屏</button>
+                    <!--<button class="mdui-btn mdui-btn-icon mdui-float-right"><i class="mdui-icon material-icons">&#xe5cf;</i></button>-->
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-3 mdui-col-lg-3 mdui-col-xl-3 mdui-p-b-1">
+
+
+            <div class="mdui-card mdui-hoverable mdui-shadow-3">
+
+                <!--&lt;!&ndash; 卡片头部，包含头像、标题、副标题 &ndash;&gt;-->
+                <!--<div class="mdui-card-header">-->
+                <!--<img class="mdui-card-header-avatar" src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>-->
+                <!--<div class="mdui-card-header-title">Title</div>-->
+                <!--</div>-->
+
+                <!-- 卡片的媒体内容，可以包含图片、视频等媒体内容，以及标题、副标题 -->
+                <div class="mdui-card-media">
+                    <img class="mdui-img-rounded"
+                         src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>
+
+
+                </div>
+
+                <!-- 卡片的标题和副标题 -->
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title"
+                         style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏
+                    </div>
+                    <!--<div class="mdui-card-primary-subtitle">Subtitle</div>-->
+                </div>
+
+                <!-- 卡片的内容 -->
+                <div class="mdui-card-content"
+                     style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+                    子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知，而不愠，不亦君子乎？」
+                </div>
+
+
+                <!--分割线-->
+                <div class="mdui-divider-dark"></div>
+
+
+                <!-- 卡片的按钮 -->
+                <div class="mdui-card-actions ">
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-left">复制大屏</button>
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-right">预览大屏</button>
+                    <!--<button class="mdui-btn mdui-btn-icon mdui-float-right"><i class="mdui-icon material-icons">&#xe5cf;</i></button>-->
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-3 mdui-col-lg-3 mdui-col-xl-3 mdui-p-b-1">
+
+
+            <div class="mdui-card mdui-hoverable mdui-shadow-3">
+
+                <!--&lt;!&ndash; 卡片头部，包含头像、标题、副标题 &ndash;&gt;-->
+                <!--<div class="mdui-card-header">-->
+                <!--<img class="mdui-card-header-avatar" src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>-->
+                <!--<div class="mdui-card-header-title">Title</div>-->
+                <!--</div>-->
+
+                <!-- 卡片的媒体内容，可以包含图片、视频等媒体内容，以及标题、副标题 -->
+                <div class="mdui-card-media">
+                    <img class="mdui-img-rounded"
+                         src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>
+
+
+                </div>
+
+                <!-- 卡片的标题和副标题 -->
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title"
+                         style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏
+                    </div>
+                    <!--<div class="mdui-card-primary-subtitle">Subtitle</div>-->
+                </div>
+
+                <!-- 卡片的内容 -->
+                <div class="mdui-card-content"
+                     style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+                    子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知，而不愠，不亦君子乎？」
+                </div>
+
+
+                <!--分割线-->
+                <div class="mdui-divider-dark"></div>
+
+
+                <!-- 卡片的按钮 -->
+                <div class="mdui-card-actions ">
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-left">复制大屏</button>
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-right">预览大屏</button>
+                    <!--<button class="mdui-btn mdui-btn-icon mdui-float-right"><i class="mdui-icon material-icons">&#xe5cf;</i></button>-->
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-3 mdui-col-lg-3 mdui-col-xl-3 mdui-p-b-1">
+
+
+            <div class="mdui-card mdui-hoverable mdui-shadow-3">
+
+                <!--&lt;!&ndash; 卡片头部，包含头像、标题、副标题 &ndash;&gt;-->
+                <!--<div class="mdui-card-header">-->
+                <!--<img class="mdui-card-header-avatar" src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>-->
+                <!--<div class="mdui-card-header-title">Title</div>-->
+                <!--</div>-->
+
+                <!-- 卡片的媒体内容，可以包含图片、视频等媒体内容，以及标题、副标题 -->
+                <div class="mdui-card-media">
+                    <img class="mdui-img-rounded"
+                         src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>
+
+
+                </div>
+
+                <!-- 卡片的标题和副标题 -->
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title"
+                         style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏
+                    </div>
+                    <!--<div class="mdui-card-primary-subtitle">Subtitle</div>-->
+                </div>
+
+                <!-- 卡片的内容 -->
+                <div class="mdui-card-content"
+                     style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+                    子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知，而不愠，不亦君子乎？」
+                </div>
+
+
+                <!--分割线-->
+                <div class="mdui-divider-dark"></div>
+
+
+                <!-- 卡片的按钮 -->
+                <div class="mdui-card-actions ">
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-left">复制大屏</button>
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-right">预览大屏</button>
+                    <!--<button class="mdui-btn mdui-btn-icon mdui-float-right"><i class="mdui-icon material-icons">&#xe5cf;</i></button>-->
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-3 mdui-col-lg-3 mdui-col-xl-3 mdui-p-b-1">
+
+
+            <div class="mdui-card mdui-hoverable mdui-shadow-3">
+
+                <!--&lt;!&ndash; 卡片头部，包含头像、标题、副标题 &ndash;&gt;-->
+                <!--<div class="mdui-card-header">-->
+                <!--<img class="mdui-card-header-avatar" src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>-->
+                <!--<div class="mdui-card-header-title">Title</div>-->
+                <!--</div>-->
+
+                <!-- 卡片的媒体内容，可以包含图片、视频等媒体内容，以及标题、副标题 -->
+                <div class="mdui-card-media">
+                    <img class="mdui-img-rounded"
+                         src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>
+
+
+                </div>
+
+                <!-- 卡片的标题和副标题 -->
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title"
+                         style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏
+                    </div>
+                    <!--<div class="mdui-card-primary-subtitle">Subtitle</div>-->
+                </div>
+
+                <!-- 卡片的内容 -->
+                <div class="mdui-card-content"
+                     style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+                    子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知，而不愠，不亦君子乎？」
+                </div>
+
+
+                <!--分割线-->
+                <div class="mdui-divider-dark"></div>
+
+
+                <!-- 卡片的按钮 -->
+                <div class="mdui-card-actions ">
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-left">复制大屏</button>
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-right">预览大屏</button>
+                    <!--<button class="mdui-btn mdui-btn-icon mdui-float-right"><i class="mdui-icon material-icons">&#xe5cf;</i></button>-->
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-3 mdui-col-lg-3 mdui-col-xl-3 mdui-p-b-1">
+
+
+            <div class="mdui-card mdui-hoverable mdui-shadow-3">
+
+                <!--&lt;!&ndash; 卡片头部，包含头像、标题、副标题 &ndash;&gt;-->
+                <!--<div class="mdui-card-header">-->
+                <!--<img class="mdui-card-header-avatar" src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>-->
+                <!--<div class="mdui-card-header-title">Title</div>-->
+                <!--</div>-->
+
+                <!-- 卡片的媒体内容，可以包含图片、视频等媒体内容，以及标题、副标题 -->
+                <div class="mdui-card-media">
+                    <img class="mdui-img-rounded"
+                         src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>
+
+
+                </div>
+
+                <!-- 卡片的标题和副标题 -->
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title"
+                         style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏
+                    </div>
+                    <!--<div class="mdui-card-primary-subtitle">Subtitle</div>-->
+                </div>
+
+                <!-- 卡片的内容 -->
+                <div class="mdui-card-content"
+                     style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+                    子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知，而不愠，不亦君子乎？」
+                </div>
+
+
+                <!--分割线-->
+                <div class="mdui-divider-dark"></div>
+
+
+                <!-- 卡片的按钮 -->
+                <div class="mdui-card-actions ">
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-left">复制大屏</button>
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-right">预览大屏</button>
+                    <!--<button class="mdui-btn mdui-btn-icon mdui-float-right"><i class="mdui-icon material-icons">&#xe5cf;</i></button>-->
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-3 mdui-col-lg-3 mdui-col-xl-3 mdui-p-b-1">
+
+
+            <div class="mdui-card mdui-hoverable mdui-shadow-3">
+
+                <!--&lt;!&ndash; 卡片头部，包含头像、标题、副标题 &ndash;&gt;-->
+                <!--<div class="mdui-card-header">-->
+                <!--<img class="mdui-card-header-avatar" src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>-->
+                <!--<div class="mdui-card-header-title">Title</div>-->
+                <!--</div>-->
+
+                <!-- 卡片的媒体内容，可以包含图片、视频等媒体内容，以及标题、副标题 -->
+                <div class="mdui-card-media">
+                    <img class="mdui-img-rounded"
+                         src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>
+
+
+                </div>
+
+                <!-- 卡片的标题和副标题 -->
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title"
+                         style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏
+                    </div>
+                    <!--<div class="mdui-card-primary-subtitle">Subtitle</div>-->
+                </div>
+
+                <!-- 卡片的内容 -->
+                <div class="mdui-card-content"
+                     style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+                    子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知，而不愠，不亦君子乎？」
+                </div>
+
+
+                <!--分割线-->
+                <div class="mdui-divider-dark"></div>
+
+
+                <!-- 卡片的按钮 -->
+                <div class="mdui-card-actions ">
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-left">复制大屏</button>
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-right">预览大屏</button>
+                    <!--<button class="mdui-btn mdui-btn-icon mdui-float-right"><i class="mdui-icon material-icons">&#xe5cf;</i></button>-->
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-3 mdui-col-lg-3 mdui-col-xl-3 mdui-p-b-1">
+
+
+            <div class="mdui-card mdui-hoverable mdui-shadow-3">
+
+                <!--&lt;!&ndash; 卡片头部，包含头像、标题、副标题 &ndash;&gt;-->
+                <!--<div class="mdui-card-header">-->
+                <!--<img class="mdui-card-header-avatar" src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>-->
+                <!--<div class="mdui-card-header-title">Title</div>-->
+                <!--</div>-->
+
+                <!-- 卡片的媒体内容，可以包含图片、视频等媒体内容，以及标题、副标题 -->
+                <div class="mdui-card-media">
+                    <img class="mdui-img-rounded"
+                         src="http://192.168.71.179:8080/webapiproxy/img/98-1496278187287.png"/>
+
+
+                </div>
+
+                <!-- 卡片的标题和副标题 -->
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title"
+                         style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏爽肤水大屏
+                    </div>
+                    <!--<div class="mdui-card-primary-subtitle">Subtitle</div>-->
+                </div>
+
+                <!-- 卡片的内容 -->
+                <div class="mdui-card-content"
+                     style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+                    子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之子曰：「学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知，而不愠，不亦君子乎？」
+                </div>
+
+
+                <!--分割线-->
+                <div class="mdui-divider-dark"></div>
+
+
+                <!-- 卡片的按钮 -->
+                <div class="mdui-card-actions ">
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-left">复制大屏</button>
+                    <button class="mdui-btn mdui-text-color-theme-accent mdui-ripple mdui-float-right">预览大屏</button>
+                    <!--<button class="mdui-btn mdui-btn-icon mdui-float-right"><i class="mdui-icon material-icons">&#xe5cf;</i></button>-->
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+</div>
+</div>
+
+
+<div class="mdui-bottom-nav">
+    <label>HESC</label>
+    <!--<a href="javascript:void(0);" class="mdui-ripple mdui-ripple-white mdui-bottom-nav-active">-->
+        <!--<i class="mdui-icon material-icons">&#xe639;</i>-->
+        <!--<label>Movies</label>-->
+    <!--</a>-->
+    <!--<a href="javascript:void(0);" class="mdui-ripple mdui-ripple-white">-->
+        <!--<i class="mdui-icon material-icons">&#xe405;</i>-->
+        <!--<label>Music</label>-->
+    <!--</a>-->
+    <!--<a href="javascript:void(0);" class="mdui-ripple mdui-ripple-white">-->
+        <!--<i class="mdui-icon material-icons">&#xe865;</i>-->
+        <!--<label>Books</label>-->
+    <!--</a>-->
+    <!--<a href="javascript:void(0);" class="mdui-ripple mdui-ripple-white">-->
+        <!--<i class="mdui-icon material-icons">&#xe02f;</i>-->
+        <!--<label>Newsstand</label>-->
+    <!--</a>-->
+</div>
+
+
+</body>
+
+<script>
+    var s = ``
+</script>
+</html>
