@@ -1,0 +1,50 @@
+<!--
+ * Created by WebStorm
+ * User:maomao,http://www.mmcode.top
+ * Date:2017/6/27
+ * Time:16:15
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户免登陆验证</title>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/hashids.js"></script>
+    <script src="../js/index.js"></script>
+    <style>
+        *{
+         margin:0 0;
+        }
+        html,body{
+            height: 100%;
+            width: 100%;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+<div style="height: 100%;width: 100%;text-align: center;display:table-cell;vertical-align: middle;font: 25px bold;">
+    <p>用户免登陆验证中...</p>
+</div>
+    <script>
+        $.post(serviceBaseUrl+'/admin/login',{userName:'admin',passWord:'admin'},function (d) {
+            if(d.success==true){
+                //保存token
+                $('p').text('用户免验证登陆成功，正在跳转中...');
+                localStorage.setItem('token',d.token);
+                console.log(localStorage.getItem('token'));
+                setTimeout(function(){
+                    self.location='index.html';
+                },2000)
+//                self.location='index.html';
+            }
+            else {
+                $('p').text('用户免验证登陆失败，请联系管理员.')
+                alert('用户名或密码错误');
+            }
+        });
+    </script>
+</body>
+</html>

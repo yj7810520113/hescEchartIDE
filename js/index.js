@@ -11,7 +11,7 @@
     柱状图数据的验证： \[(\[(\{\"\S*?"\:[(\"\S*?\")|\d*]\},){0,}\{\"\S*?"\:[(\"\S*?\")|\d*]\}\]\,){0,}\[(\{\"\S*?"\:[(\"\S*?\")|\d*]\},){0,}\{\"\S*?"\:[(\"\S*?\")|\d*]\}\]\]
      */
 
-const serviceBaseUrl = 'http://192.168.71.179:8080/webapiproxy';
+const serviceBaseUrl = 'http://192.168.1.14:8180/hescharts_server';
 const htmlDownloadTemplate = '<!DOCTYPE html>\n' +
     '<html lang="en">\n' +
     '<head>\n' +
