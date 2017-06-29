@@ -130,7 +130,7 @@
     <section class="content">
       <!-- Small boxes (Stat box) -->
       <div class="row" id="screenStart">
-        <!--每个大屏的卡片开始的标签-->
+        <!--每个案例的卡片开始的标签-->
         <div class="col-lg-3 col-xs-6">
 
 
@@ -217,7 +217,7 @@
   </footer>
 
 
-  <!--添加新数据大屏的模态框-->
+  <!--添加新数据案例的模态框-->
   <div class="modal fade" id="addScreenModal" tabindex="-1" role="dialog"
        aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog" style="height: 700px;width:500px;z-index: 1001;">
@@ -225,20 +225,20 @@
       <div class="modal-content">
         <div class="modal-header" style="display: block">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <p>新建可视化大屏</p>
+          <p>新建可视化案例</p>
         </div>
         <div class="modal-body">
           <form role="form">
             <div class="form-group">
-              <label>可视化大屏名称<b style="color: red">*</b></label>
-              <input id="ScreenModalScreenNameInput" type="text" class="form-control" check-type="required" required-message="可视化大屏名称不能为空！" />
-              <label>大屏描述</label>
+              <label>可视化案例名称<b style="color: red">*</b></label>
+              <input id="ScreenModalScreenNameInput" type="text" class="form-control" check-type="required" required-message="可视化案例名称不能为空！" />
+              <label>案例描述</label>
               <textarea id="ScreenModalScreenDescriptionTextarea" type="text" class="form-control" rows="7"></textarea>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="addScreenModalButton">添加大屏</button>
+          <button type="button" class="btn btn-primary" id="addScreenModalButton">添加案例</button>
         </div>
       </div>
     </div><!-- /.modal-content -->
@@ -246,7 +246,7 @@
 </div>
 
 
-<!--大屏删除确认的的模态框-->
+<!--案例删除确认的的模态框-->
 <div class="modal fade" id="deleteScreenModal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true" >
   <div class="modal-dialog" style="height: 700px;width:500px;z-index: 1001;">
@@ -254,7 +254,7 @@
     <div class="modal-content">
       <div class="modal-header" style="display: block">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <p>删除可视化大屏</p>
+        <p>删除可视化案例</p>
       </div>
       <div class="modal-body">
         <form role="form">
@@ -272,7 +272,7 @@
 </div><!-- /.modal -->
 </div>
 
-<!--复制新数据大屏的模态框-->
+<!--复制新数据案例的模态框-->
 <div class="modal fade" id="copyScreenModal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true" >
   <div class="modal-dialog" style="height: 700px;width:500px;z-index: 1001;">
@@ -280,20 +280,20 @@
     <div class="modal-content">
       <div class="modal-header" style="display: block">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <p>复制可视化大屏</p>
+        <p>复制可视化案例</p>
       </div>
       <div class="modal-body">
         <form role="form">
           <div class="form-group">
-            <label>可视化大屏名称：</label>
-            <input id="copyScreenModalScreenNameInput" type="text " class="form-control" check-type="required" required-message="可视化大屏名称不能为空！" />
-            <label>大屏描述：</label>
+            <label>可视化案例名称：</label>
+            <input id="copyScreenModalScreenNameInput" type="text " class="form-control" check-type="required" required-message="可视化案例名称不能为空！" />
+            <label>案例描述：</label>
             <textarea id="copyScreenModalScreenDescriptionTextarea"  class="form-control" rows="7"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="copyaddScreenModalButton">复制大屏</button>
+        <button type="button" class="btn btn-primary" id="copyaddScreenModalButton">复制案例</button>
       </div>
     </div>
   </div><!-- /.modal-content -->
@@ -304,7 +304,7 @@
     $(function () {
         $("form").validation();
     });
-    //是否删除某个大屏
+    //是否删除某个案例
     function showDeleteScreenModal(id) {
         $('#deleteScreenModal').modal({
             keyboard:true//当按下esc键时，modal框消失
@@ -325,15 +325,15 @@
             });
         });
     };
-    //复制某个大屏
+    //复制某个案例
     function showCopyScreenModal(id) {
         $('#copyScreenModal').modal({
             keyboard:true//当按下esc键时，modal框消失
         });
-        //添加大屏模态框按钮产生的事件
+        //添加案例模态框按钮产生的事件
         $('#copyaddScreenModalButton').click(function () {
             if ($("#copyScreenModal form").valid(this,"error!")==false){
-                $(".alert-warning").text("大屏名称不能为空!");
+                $(".alert-warning").text("案例名称不能为空!");
                 return true;
             }
             else{
@@ -349,13 +349,13 @@
                         console.log("描述部分的文字为："+$('#copyScreenModalScreenDescriptionTextarea').val())
                         checkSuccessStatus(d);
                         console.log(d);
-                        //大屏名称重复
+                        //案例名称重复
                         if(d==false){
-                            alert('大屏名称重复');
+                            alert('案例名称重复');
                         }
-                        //大屏添加成功
+                        //案例添加成功
                         else{
-                            alert('大屏复制成功');
+                            alert('案例复制成功');
                             location.reload();
                         }
                     }
@@ -363,13 +363,13 @@
 //
 //            $.post(serviceBaseUrl+'/ajax/home/my/find',{screenName:$('#ScreenModalScreenNameInput').val(),description:$('#ScreenModalScreenDescriptionTextarea').val()},function (d) {
 //                console.log(d);
-//                //大屏名称重复
+//                //案例名称重复
 //                if(d==false){
-//                    alert('大屏名称重复');
+//                    alert('案例名称重复');
 //                }
-//                //大屏添加成功
+//                //案例添加成功
 //                else{
-//                    alert('大屏添加成功');
+//                    alert('案例添加成功');
 //                    location.reload();
 //                }
 //            })
@@ -394,10 +394,10 @@
 
 
 
-    //添加大屏模态框按钮产生的事件
+    //添加案例模态框按钮产生的事件
     $('#addScreenModalButton').click(function () {
         if ($("#addScreenModal form").valid(this,"error!")==false){
-            $(".alert-warning").text("大屏名称不能为空!");
+            $(".alert-warning").text("案例名称不能为空!");
             return true;
         }
         else{
@@ -412,13 +412,13 @@
                 success:function(d){
                     checkSuccessStatus(d);
                     console.log(d);
-                    //大屏名称重复
+                    //案例名称重复
                     if(d==false){
-                        alert('大屏名称重复');
+                        alert('案例名称重复');
                     }
-                    //大屏添加成功
+                    //案例添加成功
                     else{
-                        alert('大屏添加成功');
+                        alert('案例添加成功');
                         location.reload();
                     }
                 }
@@ -426,13 +426,13 @@
 //
 //            $.post(serviceBaseUrl+'/ajax/home/my/find',{screenName:$('#ScreenModalScreenNameInput').val(),description:$('#ScreenModalScreenDescriptionTextarea').val()},function (d) {
 //                console.log(d);
-//                //大屏名称重复
+//                //案例名称重复
 //                if(d==false){
-//                    alert('大屏名称重复');
+//                    alert('案例名称重复');
 //                }
-//                //大屏添加成功
+//                //案例添加成功
 //                else{
-//                    alert('大屏添加成功');
+//                    alert('案例添加成功');
 //                    location.reload();
 //                }
 //            })
@@ -440,7 +440,7 @@
     });
 
 
-    //拼接每个大屏展示的html
+    //拼接每个案例展示的html
     $.ajax({
         type:"get",
         dataType:"json",

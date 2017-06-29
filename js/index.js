@@ -11,7 +11,7 @@
     柱状图数据的验证： \[(\[(\{\"\S*?"\:[(\"\S*?\")|\d*]\},){0,}\{\"\S*?"\:[(\"\S*?\")|\d*]\}\]\,){0,}\[(\{\"\S*?"\:[(\"\S*?\")|\d*]\},){0,}\{\"\S*?"\:[(\"\S*?\")|\d*]\}\]\]
      */
 
-const serviceBaseUrl = 'http://192.168.1.14:8180/hescharts_server';
+    const serviceBaseUrl = 'http://192.168.1.14:8180/hescharts_server';
 const htmlDownloadTemplate = '<!DOCTYPE html>\n' +
     '<html lang="en">\n' +
     '<head>\n' +
@@ -2112,7 +2112,7 @@ function resizeFix(event, ui) {
  */
 function refreshTransformScale(){
     var screenGap=30;
-    var screenContainerHeight=$(window).height()-60;
+    var screenContainerHeight=$(window).height()-60-20;
     var sceenContainerWidth=$(window).width()-315;
     //缩放系数
     console.log($('#screen').height())
@@ -2251,6 +2251,38 @@ function screenShot(id) {
     NProgress.done(true);
 
 }
+
+//下载屏幕截图
+//截屏时候注意屏幕的缩放比scale，实现方法：
+//https://segmentfault.com/a/1190000007707209
+function downloadScreenShot() {
+    NProgress.inc(0.4);
+    console.log('准备截图了');
+    html2canvas(document.getElementById('screen'), {
+        //根据屏幕的缩放系数转换截图的分辨率
+        height: $('#screen').height() * transformScale,
+        width: $('#screen').width() * transformScale
+    }).then(function (canvas) {
+        //     var file = new File([canvasConvertToPng(canvas)], "screenShoot.png", {type: "png;"});
+        // saveAs(file);
+        canvas.toBlob(function (blob) {
+            saveAs(blob,"screenShot.png");
+        })
+    });
+
+    /*
+     nprogress和notify
+     */
+    NProgress.done(true);
+
+}
+function canvasConvertToPng(canvas){
+    var image=new Image();
+    image.src=canvas.toDataURL("image/png");
+    return image;
+}
+
+
 //点击预览时的动画
 function previewScreenLoading(id) {
     $('#previewScreenModal').modal({
@@ -2291,7 +2323,9 @@ function previewScreenLoading(id) {
             $('#previewScreenModal').modal('hide');
             console.log('预览前，保存完毕')
             NProgress.done(true);
-            window.open('./hescEchartForPreView.html?id='+id);
+            $('#previewHref').attr('href','./hescEchartForPreView.html?id='+id);
+            $('#previewHrefClick').click();
+            //window.open('./hescEchartForPreView.html?id='+id);
         }
     });
     //保存图片

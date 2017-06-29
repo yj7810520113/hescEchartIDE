@@ -125,6 +125,10 @@
     };
     var chart = echarts.init(document.getElementById('test'),'dark');
     chart.setOption(option);
+
+    chart.on('click', function (params) {
+        console.log(params);
+    });
 </script>
 </body>
 </html>

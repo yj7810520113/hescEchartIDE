@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../css/JSONFormatter.css">
     <link rel="stylesheet" href="../css/tooltipster.bundle.css">
     <link rel="stylesheet" href="../css/nprogress.css">
+    <link rel="stylesheet" href="../css/bootstrap-slider.css">
 
 
     <script src="../js/jquery.js"></script>
@@ -34,6 +35,7 @@
     <script src="../js/hescEchartCore.js"></script>
     <script src="../js/worldcloud.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-slider.js"></script>
     <script src="../js/ace.js"></script>
     <script src="../js/ajv.js"></script>
     <script src="../js/jsoneditor.js"></script>
@@ -67,6 +69,7 @@
     <script src="../js/ETheme/wonderland.js"></script>
     <script src="../js/D3.js"></script>
     <script src="../js/html2canvas.js"></script>
+    <script src="../js/canvas-toBlob.js"></script>
 
 </head>
 <body>
@@ -119,8 +122,16 @@
 
             <ul id="preview" class="nav navbar-nav navbar-right">
                 <li><a href="javascript:previewScreenLoading(id)" >预览</a></li>
+                <a id="previewHref" href="" style="display: none" target="_blank"><span id="previewHrefClick" ></span></a>
                 <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
             </ul>
+
+            <ul id="downloadScreenshot" class="nav navbar-nav navbar-right">
+                <li><a href="javascript:downloadScreenShot()" >保存截图</a></li>
+                <!--<li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>-->
+            </ul>
+
+
 
 
         </div>
@@ -138,6 +149,18 @@
         <!--<div id="barChild" style="height:calc(100% - 3px);width:calc(100% - 3px);"></div>-->
         <!--</div>-->
 
+    </div>
+
+
+
+</div>
+
+
+<div class="zoomScreen">
+    <div style="text-align: center">
+
+    <input id="ex6" type="text" data-slider-min="20" data-slider-max="200" data-slider-step="5" data-slider-value=""/>
+    <span id="ex6CurrentSliderValLabel">当前缩放大小:<span id="ex6SliderVal"></span></span><span>%</span>
     </div>
 </div>
 
@@ -285,6 +308,7 @@
 </div><!-- /.modal -->
 
 
+
 <!--读取screen高度、计算缩放系数-->
 <!--初始化tab的高度-->
 <script>
@@ -359,6 +383,7 @@
                 addScreenByShare();
                 addScreenDatGui();
                 refreshTransformScale();
+                updateZoomDiv();
                 //根据gridConfig的divId创建div和生成图形
                 for(var i=0;i<d.gridConfig.length;i++){
                     //排除gridConfig里面的screen的配置
@@ -883,6 +908,32 @@
             }
         });
     });
+
+
+</script>
+
+
+
+<!--缩放的slider-->
+<script>
+
+    function  updateZoomDiv() {
+
+        var slider = new Slider('#ex6', {
+            value: transformScale * 100,
+            formatter: function (value) {
+                return '当前缩放大小:' + value + '%';
+            }
+        });
+        $('#ex6SliderVal').text((transformScale*100).toFixed(0));
+
+        $("#ex6").on("slide", function (slideEvt) {
+            $("#ex6SliderVal").text(slideEvt.value);
+            $('#screen').css('transform', 'scale(' + slideEvt.value / 100 + ')');
+            transformScale=slideEvt.value/100;
+            console.log(slideEvt.value / 100);
+        });
+    }
 
 
 </script>
