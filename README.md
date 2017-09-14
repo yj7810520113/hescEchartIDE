@@ -8,3 +8,5 @@ Java（Spring、SpringMVC、Spring jdbc），JWT(Json Web Token)验证，修改b
 大屏预览的图片保存在img目录下
 #### 1.WEB端：hescEchartIDE
 修改js/index.js下 const serviceBaseUrl值为服务端地址
+
+#### 在线预览 [demo](http://www.mmcode.top/hescEchartIDE/html/login.html)DEMO
